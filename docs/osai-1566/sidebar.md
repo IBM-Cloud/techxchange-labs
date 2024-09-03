@@ -1,0 +1,16 @@
+- [🛫 Overview](README)
+- [🏎️ Getting started!](10-getting-started)
+- [🔎 Tour the OpenShift AI environment](20-tour)
+- **Part I - Go Jupyter!**
+- [⚙️ Configure Jupyter notebook](30-configure)
+- [🚀 Build, train, and run a model](40-build-train-run)
+- **Part II - Be a data scientist**
+- [💾 Setup a project and storage](50-dsp)
+- [⚒️ Create a workbench and a notebook](60-workbench)
+- [👟 Train a model](70-train)
+- [🧪 Deploy and test a model](80-deploy)
+- [🏁 Conclusion](99-conclusion)
+- **Learn more**
+- [Lab Sign in](https://ibm.biz/1566-invite)
+- [Console](https://cloud.ibm.com/)
+- [Documentation](https://cloud.ibm.com/docs/)

@@ -13,7 +13,7 @@ In this hands-on lab, you will learn how to deploy an VMware Cloud Foundation as
 The main objective of the hands-on lab is to introduce the participant to basic VCF as a Service (VCFaaS) concepts through exploring and utilizing the VMware Cloud Director interface provided to customers to manage the offering. 
 The lab consists of a partially completed deployment of the opensource Pet Clinic application in a personalized Virtual Data Center deployed on a multi-tenanted Cloud Director site. The participant will explore the Cloud Director interface, fix infrastructure issues with the application and finally configure a Veeam backup job to protect the environment. 
 
-![](images/00-readme-pet-clinic.png ':size=400')
+![](images/00-readme-pet-clinic.png ':size=200%')
 
 It is important to consider through this lab that the environment is a Multi-Tenant Director Site which offers a slightly different user experience than the Single Site Instance which allocates dedicated resources to a Director Site. 
 

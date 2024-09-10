@@ -2,7 +2,7 @@
 
 IBM Cloud for VMware Cloud Foundation (VCF) as a Service is the IBM Cloud managed service offering for which customers can deploy existing or new VMware workloads in an environment that is managed by IBM while still being fully accessible to customers. IBM Cloud for VMware Cloud Foundation as a Service (VCFaaS) is available in single or multi-tenant configurations with the choice to reserve dedicated resources of flexibly grow resource consumption as need demands. For more information please review the Documentation.
 
-  ![](images/10-lab-environment.jpg ':size=100%')
+  ![](images/10-lab-environment.jpg ':size=300%')
 
 
 VCFaaS is managed by VMware Cloud Director which provides the multi-tenancy and management capabilities which may be unfamiliar to existing vCenter customers. This hands-on lab is a gentle introduction to the concepts and capabilities VMware Cloud Director and how an application might be deployed in a multi-tenanted environment.

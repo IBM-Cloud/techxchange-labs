@@ -6,7 +6,7 @@
 - [📈 Pet Clinic Application](50-pet-clinic-application)
 - [⨐ Veeam Backups](60-veeam-backups)
 - **VMware Cloud Foundation as a Service on IBM Cloud**
-- [Lab Sign in](https://ibm.biz/1558-invite)
+- [Lab Sign in](https://cloud.ibm.com/authorize/5eb21c423b5249b6884e527fc8ebc3e5)
 - [Console](https://cloud.ibm.com/vmware)
 - [Documentation](https://cloud.ibm.com/docs/vmwaresolutions)
 

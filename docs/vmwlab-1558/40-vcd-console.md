@@ -16,22 +16,22 @@ The Content Hub hosts a library of user-managed VMware templates, media and imag
 
 The application images required to deploy the Pet Clinic application are displayed.
 
-  ![](images/40-content-hub.jpg ':size=400') 
+  ![](images/40-content-hub.jpg ':size=200%') 
 
  
 ## Navigating to your VDC
 When we navigate out of Virtual Data Center to a section for example the Content Hub we will need to navigate our way back. This is a general technique for navigating to the Virtual Data Center we are managing.
 1.	Select Data Centers (A)
 
-  ![](images/40-vdc.jpg ':size=400') 
+  ![](images/40-vdc.jpg ':size=200%') 
  
 2.	Navigate to and select the VDC we have been assigned
 
-  ![](images/40-vdc-list.png ':size=400') 
+  ![](images/40-vdc-list.png ':size=200%') 
 
 3. We should now be viewing the Data Center we are managing.
  
-  ![](images/40-vdc-instance.jpg ':size=400') 
+  ![](images/40-vdc-instance.jpg ':size=200%') 
 
 ## Virtual Machines
 
@@ -43,16 +43,16 @@ Please note, some of the virtual machines have been **switched off**, please lea
 
 Note that same virtual machines may be powered off. Please explore the Actions and Details for a virtual machines. For example, to find the IP address of the lab01-app virtual machine….
 
-  ![](images/40-vdc-vm.jpg ':size=400') 
+  ![](images/40-vdc-vm.jpg ':size=200%') 
  
 
 2.	From the virtual machine, lab01-app, select the **DETAILS (A)** button. 
 
-  ![](images/40-vdc-vm-details.jpg ':size=400')  
+  ![](images/40-vdc-vm-details.jpg ':size=200%')  
 
 3.	Select Hardware -> **NICS (A)**.
 
-  ![](images/40-vdc-vm-nics.jpg ':size=400') 
+  ![](images/40-vdc-vm-nics.jpg ':size=200%') 
 
 On the network panel, we can see that this virtual machine has been deployed on the **lab01-app network (B)** and has a private **IP Address (C)** of 192.168.100.10.
 
@@ -74,13 +74,13 @@ We have deployed two private networks to host the Pet Clinic application. The pu
 
 1.	To list networks, select **Networking** -> **Networks** (A), the list of available networks is displayed.
   
-  ![](images/40-vdc-networks.jpg ':size=400')
+  ![](images/40-vdc-networks.jpg ':size=200%')
 
 We can see the two pre-provisioned private networks.
 
 2.	Select a network and review the displayed information.
  
-  ![](images/40-vdc-vm-web01.png ':size=400')
+  ![](images/40-vdc-vm-web01.png ':size=200%')
 
 We can see in the above example, the network has a Gateway CIDR of 192.168.100.9/29, is routed, connected to our T0 gateway and supports Distributed routing. These options are beyond the scope of this lab, however, in general VCD networks support similar options as a T1 router.
 
@@ -94,17 +94,17 @@ Each Virtual Data Center (VDC) is provisioned with a single Edge Server which is
  
 We can see a single Edge Server deployed with the Virtual Data Center.
 
-  ![](images/40-vdc-edge.jpg ':size=400')
+  ![](images/40-vdc-edge.jpg ':size=200%')
 
 2.	Select the **Edge Server**
 
-  ![](images/40-vdc-edge-details.png ':size=400')
+  ![](images/40-vdc-edge-details.png ':size=200%')
  
 Details of the Edge Server are displayed, to view the Firewall rules…
 
 3.	Select **Services** -> **Firewall (A)**.
 
-  ![](images/40-vdc-edge-firewall.jpg ':size=400')
+  ![](images/40-vdc-edge-firewall.jpg ':size=200%')
 
 In addition to the default rule, we have two firewall rules defined to control the inbound and outbound traffic to the web servers.
 

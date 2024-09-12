@@ -6,11 +6,11 @@ For more information, please refer to the Veeam Documentation.
 ## Access Veeam Console
 1.	To access the Veeam console, select **More**,  then select Data protection with **Veeam (A)**.
 
-   ![](images/60-veeam-console.jpg ':size=400') 
+   ![](images/60-veeam-console.jpg ':size=200%') 
 
 Please allow time for the Veeam console to load.
 
-   ![](images/60-veeam-console-2.png ':size=400') 
+   ![](images/60-veeam-console-2.png ':size=200%') 
 
 For all intensive purposes, this is a standard Veeam installation with all of the usual features.
 
@@ -21,24 +21,24 @@ This example is the simplest example, we will not touch Guest File indexing or a
 
 1.	From the Veeam console select **Create (A)**, enter a **job name (B)**, select a **repository (C)** then click **Next (D)**.
  
-    ![](images/60-veeam-backup-job.jpg ':size=400') 
+    ![](images/60-veeam-backup-job.jpg ':size=200%') 
 2.	Select **ADD (A)** then navigate to and select your **Virtual Data Center (B)**, click on **OK (C)**.
-    ![](images/60-veeam-backup-job-2.jpg ':size=400') 
+    ![](images/60-veeam-backup-job-2.jpg ':size=200%') 
 3.	Click **Next**.
 4.	Click **Next**.
 5.	Modify the Job Schedule as required, this is not essential however, when complete click **Next**.
 
-    ![](images/60-veeam-backup-job-3.png ':size=400') 
+    ![](images/60-veeam-backup-job-3.png ':size=200%') 
 
 6.	Click **Next**. The job is now complete. 
 
 7.	To start the job, select the relevant job and click **Start (A)**. While the job is running observe the **Status (B)** changing.
 
-     ![](images/60-veeam-backup-job-4.jpg ':size=400') 
+     ![](images/60-veeam-backup-job-4.jpg ':size=200%') 
  
 8.	From the **Dashboard**, review information such as **Protected (A)** and overall usage status on each **backup repository (B)**.
  
-     ![](images/60-veeam-backup-job-console.jpg ':size=400') 
+     ![](images/60-veeam-backup-job-console.jpg ':size=200%') 
 
 9. **We are now all protected !!!**
 

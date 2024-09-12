@@ -18,14 +18,14 @@ In this activity we will review the resources deployed from a Cloud perspective.
 1.	From the Cloud Console, select **VMware** -> **Resources** -> **VCF as a Service**
 2.	Select **Cloud Director Sites (A)**
 
-  ![](images/30-cloud-director-site.jpg ':size=400')
+  ![](images/30-cloud-director-site.jpg ':size=200%')
  
 3.	Select the appropriate Cloud Director Site
  
 This lab has deployed a multi-tenant site. Cloud Director sites are scoped to a specific region and are not resource constrained in the way single-tenant sites are. 
 For more information please review the documentation on deployment options -> https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-tenant-ordering
 
-  ![](images/30-cloud-director-site-details.png ':size=400')
+  ![](images/30-cloud-director-site-details.png ':size=200%')
 
 4.	Select **Add-on services (A)** to view the optional add-on services.
  
@@ -36,21 +36,21 @@ The IBM Cloud for VMware Cloud Foundation (VCF) as a Service is packaged with a 
 Add-on services are optionally provisioned and integrated using automation from the IBM Cloud Console. 
 For more information on provisioning add-on services please visit the documentation here -> https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-tenant-plan-deploy#tenant-plan-deploy-services
 
-  ![](images/30-cloud-director-add-on.jpg ':size=400')
+  ![](images/30-cloud-director-add-on.jpg ':size=200%')
 
 5.	Click on **Virtual data centers (A)** to view the attached Virtual data centers.
  
 Cloud Director sites represent a single organization and resources which is split between 1..n Virtual Data Centers. 
 The Virtual Data Center contains the operational aspects of the environment such as virtual machines, networks and firewalls.
 
-  ![](images/30-cloud-director-vdc.jpg ':size=400')
+  ![](images/30-cloud-director-vdc.jpg ':size=200%')
 
 ## Review Virtual Data Center
 A Virtual Data Center is a construct that manages the operational parts of a site, for example, Virtual Machines, Networks, Edge Server and more. Similar in nature to VMware vCenter, the Virtual Data Center consumes resources exposed by the Cloud Director site and provides an operational interface to manage the day to day tasks in managing resources.
 
 1.	Select the **Virtual Data Center** for your instance as described in List virtual data centers.
  
-  ![](images/30-cloud-director-vdc-site-details.jpg ':size=400') 
+  ![](images/30-cloud-director-vdc-site-details.jpg ':size=200%') 
 
 Some points of interest from the above example:
 * **Resources Limits (A)**	
@@ -69,30 +69,30 @@ Some points of interest from the above example:
 ## Log into VCD Console
 1.	From the Cloud Console, select the **VMware console (A)** button for the relevant Cloud Director Site.
 
-  ![](images/30-cloud-director-site-console.jpg ':size=400') 
+  ![](images/30-cloud-director-site-console.jpg ':size=200%') 
 
 The login screen will now be displayed.
 2.	Click  **SIGN IN WITH OIDC** button.
 
-  ![](images/30-cloud-director-oidc.jpg ':size=400') 
+  ![](images/30-cloud-director-oidc.jpg ':size=200%') 
  
 
 3.	The Director Console will be displayed.
  
-  ![](images/30-cloud-director-console-instance.jpg ':size=400') 
+  ![](images/30-cloud-director-console-instance.jpg ':size=200%') 
 
 ## Navigating to your VDC
 When we navigate out of Virtual Data Center to a section for example the Content Hub we will need to navigate our way back. This is a general technique for navigating to the Virtual Data Center we are managing.
 1.	Select **Data Centers (A)**
-  ![](images/30-cloud-director-console-dc.jpg ':size=400') 
+  ![](images/30-cloud-director-console-dc.jpg ':size=200%') 
  
 2.	Navigate to and select the VDC we have been assigned
 
-  ![](images/30-cloud-director-console-2.jpg ':size=400') 
+  ![](images/30-cloud-director-console-2.jpg ':size=200%') 
  
 We should now be viewing the Data Center we are managing.
  
-  ![](images/30-cloud-director-console-instance.jpg ':size=400') 
+  ![](images/30-cloud-director-console-instance.jpg ':size=200%') 
 
 
 

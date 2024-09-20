@@ -35,7 +35,7 @@ A project is a grouping of Code Engine entities such as applications, jobs, and 
 1. Select **Application** as the component type you'd like to deploy.
 1. Set the **Name** of the application to something unique like `<your-username>-helloworld-app`. As example `celab-123-helloworld-app`.
 1. Review the other settings in the page but keep their default values:
-   * **Code to run** - This example application uses a pre-built sample image that is publically available in IBM Cloud Container Registry (`icr.io/codeengine/helloworld`). However, outside of this specific example, you can easily use your own container image or even start from a source code repository.
+   * **Code** - This example application uses a pre-built sample image that is publically available in IBM Cloud Container Registry (`icr.io/codeengine/helloworld`). However, outside of this specific example, you can easily use your own container image or even start from a source code repository.
       * Because this example uses a sample that is publically available, no registry access is required. (I would acknowledge the registry access secret setting).
       * This application listens internally for requests on port `8080`, but is exposed by Code Engine on the standard `443` HTTPS port.
    * **Resources & Scaling** - You can configure resources that are associated with your application including CPU, memory, storage, number of instances, and autoscaling settings.

@@ -16,7 +16,7 @@ The form is filled with default values that will be perfect to try out Functions
 Let's review them.
 
 Under **Code**:
-* the **Runtime image** is set to **Node.js 18**. Functions include Node and Python managed runtimes.
+* the **Runtime image** is set to **Node.js**. Functions include Node and Python managed runtimes.
 * the **Code bundle options** is set to **Edit inline code** making it very handy for quick tests.
   * Review the code in the editor. It is a simple Node.js function that will return the environment variables defined in the function runtime together with the function arguments.
   * There are other options available such as the ability to point to a source code repository or to a pre-built code bundle.

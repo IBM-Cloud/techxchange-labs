@@ -19,7 +19,7 @@ A project is a grouping of Code Engine entities such as applications, jobs, and 
 
 1. Go to https://cloud.ibm.com/codeengine/overview
    * Alternatively, use the navigation menu to go to the Code Engine Overview page: ☰ > Code Engine > Overview.
-1. Click **Let's go**.
+1. Click **Start creating**.
   ![](images/10-landing.png ':size=400')
 1. Click **Create project**
   ![](images/10-click-create-project.png ':size=400')

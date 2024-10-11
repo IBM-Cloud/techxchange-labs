@@ -33,6 +33,10 @@ Log aggregation results can be found as templates in the Templates tab in the Lo
    ![](images/log-templates.png ':size=400')
    In the Logs view, you can also click the Templates tab to open the template view.
    ![](images/template-0.png ':size=600')
+1. Make sure to clear the Lucene query if still set to `"My favorite colour is red"`.
+1. Clear all filters.
+1. Set the time frame to **Last 7 days**.
+1. Using the menu next to the **Settings** button, change the view settings from **Condensed** to **JSON**.
 1. Filter data for the application `ibm-audit-event`. This application name groups auditing events that are generated in the account.
    ![](images/template-audit-1.png ':size=600')
 1. Expand a log line and select the value of the `action` field.
@@ -43,14 +47,13 @@ Log aggregation results can be found as templates in the Templates tab in the Lo
    ![](images/show-graph-for-key.png ':size=400')
    The field visualization with top values is displayed.
    ![](images/field-visulaization-field.png ':size=400')
-1. Select the three dots to view the raw log, copy the permalink to quickly access the log at a later time.
+1. Select the three dots to view the raw log, **Copy Permalink** to quickly access the log at a later time.
    ![](images/three-dots.png ':size=300')
-   Explore the options.
    ![](images/three-dots-options.png ':size=300')
 
 ## View the logs that are associated with a template
 
-From the Templates page, scroll to the right, hover over the column **First seen**.
+From the Templates page, scroll to the right, hover over the column **First Seen**.
 
 ![](images/template-3.png ':size=300')
 

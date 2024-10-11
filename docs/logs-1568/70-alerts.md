@@ -50,16 +50,21 @@ Let's create an alert based on data that you generate by using the `app-log-anal
    ![](images/alert-2.png ':size=300')
    Create an alert. Slect **New alert**.
    ![](images/alert-3.png ':size=800')
-3. Enter the details of the alert. Enter a name, a severity, and a label.
+3. Enter the details of the alert.
+   1. Set **Alert name** to your username
+   1. Set **Alert severity** to **Warning**.
+   1. Set **Labels** to `env:prod`
    ![](images/alert-4.png ':size=600')
-4. Select the **Standard alert**. Enter the the triggering condition in the Query section. Select the subsystem `app-log-analysis` and as application your namespace.
+4. Select the **Standard alert**.
+   1. Set the search query to the trigger condition.
+   1. Under **Applications**, select your username.
+   1. Under **Subsystems**, select `app-log-analysis`.
    ![](images/alert-5.png ':size=600')
    Select all severities.
    ![](images/alert-7.png ':size=600')
    Change the condition to more that 1 log in 5 minutes.
    ![](images/alert-6.png ':size=600')
 5. Click **Create alert**.
-
-Generate data by using the application `app-log-analysis` so the alert triggers based on ypur condition. If you use the sample message, send messages with different colours, and repeat the red color so the alert triggers.
+1. Generate data by using the application `app-log-analysis` so the alert triggers based on your condition. If you use the sample message, send messages with different colours, and repeat the red color so the alert triggers.
 
 ⇨ [Continue to Incident management to monitor your alert](80-incident.md)

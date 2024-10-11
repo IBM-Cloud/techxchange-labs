@@ -8,12 +8,13 @@ You can use a view to see logs that match a specific filtering criteria. Views c
 
 ## Creating a custom view
 
-1. In the application, generate a log line with the message `My favorite colour is red`
+1. In the application, generate a log line with the message `My favorite colour is red 🔴`
    ![](images/log-line.png ':size=600')
 1. Back in the Cloud Logs dashboard, in the left-hand navigation, click **Explore logs** > **Logs**. By default, the last view you had opened will be displayed. If no view was previously open, all views will be displayed.
    ![](images/explore-logs.png ':size=200')
-1. Select the fields to be included in the view. By default, you can select *Applications*, *Subsystems*, and log *Severities*. For example, select the application that matches the namespace allocated to you.
-1. Add additional filters. Select the subsystem `app-log-analysis`.
+1. Select the fields to be included in the view. By default, you can select *Applications*, *Subsystems*, and log *Severities*.
+   1. Select the application that matches the namespace allocated to you.
+   1. Select the subsystem `app-log-analysis`.
    ![](images/subsystem-filter-view.png ':size=300')
 1. Select if you want your view to only include **Priority Logs** (those in the `Priority Insights` data pipeline or **All Logs**, that is, logs that are stored in your data bucket. Logs in the data bucket include logs collected through all the three data pipelines.
    ![](images/query-priority.png ':size=300')
@@ -23,8 +24,7 @@ You can use a view to see logs that match a specific filtering criteria. Views c
 1. Save your view by clicking the three dots **...**
    1. Set the view name to `<your-username>-first-view`.
    2. Check **Save query and filters** to save the query and filter values you configured.
-   3. If you want your view to be the default view, check **Set as default view**.
-   4. Set the privacy of your view. Private views can only be seen by you. You can set a view as **Private** or **Shared**.
+   4. Set the privacy of your view to **Private**. Private views can only be seen by you. You can set a view as **Private** or **Shared**.
 7. Click **Create**.
 
 ## Organizing views into folders

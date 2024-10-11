@@ -51,7 +51,7 @@ An application to generate logs (`app-log-analysis`) has been pre-deployed in a 
 1. Open the web app at `https://<your-username>.logs-1568-cluster-8ca15627c911dc5cc2eb40c6340e97bf-0000.us-south.containers.appdomain.cloud/`, as example https://loglab-123.logs-1568-cluster-8ca15627c911dc5cc2eb40c6340e97bf-0000.us-south.containers.appdomain.cloud.
 1. Click on the **Logging** tab.
 1. Change the **Logger Log Level on Server** to **debug**.
-1. Type `Hello World!` in the **Message** field.
+1. Copy and paste  `🔥 Hello World!` in the **Message** field.
 1. Click on **Log Message** to submit message.
 1. Repeat the steps several times changing the **Message Log Level** and the message text.
    ![](images/10-app-log-analysis.png ':size=600')

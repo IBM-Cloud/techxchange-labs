@@ -2,6 +2,18 @@
 
 Initialize ilab using the **`ilab config init`** command
 
+Create the `insights-opt-out` file in the `/etc/ilab directory`
+
+``` shell
+# cd /etc
+# mkdir ilab
+# cd ilab
+# echo >insights-opt-out
+
+# ls -l /etc/ilab
+total 4
+-rw-r--r--. 1 root root 1 Oct 14 15:16 insights-opt-out
+```
 
 ``` shell
 # ls -asl

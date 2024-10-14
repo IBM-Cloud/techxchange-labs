@@ -3,7 +3,7 @@
 ### Serve the model 
 
 ``` shell
- ilab -v model serve --model-path /mnt/djblock/demo/.cache/instructlab/models/instructlab/granite-7b-lab  --backend vllm --gpus 2 -- --served-model-name hello1
+ ilab -v model serve --model-path /root/.cache/instructlab/models/instructlab/granite-7b-lab  --backend vllm --gpus 2 -- --served-model-name hello1
  ```
  
  ``` shell

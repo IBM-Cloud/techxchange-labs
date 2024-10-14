@@ -64,7 +64,24 @@ ibmcloud iam authorization-policy-create is cloud-object-storage Reader  --sourc
 
 ### 6. Create a VPC image from the downloaded qcow2 image
 
-Click on **VPC Infrastructure -> Images**  and click on **Create**.
+Click on **Infrastructure -> Compute -> Images**  and click on **Create**.
 
-![createRHELAIImage](images/createRHELAIImage.png)
+![createRHELAIImage-1](images/createRHELAIImage-1.png)
+![createRHELAIImage-2](images/createRHELAIImage-2.png)
 
+Click on **Create custom image** to create the RHELAI image for VPC.
+
+<p>&nbsp;</p>
+
+### 7. Check the status of the created image 
+
+Click on **Infrastructure -> Compute -> Images** 
+
+![createRHELAIImage-1](images/createRHELAIImage-3.png)
+
+<p>&nbsp;</p>
+Click on the image to see the derails
+
+![createRHELAIImage-2](images/createRHELAIImage-4.png)
+
+Click on **Create custom image** to create the RHELAI image for VPC.

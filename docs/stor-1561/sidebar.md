@@ -5,7 +5,7 @@
 - [🏁 Conclusion](40-conclusion.md)
 - [🔨 Optional](50-optional.md) 
 
-**VPC Infrastructure in IBM Cloud**
+**Infrastructure in IBM Cloud**
 - [Lab Sign in](https://ibm.biz/TX24-1561)
 - [Block Storage for VPC Documentation](https://cloud.ibm.com/docs/vpc?topic=vpc-block-storage-about)
 - [File Storage for VPC Documentation](https://cloud.ibm.com/docs/vpc?topic=vpc-file-storage-planning)

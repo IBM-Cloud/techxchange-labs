@@ -3,14 +3,14 @@
 
 ![image](https://media.github.ibm.com/user/273685/files/f5e513dd-537d-4ae0-8023-d3cb761215fa)
 
-## Navigate to VPC Infrastructure
+## Navigate to Infrastructure
 1. Click top left hamburger menu
 ![image](https://media.github.ibm.com/user/273685/files/17750bc9-24d6-44d2-8ab9-8b4077f219a6)
 
 
-3. Scroll down to **VPC Infrastructure**
-4. Click the Pin next to VPC Infrastructure to pin the menu option to the top.
-5. Choose **Virtual Server Instances** within the **VPC Infrastructure** menu. This will take you to the VSI lising.
+3. Scroll down to **Infrastructure**
+4. Click the Pin next to Infrastructure to pin the menu option to the top.
+5. Choose **Virtual Server Instances** within the **Infrastructure** menu. This will take you to the VSI lising.
 ![image](https://media.github.ibm.com/user/273685/files/b2c1b86d-192e-435a-8618-a8d5090f83fd)
 7. If you are not in the **Washinton DC** region, please change it via the drop dowm at the top of the list.
 ![image](https://media.github.ibm.com/user/273685/files/76791086-6a20-4097-9fa9-9b9e8c41a16a)
@@ -122,7 +122,7 @@ Input a name for your new VSI, your snapshot will be pre-selected as the image f
 ## Let's now protect file storage
   Now that your VPC Block Storage volume is protected, let's protect your file share. We will use replication to protect our data in a different availability zone within the same MZR (Tip: you could replicate to a different MZR if needed, this is useful on data migration use cases.)
 
-  Go to the "File storage shares" section within VPC Infrastructure and make sure you are on the WDC MZR, then select your file share to go into the file share details page (Hint: it will have your user as part of the file share name). 
+  Go to the "File storage shares" section within Infrastructure and make sure you are on the WDC MZR, then select your file share to go into the file share details page (Hint: it will have your user as part of the file share name). 
   
   Once you are on the file share details page, scroll down to the replication section, since replication hasn't been setup, go ahead an click on "Create replica", which will open a new tab to provision the replica:
   ![image](https://media.github.ibm.com/user/273685/files/9e64fcd4-6e28-458f-ae2a-37138c7dce74)
@@ -143,7 +143,7 @@ This effectively created the replica in a different AZ and will sync the informa
 
 
 
-  ## Have time left over? 
+  ## Have time left over?
   
   After the conclusion, you can go to the optional activities section, where we will learn how to create backup policies for your block storage snapshots.
  

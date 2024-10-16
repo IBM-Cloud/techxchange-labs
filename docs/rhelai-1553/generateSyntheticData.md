@@ -5,6 +5,9 @@
 export HF_TOKEN=`hugging face token`
 ```
 
+> [!NOTE]
+> Token will be provided for the lab.
+
 ### Download a teacher model
 For this lab we will use the Mistral 7B teacher model.
 

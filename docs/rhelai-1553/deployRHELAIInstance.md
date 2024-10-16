@@ -7,6 +7,9 @@ Go to **Infrastructure -> Network-> VPCs**. Provide the name and take the defaul
 
 ![createVPC](images/createVPC.png)
 
+> [!NOTE]
+> Use `vpc-lab1553` in `Toronto` for this lab.
+
 <p>&nbsp;</p>
 
 ### 2. Create a RHEL AI instance

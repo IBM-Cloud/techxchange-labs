@@ -1,5 +1,10 @@
 ## Create a RHEL AI Image on IBM Cloud
 
+
+> [!NOTE]
+> **Steps 1 to 5** have already been ccompleted for the lab. You can review these steps. Start at **Step 6**.
+
+
 ### 1. Download the RHEL AI image
 
 The Red Hat Enterprise AI (RHEL AI) image can be imported as a bring your own license (BYOL) from RedHat. It is available as a qcow2 image.

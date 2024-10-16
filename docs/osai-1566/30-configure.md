@@ -2,7 +2,7 @@
 
 Red Hat OpenShift AI provides a fully supported environment in which to rapidly develop, train, and test machine learning models before deploying them in production.
 
-In section, you will walk through configuring a Jupyter notebook to use GPUs for AI/ML modeling. You will learn how to use PyTorch to examine GPU resources, then load and run a PyTorch model.
+In this section, you will walk through configuring a Jupyter notebook to use GPUs for AI/ML modeling. You will learn how to use PyTorch to examine GPU resources, then load and run a PyTorch model.
 
 ## Start your Jupyter notebook server
 
@@ -46,7 +46,7 @@ After starting your server, three sections appear in JupyterLab's launcher:
 * Other
 
 In the window, locate the following components:
-* on the left side is the file explorer panel. This panel is where you can create and manage your project directories.
+* on the left side is the file explorer panel. This panel is where you can create and manage your notebook directories.
 * at the top is the menu bar with the most common actions to work with notebooks.
    ![](images/30-jupyter-launcher.png ':size=600')
 

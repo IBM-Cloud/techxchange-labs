@@ -27,7 +27,7 @@ You can now see your project’s initial state. Individual tabs provide more inf
 * **Pipelines** contain the data science pipelines that are executed within the project.
 * **Models** allow you to quickly serve a trained model for real-time inference. You can have multiple model servers per data science project. One model server can host multiple models.
 * **Cluster storage** is a persistent volume that retains the files and data you’re working on within a workbench. A workbench has access to one or more cluster storage instances.
-* **Data connections** contain configuration parameters that are required to connect to a data source, such as an S3 object bucket.
+* **Data connections** contain configuration parameters that are required to connect to a data source, such as a Cloud Object Storage (S3 compatible) bucket.
 
 ## Configure storage
 

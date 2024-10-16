@@ -7,7 +7,7 @@ After you train a model, you can deploy it by using the OpenShift AI model servi
 To prepare a model for deployment, you must move the model from your workbench to Cloud Object Storage. You use the data connection that you reviewed in the `Configure storage` section and upload the model from a notebook. You also convert the model to the portable ONNX format. ONNX allows you to transfer models between frameworks with minimal preparation and without the need for rewriting the models.
 
 1. In your Jupyter environment, open the `2_save_model.ipynb` file.
-1. Follow the instructions in the notebook to make the model accessible in storage and save it in the portable ONNX format.
+1. Follow the instructions in the notebook to upload the portable ONNX model file to the Cloud Object Storage bucket.
 1. When you have completed the notebook instructions, the `models/fraud/1/model.onnx` file is in Cloud object storage and it is ready for your model server to use.
 
 ## Deploy a model

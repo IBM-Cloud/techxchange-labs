@@ -5,7 +5,7 @@
 export HF_TOKEN=`hugging face token`
 ```
 
-> [!NOTE]
+> **Note**
 > Token will be provided for the lab.
 
 ### Download a teacher model

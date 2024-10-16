@@ -1,7 +1,7 @@
 ## Create a RHEL AI Image on IBM Cloud
 
 
-> **Note**
+> **Note:** 
 > **Steps 1 to 5** have already been ccompleted for the lab. You can review these steps. Start at **Step 6**.
 
 

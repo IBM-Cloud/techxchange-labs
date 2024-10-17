@@ -23,12 +23,13 @@ By default, the environment creates a File Share for VPC with three mount target
    - **hpc-demo-1-mgmt-2** - The secondary server to failover workload
 4. These VSIs are provisioned and configured via the deployable architecture.
 
+![](images/20-virtual-servers.png ':size=600')
+
 You might wonder a few things that are specific for the lab setup:
 - the floating IP for the management node is used to make the application center available for the lab. In a production environment this would be done through an ALB and custom domain and certificate.
 - the one additional compute node with profile _gx2-8x64x1v100_ is prepared for the GPU related part of the lab
 - since this is a shared and dynamic HPC environment other attendees might have provisioned additional compute nodes that show up in the list.
 
-![](images/20-virtual-servers.png ':size=600')
 
 ## Review deployed network topology 
 

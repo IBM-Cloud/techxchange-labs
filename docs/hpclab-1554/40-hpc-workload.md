@@ -34,7 +34,10 @@ The idle-timeout of the cluster is configured to be 10 min. So, after 20 min, th
     - `USER` the user column shows the user that submitted the job
     - `STAT` shows the status of the job and weather it's (1) pending `PEND` or (2) running `RUN` or (3) done `DONE`
    ![](./images/40-bjobs-detail.png ':size=600')
-6. The LSF scheduler is now looking for a dynamic compute nodes that are satisfying the request of 10 vCPU, e.g. 10 x 1 VCPU.
+6. The LSF scheduler is now looking for a dynamic compute nodes that are satisfying the request of 10 vCPU, e.g. 10 x 1 VCPU. It requests 3 dynamic compute nodes, e.g. `Target: 3`
+   ```
+   badmin rc view
+   ```
 7. Navigate to [Virtual server instance for VPC](https://cloud.ibm.com/infrastructure/compute/vs) and notice that 3 dynamic nodes with 4 vCPU and 16 GB are provisioned, i.e. 3 x 4 = 12 vCPU.
    ![](images/40-dynamic-nodes.png ':size=600')
 8. Watch the number of hosts in the cluster and observe how the new VSIs are joining the cluster (Close with `CTRL-C`)

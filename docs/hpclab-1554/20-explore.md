@@ -21,11 +21,12 @@ By default, the environment creates a File Share for VPC with three mount target
    - **hpc-demo-1-login** - The home of HPC users to submit and run jobs
    - **hpc-demo-1-mgmt-1** - The primary server running Spectrum LSF scheduler.
    - **hpc-demo-1-mgmt-2** - The secondary server to failover workload
-4. Note, that
-   - the floating IP for the management node is just for this lab in order to make the application center publicly available
-   - the additional node called `hpc-demo-1-10-241-1-65` is a dynamic compute nodes which has been provisioned in preparation of the GPU related steps
-   - since this is a shared environment multiple more dynamic compute nodes might be observed following the same naming pattern
+4. These VSIs are provisioned and configured via the deployable architecture.
 
+You might wonder a few things that are specific for the lab setup:
+- the floating IP for the management node is used to make the application center available for the lab. In a production environment this would be done through an ALB and custom domain and certificate.
+- the one additional compute node with profile _gx2-8x64x1v100_ is prepared for the GPU related part of the lab
+- since this is a shared and dynamic HPC environment other attendees might have provisioned additional compute nodes that show up in the list.
 
 ![](images/20-virtual-servers.png ':size=600')
 

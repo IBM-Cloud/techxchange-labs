@@ -8,6 +8,7 @@ The application center can be optionally enabled in the deployable architecture 
 ### Steps
 
 1. Open the [LSF Application Center](https://ibm.biz/1554-appcenter)
+   - Press **Accept** when a certificate warning pops up since the demo environment is using a floating IP to access the Application Center.
 2. Login with your username and password
    ![](./images/42-pac-login.png ':size=600')
 3. Navigate to **Workloads** to see the submitted jobs in pending (yellow) or running (green) state

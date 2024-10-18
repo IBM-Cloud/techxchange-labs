@@ -11,7 +11,7 @@ mkdir fsys
 ```
 
 ``` shell
-mount -t nfs4 -o sec=sys,nfsvers=4.1 fsf-tor0451a-byok-fz.adn.networklayer.com:/70ed587a_b2dc_4e82_8528_b9bc18f5d751 /mnt/fsys
+mount  -t nfs4 -o ro,sec=sys,nfsvers=4.1 fsf-tor0451a-byok-fz.adn.networklayer.com:/70ed587a_b2dc_4e82_8528_b9bc18f5d751 /mnt/fsys
 ```
 
 ### Look into the taxonomy

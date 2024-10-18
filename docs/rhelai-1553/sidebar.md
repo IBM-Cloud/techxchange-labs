@@ -8,6 +8,7 @@
 - [8. Chat with the served model](chatWithModel.md)
 - [9. Create taxonomy](createTaxonomy.md)
 - [10. Generate synthetic data](generateSyntheticData.md)
+- [11. Optional steps](optionalSteps.md)
 - **Learn more**
 - [Lab Sign in](https://ibm.biz/txc-XXX-invite)
 - [Console](https://cloud.ibm.com/)

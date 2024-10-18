@@ -19,9 +19,9 @@ An interactive job will connect to the remote host and execute the command "as i
    Hello World
    ```
 3. Navigate to [Virtual Server Instance for VPC](https://cloud.ibm.com/vpc-ext/compute/vs)
-4. You can see one or multiple dynamic compute nodes 
+4. You can see one or multiple dynamic compute nodes that already exists or being provisioned.
    ![](./images/30-first-vsi.png ':size=600')
-5. The job did not specify any resource requirements and there got dispatched on any of the compute nodes. 
+5. Since the job did not specify any resource requirements and it gets dispatched on any of the compute nodes. 
 6. Remember your job ID <928> and view the job details
    ```
    bjobs -w 928

@@ -3,7 +3,7 @@ Join this interactive session and learn to deploy a **RHEL AI environment**, on 
 
 
 ## Log in to the IBM account
-1. Go to https://cloud.ibm.com/authorize/cd52f3c929884cf6b11a706ba6fb04ec/ajRtQB5wDK
+1. Go to [Login to IBM Cloud](https://cloud.ibm.com/authorize/cd52f3c929884cf6b11a706ba6fb04ec/ajRtQB5wDK)
 2. Enter te `Username` and `Password` provided for the lab
 3. Click **Sign In**
 

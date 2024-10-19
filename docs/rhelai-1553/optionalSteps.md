@@ -30,4 +30,8 @@ The `generated_data` will have the synthetic data that was generated for the abo
 cd /mnt/fsys/models/fsmodel
 ```
 
-You will be ale to see the model created. You can download this model and use the previous steps to serve and chat with the model
+You will be able to see the model created. You can download this model and use the previous steps to serve and chat with the model.
+
+``` shell
+ilab -v model serve --model-path /root/models/fsmodel/  --backend vllm --gpus 2 -- --served-model-name fsc --disable-custom-all-reduce
+```

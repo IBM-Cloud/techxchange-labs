@@ -19,7 +19,7 @@ The teacher model would be downloaded into the .cache directory.
 ### Serve the teacher model
 
 ``` shell
-ilab -v model serve --model-path /root/.cache/instructlab/models/mistralai/Mistral-7B-Instruct-v0.3  --backend vllm --gpus 2 -- --served-model-name teacher
+ilab -v model serve --model-path /root/.cache/instructlab/models/mistralai/Mistral-7B-Instruct-v0.3  --backend vllm --gpus 2 -- --served-model-name teacher --disable-custom-all-reduce
 ```
 
 

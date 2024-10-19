@@ -16,6 +16,11 @@ total 4
 ```
 
 ``` shell
+# cd /root
+```
+
+
+``` shell
 # ls -asl
 total 8
 4 drwxr-xr-x. 2 root root 4096 Sep 19 20:05 .

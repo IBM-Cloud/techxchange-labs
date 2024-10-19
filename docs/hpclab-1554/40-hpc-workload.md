@@ -69,16 +69,12 @@ The idle-timeout of the cluster is configured to be 10 min. So, after 20 min, th
     bsub -Is -n 1 -R "select[family=balanced]" htop
     ```
     ![](images/40-htop2.png ':size=600')
-16. Optionally, try to identify the host with the highest `ut` from the `lsload -aw` ouput and run the `htop` on that host using `-m <hostname>`.
-    ```
-    bsub -Is -n 1 -m hpc-demo-1-10-241-1-28 htop
-    ```
-17. Since we burn 10 vCPU you will notice that the utilization of 2 hosts is 100% (2 x 4 vCPU), while 1 host has a utilization of just 50% (1 x 2vCPU)
+16. Since we burn 10 vCPU you will notice that the utilization of 2 hosts is 100% (2 x 4 vCPU), while 1 host has a utilization of just 50% (1 x 2vCPU)
    ```
    HOST_NAME               status  r15s   r1m  r15m   ut    pg  ls    it   tmp   swp   mem   
    hpc-demo-1-10-241-1-29      ok   2.6   2.0   0.9  50%   0.0   0     7   78G    0M 14.6G
    hpc-demo-1-10-241-1-28      ok   4.0   4.0   1.7 100%   0.0   0     8   78G    0M 14.6G
    hpc-demo-1-10-241-1-27      ok   4.0   4.0   1.6 100%   0.0   0     7   78G    0M 14.6G
    ```
-18. The dynamic compute nodes are deprovisioned after an idle time of 10min. So, let's continue to the next chapter to keep them busy...
+17. The dynamic compute nodes are deprovisioned after an idle time of 10min. So, let's continue to the next chapter to keep them busy...
 

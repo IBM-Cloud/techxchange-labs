@@ -60,6 +60,7 @@ Let's create an alert based on data that you generate by using the `app-log-anal
    1. Select all severities.
    1. Change the condition to alert immediately
    ![](images/alert-5.png ':size=600')
+1. Under Notifications, set Notify to every 1 minutes.
 5. Click **Create alert**.
 1. Generate data by using the application `app-log-analysis` so the alert triggers based on your condition. If you use the sample message `My favorite colour is red`, send messages with different colours, and repeat the red color so the alert triggers.
 

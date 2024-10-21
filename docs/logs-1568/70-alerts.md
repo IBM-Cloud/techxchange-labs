@@ -41,30 +41,26 @@ IBM Cloud Logs provides the following types of alerts that you can configure.
 
 Let's create an alert based on data that you generate by using the `app-log-analysis` application.
 
-1. Define the criteria that you want to apply to filter logs and trigger an alert. For example, you can choose by message log level, or by words that you include in the message and appear in more than 1 log record.
-
-   In IBM Cloud Logs, message log level is found in the field `coralogix.metadata.severity`. This field must be set to a number: 1 for Debug, 2 for Verbose, 3 for Info, 4 for Warn, 5 for Error, 6 for Critical. If a log does not specify a value, 1 (Debug) is assigned when the log is ingested by IBM Cloud Logs.
-
-   Test you search query in a Logs view. For example, generate log records with different log levels, and text such as : "My favorite colour is red". Use and repeat colours to have a variety of log lines. You can use a Lucene search query as follows: `kubernetes.labels.run:"app-log-analysis" AND message.keyword:/.*red.*/`
-2. Go to the **Alert Management** section.
+1. Go to the **Alert Management** section.
    ![](images/alert-2.png ':size=300')
-   Create an alert. Slect **New alert**.
+   Create an alert. Select **New alert**.
    ![](images/alert-3.png ':size=800')
 3. Enter the details of the alert.
    1. Set **Alert name** to your username
    1. Set **Alert severity** to **Warning**.
-   1. Set **Labels** to `env:prod`
+   1. Set **Labels** to `env:<your username>` such as `env:loglab-123`.
    ![](images/alert-4.png ':size=600')
 4. Select the **Standard alert**.
-   1. Set the search query to the trigger condition.
+   1. Set the search query to
+      ```sh
+      kubernetes.labels.run:"app-log-analysis" AND message.keyword:/.*red.*/
+      ```
    1. Under **Applications**, select your username.
    1. Under **Subsystems**, select `app-log-analysis`.
+   1. Select all severities.
+   1. Change the condition to alert immediately
    ![](images/alert-5.png ':size=600')
-   Select all severities.
-   ![](images/alert-7.png ':size=600')
-   Change the condition to more that 1 log in 5 minutes.
-   ![](images/alert-6.png ':size=600')
 5. Click **Create alert**.
-1. Generate data by using the application `app-log-analysis` so the alert triggers based on your condition. If you use the sample message, send messages with different colours, and repeat the red color so the alert triggers.
+1. Generate data by using the application `app-log-analysis` so the alert triggers based on your condition. If you use the sample message `My favorite colour is red`, send messages with different colours, and repeat the red color so the alert triggers.
 
 ⇨ [Continue to Incident management to monitor your alert](80-incident.md)

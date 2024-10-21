@@ -5,19 +5,16 @@
 
 ## Navigate to Infrastructure
 1. Click top left hamburger menu
-![image](https://media.github.ibm.com/user/273685/files/17750bc9-24d6-44d2-8ab9-8b4077f219a6)
-
+![image](https://media.github.ibm.com/user/273685/files/83cb0dad-b99c-4968-9027-a23abc08a630)
 
 3. Scroll down to **Infrastructure**
 4. Click the Pin next to Infrastructure to pin the menu option to the top.
-5. Choose **Virtual Server Instances** within the **Infrastructure** menu. This will take you to the VSI lising.
-![image](https://media.github.ibm.com/user/273685/files/b2c1b86d-192e-435a-8618-a8d5090f83fd)
-7. If you are not in the **Washinton DC** region, please change it via the drop dowm at the top of the list.
-![image](https://media.github.ibm.com/user/273685/files/76791086-6a20-4097-9fa9-9b9e8c41a16a)
+5. Choose **Virtual Server Instances** within the **Compute** sub-menu on the **Infrastructure** menu. This will take you to the VSI lising.
+![image](https://media.github.ibm.com/user/273685/files/a96cee77-830b-494a-a3f9-3081c98de3bf)7. If you are not in the **Washinton DC** region, please change it via the drop dowm at the top of the list.
+![image](https://media.github.ibm.com/user/273685/files/211dd638-7af9-4b00-83d6-75bba5bc2186)
 
 9. Click on your VSI Name.
-![image](https://media.github.ibm.com/user/273685/files/687f6023-a917-4c9d-ace1-c91012a8a313)
-
+![image](https://media.github.ibm.com/user/273685/files/ef44a2e1-b6a7-48e4-85d5-0519420756b1)
 
 ## Create snapshot of Boot Volume
 

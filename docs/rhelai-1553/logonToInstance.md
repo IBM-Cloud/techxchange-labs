@@ -23,7 +23,7 @@ ilab
 
 <p>&nbsp;</p>
 
-![ilabOutput](images/ilabOutput.png)
+
 
 ``` shell
 nvidia-smi

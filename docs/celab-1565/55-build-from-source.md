@@ -51,7 +51,7 @@ Whether your code is in a public or private Git repository or in your local syst
 ### Create a registry access secret
 
 1. Go to https://cloud.ibm.com/codeengine/projects
-   * Alternatively, use the navigation menu to go to the Code Engine Projects page: ☰ > Code Engine > Projects.
+   * Alternatively, use the navigation menu to go to the Code Engine Projects page: ☰ > Containers > Serverless > Projects.
 1. Select the project you created previously.
 1. Select **Secrets and configmaps** in the left menu.
 1. Click **Create**.
@@ -80,7 +80,7 @@ Whether your code is in a public or private Git repository or in your local syst
    1. Set **Registry access secret** to **ibm-container-registry** (created earlier).
       > Ignore the warning access the registry. It is expected as we gave a limited set of permissions to the Service ID.
    1. Set **Namespace** to your username (like `celab-123`).
-   1. Set **Image name** to `<your-username>-helloworld`, as example `celab-123-helloworld`.
+   1. Set **Repository (image name)** to `<your-username>-helloworld`, as example `celab-123-helloworld`.
    1. Click **Done**.
 1. Under **Instance resources**, set **CPU and memory** to **0.125 vCPU / 0.25 GB** (the first in the list).
 1. Click **Create**.

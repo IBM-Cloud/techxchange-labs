@@ -18,12 +18,12 @@ In this section, you are going to log in to IBM Cloud, deploy an application and
 A project is a grouping of Code Engine entities such as applications, jobs, and builds. The name of your project must be unique within your IBM Cloud resource group, user account, and region. Projects are used to manage resources and provide access to its entities.
 
 1. Go to https://cloud.ibm.com/codeengine/overview
-   * Alternatively, use the navigation menu to go to the Code Engine Overview page: ☰ > Code Engine > Overview.
+   * Alternatively, use the navigation menu to go to the Code Engine Overview page: ☰ > Containers > Serverless > Get Started.
 1. Click **Start creating**.
   ![](images/10-landing.png ':size=400')
 1. Click **Create project**
   ![](images/10-click-create-project.png ':size=400')
-1. Set the **Location** to **Dallas** or **Washington DC**.
+1. Set the **Location** to **Washington DC**.
 1. Set the **Name** to something like `<your-username>-helloworld-project`. As example `celab-123-helloworld-project`.
 1. Keep the default choices for **Resource group** and **Tags**.
 1. Click **Create**.

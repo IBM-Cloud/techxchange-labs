@@ -19,7 +19,7 @@ Based on this data, the model outputs the likelihood of the transaction being fr
 In the previous sections, you used the standalone Jupyter server as a one-off solution running in isolation. To implement a data science workflow, you must use a data science project. Projects allow you and your team to organize and collaborate on resources within separated namespaces. From a project you can create multiple workbenches, each with their own IDE environment (for example, JupyterLab), and each with their own data connections and cluster storage. In addition, the workbenches can share models and data with pipelines and model servers.
 
 1. On the navigation menu, select **Data Science Projects**. This page lists any existing projects that you have access to.
-1. Select the existing data science project, already created for you.
+1. Select the existing data science project named `osai-1566-dsp`, already created for you.
    ![](images/50-dsp-select-project.png ':size=600')
 
 You can now see your project’s initial state. Individual tabs provide more information about the project components and project access permissions:

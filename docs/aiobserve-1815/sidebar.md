@@ -1,0 +1,19 @@
+- [Overview](./cover.md)
+- [Getting started!](./10-getting-started.md)
+- **Part I - Monitoring Observability services**
+- [Monitoring Observability services in IBM Cloud](./30-monitor-platform-data.md)
+- [Validating Observability Resources](./20-validate-observability-resources.md)
+- [Monitoring IBM Cloud Activity Tracker Event Routing](./30-monitor-atracker.md)
+- [Monitoring IBM Cloud Metrics Routing](./30-monitor-mrouter.md)
+- [Monitoring Cloud Object Storage (COS) Health and Status](./30-monitor-cos.md)
+- [Monitoring Event Notifications Service Health](./30-monitor-en.md)
+- **Part II - Monitoring other services and components**
+- [Monitoring Infrastructure Deployments](./40-monitor-da-deployments.md)
+- [Monitoring Code Engine](./50-monitor-code-engine.md)
+- [Monitoring IBM Cloud Databases for Elasticsearch](./60-elasticsearch.md)
+- [Monitoring WatsonX AI services](./70-monitoring-watsonx.md)
+- [Conclusion](./100-conclusion.md)
+- **Learn more**
+- [Lab Sign in](https://ibm.biz/1815-invite)
+- [Console](https://cloud.ibm.com/)
+- [Documentation](https://cloud.ibm.com/docs/)

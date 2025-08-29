@@ -2,12 +2,12 @@
 
 1. The Run Details link will display the OpenShift AI console **Experiments and runs** screen with the pipeline run. Click on a node to display information about the node execution.
 
-    ![image](../images/dp-pipeline-run-details-logs.png)
+    ![image](images/dp-pipeline-run-details-logs.png)
     > Observe that each node in the pipeline graph corresponds to a node in the workbench pipeline editor. Each node represents a container run given the image you specified in the node properties panel.
 
 2. Go back to the IBM Cloud COS bucket that was created in [Step 1](#step-1-create-a-cos-bucket-with-credentials) and find the logs and output from the pipeline run that was just executed.
 
-    ![image](../images/dp-cos-pipeline-logs.png)
+    ![image](images/dp-cos-pipeline-logs.png)
 
 3. Open any of the `.html` files (i.e. `deepeval-correctness-evaluations.html`) to validate the evaluation test ran and the score. Scroll down to the bottom to see the evaluation results summary, which should look similar to below.
 

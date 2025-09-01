@@ -1,0 +1,60 @@
+# This is a sample workflow to demonstrate a CI pipeline with onboarding of a new release of an offering
+# to the IBM Cloud catalog.
+
+name: custom-ci-pipeline
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on the publish of a release. Its assumed that the release has an associated tag.
+  release:
+    types:
+      - published
+       
+  workflow_dispatch: 
+jobs:
+  # This workflow contains a single job called "onboard-publish-release"
+  onboard-publish-release:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      CATALOG_NAME: Community registry
+      OFFERING_NAME: deploy-arch-ibm-code-engine
+      OFFERING_VARIATION_LABEL: project
+      INSTALL_TYPE: fullstack
+      FORMAT_KIND: terraform
+      RESOURCE_GROUP: default
+      CRA_SCAN: SCAN
+      # Note that IBMCLOUD_API_KEY is a secret environment variable configured on the project
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access scripts, etc.
+      - uses: actions/checkout@v3
+        with:
+          ref: $github.event.release.tag_name
+
+      - name: Install and setup IBMCLOUD Cli
+        env: 
+          IBMCLOUD_API_KEY: $secrets.IBMCLOUD_API_KEY
+        run: |
+          ./.github/scripts/installCloudCli.sh
+
+      - name: Upload, validate, scan and publish
+        env: 
+          IBMCLOUD_API_KEY: $secrets.IBMCLOUD_API_KEY
+          VERSION: $github.event.release.tag_name
+        run: |
+
+          echo "--------------------------------------------------------------------"
+          echo "onboard version, validate, scan, publish"
+          echo "--------------------------------------------------------------------"
+          ./.github/scripts/onboard_validate_publish.sh "$CATALOG_NAME" "$OFFERING_NAME" "$VERSION" "$OFFERING_VARIATION_LABEL" "$INSTALL_TYPE" "$RESOURCE_GROUP" "$FORMAT_KIND" "$CRA_SCAN"
+
+      - name: Cleanup deployed resources
+        env: 
+          VERSION: $github.event.release.tag_name
+        run: |
+          echo "--------------------------------------------------------------------"
+          echo "cleanup validation resources"
+          echo "--------------------------------------------------------------------"
+          ./.github/scripts/cleanup.sh "$CATALOG_NAME" "$OFFERING_NAME" "$VERSION" "$FORMAT_KIND"

@@ -1,0 +1,12 @@
+- [🔎 Lab Overview and Objectives](./10-getting-started.md)
+- [📋 Prerequisites and Setup Requirements](./01-prerequisites-and-setup.md)
+- [🏗️ Understanding Infrastructure Requirements](./02-understanding-agentic-ai-infrastructure-requirements.md)
+- [🛠️ Developing Custom Automation (High-Code Approach)](./04-deploying-sample-agentic-ai-application.md)
+- [🚀 Publishing Your Automation to the Catalog](./05-publish-sample-agentic-da-into-catalog.md)
+- [🔐 Complete Solution Stack with Low-Code Composition](./06-advanced-security-and-monitoring.md)
+- [✅ Final Review and Cleanup](./07-final-review-cleanup.md)
+- [🏁 Conclusion](./08-conclusion.md)
+- **Quick links**
+- [Lab Sign in](https://ibm.biz/txc-lab-env)
+- [IBM Cloud Console](https://cloud.ibm.com)
+

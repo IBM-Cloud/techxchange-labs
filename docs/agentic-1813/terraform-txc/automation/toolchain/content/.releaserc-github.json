@@ -1,0 +1,14 @@
+{
+  "tagFormat": "v${version}",
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    ["@semantic-release/github",{
+      "assets": [
+        {"path": "dist/*.tar.gz", "label": "iac-sample-module distribution"},
+        {"path": "dist/*.signature.asc", "label": "iac-sample-module signature"}
+      ]
+    }]
+  ]
+}

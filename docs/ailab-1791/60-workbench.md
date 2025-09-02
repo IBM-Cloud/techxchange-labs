@@ -6,22 +6,21 @@ A workbench is an instance of your development and experimentation environment. 
 
 1. Navigate to the project detail page for your data science project.
 1. Click the **Workbenches** tab, and then click the **Create workbench** button.
-1. Set the name to your username (`ailab-<a number>`).
+1. Set the name to your username, as example `ailab-123`.
 1. Select the TensorFlow image.
    > Red Hat provides several supported notebook images. In the Notebook image section, you can choose one of these images or any custom images that an administrator has set up for you. The Tensorflow image has the libraries needed for this lab.
 1. Set the image version to **2025.1**.
 1. Choose **Small** for **Container size**.
-1. Edit the cluster storage and set the **Persistent storage size** to **5GiB**.
+1. Edit the cluster storage using the action menu (&#8942;) and set the **Persistent storage size** to **5GiB**.
 1. Leave the default environment variables and storage options.
 1. Under **Connections**
    1. Click **Attach existing connections**.
-   1. Select the **ailab-1971-storage** from the list.
+   1. Select the **ailab-1791-storage** from the list.
    1. Click **Attach**.
    ![](images/60-workbench-settings.png ':size=600')
 1. Click the **Create workbench** button.
 1. Wait for the workbench to start.
 1. Eventually, in the **Workbenches** tab for the project, the status of the workbench changes from **Starting** to **Running**.
-
 
 ## Import the tutorial files into the Jupyter environment
 

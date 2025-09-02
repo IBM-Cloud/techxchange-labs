@@ -1,0 +1,174 @@
+version: '1'
+
+setup:
+  abort_on_failure: false
+  image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.16
+  script: |
+    #!/bin/bash
+
+    if [[ "$(get_env pipeline_namespace)" == *"pr"* ||  "$(get_env pipeline_namespace)" == *"ci"* ]]; then
+      source ${WORKSPACE}/$(get_env ONE_PIPELINE_CONFIG_DIRECTORY_NAME)/scripts/code_setup.sh
+    fi
+
+    # Perform the expected .netrc creation to allow private catalog access for modules
+    ibmcloud login --apikey "$(get_env ibmcloud-api-key)" --no-region
+    ibmcloud plugin install catalogs-management
+    ibmcloud catalog netrc
+
+    # Perform the terraform init
+    cd "$WORKSPACE/$(load_repo app-repo path)/$(get_env tf-dir '.')"
+    terraform init
+
+    # If using dev-mode listener, add the terraform related static scan and compliance-checks
+    # If not, this scans and checks will be performed using regular DevSecOps process
+    if [ "$PIPELINE_NAME" == "iac-dev-ci-pipeline" ]; then
+      source "${ONE_PIPELINE_PATH}/internal/tools/logging"
+      source "${COMMONS_PATH}/terraform/terraform-utilities.sh"
+
+      terraform_tfvars_setup
+      terraform_env_export
+
+      # perform the static scan
+      banner "Running Terraform format and validate."
+      "${COMMONS_PATH}"/terraform/terraform-scan.sh
+      banner "Running TFLint Scan."
+      "${COMMONS_PATH}"/tflint/tflint-scan.sh
+      if [ -n "$(get_env "STATIC_SCAN_FAILURE" "")" ]; then
+        exit_code=1
+      fi
+
+      # perform subset of compliance checks
+      banner "Running CRA terraform validate."
+      source "${COMMONS_PATH}/cra/run-cra-terraform-validate.sh"
+      while read -r repo; do
+        path="$(load_repo "${repo}" path)"
+        url="$(load_repo "${repo}" url)"
+        commit_sha="$(load_repo "${repo}" commit)"
+
+        # configure .netrc for private module if stored in same git server as source one(s)
+        configure_git_and_netrc "$url" "$repo"
+
+        # run cra terraform validate
+        run-cra-terraform-validate "${url}" "${path}" "${repo}" || cra_tf_status=$?
+        exit_code=$((cra_tf_status+exit_code))
+      done < <(list_repos)
+    fi
+
+    exit $exit_code
+
+test:
+  abort_on_failure: false
+  image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.16
+  script: |
+    #!/bin/bash
+
+    exit 0
+
+build-artifact:
+  image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.16
+  dind: true
+  abort_on_failure: false
+  image_pull_policy: IfNotPresent
+  script: |
+    #!/bin/bash
+
+    "${COMMONS_PATH}/infrastructure-as-code/build-artifact.sh"
+
+    # If using dev-mode listener, add the artifacture signature
+    # If not, this will be performed using regular DevSecOps process
+    if [ "$PIPELINE_NAME" == "iac-dev-ci-pipeline" ]; then
+      if [ -n "$(get_env signing-key "")" ]; then
+        source "${COMMONS_PATH}/sign-artifact/sign-artifacts.sh"
+      else
+        echo "No signing-key defined. Skipping artifact signature"
+      fi
+    fi
+
+sign-artifact:
+  image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.16
+  abort_on_failure: false
+  script: |
+    #!/bin/bash
+
+    source "${COMMONS_PATH}/sign-artifact/sign-artifacts.sh"
+
+deploy:
+  image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.16
+  abort_on_failure: true
+  script: |
+    #!/bin/bash
+
+    # export TF_VAR
+    source "${COMMONS_PATH}/terraform/terraform-utilities.sh"
+
+    # prepare terraform context (tfvars & TF_VAR export)
+    terraform_tfvars_setup
+    terraform_env_export
+
+    cd "$WORKSPACE/$(load_repo app-repo path)/$(get_env tf-dir '.')"
+
+    terraform plan
+
+    # terraform apply
+
+    # terraform destroy
+
+    exit 0
+
+acceptance-test:
+  abort_on_failure: false
+  image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.16
+  script: |
+    #!/bin/bash
+
+    exit 0
+
+release:
+  abort_on_failure: true
+  image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.16
+  script: |
+    #!/bin/bash
+
+    source "${COMMONS_PATH}/infrastructure-as-code/helpers.sh"
+
+    if [ -n "$(get_env skip-inventory-update-on-failure "")" ]; then
+      # check if the compliance status checks are successfull
+      # do not create a release and update inventory if compliance checks are not succesfull
+      if ! check-compliance-statuses; then
+          echo "Skipping release stage as compliance checks are not successfull."
+          exit 0
+      fi
+    fi
+
+    exit_code=0
+    chmod +x "${WORKSPACE}/$(get_env ONE_PIPELINE_CONFIG_DIRECTORY_NAME)/scripts/run-semantic-release.sh"
+    "${WORKSPACE}/$(get_env ONE_PIPELINE_CONFIG_DIRECTORY_NAME)/scripts/run-semantic-release.sh" || exit_code=$?
+    if [ "$exit_code" != "0" ]; then
+      echo "Failure in the semantic release creation process - Exiting $exit_code"
+      exit $exit_code
+    fi
+
+    chmod +x "${WORKSPACE}/$(get_env ONE_PIPELINE_CONFIG_DIRECTORY_NAME)/scripts/release.sh"
+    "${WORKSPACE}/$(get_env ONE_PIPELINE_CONFIG_DIRECTORY_NAME)/scripts/release.sh" || exit_code=$?
+    if [ "$exit_code" != "0" ]; then
+      echo "Failure in the release/inventory process - Exiting $exit_code"
+      exit $exit_code
+    fi
+
+    # chmod +x "${WORKSPACE}/$(get_env ONE_PIPELINE_CONFIG_DIRECTORY_NAME)/scripts/sign-tag.sh"
+    # "${WORKSPACE}/$(get_env ONE_PIPELINE_CONFIG_DIRECTORY_NAME)/scripts/sign-tag.sh" || exit_code=$?
+    # if [ "$exit_code" != "0" ]; then
+    #   echo "Failure in the tag signature - Exiting $exit_code"
+    #   exit $exit_code
+    # fi
+
+    if [ -n "$(get_env release-version "")" ]; then
+      chmod +x "${WORKSPACE}/$(get_env ONE_PIPELINE_CONFIG_DIRECTORY_NAME)/scripts/onboard_validate_publish.sh"
+      "${WORKSPACE}/$(get_env ONE_PIPELINE_CONFIG_DIRECTORY_NAME)/scripts/onboard_validate_publish.sh" || exit_code=$?
+      if [ "$exit_code" != "0" ]; then
+        echo "Failure in the onboard_validate_publish - Exiting $exit_code"
+        exit $exit_code
+      fi
+    else
+      echo "No new version released. Skipping catalog on-boarding"
+    fi

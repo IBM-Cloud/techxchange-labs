@@ -21,7 +21,9 @@ OpenShift AI offers two options for model serving:
 
 In this section, you will deploy on a single-model server. You create a new model server and deploy your model to it.
 
-1. In the OpenShift AI dashboard, navigate to the project details page and click the **Models** tab.
+1. In the OpenShift AI dashboard, go to **Data science projects**.
+1. Select the **ailab-1791-dsp** project.
+1. Click the **Models** tab.
 1. Click **Deploy model**.
 1. In the form, provide the following values:
    1. Set **Model deployment name** to **your username**, as example `ailab-123`.
@@ -29,11 +31,14 @@ In this section, you will deploy on a single-model server. You create a new mode
    1. Set **Model framework** to **onnx-1**.
    1. Set **Number of model server replicas to deploy** to **1**.
    1. Set **Model server size** to **Custom**
-      1. Set CPU requested and limit to 500 millicores
-      1. Set Memory requested to 1GiB
-   1. Set **Existing  connection** to **ailab-1971-storage**.
+      1. Set CPU requested to 500 millicores
+      1. Set CPU limit to 500 millicores
+      1. Set Memory requested to 1 GiB
+      1. Set Memory limit to 1 GiB
+   1. Set **Existing connection** to **ailab-1791-storage**.
    1. Type the path that leads to the version folder that contains your model file `models/<your-username>/fraud`, as example `models/ailab-123/fraud`.
    1. Leave the other fields with the default settings.
+   ![](images/80-configure-model-server.png ':size=600')
 1. Click **Deploy**.
 1. Wait for the model to deploy and for the Status to show a <span style='color: green'>green</span> checkmark.
 

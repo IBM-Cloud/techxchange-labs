@@ -41,7 +41,7 @@ You can also choose different deployment sizes based on the type of data analysi
 
 ## Examine GPU resources with PyTorch
 
-After starting your server, three sections appear in JupyterLab's launcher:
+After starting your server, these sections appear in JupyterLab's launcher:
 * Notebook
 * Console
 * Elyra - Elyra is a set of AI-centric extensions to JupyterLab Notebooks.

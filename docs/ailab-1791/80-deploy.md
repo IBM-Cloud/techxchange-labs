@@ -31,7 +31,7 @@ In this section, you will deploy on a single-model server. You create a new mode
    1. Set **Model server size** to **Custom**
       1. Set CPU requested and limit to 500 millicores
       1. Set Memory requested to 1GiB
-   1. Set **Existing  connection** to **ailab-1971-storage**.
+   1. Set **Existing  connection** to **ailab-1791-storage**.
    1. Type the path that leads to the version folder that contains your model file `models/<your-username>/fraud`, as example `models/ailab-123/fraud`.
    1. Leave the other fields with the default settings.
 1. Click **Deploy**.

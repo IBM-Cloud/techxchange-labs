@@ -35,9 +35,8 @@ Now that the model is trained, let's put it to the test. The model predicts the 
 
 1. In Red Hat OpenShift AI console, select **Applications / Enabled**.
 1. Click **Launch Application** in the *Jupyter* tile.
-1. Click **Stop notebook server**
+1. Click **Stop notebook server**.
    ![](images/40-stop-notebook.png ':size=600')
-
-
+1. Click **Stop server**.
 
 ⇨ [Continue to Be a data scientist](50-dsp.md)

@@ -62,7 +62,7 @@ From the jumpbox, you should be able to connect to the workload servers in the p
 1.  **Copy the Private Key to the Jumpbox**:
     The jumpbox needs the private SSH key to connect to the workload server.
 
-    First, open a **new, second terminal window** on your local machine. In this new terminal, you need to re-export the variables for the jumpbox IP and the private key.
+    First, open a **new, second terminal window** on your local machine. Navigate to the project directory. In this new terminal, you need to re-export the variables for the jumpbox IP and the private key.
 
     Run these commands from your local machine in the new terminal. Remember to replace `<YOUR-PREFIX>` with the same prefix you used before.
     ```bash
@@ -81,6 +81,7 @@ From the jumpbox, you should be able to connect to the workload servers in the p
 
     First, switch to your **first local terminal** (the one where you ran the `terraform output` commands) and run the following commands to display the values. Copy these values to your clipboard.
     ```bash
+    export WORKLOAD_IP_1=$(terraform output -json workload_server_private_ips | jq -r '.[0]')
     echo "Workload IP: $WORKLOAD_IP_1"
     echo "Private Key Filename: $PRIVATE_KEY_FILE"
     ```
@@ -106,7 +107,11 @@ Now for the final test. You will deploy a sample Python application on the workl
 
 `Internet -> Public LB -> Private LB -> Workload Server -> VPE -> COS`
 
-1. **Copy the Application to the Workload Server**:
+1. **Download some additional files**:
+    1. Download the sample Python application file from [here](https://github.com/IBM/deployable-architecture-iac-lab-materials/blob/main/test_app.py). Save it as `test_app.py`.
+    2. Download the dummy HTML page from [here](https://github.com/IBM/deployable-architecture-iac-lab-materials/blob/main/dummy_page.html). Save it as `dummy_page.html`.
+
+2. **Copy the Application to the Workload Server**:
     This is a two-step process: first from your local machine to the jumpbox, then from the jumpbox to the workload server.
 
     First, if you are currently inside the workload server, type `exit` to return to the jumpbox. Your terminal prompt should look like `root@<jumpbox-name>`.
@@ -130,10 +135,10 @@ Now for the final test. You will deploy a sample Python application on the workl
     ```
     Your prompt should now be `root@<workload-server-name>`.
 
-2. **Upload a Test File to COS**:
+3. **Upload a Test File to COS**:
     From one of your **local machine's terminals**, log in to IBM Cloud.
     ```bash
-    ibmcloud login
+    ibmcloud login --sso
     ```
     
     Next, you need to configure the Cloud Object Storage CLI plugin with the CRN (Cloud Resource Name) of the service instance created by Terraform. This command searches your entire account for the COS instance matching your prefix.
@@ -155,14 +160,14 @@ Now for the final test. You will deploy a sample Python application on the workl
     ibmcloud cos object-put --bucket $BUCKET_NAME --key "index.html" --body dummy_page.html
     ```
 
-3. **Install Dependencies and Run the App**:
+4. **Install Dependencies and Run the App**:
     The final setup step is to run the Python application on the workload server.
 
     First, go to your **local terminal** and get the credentials needed by the application.
     ```bash
     # Display the values on your local machine and copy them
-    terraform output -raw cos_access_key_id
-    terraform output -raw cos_secret_access_key
+    terraform output -json cos_access_key_id
+    terraform output -json cos_secret_access_key
     echo $BUCKET_NAME
     ```
 

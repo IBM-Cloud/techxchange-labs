@@ -1,0 +1,10 @@
+- [🔎 Overview](README.md)
+- [🌐 Getting situated!](10-getting-started.md)
+- [📊 Determine use](20-determine-use.md)
+- [📐 Optimize Cluster](30-optimize-cluster.md)
+- [🌻 Environmental Impact](40-carbon-calc.md)
+- [🏁 Check Success](50-success.md)
+- **Learn more**
+- [Lab Sign in](https://ibm.biz/txc-XXX-invite)
+- [Console](https://cloud.ibm.com/)
+- [Documentation](https://cloud.ibm.com/docs/)

@@ -47,39 +47,112 @@ In a real-world scenario, this file would be created alongside your Terraform fi
 {
   "products": [
     {
-      "name": "ai-agent-for-loan-risk",
-      "label": "Demo: TechXchange Custom IaC for Agentic AI",
+      "name": "deploy-arch-ibm-ai-agent-code-engine",
+      "label": "Demo: Custom IaC for Agentic AI",
       "product_kind": "solution",
-      "tags": ["ai", "agentic", "code-engine", "terraform"],
-      "keywords": ["ai", "agent", "loan", "risk", "code-engine"],
-      "short_description": "Deploy an AI agent for loan risk assessment using IBM Cloud Code Engine",
-      "long_description": "This deployable architecture demonstrates how to deploy an agentic AI application for loan risk assessment using IBM Cloud Code Engine, Terraform, and watsonx.ai services.",
-      "provider_name": "IBM",
-      "offering_docs_url": "https://github.com/IBM/ai-agent-for-loan-risk",
-      "support_url": "https://github.com/IBM/ai-agent-for-loan-risk/issues",
+      "tags": ["ibm_created","integration", "terraform", "solution"],
+      "keywords": ["code engine","IaC","infrastructure as code","terraform","solution", "agentic ai", "watsonx", "loan risk"],
+      "short_description": "Provisions the Loan Risk AI Agents sample application on IBM Cloud Code Engine using a serverless architecture",
+      "long_description": "Configures a serverless IBM Cloud Code Engine project to deploy the Loan Risk AI Agents sample application designed as a proof of concept (PoC) for adopting agentic AI in enterprise workflows.\n\nThe application showcases a bank loan processing workflow in the financial industry, demonstrating how LLMs can drive reasoning and actions—moving beyond traditional rule-based approaches. It uses IBM Cloud services including watsonx.ai for inferencing and retrieval-augmented generation (RAG), and watsonx Assistant/Orchestrate for conversational interactions.",
+      "offering_docs_url": "https://github.com/IBM/agentic-iac-lab-materials/blob/main/agentic-solution/README.md",
+      "features": [
+        {
+          "title": "Code Engine project",
+          "description": "Creates Code Engine project for Code Engine resources such as applications, secrets, jobs."
+        },
+        {
+          "title": "Code Engine secret",
+          "description": "Creates a Code Engine secret used to securely store the API key required to publish the build image to the container registry."
+        },
+        {
+          "title": "Code Engine build",
+          "description": "Creates a Code Engine build that compiles your application source code, builds a container image, and pushes it to the specified container registry using the stored authentication secret."
+        },
+        {
+          "title": "Loan Risk AI Agents sample application",
+          "description": "Deploys Loan Risk AI Agents sample application."
+        }
+      ],
       "flavors": [
         {
-          "label": "Code Engine application",
-          "name": "standard",
-          "install_type": "fullstack",
-          "working_directory": ".",
+          "label": "Code Engine Application",
+          "name": "ce-ai-application",
+          "working_directory": "agentic-solution",
+          "licenses": [],
           "compliance": {},
           "iam_permissions": [
             {
-              "role_crns": ["crn:v1:bluemix:public:iam::::role:Administrator"],
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Viewer"
+              ],
+              "service_name": "Resource group only",
+              "notes": "Viewer access is required in the resource group you want to provision in."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Writer"
+              ],
               "service_name": "codeengine"
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "codeengine"
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "container-registry"
             }
           ],
           "architecture": {
+            "features": [
+              {
+                "title": " ",
+                "description": "Creates Code Engine project."
+              },
+              {
+                "title": " ",
+                "description": "Creates Code Engine secret."
+              },
+              {
+                "title": " ",
+                "description": "Builds Code Engine build."
+              },
+              {
+                "title": " ",
+                "description": "Deploys Loan Risk AI Agents sample application."
+              }
+            ],
             "diagrams": [
               {
                 "diagram": {
-                  "url": "https://raw.githubusercontent.com/IBM/ai-agent-for-loan-risk/main/reference-architecture/IaC_diag.svg"
+                  "url": "https://raw.github.com/IBM/agentic-iac-lab-materials/refs/heads/main/agentic-solution/reference-architecture/ce-app-da.svg",
+                  "caption": "IBM Cloud Code Engine application solution.",
+                  "type": "image/svg+xml"
                 },
-                "description": "Architecture diagram showing the deployment of AI agent using Code Engine"
+                "description": "This deployable architecture creates IBM Cloud Code Engine project and deploys AI application."
               }
             ]
-          }
+          },
+          "configuration": [
+            [
+              {
+                "key": "ibmcloud_api_key"
+              },
+              {
+                "key": "watsonx_project_id",
+                "type": "string",
+                "description": "Watsonx project ID.",
+                "required": true
+              }
+            ]
+          ],
+          "install_type": "fullstack",
+          "terraform_version": "1.10.0"
         }
       ]
     }
@@ -87,17 +160,17 @@ In a real-world scenario, this file would be created alongside your Terraform fi
 }
 ```
 
-> 📝 **Note:** For this lab, you don't need to create this file manually. The provided package already contains both the Terraform configuration you built in the previous section and the required `ibm_catalog.json` metadata file. For more information about the catalog schema, refer to the [IBM Cloud Catalog schema documentation](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-manifest-values).
+> 📝 **Note:** For this lab, you don't need to create this file manually. [The provided package](https://github.com/IBM/agentic-iac-lab-materials/releases/tag/v1.0.0) already contains both the Terraform configuration you built in the previous section and the required [`ibm_catalog.json`](https://github.com/IBM/agentic-iac-lab-materials/blob/main/ibm_catalog.json) metadata file. For more information about the catalog schema, refer to the [IBM Cloud Catalog schema documentation](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-manifest-values).
 
 ### Adding the Product to Your Catalog
 
 Now add the product to your catalog:
 
-1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select catalog named `txc-catalog`.
-1. Once inside, click **Add product** to begin adding your customized deployable architecture (DA).
+1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select catalog named `txc-catalog`
+1. Once inside, click **Add product** to begin adding your customized deployable architecture (DA)
 1. Choose **Deployable architecture** as the product type, and select **Terraform** as the delivery method
 1. Choose **Public repository** (if using a private repo, ensure the system has access via credentials or IBM Cloud Secrets Manager)
-1. In the **Source URL** field, enter: `https://github.com/IBM/ai-agent-for-loan-risk/archive/refs/heads/main.tar.gz`
+1. In the **Source URL** field, enter: `https://github.com/IBM/agentic-iac-lab-materials/archive/refs/tags/v1.0.0.tar.gz`
 
 > 💡 **Package Contents:** This tar.gz file contains the complete Terraform automation you built in the previous section, along with the required `ibm_catalog.json` metadata file. In a real-world scenario, this package would typically be generated by your source control release process (e.g., [GitHub releases](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) or [GitLab releases](https://docs.gitlab.com/ee/user/project/releases/)), but for this lab we provide a pre-built package to simplify the process.
 
@@ -111,8 +184,8 @@ After the product is added to a catalog, its version is initially in a draft sta
 
 To access your product version:
 
-1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select catalog named `txc-catalog`.
-1. On the new page, in the **Products** table, click on our deployable architecture (DA) - `Demo: TechXchange Custom IaC for Agentic AI`.
+1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select catalog named `txc-catalog`
+1. On the new page, in the **Products** table, click on our deployable architecture (DA) - `Demo: Custom IaC for Agentic AI`
 
 To make the deployable architecture available:
 
@@ -121,6 +194,15 @@ To make the deployable architecture available:
 1. Follow the prompts to make the version available for deployment
 
 Your deployable architecture is now available in the catalog for no-code deployment by other users.
+
+## Step 4: Find your deployable architecture in the IBM Cloud Catalog
+
+To verify that your deployable architecture has been successfully added:
+
+1. Go to the [IBM Cloud Catalog](https://cloud.ibm.com/catalog)
+1. Use the search bar and type: `Demo: Custom IaC for Agentic AI`
+1. Once it appears in the results, **click on the deployable architecture**.
+1. From there, you can **review the details and deploy it directly** from the catalog.
 
 ## Platform Engineering Milestone
 

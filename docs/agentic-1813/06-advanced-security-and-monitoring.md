@@ -6,8 +6,8 @@ You've built a custom deployable architecture for your application. Now you'll c
 
 > 💡 **Simple Goal:** Combine three deployable architectures into one complete solution:
 > - Your custom Code Engine DA (application workload)
-> - [Watsonx.ai SaaS DA](https://cloud.ibm.com/catalog/architecture/deploy-arch-ibm-watsonx-saas-9aa6135e-75d6-4c56-a757-26804837a6bb-global) (AI services) - *provided by IBM through the public catalog*
-> - [Security & Observability DA](https://cloud.ibm.com/catalog/architecture/deploy-arch-ibm-observability-91919c9a-9bc4-448d-b653-9e90886fce92-global) (enterprise features) - *provided by IBM through the public catalog*
+> - [Watsonx.ai SaaS DA](https://cloud.ibm.com/catalog/architecture/deploy-arch-ibm-watsonx-ai-saas-e8ad6597-8c1a-466a-8bb7-243a109daaa8-global) (AI services) - *provided by IBM through the public catalog*
+> - [Security & Observability DA](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-observability-a3137d28-79e0-479d-8a24-758ebd5a0eab-global) (enterprise features) - *provided by IBM through the public catalog*
 
 Then wire them together, test the complete solution, and share it as a reusable stack.
 
@@ -21,13 +21,13 @@ Start by creating a new IBM Cloud project named `txc-project` that will act as t
 
 You will add this architecture to a new IBM Cloud project named `txc-project`, using the `us-south` region and the `Default` resource group. 
 
-1. In the IBM Cloud console, click the **navigation menu (☰)** in the top-left corner, then select **Projects** from the menu - or go directly to [**Projects**](https://cloud.ibm.com/projects).
-1. On the Projects page, click **Create** to start setting up a new project.
+1. In the IBM Cloud console, click the **navigation menu (☰)** in the top-left corner, then select **Projects** from the menu - or go directly to [**Projects**](https://cloud.ibm.com/projects)
+1. On the Projects page, click **Create** to start setting up a new project
 1. On the **Create a project** page, fill out the form as follows:
     - Enter `txc-project` as the project **Name**
     - Select the `Default` **resource group** from the dropdown
     - Select the `Dallas (us-south)` **region** from the region dropdown
-1. Then click **Create** to finish setting up the project.
+1. Then click **Create** to finish setting up the project
 
 
 ### Add and Configure Observability DA
@@ -67,7 +67,7 @@ In this step, we’ll add the `Watsonx.ai SaaS with Assistant and Governance` De
 After adding a deployable architecture to your project, you can edit its input values to customize the deployment. While configurations can be generic, most projects use specific configurations—or groups of them—to deploy resources across different environments, such as development, test, and production.
 
 1. On the Configure page, scroll down and click **Next** to continue.
-1. Enter your `IBM Cloud API` key in **the api_key** field.
+1. Enter your `IBM Cloud API` key in the **api_key** field.
 1. Click **Next** to continue.
 1. To enter a **resource group**, click `Edit` inside the `resource_group_name` input field, then enter the name of a new or existing resource group. In our case we will use `txc-watson-rg`.
 1. To configure all input variables, turn on **Advanced** to enable editing of optional inputs and fine-tune your configuration.
@@ -90,7 +90,7 @@ After adding a deployable architecture to your project, you can edit its input v
 ### Add and Configure your custom Code Engine DA
 
 1. Navigate to the **Catalog** via the top menu, or go directly to the [Catalog page](https://cloud.ibm.com/catalog).
-1. Make sure **txc-catalog** private catalog is selected from the Catalog picker. Then, in the Catalog search bar, type `Demo: TechXchange Custom IaC for Agentic AI` and select it from the results.
+1. Make sure **txc-catalog** private catalog is selected from the Catalog picker. Then, in the Catalog search bar, type `Demo: Custom IaC for Agentic AI` and select it from the results.
 1. Choose the correct version of the deployment architecture, then click **Add to project** to proceed.
 1. Make sure **Add to existing** is selected from the left menu.  Then, choose `txc-project` from the dropdown. Update the configuration name if needed — in this case, we'll use `agentic-ai-demo`.
 1. Click **Add** to continue.
@@ -98,7 +98,7 @@ After adding a deployable architecture to your project, you can edit its input v
 After adding a deployable architecture to your project, you will customize its input values to match your specific use case. While default configurations are provided, you’ll often adjust them based on the type of workload, connected services, or the overall solution you're building.
 
 1. On the Configure page, scroll down and click **Next** to continue.
-1. Enter your `IBM Cloud API` key in **the api_key** field.
+1. Enter your `IBM Cloud API` key in the **api_key** field.
 1. Click **Next** to continue.
 1. We will link the input of the `agentic-ai-demo` to the output of the previously deployed `watsonx-ai-saas-demo` DA. Hover over the **watsonx_project_id** input field and click on **Add Reference**.
 1. A new popup will open.
@@ -164,7 +164,7 @@ Now that you’ve integrated your custom deployable architecture with existing I
 1. Navigate to the **Configuration** tab to continue.
 1. Click the **options menu (⋮)** at the top-right corner of the page, then select **Export JSON Project** to download the stack definition in JSON format.
 
-> 📤 The **JSON file** can now be **shared and published** for organizational use, enabling teams to easily create new products based on the existing stack definition. This file contains all deployment architectures (**Loan Risk AI Agents sample application**, `Watsonx.ai SaaS with Assistant and Governance` and `Cloud automation for Observability`) and the references (wires) between them.  
+> 📤 The **JSON file** can now be **shared and published** for organizational use, enabling teams to easily create new products based on the existing stack definition. This file contains all deployment architectures (`Loan Risk AI Agents sample application`, `Watsonx.ai SaaS with Assistant and Governance` and `Cloud automation for Observability`) and the references (wires) between them.  
 This gives developers a one-click, secure, and compliant AI platform; and gives platform teams consistent, maintainable delivery at scale.
 
 ## Platform Engineering Achievement

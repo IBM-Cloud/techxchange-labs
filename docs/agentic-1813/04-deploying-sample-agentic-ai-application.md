@@ -23,7 +23,7 @@ ai-agent-for-loan-risk/
 
 This structure ensures the configuration is modular, organized, and aligned with Terraform best practices, making it easier to manage the deployment lifecycle of the **Loan Risk AI Agents sample application**.
 
-To begin, create a working directory named `ai-agent-for-loan-risk` that will contain all the Terraform configuration files for the `Load Risk AI Agents sample application`. Within this directory, you’ll create the following set of files: `.gitignore main.tf variables.tf terraform.tfvars outputs.tf provider.tf version.tf`.
+To begin, create a working directory named `ai-agent-for-loan-risk` that will contain all the Terraform configuration files for the `Loan Risk AI Agents sample application`. Within this directory, you’ll create the following set of files: `.gitignore main.tf variables.tf terraform.tfvars outputs.tf provider.tf version.tf`.
 
 <details>
   <summary><b>CLI command</b></summary>
@@ -162,9 +162,8 @@ Create a **Code Engine build** to automatically build container images from sour
 
 The `code_engine_build` module includes key inputs:
 
-- **source_url** – [The URL of the Git repository](https://github.com/IBM/ai-agent-for-loan-risk) that contains the source code for the **Loan Risk AI Agents sample application**.  
+- **source_url** – [The URL of the Git repository](https://github.com/IBM/ai-agent-for-loan-risk) that contains the source code for the **Loan Risk AI Agents sample application**.
 - **strategy_type** – Set to `dockerfile`, which tells Code Engine to use a Dockerfile located in the [Git repository](https://github.com/IBM/ai-agent-for-loan-risk/blob/main/Dockerfile) to define how the container image should be built.
-The name of the Code Engine secret that contains credentials for authenticating with the IBM Cloud Container Registry. This allows the built image to be securely pushed to the container registry under your CR namespace.
 - **output_secret** – The name of the Code Engine secret (created in the previous step) that contains credentials for authenticating with the IBM Cloud Container Registry. This allows the built image to be securely pushed to the container registry under your CR namespace.
 - **output_image** – The full path of the image (including registry namespace and image name) where the final container will be stored. This is the destination in IBM Cloud Container Registry where the built image is pushed.
 
@@ -287,8 +286,8 @@ Create the `terraform.tfvars` file to store your configuration values:
 Create `terraform.tfvars` and replace the placeholder values with your actual values:
 
 ```hcl
-ibmcloud_api_key="<your-IBM-cloud-api-key>"
-watsonx_project_id="<your-watsonx-project-id>"
+ibmcloud_api_key     = "<your-IBM-cloud-api-key>"      # From IBM Cloud IAM
+watsonx_project_id   = "<your-watsonx-project-id>"     # Provided in the lab
 ```
 
 ### Deploy the infrastructure
@@ -395,7 +394,7 @@ resource_group_id = "82a136aaa2a44964a5b45e9370a93ff2"
   - In the project dashboard, navigate to the **Image builds** section from the left-hand menu to view the configuration of your created `image build`.
   - In the project dashboard, navigate to the **Applications** section from the left-hand menu to view the configuration of your created `application`.
 
-> 🌐 To **access** the **deployed Load Risk AI Agents sample application**, look at the **`app_url`** output from the `terraform apply` command — it provides the public URL of the running application. You can navigate to application URL (`app_url`) in your browser to access and test the AI Agent for Loan Risk application UI.
+> 🌐 To **access** the **deployed Loan Risk AI Agents sample application**, look at the **`app_url`** output from the `terraform apply` command — it provides the public URL of the running application. You can navigate to application URL (`app_url`) in your browser to access and test the AI Agent for Loan Risk application UI.
 Note that it may take a short while for the application to fully load after deployment, so if the page doesn’t respond immediately, give it a moment before refreshing.
 
 ## Local Infrastructure Cleanup

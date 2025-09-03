@@ -21,13 +21,13 @@ Start by creating a new IBM Cloud project named `txc-project` that will act as t
 
 You will add this architecture to a new IBM Cloud project named `txc-project`, using the `us-south` region and the `Default` resource group. 
 
-1. In the IBM Cloud console, click the **navigation menu (☰)** in the top-left corner, then select **Projects** from the menu - or go directly to [**Projects**](https://cloud.ibm.com/projects).
-1. On the Projects page, click **Create** to start setting up a new project.
+1. In the IBM Cloud console, click the **navigation menu (☰)** in the top-left corner, then select **Projects** from the menu - or go directly to [**Projects**](https://cloud.ibm.com/projects)
+1. On the Projects page, click **Create** to start setting up a new project
 1. On the **Create a project** page, fill out the form as follows:
     - Enter `txc-project` as the project **Name**
     - Select the `Default` **resource group** from the dropdown
     - Select the `Dallas (us-south)` **region** from the region dropdown
-1. Then click **Create** to finish setting up the project.
+1. Then click **Create** to finish setting up the project
 
 
 ### Add and Configure Observability DA

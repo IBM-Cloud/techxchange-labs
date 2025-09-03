@@ -47,7 +47,7 @@ In a real-world scenario, this file would be created alongside your Terraform fi
 {
   "products": [
     {
-      "name": "deploy-arch-ibm-code-engine",
+      "name": "deploy-arch-ibm-ai-agent-code-engine",
       "label": "Demo: Custom IaC for Agentic AI",
       "product_kind": "solution",
       "tags": ["ibm_created","integration", "terraform", "solution"],

@@ -630,7 +630,7 @@ Your `main.tf` file is now complete with all compute, load balancing, and storag
     terraform init
     ```
    
-3. **Run `terraform plan`**
+2. **Run `terraform plan`**
 
     Run plan again to see the new resources that will be added.
 
@@ -640,7 +640,7 @@ Your `main.tf` file is now complete with all compute, load balancing, and storag
 
     You should see a plan to add the SSH key, virtual servers, load balancers, VPEs, and the COS instance.
 
-4. **Run `terraform apply`**
+3. **Run `terraform apply`**
 
     This command applies the plan and builds the remaining infrastructure.
 
@@ -652,7 +652,7 @@ Your `main.tf` file is now complete with all compute, load balancing, and storag
 
     The provisioning process will take several minutes (typically 10-15 minutes).
 
-5. **Review the Outputs**
+4. **Review the Outputs**
 
     Once the `apply` is complete, Terraform will display all the outputs, including the jumpbox IP and load balancer hostname. You will use these in the next section to test your deployment.
 

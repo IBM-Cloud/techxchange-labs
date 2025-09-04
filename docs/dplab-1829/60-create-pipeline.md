@@ -41,7 +41,7 @@ The workbench you see will be used to construct an AI pipeline with existing ass
 
 10. On the pipeline canvas, draw a line to connect the comment to the `"Correctness" evaluations` notebook node.
 
-11. Open the Jupyter notebook by double clicking the Notebook node on the Pipeline canvass. Update the **`model_name` (A)** and **`llm_base_url` (B)** parameters with the values recorded in last task of [Step 2](#step-2-open-the-openshift-ai-console).
+11. Open the Jupyter notebook by double clicking the Notebook node on the Pipeline canvass. Update the **`model_name` (A)** and **`llm_base_url` (B)** parameters with the values recorded in last task of [Step 2](20-open-rhoai-console.md).
 
     ![image](images/dp-pipeline-notebook-params.png)
 

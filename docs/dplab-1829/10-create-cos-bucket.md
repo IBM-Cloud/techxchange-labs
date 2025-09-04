@@ -1,17 +1,17 @@
-## Step 1: Create a COS bucket with credentials
+## Step 1: Create an Object Storage bucket with credentials
 
-Pipelines in OpenShift AI will use this COS bucket to store log files and output from the pipeline runs. We will use the existing COS instance created for the OpenShift AI cluster. However, we will create a new bucket for the data pipeline to use. For performance purposes, the bucket should be allocated in the same location that the OpenShift cluster runs in.
+Pipelines in OpenShift AI will use this cloud object storage (COS) bucket to store log files and output from the pipeline runs. We will use the existing COS instance created for the OpenShift AI cluster. However, we will create a new bucket for the data pipeline to store it's logs and pipeline output. For performance purposes, the bucket should be allocated in the same location that the OpenShift cluster runs in.
 
-1. In the IBM Cloud console, navigate to the Resource List and expand the **Storage** category. Select the `openshift-ai-cos` service instance
+1. In the IBM Cloud console, navigate to the Resource List and expand the **Storage** category. Select the `rhocp-cluster-cos` service instance
 
 2. Click **Create bucket** then "Create a Custom Bucket". Provide the following for the bucket configuration:
-    +  **Unique-bucket-name**: `dpl4lab-bucket-XYZ` where `XYZ` is any unique set of characters
+    +  **Unique-bucket-name**: `pipeline-bucket-XX` *where `XX` is your student ID*
     +  **Resiliency**: `Regional`
-    +  **Location**: `Brazil - Sao Paolo (br-sao)`
+    +  **Location**: `United States - Dallas (us-south)`
 > Leave all other settings at their default
 
-3. Create **Service credentials (A)** for Data Science Pipelines to store logs and output:
-    +  **Name (B)**: `l4-lab-paas-pipelines`
+3. Create **Service credentials** for Data Science Pipelines to store logs and output:
+    +  **Name (B)**: `pipeline-bucket-creds`
     +  **Role (C)**: `Writer`
     +  **Servive ID (D)**: `Auto-Generate`
     +  **Include HMAC (E)**: `On`

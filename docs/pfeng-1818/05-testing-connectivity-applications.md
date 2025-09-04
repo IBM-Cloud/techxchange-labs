@@ -108,8 +108,22 @@ Now for the final test. You will deploy a sample Python application on the workl
 `Internet -> Public LB -> Private LB -> Workload Server -> VPE -> COS`
 
 1. **Download some additional files**:
-    1. Download the sample Python application file from [here](https://github.com/IBM/deployable-architecture-iac-lab-materials/blob/main/test_app.py). Save it as `test_app.py`.
-    2. Download the dummy HTML page from [here](https://github.com/IBM/deployable-architecture-iac-lab-materials/blob/main/dummy_page.html). Save it as `dummy_page.html`.
+    1. Download the sample Python application file
+       ```bash
+       # Run from your local terminal
+       wget https://raw.githubusercontent.com/IBM/deployable-architecture-iac-lab-materials/refs/heads/main/test_app.py
+       
+       # Or using curl -O (not zero)
+       curl -O https://raw.githubusercontent.com/IBM/deployable-architecture-iac-lab-materials/refs/heads/main/test_app.py
+       ```
+    2. Download the dummy HTML page
+       ```bash
+       # Run from your local terminal
+       wget https://raw.githubusercontent.com/IBM/deployable-architecture-iac-lab-materials/refs/heads/main/dummy_page.html
+       
+       # Or using curl -O (not zero)
+       curl -O https://raw.githubusercontent.com/IBM/deployable-architecture-iac-lab-materials/refs/heads/main/dummy_page.html
+       ```
 
 2. **Copy the Application to the Workload Server**:
     This is a two-step process: first from your local machine to the jumpbox, then from the jumpbox to the workload server.

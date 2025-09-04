@@ -211,7 +211,7 @@ At this point, you have defined the core network infrastructure: two VPCs and a 
 
 1. **Run `terraform init`**
     
-    As you have alreaady executed this command earlier in the previous step, running again this command now searches for `module` blocks, and the source code for referenced modules is retrieved from the locations given in their `source` arguments.
+    As you have already executed this command earlier in the previous step, running again this command now searches for `module` blocks, and the source code for referenced modules is retrieved from the locations given in their `source` arguments.
     
     ```bash
    terraform init
@@ -622,7 +622,7 @@ output "cos_secret_access_key" {
 
 Your `main.tf` file is now complete with all compute, load balancing, and storage resources. Let's deploy them.
 
-1. **Run `terrafomr init`**
+1. **Run `terraform init`**
     
     Run init again to download new modules added to the code.
     

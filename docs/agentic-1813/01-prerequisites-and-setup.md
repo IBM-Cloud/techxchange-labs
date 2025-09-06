@@ -11,67 +11,64 @@ While this lab guides you step-by-step without assuming specific prior knowledge
 
 > 💡 **Tip:** Don't worry if you're not an expert in these areas - the lab provides detailed instructions and explanations throughout.
 
-## Lab Environment Architecture
+## Lab Environment
 
-### Instructor-Led Provisioning
+### For Instructor-Led Workshops
 
-Participants receive pre-configured IBM Cloud accounts with service quotas optimized for AI workloads, including:
+Your instructor will provide credentials to access the lab environment. You will use a web-based IDE for development and a dedicated IBM Cloud account to deploy your infrastructure.
 
-- Administrator access to all IBM services used in this lab, including Code Engine, Log Analysis, and Monitoring services
-- Cloud-based development machine with Visual Studio Code, IBM Cloud CLI, and Terraform CLI 1.5+ with IBM Cloud Provider plugin pre-configured
+**Step 1: Access the Web-based IDE**
 
-### Self-Paced Implementation
+1.  Open a browser tab and log in at **[https://ibm.biz/txc-lab-env-login](https://ibm.biz/txc-lab-env-login)** using the first set of credentials provided.
+2.  After logging in, you will land on an IBM Cloud dashboard. In the same tab, open the web-based IDE by navigating to **[https://ibm.biz/txc-lab-env](https://ibm.biz/txc-lab-env)**. This is your complete IDE development environment, where you will edit files and run all the necessary commands (like `terraform`).
+    > **Note:** After authentication, you may be prompted to **Log in with OpenShift**. Click the button to proceed.
+    > ![Login with OpenShift](./images/devenv/login-ide-openshift.png ':size=500')
 
-If you're working through this lab independently, ensure you have the following prerequisites before starting:
+<details>
+<summary><b>A Quick Tour of the Web-based IDE</b></summary>
 
-**IBM Cloud Account**: You need an IBM Cloud account with necessary permissions. Independent learners must have access to or create a Pay-As-You-Go account.
+Once the IDE is loaded, here’s a quick tour to get you started.
 
-**Development Environment**: Set up your local development machine with the required tools:
-  - **Terraform CLI** installed locally.  
-    Verify your installation by running:
+1.  **Initial Workspace Load**: The IDE will load the lab's workspace. This may take a moment.
+    ![Initial Workspace Load](./images/devenv/ide-initial-workspace-load.png ':size=500')
 
-    ```bash
-    terraform -version
-    ```
+2.  **Trust Workspace Authors**: For the terminal and other features to work correctly, you must trust the workspace authors. Click **Yes, I trust the authors**.
+    ![Trust Workspace Authors](./images/devenv/ide-trust-authors.png ':size=500')
 
-    You should see output similar to:
+3.  **Welcome Tab**: You can close the "Welcome" tab to get a clearer view of the file explorer.
+    ![Close Welcome Tab](./images/devenv/ide-close-welcome.png ':size=500')
 
-    ```bash
-    Terraform v1.x.x
-    ```
+4.  **Editor and File Explorer**: The main interface consists of the file explorer on the left, where you can navigate through the lab files, and the editor on the right, where you can view and modify file contents.
+    ![Editor and File Explorer](./images/devenv/ide-editor.png ':size=500')
 
-    If Terraform is not installed, follow the [official Terraform installation guide](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
+5.  **Open a New Terminal**: To run commands, you'll need a terminal. Click the hamburger menu (the three horizontal lines) at the top left, then select **Terminal** > **New Terminal**.
 
-  - **IBM Cloud CLI** installed locally.  
-    Verify your installation by running:
+6.  **Manage Terminals**: You can create multiple terminals and switch between them using the dropdown menu in the terminal panel.
+    ![Open a New Terminal](./images/devenv/ide-new-terminal.png ':size=500')
+    ![Switch Between Terminals](./images/devenv/ide-switch-between-terminal.png ':size=500')
 
-    ```bash
-    ibmcloud -version
-    ```
+7.  **Create a New File**: To create a new file, right-click in the file explorer, select **New File**, and give it a name.
+    ![Create a New File](./images/devenv/ide-new-file.png ':size=500')
 
-    You should see output similar to:
+</details>
 
-    ```bash
-    ibmcloud version 2.x.x+...
-    ```
+**Step 2: Log in to Your Target IBM Cloud Account**
 
-    If the IBM Cloud CLI is not installed, follow the [official IBM Cloud CLI installation guide](https://cloud.ibm.com/docs/cli?topic=cli-install-ibmcloud-cli).
+1.  To ensure you can work with both accounts simultaneously, open a **new private or incognito browser window**. Alternatively, you can use a different browser profile.
+2.  Log in at **[https://ibm.biz/1813-login](https://ibm.biz/1813-login)** using the second set of credentials. This is your target account where the infrastructure will be provisioned.
 
-  - **Text Editor** such as Visual Studio Code installed locally for editing configuration files.
+> **Important**: Keep both tabs open. You will write code in the IDE (first tab) and view the deployed resources in your target IBM Cloud account (second tab).
 
-  - **Git client** installed and configured.  
-    Verify your installation by running:
+### Self-Paced
 
-    ```bash
-    git --version
-    ```
+Ensure you have:
 
-    You should see output similar to:
-
-    ```bash
-    git version 2.x.x
-    ```
-
-    If Git is not installed, follow the [official Git installation guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+- IBM Cloud account with necessary permissions (Pay-As-You-Go account required)
+- Development machine with:
+  - [Terraform CLI](https://developer.hashicorp.com/terraform/install)
+  - [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started)
+  - Make sure you have installed Cloud Object Storage plugin for IBM Cloud CLI by running `ibmcloud plugin install cloud-object-storage`.
+  - Text editor such as [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+  - (Optional) [Git client](https://github.com/git-guides/install-git)
 
 

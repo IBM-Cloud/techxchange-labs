@@ -38,7 +38,8 @@ This is where the self-service magic happens. The developer doesn't need to writ
 
 3. **Provide Input Values**:
     *   Click on your configuration to open the deployment panel.
-    *   You will be prompted to provide a value for the `prefix` variable. Enter a unique prefix for this new environment, for example, `dev-instance-1`.
+    *   You will be prompted to provide a value for the `prefix` variable. Enter a unique prefix for this new environment, for example, `dev1`.
+    > **Important**: The prefix must be 4 characters or less.
 
     ![Project Inputs](images/project-inputs.png)
 
@@ -55,7 +56,7 @@ The deployment will take 10-15 minutes. Once it's complete, a brand new, fully c
 
 ## Step 4: Verify the New Environment
 
-You can now go to the [Resource list](https://cloud.ibm.com/resources) in your IBM Cloud account. Filter by the prefix you just used (e.g., `dev-instance-1`), and you will see all the newly created resources: VPCs, subnets, VSIs, load balancers, etc.
+You can now go to the [Resource list](https://cloud.ibm.com/resources) in your IBM Cloud account. Filter by the prefix you just used (e.g., `dev1`), and you will see all the newly created resources: VPCs, subnets, VSIs, load balancers, etc.
 
 You have successfully consumed a Deployable Architecture, demonstrating how platform engineering can accelerate development and ensure consistency and security across an organization.
 

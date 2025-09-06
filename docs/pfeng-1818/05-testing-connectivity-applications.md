@@ -33,7 +33,8 @@ First, let's retrieve the key information about your newly created infrastructur
 5.  **Set the Private Key File Name**:
     The private key was created in the project directory using the prefix you defined in the previous lab. Please provide that prefix again to construct the key file path.
 
-    Replace `<YOUR-PREFIX>` with the same prefix you used before (e.g., "jdoe-lab").
+    Replace `<YOUR-PREFIX>` with the same prefix you used before (e.g., "jdoe").
+    > **Important**: The prefix must be 4 characters or less to avoid exceeding resource name length limits.
     ```bash
     export TF_VAR_prefix="<YOUR-PREFIX>"
     export PRIVATE_KEY_FILE="${TF_VAR_prefix}_ssh_private_key.pem"
@@ -65,6 +66,7 @@ From the jumpbox, you should be able to connect to the workload servers in the p
     First, open a **new, second terminal window** on your local machine. Navigate to the project directory. In this new terminal, you need to re-export the variables for the jumpbox IP and the private key.
 
     Run these commands from your local machine in the new terminal. Remember to replace `<YOUR-PREFIX>` with the same prefix you used before.
+    > **Important**: The prefix must be 4 characters or less.
     ```bash
     export JUMPBOX_IP=$(terraform output -raw jumpbox_public_ip)
     export TF_VAR_prefix="<YOUR-PREFIX>"

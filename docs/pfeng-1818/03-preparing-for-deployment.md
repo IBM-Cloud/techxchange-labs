@@ -29,7 +29,7 @@ Terraform requires an API key to authenticate with IBM Cloud.
 To avoid naming conflicts with other resources in the account, we will use a unique prefix for everything we create.
 
 1.  **Choose a Prefix**:
-    A good prefix is something easily identifiable, like your initials followed by a short word (e.g., `jdoe-lab`).
+    A good prefix is something short and easily identifiable, like your initials followed by a short word (e.g., `vb-lab`). Keep in mind the maximum prefix length is 6 characters.
 
 2.  **Set the Prefix as an Environment Variable**:
     Run the following command in your terminal, replacing `<YOUR-PREFIX>` with the prefix you chose:
@@ -52,7 +52,7 @@ variable "ibmcloud_api_key" {
 }
 
 variable "prefix" {
-  description = "Unique prefix for resource naming (e.g., 'jdoe-demo' or 'team-dev')"
+  description = "Unique prefix for resource naming (e.g., 'vb-lab' or 'ra-dev'). Maximum prefix length is 6 characters."
   type        = string
 }
 

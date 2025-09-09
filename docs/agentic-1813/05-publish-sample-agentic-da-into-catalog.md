@@ -179,7 +179,7 @@ Now add the product to your catalog:
 
 6. Choose the **variation** `Code Engine application`, and set the **Software version** to `1.0.0`
 7. Click **Add product** to complete the process
-8. Click on the **Step 3 - Configure the deployment** tab, then click **Import input variables** to add all inputs (e.g., `ibmcloud_api_key`, `watsonx_project_id`) to your deployment architecture
+8. Click on the **Step 3 - Configure the deployment** tab, then click **Import input variables** to add all inputs (e.g., `ibmcloud_api_key`, `watsonx_project_id`, `prefix`) to your deployment architecture
 
 ## Step 3: Make the deployable architecture available
 

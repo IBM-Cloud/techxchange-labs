@@ -37,7 +37,7 @@ In this step, you will deploy the `Cloud automation for Observability` DA, which
 1. Navigate to the **Catalog** via the top menu, or go directly to the [Catalog page](https://cloud.ibm.com/catalog).
 1. In the Catalog search bar, type `Cloud automation for Observability` and select it from the results.
 1. Make sure `Create a new architecture` is selected.
-1. Review the features and capabilities, choose the appropriate **variation**, ensure `Instances` is selected, pick the correct version (`v3.1.10`), and click **Configure and deploy**.
+1. Review the features and capabilities, choose the appropriate **variation**, ensure `Instances` is selected, pick the correct version (`v3.1.17`), and click **Configure and deploy**.
 1. Since you already have a project, make sure **Add to existing** in the left-hand menu is selected, then choose the `txc-project` project from the dropdown list.
 1. Change the configuration name to `observability-demo`, then click **Add**.
 1. On the new page, you can add or remove deployable architectures based on your use case.
@@ -59,7 +59,7 @@ In this step, we’ll add the `Watsonx.ai SaaS with Assistant and Governance` De
 
 1. Navigate to the **Catalog** via the top menu, or go directly to the [Catalog page](https://cloud.ibm.com/catalog).
 1. In the Catalog search bar, type `Watsonx.ai SaaS with Assistant and Governance` and select it from the results.
-1. Review the features and capabilities, and choose the appropriate product version (`v1.9.2`).
+1. Review the features and capabilities, and choose the appropriate product version (`v1.9.38`).
 1. Select the checkbox labeled `I have read and agree to the following license agreements` and click the **Configure and deploy** button.
 1. Since you already have a project, make sure **Add to existing** in the left-hand menu is selected, then choose the `txc-project` project from the dropdown list.
 1. Change the configuration name to `watsonx-ai-saas-demo`, then click **Add**.
@@ -72,8 +72,8 @@ After adding a deployable architecture to your project, you can edit its input v
 1. To enter a **resource group**, click `Edit` inside the `resource_group_name` input field, then enter the name of a new or existing resource group. In our case we will use `txc-watson-rg`.
 1. To configure all input variables, turn on **Optional inputs** to enable editing of optional inputs and fine-tune your configuration.
 1. In the input field labeled `resource_prefix`, enter the `txc-demo`.
-1. Since we want to enable encryption for Cloud Object Storage (COS) by setting **enable_cos_kms_encryption** to `true`, we need to provide a value for **cos_kms_new_key_name** to specify the Key Protect instance used for encryption. To achieve this, we will wire the KMS CRN from the previously configured `Cloud automation for Observability` DA into the `Watsonx.ai SaaS with Assistant and Governance` DA.
-    - a) Hover your cursor over **cos_kms_new_key_name**, then click the **Add a reference** button that appears.
+1. Since we want to enable encryption for Cloud Object Storage (COS) by setting **enable_cos_kms_encryption** to `true`, we need to provide a value for **cos_kms_crn** to specify the Key Protect instance used for encryption. To achieve this, we will wire the KMS CRN from the previously configured `Cloud automation for Observability` DA into the `Watsonx.ai SaaS with Assistant and Governance` DA.
+    - a) Hover your cursor over **cos_kms_crn**, then click the **Add a reference** button that appears.
     - b) A new popup will open:
         - For **Source**, select `Configuration`.
         - For **Name**, choose `observability-demo`.
@@ -104,6 +104,7 @@ After adding a deployable architecture to your project, you will customize its i
     - Set **Category** to `Output`.
     - For **Property**, select `watsonx_project_id`.
 1. Click **OK** to confirm the reference selection.
+1. Click the **Optional inputs** toggle to display optional input variables, then modify the **prefix** value as needed.
 1. Click **Done**, then click **Save** at the top right to save your configuration.
 
 

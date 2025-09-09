@@ -148,6 +148,9 @@ In a real-world scenario, this file would be created alongside your Terraform fi
                 "type": "string",
                 "description": "Watsonx project ID.",
                 "required": true
+              },
+              {
+                "key": "prefix"
               }
             ]
           ],

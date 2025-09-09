@@ -156,6 +156,7 @@ Now for the final test. You will deploy a sample Python application on the workl
     ```bash
     ibmcloud login --sso
     ```
+    > **Note**: If you have access multiple IBM cloud accounts, make sure to select the account where your resources are deployed. 
     
     Next, you need to configure the Cloud Object Storage CLI plugin with the CRN (Cloud Resource Name) of the service instance created by Terraform. This command searches your entire account for the COS instance matching your prefix.
 
@@ -184,6 +185,7 @@ Now for the final test. You will deploy a sample Python application on the workl
     # Display the values on your local machine and copy them
     terraform output -json cos_access_key_id
     terraform output -json cos_secret_access_key
+    terraform output workload_vpe_ips_1
     echo $BUCKET_NAME
     ```
 
@@ -192,6 +194,7 @@ Now for the final test. You will deploy a sample Python application on the workl
     # Paste the values you copied from your local terminal
     export COS_ACCESS_KEY_ID="<paste_access_key_id_here>"
     export COS_SECRET_ACCESS_KEY="<paste_secret_access_key_here>"
+    export ENDPOINT="<paste_workload_vpe_ips_1>"
     export COS_BUCKET_NAME="<paste_bucket_name_here>"
 
     # Run the application in the background

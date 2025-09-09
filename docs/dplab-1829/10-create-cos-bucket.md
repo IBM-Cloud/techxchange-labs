@@ -9,20 +9,24 @@ Pipelines in OpenShift AI will use this cloud object storage (COS) bucket to sto
     +  **Resiliency**: `Regional`
     +  **Location**: `United States - Dallas (us-south)`
 > Leave all other settings at their default
+Click **Create Bucket**
 
-3. Create **Service credentials** for Data Science Pipelines to store logs and output:
-    +  **Name (B)**: `pipeline-bucket-creds`
-    +  **Role (C)**: `Writer`
-    +  **Servive ID (D)**: `Auto-Generate`
-    +  **Include HMAC (E)**: `On`
+3. Click on the instance name **rhocp-cluster-cos (A)** at the top of the page.
+    ![image](images/dp-cos-instance.png)
+
+4. Create **Service credentials** for Data Science Pipelines to store logs and output:
+    +  **Name (A)**: `pipeline-bucket-XX-creds` *(where XX is your student ID)*
+    +  **Role (B)**: `Writer`
+    +  **Servive ID (C)**: `Auto-Generate`
+    +  **Include HMAC (D)**: `On`
 
     ![image](images/dp-cos-creds.png)
 
-    Click **Add (F)**
+    Click **Add (E)**
 
-4. Record the credentials in the `cos_hmac_keys` section of the newly created Service credential. Specifically, you will need the value of **access_key_id (A)** and **secret_key_access (B)**. These values will be used in [Step 4](#step-4-create-a-pipeline-server) below.
+5. Record the credentials in the `cos_hmac_keys` section of the newly created Service credential. Specifically, you will need the value of **access_key_id (A)** and **secret_key_access (B)**. These values will be used in [Step 4](#step-4-create-a-pipeline-server) below.
 
-![image](images/dp-cos-creds-values.png)
+    ![image](images/dp-cos-creds-values.png)
 
 5. Record the `Direct` endpoint for the COS service instance. This value will be used in [Step 4](#step-4-create-a-pipeline-server).
 > The Direct endpoint can be used since the OpenShift AI cluster resides in an IBM Cloud VPC. Learn more on the COS [Endpoint Types](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-endpoints#advanced-endpoint-types).

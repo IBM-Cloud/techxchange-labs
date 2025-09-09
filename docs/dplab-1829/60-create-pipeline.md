@@ -8,7 +8,7 @@ The workbench you see will be used to construct an AI pipeline with existing ass
 
 2. From the **Launcher** window, click **Pipeline Editor** under the Elyra section. This will launch another tab with a blank pipeline canvas.
 
-3. Rename your pipeline from `untitled.pipeline` to `deepeval-evaluation.pipeline`
+3. Rename your pipeline from `untitled.pipeline` to `deepeval-evaluation.pipeline` by right clicking to *rename*
 
 4. From the **Pipeline Component** menu, drag and drop a **Notebook (A)** node on to the pipeline canvas.
 
@@ -42,6 +42,9 @@ The workbench you see will be used to construct an AI pipeline with existing ass
 10. On the pipeline canvas, draw a line to connect the comment to the `"Correctness" evaluations` notebook node.
 
 11. Open the Jupyter notebook by double clicking the Notebook node on the Pipeline canvass. Update the **`model_name` (A)** and **`llm_base_url` (B)** parameters with the values recorded in last task of [Step 2](20-open-rhoai-console.md).
+
+    > Be sure to add `/v1` at the end of the `llm-base_url` such that the value looks *similar* to the following:
+    `llm_base_url = "https://model-granite-33-8b-instruct-granite-inferencing.rhoai-4-17-cluster-58003ab4df7ea9f28f941ba1d396e878-0000.us-south.containers.appdomain.cloud/v1"`
 
     ![image](images/dp-pipeline-notebook-params.png)
 

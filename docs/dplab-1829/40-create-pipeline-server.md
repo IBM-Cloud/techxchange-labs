@@ -9,7 +9,7 @@ Before you can create a data science pipeline, you must create a pipeline server
 
     * **Access key (A)**: *value of "cos_hmac_keys"."access_key_id"
     * **Secret key (B)**: *value of "cos_hmac_keys"."secret_access_key"*
-    * **Endpoint (C)**: *Direct endpoint URL in the bucket settings*
+    * **Endpoint (C)**: *Direct endpoint URL in the bucket settings* **include `https://` at the start of the endpont**
     * **Region (D)**: `us-south` *region where the COS bucket was provisioned*
     * **Bucket (E)**: `pipeline-bucket-XX` *where `XX` is your student ID*
 

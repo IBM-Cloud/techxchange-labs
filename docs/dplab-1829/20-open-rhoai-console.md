@@ -16,4 +16,4 @@
     Record:
     * **Inference endpoint (external)**: `https://model-granite-33-8b-instruct-aal4lab-v1.l4-lab-paas-rhoai-946464-1cce585f5a0d7ffedb5150cacf858bae-0000.br-sao.containers.appdomain.cloud` (example)
 
-    ![image](images/dp-model-deployments.png)
+    ![image](images/dp-model-endpoint.png)

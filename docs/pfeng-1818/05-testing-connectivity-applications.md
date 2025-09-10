@@ -34,7 +34,7 @@ First, let's retrieve the key information about your newly created infrastructur
     The private key was created in the project directory using the prefix you defined in the previous lab.
     
     ```bash
-    export PRIVATE_KEY_FILE=$(terraform output -raw ssh_private_key_file)
+    export PRIVATE_KEY_FILE=$(terraform output -raw ssh_private_key_file_name)
     echo "Private Key File: $PRIVATE_KEY_FILE"
     ```
 
@@ -57,7 +57,7 @@ The jumpbox is your secure gateway to the private environment. Let's connect to 
 
 From the jumpbox, you should be able to connect to the workload servers in the private VPC. This test validates that the **Transit Gateway** is correctly routing traffic between the two VPCs.
 
-1.  **Copy the Private Key to the Jumpbox**:
+1. **Copy the Private Key to the Jumpbox**:
     The jumpbox needs the private SSH key to connect to the workload server.
 
     First, open a **new, second terminal window** on your local machine. Navigate to the project directory. In this new terminal, you need to re-export the variables for the jumpbox IP and the private key.
@@ -66,7 +66,7 @@ From the jumpbox, you should be able to connect to the workload servers in the p
     
     ```bash
     export JUMPBOX_IP=$(terraform output -raw jumpbox_public_ip)
-    export PRIVATE_KEY_FILE=$(terraform output -raw ssh_private_key_file)
+    export PRIVATE_KEY_FILE=$(terraform output -raw ssh_private_key_file_name)
     ```
 
     Now, run the following command from the same new terminal to copy the key.
@@ -89,8 +89,10 @@ From the jumpbox, you should be able to connect to the workload servers in the p
     # Paste the IP address and filename you copied from your local terminal
     export WORKLOAD_IP_1="<paste-workload-ip-here>"
     export PRIVATE_KEY_FILE="<paste-key-file-name-here>"
-
-    # Now connect
+    ```
+    
+    Now connect to the **workload server** from the **jumpbox terminal**.
+    ```bash
     chmod 400 $PRIVATE_KEY_FILE
     ssh -i $PRIVATE_KEY_FILE root@$WORKLOAD_IP_1
     ```
@@ -186,7 +188,7 @@ Now for the final test. You will deploy a sample Python application on the workl
     # Paste the values you copied from your local terminal
     export COS_ACCESS_KEY_ID="<paste_access_key_id_here>"
     export COS_SECRET_ACCESS_KEY="<paste_secret_access_key_here>"
-    export ENDPOINT="<paste_workload_vpe_ips_1>"
+    export VPE_ENDPOINT="<paste_workload_vpe_ips_1>"
     export COS_BUCKET_NAME="<paste_bucket_name_here>"
 
     # Run the application in the background

@@ -16,7 +16,7 @@ You'll find this lab most valuable if you have:
 
 ### For Instructor-Led Workshops
 
-Your instructor will provide credentials to access the lab environment. You will use a web-based IDE for development and a dedicated IBM Cloud account to deploy your infrastructure.
+You will use a web-based IDE for development and a dedicated IBM Cloud account to deploy your infrastructure. Access your credentials at: **[https://ibm.biz/txc25_1818_creds](https://ibm.biz/txc25_1818_creds)**. Your instructor will provide the access passcode.
 
 **Step 1: Access the Web-based IDE**
 

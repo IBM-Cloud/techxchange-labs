@@ -77,14 +77,20 @@ Define the required input variables in `variables.tf`. These variables enable yo
 
 ```hcl
 variable "ibmcloud_api_key" {
-    type        = string
-    description = "The IBM Cloud API key."
-    sensitive   = true
+  type        = string
+  description = "The IBM Cloud API key."
+  sensitive   = true
+}
+
+variable "watsonx_ai_api_key" {
+  type        = string
+  description = "The API key of the IBM watsonx in the target account."
+  sensitive   = true
 }
 
 variable "watsonx_project_id" {
-    type        = string
-    description = "The Watsonx project ID for AI model access."
+  type        = string
+  description = "IBM Watsonx project ID."
 }
 
 variable "prefix" {
@@ -238,7 +244,7 @@ module "code_engine_app" {
   run_env_variables = [{
     type  = "literal"
     name  = "WATSONX_AI_APIKEY"
-    value = var.ibmcloud_api_key
+    value = var.watsonx_ai_api_key
     },
     {
       type  = "literal"
@@ -308,12 +314,13 @@ First, if you're working in a Git repository, create a `.gitignore` file to prev
 
 Create the `terraform.tfvars` file to store your configuration values:
 
-> 📝 **Note:** For this lab, the `watsonx_project_id` is provided to enable the AI application to function immediately after deployment. In the next steps of this lab, you'll learn how to automate the creation of watsonx.ai resources using deployable architectures, eliminating the need to manually configure project IDs.
+> 📝 **Note:** For this lab, the `watsonx_project_id` and `watsonx_ai_api_key` are provided to enable the AI application to function immediately after deployment. In the next steps of this lab, you'll learn how to automate the creation of watsonx.ai resources using deployable architectures, eliminating the need to manually configure project IDs.
 
 Create `terraform.tfvars` and replace the placeholder values with your actual values:
 
 ```hcl
 ibmcloud_api_key     = "<your-IBM-cloud-api-key>"        # From IBM Cloud IAM
+watsonx_ai_api_key   = "<your-watsonx-ai-api-key>"       # Provided in the lab
 watsonx_project_id   = "<your-watsonx-project-id>"       # Provided in the lab
 prefix               = "<prefix-added-to-resources>"     # You can choose your own prefix for resource names
 ```

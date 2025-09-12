@@ -97,7 +97,7 @@ From the jumpbox, you should be able to connect to the workload servers in the p
     ssh -i $PRIVATE_KEY_FILE root@$WORKLOAD_IP_1
     ```
 
-    If successful, your prompt will change again to `root@<workload-server-name>`. You have successfully "jumped" from the public internet to the secure, private workload environment.
+   When prompted to continue connecting, type `yes`. If successful, your prompt will change again to `root@<workload-server-name>`. You have successfully "jumped" from the public internet to the secure, private workload environment.
 
     > **Note:** For the next step, you will run commands from *inside the workload server*. Keep this connection active.
 
@@ -107,22 +107,14 @@ Now for the final test. You will deploy a sample Python application on the workl
 
 `Internet -> Public LB -> Private LB -> Workload Server -> VPE -> COS`
 
-1. **Download some additional files**:
-    1. Download the sample Python application file
+1. **Download some additional files in your Development workspace (local terminal)**:
+    1. Download the sample Python application file 
        ```bash
-       # Run from your local terminal
        wget https://raw.githubusercontent.com/IBM/deployable-architecture-iac-lab-materials/refs/heads/main/test_app.py
-       
-       # Or using curl -O (not zero)
-       curl -O https://raw.githubusercontent.com/IBM/deployable-architecture-iac-lab-materials/refs/heads/main/test_app.py
        ```
     2. Download the dummy HTML page
        ```bash
-       # Run from your local terminal
        wget https://raw.githubusercontent.com/IBM/deployable-architecture-iac-lab-materials/refs/heads/main/dummy_page.html
-       
-       # Or using curl -O (not zero)
-       curl -O https://raw.githubusercontent.com/IBM/deployable-architecture-iac-lab-materials/refs/heads/main/dummy_page.html
        ```
 
 2. **Copy the Application to the Workload Server**:

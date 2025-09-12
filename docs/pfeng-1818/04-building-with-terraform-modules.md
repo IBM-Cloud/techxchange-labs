@@ -237,8 +237,8 @@ At this point, you have defined the core network infrastructure: two VPCs and a 
 
     Terraform will ask for your confirmation. Type `yes` and press Enter.
 
-    The provisioning process for the network can take a few minutes. Once complete, you can go to the [VPC console](https://cloud.ibm.com/vpc-ext/network/vpcs) in IBM Cloud to see your newly created `management` and `workload` VPCs.
-
+    The provisioning process for the network can take a few minutes (typically less than 10 minutes). Once complete, you can go to the [VPC console](https://cloud.ibm.com/vpc-ext/network/vpcs) in the Target Deployment IBM Cloud Account to see your newly created `management` and `workload` VPCs.
+   
 ---
 
 Now that the network foundation is in place, you will add the compute resources (virtual servers), load balancers, and other services.

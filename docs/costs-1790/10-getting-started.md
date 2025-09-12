@@ -22,7 +22,7 @@ Before we begin analyzing cost and sustainability metrics, it’s essential to u
 1. Click on the `Configurations` tab and the click on the overflow menu (three dots) next to the "cluster-and-monitoring" configuration.  Select Edit
 ![config list](images/config-list.png ':size=600')
 
-1. Review the deployment configuration to understand the components provisioned—such as the Red Hat OpenShift cluster, VPC networking, monitoring.  Be sure to turn on the `advanced` toggle to view all the configuration details, including the worker machine type and number of workers per pool.
+1. Review the deployment configuration to understand the components provisioned—such as the Red Hat OpenShift cluster, VPC networking, monitoring.  Open the inputs section to find important details like the worker machine type and number of workers per pool.  You can also click on the "optional inputs" toggle to see additional configuration options.
 ![Configuration](images/cluster-and-monitoring.png ':size=600')
 1. Take note of the number of pool workers per zone, the number of zones, and the pool machine type as these inputs have a big impact on the size and cost of the cluster.
 1. This configuration is based on a reusable deployable architecture for [Red Hat OpenShift on IBM Cloud VPC infrastructure](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-ocp-vpc-1728a4fd-f561-4cf9-82ef-2b1eeb5da1a8-global) which is a great way to deploy a secure cluster.
@@ -32,7 +32,7 @@ Before we begin analyzing cost and sustainability metrics, it’s essential to u
 
 1. Open the **Resource List** from the IBM Cloud main menu (top left in the header)
 ![main menu](images/main%20menu.png ':size=400')
-1. Open up the clusters, network, storage, and observability categories
+1. Open up the containers, network, storage, and observability categories
 ![Resource list](images/resource%20list.png ':size=600')
 1. Identify key resources deployed for the lab, including:
     - The OpenShift cluster
@@ -43,7 +43,7 @@ Before we begin analyzing cost and sustainability metrics, it’s essential to u
 
 ## View Cluster Configuration via Service Details
 
-1. Click on the **OpenShift cluster** in the resource list to view the cluster details, including:
+1. Click on the **Lab1790-openshift** cluster in the resource list to view the cluster details, including:
     - Cluster version and status
     - Number of worker nodes
     - Worker node types (e.g., `bx2.8x32`)
@@ -64,8 +64,8 @@ Before we begin analyzing cost and sustainability metrics, it’s essential to u
 ![OpenShift Deployment View](images/os%20deployments.png ':size=600')
 1. Select the astro-shop project from the project filter at the top left to filter to only the business related apps
     - Have a look through the list to get a sense of the microservices deployed, such as e-commerce frontends, microservices, or analytics pipelines.
-1. For each micro-service listed in the deployments view you can inspect the CPU and Memory limits by selecting "Edit resource limits" from the overflow menu.
-![OpenShift overflow menu](images/os%20resource%20limit%20menu.png ':size=600')
+1. For each micro-service listed in the deployments view you can inspect the CPU and Memory limits by clicking on its name and then scrolling down to the containers section where you can see the setting for resource limits.
+![resource limits](images/resource-limits.png ':size=600')
 1. Under networking->routes observe the URL for the astro-shop front end.
 ![OpenShift Routes](images/os%20routes.png ':size=600')
 1. Click through the link (you may have to click past some warnings as the Astroshop uses HTTP and not HTTPS) and view the example ecommerce application we are optimizing.

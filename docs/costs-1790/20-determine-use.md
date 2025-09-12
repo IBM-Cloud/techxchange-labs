@@ -4,16 +4,16 @@ In this part of the lab, you’ll use IBM Cloud Monitoring (powered by Sysdig) t
 
 ## Launch IBM Cloud Monitoring
 
-1. From the IBM Cloud main menu (top left) select Observability->Monitoring
+1. From the IBM Cloud main menu (top left) select Observability->Monitoring->Instances
 ![monitoring menu](images/monitoring%20menu.png ':size=400')
 1. Launch the 'lab 1790' IBM Cloud Monitoring instance by clicking on the 'dashboard' link.
 ![Launch dashboard](images/monitoring%20dashboard%20link.png ':size=600')
 
 ## Locate and Monitor the Cluster
 
-1. Once in the Sysdig interface, select **Advisor** - kubernetes troubleshooting from the menu on left to get a view of the kubernetes (and openshift) clusters which are being monitored.
+1. Once in the Monitoring Dashboard interface, select **Advisor** - kubernetes troubleshooting from the menu on left to get a view of the kubernetes (and openshift) clusters which are being monitored.
 ![Advisor menu](images/advisor-menu.png ':size=400')
-1. Select our lab cluster based on the ID we found in part 1 and then click on the "astro-shop" project/namespace so that we can see the overall status of our commerce application.  The other namespaces are used by various services that secure, operate, and administer the openshift cluster - we aren't looking to optimize them at this time.
+1. Select our lab cluster based on the ID (d1qnn2ud0c1g6mtpkpbg) we found in part 1 and then click on the "astro-shop" project/namespace so that we can see the overall status of our commerce application.  The other namespaces are used by various services that secure, operate, and administer the openshift cluster - we aren't looking to optimize them at this time.
 ![Advisor dashboard](images/advisor-kub-dash.png ':size=600')
 1. Explore this dashboard to see any trends or behavior of interest
 

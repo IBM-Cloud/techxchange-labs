@@ -56,7 +56,7 @@ Once the IDE is loaded, here’s a quick tour to get you started.
 **Step 2: Log in to Your Target IBM Cloud Account**
 
 1.  To ensure you can work with both accounts simultaneously, open a **new private or incognito browser window**. Alternatively, you can use a different browser profile.
-2.  Log in at **[https://ibm.biz/1818-login](https://ibm.biz/1818-login)** using the second set of credentials. This is your target account where the infrastructure will be provisioned.
+2.  Log in at **[https://ibm.biz/1818-txc-target-account-login](https://ibm.biz/1818-txc-target-account-login)** using the second set of credentials. This is your target account where the infrastructure will be provisioned.
 
 > **Important**: Keep both tabs open. You will write code in the IDE (first tab) and view the deployed resources in your target IBM Cloud account (second tab).
 

@@ -15,4 +15,4 @@ In this part of the lab you will understand the emissions produced by the infras
 
 ## Project future emissions
 1. If we resized our clusters (based on the work we did earlier) could we improve our carbon foot print and by how much?  You can use straight ratios for a simple projection (%50 less nodes means %50 less emissions, %50 smaller nodes means %50 less emissions).  Alternatively, scaling up our cluster will corresponding increase emissions.
-1. If we moved all workloads from Montreal to Dallas how would that impact the workload carbon footprint?
+1. If we moved all workloads from Tokyo to Dallas how would that impact the workload carbon footprint?

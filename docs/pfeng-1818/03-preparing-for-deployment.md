@@ -6,8 +6,8 @@ Before provisioning the infrastructure, you need to set up your environment to a
 
 Terraform requires an API key to authenticate with IBM Cloud.
 
-1.  **Create an IBM Cloud API Key**:
-    *   Log in to the [IBM Cloud Console](https://cloud.ibm.com).
+1.  **Create an IBM Cloud API Key in the "Target Deployment Account".**:
+    *   Open the incognito/private browser window where you've logged into your "Target Deployment Account".
     *   Navigate to **Manage > Access (IAM) > API keys**.
     *   Click **Create an IBM Cloud API key**.
     *   Give your key a descriptive name (e.g., `terraform-lab-key`) and click **Create**.
@@ -41,6 +41,8 @@ To avoid naming conflicts with other resources in the account, we will use a uni
 ## Step 3: Review the Terraform Configuration
 
 The `main.tf` file in the root of the project directory contains the core Terraform configuration. Let's briefly review the key sections that are now configured by the environment variables you just set.
+
+> **Note**: For this tutorial, we’ll keep everything in a single `main.tf` file for simplicity, but in a real environment you would typically split the configuration into multiple files (e.g., `variables.tf`, `outputs.tf`) for better organization and maintainability.
 
 ```hcl
 # main.tf

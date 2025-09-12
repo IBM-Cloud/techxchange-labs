@@ -209,7 +209,15 @@ module "transit_gateway" {
 
 At this point, you have defined the core network infrastructure: two VPCs and a Transit Gateway to connect them. Let's deploy these resources. This is a good time to apply your changes, as it allows you to verify the network foundation before adding the compute resources.
 
-1.  **Run `terraform plan`**
+1. **Run `terraform init`**
+    
+    As you have already executed this command earlier in the previous step, running again this command now searches for `module` blocks, and the source code for referenced modules is retrieved from the locations given in their `source` arguments.
+    
+    ```bash
+   terraform init
+    ```
+ 
+2. **Run `terraform plan`**
 
     This command creates an execution plan. It's a great way to check for errors and verify what will be created.
 
@@ -219,7 +227,7 @@ At this point, you have defined the core network infrastructure: two VPCs and a 
 
     You should see a plan to add the resource group, both VPCs, and the transit gateway.
 
-2.  **Run `terraform apply`**
+3. **Run `terraform apply`**
 
     This command applies the plan and builds the network infrastructure.
 
@@ -229,8 +237,8 @@ At this point, you have defined the core network infrastructure: two VPCs and a 
 
     Terraform will ask for your confirmation. Type `yes` and press Enter.
 
-    The provisioning process for the network can take a few minutes. Once complete, you can go to the [VPC console](https://cloud.ibm.com/vpc-ext/network/vpcs) in IBM Cloud to see your newly created `management` and `workload` VPCs.
-
+    The provisioning process for the network can take a few minutes (typically less than 10 minutes). Once complete, you can go to the [VPC console](https://cloud.ibm.com/vpc-ext/network/vpcs) in the Target Deployment IBM Cloud Account to see your newly created `management` and `workload` VPCs.
+   
 ---
 
 Now that the network foundation is in place, you will add the compute resources (virtual servers), load balancers, and other services.
@@ -255,6 +263,12 @@ resource "local_file" "ssh_private_key" {
   file_permission = "0600" # Read-only for owner
 }
 
+# ONLY outputs private file name
+output "ssh_private_key_file_name" {
+  description = "Private key file name."
+  value = "${var.prefix}_ssh_private_key.pem"
+}
+
 resource "ibm_is_ssh_key" "ssh_key" {
   name       = "${var.prefix}-ssh-key"
   public_key = tls_private_key.ssh_key.public_key_openssh
@@ -268,7 +282,7 @@ Now, provision the **jumpbox server** in the Management VPC. It will have a publ
 
 Add the following code to `main.tf`:
 
-```terraform
+```hcl
 module "jumpbox_server" {
   source                = "terraform-ibm-modules/landing-zone-vsi/ibm"
   version               = "v5.4.18"
@@ -533,7 +547,7 @@ To allow the private workload servers to securely access IBM Cloud services like
 
 Add the following code to `main.tf`:
 
-```terraform
+```hcl
 module "workload_vpe_security_group" {
   source              = "terraform-ibm-modules/security-group/ibm"
   version             = "2.7.0"
@@ -573,6 +587,11 @@ output "workload_vpe_ips" {
   description = "Private IP addresses of VPC endpoints for cloud services"
   value       = module.workload_vpes.vpe_ips
 }
+
+output "workload_vpe_ips_1" {
+  description = "One of the Private IP addresses of VPC endpoints for cloud services"
+  value = flatten([for vpe_ips in module.workload_vpes.vpe_ips : [for ip in vpe_ips : ip.address]])[0]
+}
 ```
 
 ## Step 11: Provision Cloud Object Storage
@@ -597,6 +616,16 @@ module "cos_storage" {
   }]
 }
 
+output "cos_instance_crn" {
+  description = "COS instance CRN"
+  value       = module.cos_storage.cos_instance_crn
+}
+
+output "bucket_name" {
+  description = "Bucket name"
+  value       = module.cos_storage.bucket_name
+}
+
 output "cos_access_key_id" {
   sensitive   = true
   description = "Access key ID for Cloud Object Storage (S3-compatible)"
@@ -614,7 +643,15 @@ output "cos_secret_access_key" {
 
 Your `main.tf` file is now complete with all compute, load balancing, and storage resources. Let's deploy them.
 
-1.  **Run `terraform plan`**
+1. **Run `terraform init`**
+    
+    Run init again to download new modules added to the code.
+    
+    ```bash
+    terraform init
+    ```
+   
+2. **Run `terraform plan`**
 
     Run plan again to see the new resources that will be added.
 
@@ -624,7 +661,7 @@ Your `main.tf` file is now complete with all compute, load balancing, and storag
 
     You should see a plan to add the SSH key, virtual servers, load balancers, VPEs, and the COS instance.
 
-2.  **Run `terraform apply`**
+3. **Run `terraform apply`**
 
     This command applies the plan and builds the remaining infrastructure.
 
@@ -636,7 +673,7 @@ Your `main.tf` file is now complete with all compute, load balancing, and storag
 
     The provisioning process will take several minutes (typically 10-15 minutes).
 
-3.  **Review the Outputs**
+4. **Review the Outputs**
 
     Once the `apply` is complete, Terraform will display all the outputs, including the jumpbox IP and load balancer hostname. You will use these in the next section to test your deployment.
 

@@ -1,7 +1,7 @@
 ### Step 5: Create a Workbench
 Workbenches are scoped to a Data science project, and you can have more than one. Workbenches are used to design and construct data science pipelines (which the Pipeline Server will run). There are different flavors of Workbench environments which have various packages and frameworks to construct pipelines. We will create a Workbench that supports [Jupyter](https://jupyter.org/) notebooks, [Python](https://www.python.org/) scripts, and the [Elyra](https://github.com/elyra-ai/elyra) AI-centric extensions for Jupyter notebooks.
 
-1. From the `dpL4Lab` Data science project Overview tab, click on **Create a workbench (A)**
+1. From the `pipeline-project-XX` Data science project Overview tab, click on **Create a workbench (A)**
     ![image](images/dp-workbench.png)
 
 2. Create a workbench.
@@ -14,6 +14,7 @@ Workbenches are scoped to a Data science project, and you can have more than one
     Leave all other settings at their default
 
     Click **Create workbench**
+> Wait for the workbench to complete provisioning and continue with the next step when the **Status** turns green and says *Running*
 
 3. When the workbench finishes provisioning, click the **Name (A)** to launch.
 

@@ -6,8 +6,8 @@ Before provisioning the infrastructure, you need to set up your environment to a
 
 Terraform requires an API key to authenticate with IBM Cloud.
 
-1.  **Create an IBM Cloud API Key**:
-    *   Log in to the [IBM Cloud Console](https://cloud.ibm.com).
+1.  **Create an IBM Cloud API Key in the "Target Deployment Account".**:
+    *   Open the incognito/private browser window where you've logged into your "Target Deployment Account".
     *   Navigate to **Manage > Access (IAM) > API keys**.
     *   Click **Create an IBM Cloud API key**.
     *   Give your key a descriptive name (e.g., `terraform-lab-key`) and click **Create**.
@@ -29,7 +29,7 @@ Terraform requires an API key to authenticate with IBM Cloud.
 To avoid naming conflicts with other resources in the account, we will use a unique prefix for everything we create.
 
 1.  **Choose a Prefix**:
-    A good prefix is something easily identifiable, like your initials followed by a short word (e.g., `jdoe-lab`).
+    A good prefix is something short and easily identifiable, like your initials followed by a short word (e.g., `vb-lab`). Keep in mind the maximum prefix length is 6 characters.
 
 2.  **Set the Prefix as an Environment Variable**:
     Run the following command in your terminal, replacing `<YOUR-PREFIX>` with the prefix you chose:
@@ -42,6 +42,8 @@ To avoid naming conflicts with other resources in the account, we will use a uni
 
 The `main.tf` file in the root of the project directory contains the core Terraform configuration. Let's briefly review the key sections that are now configured by the environment variables you just set.
 
+> **Note**: For this tutorial, we’ll keep everything in a single `main.tf` file for simplicity, but in a real environment you would typically split the configuration into multiple files (e.g., `variables.tf`, `outputs.tf`) for better organization and maintainability.
+
 ```hcl
 # main.tf
 
@@ -52,7 +54,7 @@ variable "ibmcloud_api_key" {
 }
 
 variable "prefix" {
-  description = "Unique prefix for resource naming (e.g., 'jdoe-demo' or 'team-dev')"
+  description = "Unique prefix for resource naming (e.g., 'vb-lab' or 'ra-dev'). Maximum prefix length is 6 characters."
   type        = string
 }
 

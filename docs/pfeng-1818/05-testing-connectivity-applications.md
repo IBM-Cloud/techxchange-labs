@@ -31,12 +31,10 @@ First, let's retrieve the key information about your newly created infrastructur
     ```
 
 5.  **Set the Private Key File Name**:
-    The private key was created in the project directory using the prefix you defined in the previous lab. Please provide that prefix again to construct the key file path.
-
-    Replace `<YOUR-PREFIX>` with the same prefix you used before (e.g., "jdoe-lab").
+    The private key was created in the project directory using the prefix you defined in the previous lab.
+    
     ```bash
-    export TF_VAR_prefix="<YOUR-PREFIX>"
-    export PRIVATE_KEY_FILE="${TF_VAR_prefix}_ssh_private_key.pem"
+    export PRIVATE_KEY_FILE=$(terraform output -raw ssh_private_key_file_name)
     echo "Private Key File: $PRIVATE_KEY_FILE"
     ```
 
@@ -59,16 +57,16 @@ The jumpbox is your secure gateway to the private environment. Let's connect to 
 
 From the jumpbox, you should be able to connect to the workload servers in the private VPC. This test validates that the **Transit Gateway** is correctly routing traffic between the two VPCs.
 
-1.  **Copy the Private Key to the Jumpbox**:
+1. **Copy the Private Key to the Jumpbox**:
     The jumpbox needs the private SSH key to connect to the workload server.
 
-    First, open a **new, second terminal window** on your local machine. In this new terminal, you need to re-export the variables for the jumpbox IP and the private key.
+    First, open a **new, second terminal window** on your local machine. Navigate to the project directory. In this new terminal, you need to re-export the variables for the jumpbox IP and the private key.
 
-    Run these commands from your local machine in the new terminal. Remember to replace `<YOUR-PREFIX>` with the same prefix you used before.
+    Run these commands from your local machine in the new terminal.
+    
     ```bash
     export JUMPBOX_IP=$(terraform output -raw jumpbox_public_ip)
-    export TF_VAR_prefix="<YOUR-PREFIX>"
-    export PRIVATE_KEY_FILE="${TF_VAR_prefix}_ssh_private_key.pem"
+    export PRIVATE_KEY_FILE=$(terraform output -raw ssh_private_key_file_name)
     ```
 
     Now, run the following command from the same new terminal to copy the key.
@@ -81,6 +79,7 @@ From the jumpbox, you should be able to connect to the workload servers in the p
 
     First, switch to your **first local terminal** (the one where you ran the `terraform output` commands) and run the following commands to display the values. Copy these values to your clipboard.
     ```bash
+    export WORKLOAD_IP_1=$(terraform output -json workload_server_private_ips | jq -r '.[0]')
     echo "Workload IP: $WORKLOAD_IP_1"
     echo "Private Key Filename: $PRIVATE_KEY_FILE"
     ```
@@ -90,13 +89,15 @@ From the jumpbox, you should be able to connect to the workload servers in the p
     # Paste the IP address and filename you copied from your local terminal
     export WORKLOAD_IP_1="<paste-workload-ip-here>"
     export PRIVATE_KEY_FILE="<paste-key-file-name-here>"
-
-    # Now connect
+    ```
+    
+    Now connect to the **workload server** from the **jumpbox terminal**.
+    ```bash
     chmod 400 $PRIVATE_KEY_FILE
     ssh -i $PRIVATE_KEY_FILE root@$WORKLOAD_IP_1
     ```
 
-    If successful, your prompt will change again to `root@<workload-server-name>`. You have successfully "jumped" from the public internet to the secure, private workload environment.
+   When prompted to continue connecting, type `yes`. If successful, your prompt will change again to `root@<workload-server-name>`. You have successfully "jumped" from the public internet to the secure, private workload environment.
 
     > **Note:** For the next step, you will run commands from *inside the workload server*. Keep this connection active.
 
@@ -106,7 +107,17 @@ Now for the final test. You will deploy a sample Python application on the workl
 
 `Internet -> Public LB -> Private LB -> Workload Server -> VPE -> COS`
 
-1. **Copy the Application to the Workload Server**:
+1. **Download some additional files in your Development workspace (local terminal)**:
+    1. Download the sample Python application file 
+       ```bash
+       wget https://raw.githubusercontent.com/IBM/deployable-architecture-iac-lab-materials/refs/heads/main/test_app.py
+       ```
+    2. Download the dummy HTML page
+       ```bash
+       wget https://raw.githubusercontent.com/IBM/deployable-architecture-iac-lab-materials/refs/heads/main/dummy_page.html
+       ```
+
+2. **Copy the Application to the Workload Server**:
     This is a two-step process: first from your local machine to the jumpbox, then from the jumpbox to the workload server.
 
     First, if you are currently inside the workload server, type `exit` to return to the jumpbox. Your terminal prompt should look like `root@<jumpbox-name>`.
@@ -130,39 +141,37 @@ Now for the final test. You will deploy a sample Python application on the workl
     ```
     Your prompt should now be `root@<workload-server-name>`.
 
-2. **Upload a Test File to COS**:
+3. **Upload a Test File to COS**:
     From one of your **local machine's terminals**, log in to IBM Cloud.
     ```bash
-    ibmcloud login
+    ibmcloud login --sso
     ```
+    > **Note**: If you have access multiple IBM cloud accounts, make sure to select the account where your resources are deployed. 
     
-    Next, you need to configure the Cloud Object Storage CLI plugin with the CRN (Cloud Resource Name) of the service instance created by Terraform. This command searches your entire account for the COS instance matching your prefix.
+    Next, you need to configure the Cloud Object Storage CLI plugin with the CRN (Cloud Resource Name) of the service instance created by Terraform.
 
     ```bash
-    export COS_CRN=$(ibmcloud resource search "name:${TF_VAR_prefix}-cos-*" --output json | jq -r '.items[0].crn')
+    export COS_CRN=$(terraform output -raw cos_instance_crn)
     ibmcloud cos config crn --crn "${COS_CRN}"
     ```
 
-    Now, use the IBM Cloud CLI to upload the `dummy_page.html` file to your COS bucket. Since the bucket name has a random suffix for uniqueness, we'll find it by listing the buckets associated with your prefix.
+    Now, use the IBM Cloud CLI to upload the `dummy_page.html` file to your COS bucket.
 
-    First, find your bucket name and export it as a variable.
+    Export your bucket name as a variable and upload the file.
     ```bash
-    export BUCKET_NAME=$(ibmcloud cos buckets --output json | grep '"Name"' | awk -F'"' '{print $4}' | grep "^${TF_VAR_prefix}-data-bucket")
-    echo "Found Bucket: $BUCKET_NAME"
-    ```
-    Then, upload the file.
-    ```bash
+    export BUCKET_NAME=$(terraform output -raw bucket_name)
     ibmcloud cos object-put --bucket $BUCKET_NAME --key "index.html" --body dummy_page.html
     ```
 
-3. **Install Dependencies and Run the App**:
+4. **Install Dependencies and Run the App**:
     The final setup step is to run the Python application on the workload server.
 
     First, go to your **local terminal** and get the credentials needed by the application.
     ```bash
     # Display the values on your local machine and copy them
-    terraform output -raw cos_access_key_id
-    terraform output -raw cos_secret_access_key
+    terraform output -json cos_access_key_id
+    terraform output -json cos_secret_access_key
+    terraform output workload_vpe_ips_1
     echo $BUCKET_NAME
     ```
 
@@ -171,6 +180,7 @@ Now for the final test. You will deploy a sample Python application on the workl
     # Paste the values you copied from your local terminal
     export COS_ACCESS_KEY_ID="<paste_access_key_id_here>"
     export COS_SECRET_ACCESS_KEY="<paste_secret_access_key_here>"
+    export VPE_ENDPOINT="<paste_workload_vpe_ips_1>"
     export COS_BUCKET_NAME="<paste_bucket_name_here>"
 
     # Run the application in the background

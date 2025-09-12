@@ -23,7 +23,7 @@ ai-agent-for-loan-risk/
 
 This structure ensures the configuration is modular, organized, and aligned with Terraform best practices, making it easier to manage the deployment lifecycle of the **Loan Risk AI Agents sample application**.
 
-To begin, create a working directory named `ai-agent-for-loan-risk` that will contain all the Terraform configuration files for the `Load Risk AI Agents sample application`. Within this directory, you’ll create the following set of files: `.gitignore main.tf variables.tf terraform.tfvars outputs.tf provider.tf version.tf`.
+To begin, create a working directory named `ai-agent-for-loan-risk` that will contain all the Terraform configuration files for the `Loan Risk AI Agents sample application`. Within this directory, you’ll create the following set of files: `.gitignore main.tf variables.tf terraform.tfvars outputs.tf provider.tf version.tf`.
 
 <details>
   <summary><b>CLI command</b></summary>
@@ -77,14 +77,47 @@ Define the required input variables in `variables.tf`. These variables enable yo
 
 ```hcl
 variable "ibmcloud_api_key" {
-    type        = string
-    description = "The IBM Cloud API key."
-    sensitive   = true
+  type        = string
+  description = "The IBM Cloud API key."
+  sensitive   = true
+}
+
+variable "watsonx_ai_api_key" {
+  type        = string
+  description = "The API key of the IBM watsonx in the target account."
+  sensitive   = true
 }
 
 variable "watsonx_project_id" {
-    type        = string
-    description = "The Watsonx project ID for AI model access."
+  type        = string
+  description = "IBM Watsonx project ID."
+}
+
+variable "prefix" {
+  type        = string
+  nullable    = true
+  description = "The prefix to be added to all resources created by this solution. To skip using a prefix, set this value to null or an empty string. The prefix must begin with a lowercase letter and may contain only lowercase letters, digits, and hyphens '-'. It should not exceed 12 characters, must not end with a hyphen('-'), and cannot contain consecutive hyphens ('--'). Example: txc-2025."
+  default = "txc-2025"
+  validation {
+    # - null and empty string is allowed
+    # - Must not contain consecutive hyphens (--): length(regexall("--", var.prefix)) == 0
+    # - Starts with a lowercase letter: [a-z]
+    # - Contains only lowercase letters (a–z), digits (0–9), and hyphens (-)
+    # - Must not end with a hyphen (-): [a-z0-9]
+    condition = (var.prefix == null || var.prefix == "" ? true :
+      alltrue([
+        can(regex("^[a-z][-a-z0-9]*[a-z0-9]$", var.prefix)),
+        length(regexall("--", var.prefix)) == 0
+      ])
+    )
+    error_message = "Prefix must begin with a lowercase letter and may contain only lowercase letters, digits, and hyphens '-'. It must not end with a hyphen('-'), and cannot contain consecutive hyphens ('--')."
+  }
+
+  validation {
+    # must not exceed 12 characters in length
+    condition     = var.prefix == null || var.prefix == "" ? true : length(var.prefix) <= 12
+    error_message = "Prefix must not exceed 12 characters."
+  }
 }
 ```
 
@@ -162,9 +195,8 @@ Create a **Code Engine build** to automatically build container images from sour
 
 The `code_engine_build` module includes key inputs:
 
-- **source_url** – [The URL of the Git repository](https://github.com/IBM/ai-agent-for-loan-risk) that contains the source code for the **Loan Risk AI Agents sample application**.  
+- **source_url** – [The URL of the Git repository](https://github.com/IBM/ai-agent-for-loan-risk) that contains the source code for the **Loan Risk AI Agents sample application**.
 - **strategy_type** – Set to `dockerfile`, which tells Code Engine to use a Dockerfile located in the [Git repository](https://github.com/IBM/ai-agent-for-loan-risk/blob/main/Dockerfile) to define how the container image should be built.
-The name of the Code Engine secret that contains credentials for authenticating with the IBM Cloud Container Registry. This allows the built image to be securely pushed to the container registry under your CR namespace.
 - **output_secret** – The name of the Code Engine secret (created in the previous step) that contains credentials for authenticating with the IBM Cloud Container Registry. This allows the built image to be securely pushed to the container registry under your CR namespace.
 - **output_image** – The full path of the image (including registry namespace and image name) where the final container will be stored. This is the destination in IBM Cloud Container Registry where the built image is pushed.
 
@@ -212,7 +244,7 @@ module "code_engine_app" {
   run_env_variables = [{
     type  = "literal"
     name  = "WATSONX_AI_APIKEY"
-    value = var.ibmcloud_api_key
+    value = var.watsonx_ai_api_key
     },
     {
       type  = "literal"
@@ -282,13 +314,15 @@ First, if you're working in a Git repository, create a `.gitignore` file to prev
 
 Create the `terraform.tfvars` file to store your configuration values:
 
-> 📝 **Note:** For this lab, the `watsonx_project_id` is provided to enable the AI application to function immediately after deployment. In the next steps of this lab, you'll learn how to automate the creation of watsonx.ai resources using deployable architectures, eliminating the need to manually configure project IDs.
+> 📝 **Note:** For this lab, the `watsonx_project_id` and `watsonx_ai_api_key` are provided to enable the AI application to function immediately after deployment. In the next steps of this lab, you'll learn how to automate the creation of watsonx.ai resources using deployable architectures, eliminating the need to manually configure project IDs.
 
 Create `terraform.tfvars` and replace the placeholder values with your actual values:
 
 ```hcl
-ibmcloud_api_key="<your-IBM-cloud-api-key>"
-watsonx_project_id="<your-watsonx-project-id>"
+ibmcloud_api_key     = "<your-IBM-cloud-api-key>"        # From IBM Cloud IAM
+watsonx_ai_api_key   = "<your-watsonx-ai-api-key>"       # Provided in the lab
+watsonx_project_id   = "<your-watsonx-project-id>"       # Provided in the lab
+prefix               = "<prefix-added-to-resources>"     # You can choose your own prefix for resource names
 ```
 
 ### Deploy the infrastructure
@@ -395,7 +429,7 @@ resource_group_id = "82a136aaa2a44964a5b45e9370a93ff2"
   - In the project dashboard, navigate to the **Image builds** section from the left-hand menu to view the configuration of your created `image build`.
   - In the project dashboard, navigate to the **Applications** section from the left-hand menu to view the configuration of your created `application`.
 
-> 🌐 To **access** the **deployed Load Risk AI Agents sample application**, look at the **`app_url`** output from the `terraform apply` command — it provides the public URL of the running application. You can navigate to application URL (`app_url`) in your browser to access and test the AI Agent for Loan Risk application UI.
+> 🌐 To **access** the **deployed Loan Risk AI Agents sample application**, look at the **`app_url`** output from the `terraform apply` command — it provides the public URL of the running application. You can navigate to application URL (`app_url`) in your browser to access and test the AI Agent for Loan Risk application UI.
 Note that it may take a short while for the application to fully load after deployment, so if the page doesn’t respond immediately, give it a moment before refreshing.
 
 ## Local Infrastructure Cleanup

@@ -35,9 +35,9 @@ You will add this architecture to a new IBM Cloud project named `txc-project`, u
 In this step, you will deploy the `Cloud automation for Observability` DA, which include components such as the Key Management Service (KMS). These services will be used later to support features like COS KMS encryption in Watsonx.ai
 
 1. Navigate to the **Catalog** via the top menu, or go directly to the [Catalog page](https://cloud.ibm.com/catalog).
-1. Make sure **Community registry** is selected from the Catalog picker. Then, in the Catalog search bar, type `Cloud automation for Observability` and select it from the results.
+1. In the Catalog search bar, type `Cloud automation for Observability` and select it from the results.
 1. Make sure `Create a new architecture` is selected.
-1. Review the features and capabilities, choose the appropriate **variation**, ensure `Instances` is selected, pick the correct version, and click **Add to Project**.
+1. Review the features and capabilities, choose the appropriate **variation**, ensure `Instances` is selected, pick the correct version (`v3.1.17`), and click **Configure and deploy**.
 1. Since you already have a project, make sure **Add to existing** in the left-hand menu is selected, then choose the `txc-project` project from the dropdown list.
 1. Change the configuration name to `observability-demo`, then click **Add**.
 1. On the new page, you can add or remove deployable architectures based on your use case.
@@ -47,7 +47,7 @@ In this step, you will deploy the `Cloud automation for Observability` DA, which
 After adding a deployable architecture to your project, you can edit its input values to customize the deployment. While configurations can be generic, most projects use specific configurations—or groups of them—to deploy resources across different environments, such as development, test, and production.
 
 1. On the Configure page, scroll down and click **Next** to continue.
-1. Enter your `IBM Cloud API` key in the **api_key** field.
+1. To enter the **API key**, click **Create a personal API key** to generate one. This will create an API key with permissions tied to your user account.
 1. Click **Next** to continue.
 1. Click **Edit** inside the **Prefix** input field, and enter the value `txc-demo`.
 1. Click **Done**, then click **Save** in the top-right corner of the page to save your changes.
@@ -58,30 +58,27 @@ After adding a deployable architecture to your project, you can edit its input v
 In this step, we’ll add the `Watsonx.ai SaaS with Assistant and Governance` Deployment Architecture from the public IBM Cloud Catalog. This will serve as the foundation for our AI sample application.
 
 1. Navigate to the **Catalog** via the top menu, or go directly to the [Catalog page](https://cloud.ibm.com/catalog).
-1. Make sure **IBM Cloud Catalog** is selected from the Catalog picker. Then, in the Catalog search bar, type `Watsonx.ai SaaS with Assistant and Governance` and select it from the results.
-1. Review the features and capabilities, and choose the appropriate product version.
-1. Select the checkbox labeled `I have read and agree to the following license agreements` and click the **Add to project** button.
+1. In the Catalog search bar, type `Watsonx.ai SaaS with Assistant and Governance` and select it from the results.
+1. Review the features and capabilities, and choose the appropriate product version (`v1.9.38`).
+1. Select the checkbox labeled `I have read and agree to the following license agreements` and click the **Configure and deploy** button.
 1. Since you already have a project, make sure **Add to existing** in the left-hand menu is selected, then choose the `txc-project` project from the dropdown list.
 1. Change the configuration name to `watsonx-ai-saas-demo`, then click **Add**.
 
 After adding a deployable architecture to your project, you can edit its input values to customize the deployment. While configurations can be generic, most projects use specific configurations—or groups of them—to deploy resources across different environments, such as development, test, and production.
 
 1. On the Configure page, scroll down and click **Next** to continue.
-1. Enter your `IBM Cloud API` key in the **api_key** field.
+1. To enter the **API key**, click **Create a personal API key** to generate one. This will create an API key with permissions tied to your user account.
 1. Click **Next** to continue.
 1. To enter a **resource group**, click `Edit` inside the `resource_group_name` input field, then enter the name of a new or existing resource group. In our case we will use `txc-watson-rg`.
-1. To configure all input variables, turn on **Advanced** to enable editing of optional inputs and fine-tune your configuration.
+1. To configure all input variables, turn on **Optional inputs** to enable editing of optional inputs and fine-tune your configuration.
 1. In the input field labeled `resource_prefix`, enter the `txc-demo`.
-1. For the **watson_studio_plan**, select `Lite` from the available options.
-1. For the **watsonx_governance_plan**, select `Lite` from the available options.
-1. For the **watsonx_orchestrate_plan**, select `Standard` from the available options.
 1. Since we want to enable encryption for Cloud Object Storage (COS) by setting **enable_cos_kms_encryption** to `true`, we need to provide a value for **cos_kms_crn** to specify the Key Protect instance used for encryption. To achieve this, we will wire the KMS CRN from the previously configured `Cloud automation for Observability` DA into the `Watsonx.ai SaaS with Assistant and Governance` DA.
     - a) Hover your cursor over **cos_kms_crn**, then click the **Add a reference** button that appears.
     - b) A new popup will open:
         - For **Source**, select `Configuration`.
-        - For **Name**, choose `Cloud automation for Key Protect`.
-        - Set **Category** to `Output`.
-        - For **Property**, select `kms_instance_crn`.
+        - For **Name**, choose `observability-demo`.
+        - Set **Category** to `Inputs`.
+        - For **Property**, select `existing_kms_instance_crn`.
     - c) Click **OK** to confirm the reference selection.
 1. To create a new Key Protect key, enter `cos-kms-key-demo` in the **cos_kms_new_key_name** field.
 1. When all inputs are configured, click the **Done** button, then save the configuration by clicking **Save** in the top-right corner.
@@ -90,16 +87,17 @@ After adding a deployable architecture to your project, you can edit its input v
 ### Add and Configure your custom Code Engine DA
 
 1. Navigate to the **Catalog** via the top menu, or go directly to the [Catalog page](https://cloud.ibm.com/catalog).
-1. Make sure **txc-catalog** private catalog is selected from the Catalog picker. Then, in the Catalog search bar, type `Demo: Custom IaC for Agentic AI` and select it from the results.
-1. Choose the correct version of the deployment architecture, then click **Add to project** to proceed.
+1. In the Catalog search bar, type `Demo: Custom IaC for Agentic AI` and select it from the results.
+1. Choose the correct version of the deployment architecture, then click **Configure and deploy** to proceed.
 1. Make sure **Add to existing** is selected from the left menu.  Then, choose `txc-project` from the dropdown. Update the configuration name if needed — in this case, we'll use `agentic-ai-demo`.
 1. Click **Add** to continue.
 
 After adding a deployable architecture to your project, you will customize its input values to match your specific use case. While default configurations are provided, you’ll often adjust them based on the type of workload, connected services, or the overall solution you're building.
 
 1. On the Configure page, scroll down and click **Next** to continue.
-1. Enter your `IBM Cloud API` key in the **api_key** field.
+1. To enter the **API key**, click **Create a personal API key** to generate one. This will create an API key with permissions tied to your user account.
 1. Click **Next** to continue.
+1. Enter your Watsonx API key into the **watsonx_ai_api_key** field.
 1. We will link the input of the `agentic-ai-demo` to the output of the previously deployed `watsonx-ai-saas-demo` DA. Hover over the **watsonx_project_id** input field and click on **Add Reference**.
 1. A new popup will open.
     - For **Source**, select `Configuration`.
@@ -107,7 +105,24 @@ After adding a deployable architecture to your project, you will customize its i
     - Set **Category** to `Output`.
     - For **Property**, select `watsonx_project_id`.
 1. Click **OK** to confirm the reference selection.
+1. Click the **Optional inputs** toggle to display optional input variables, then modify the **prefix** value as needed.
 1. Click **Done**, then click **Save** at the top right to save your configuration.
+
+
+### Dependency Wiring Overview
+
+Before deploying the solution, let’s summarize how the components are wired together using input/output references across configurations. This step ensures that each deployable architecture (DA) is correctly integrated with the others.
+
+| Deployment architecture             | Depends On                       | Input Field                         | Output Source                         |
+|----------------------------|----------------------------------|-------------------------------------|----------------------------------------|
+| `watsonx-ai-saas-demo`     | `observability-demo`             | `cos_kms_crn`                       | `observability-demo.existing_kms_instance_crn` |
+| `agentic-ai-demo`          | `watsonx-ai-saas-demo`           | `watsonx_project_id`                | `watsonx-ai-saas-demo.watsonx_project_id` |
+
+> 🔗 **Description of Wiring Logic**
+> - The **Watsonx.ai SaaS DA** requires a **Key Protect CRN** (`cos_kms_crn`) to enable COS encryption. This value is referenced from the output of the Observability DA’s `existing_kms_instance_crn`.
+> - The **Custom Code Engine DA (agentic-ai-demo)** needs access to the Watsonx.ai project it will use. It references `watsonx_project_id`, which is an output from the Watsonx.ai SaaS DA.
+>
+>These input/output references are configured through the UI and ensure secure, consistent integration across your AI solution stack.
 
 
 ## Step 2: Validate and Deploy Configuration
@@ -123,9 +138,28 @@ To enable auto-deploy, follow these steps:
 1. On the Project Details page, click the **Manage** tab, then select **Settings** from the left-hand menu.
 1. Toggle **Auto-deploy** to `On` to enable automatic deployment after successful validation.
 1. Navigate back to the **Configurations** tab.
-1. From the table, select **agentic-ai-demo**, then click **Validate** in the action bar that appears above the table. 
-1. Click **Validate** again to confirm and start the validation process.
 
+>⚠️ **Important**: You must validate and deploy the Deployment Architectures (DAs) in order, as some configurations depend on outputs from others.  
+>The correct order is:
+>- observability-demo
+>- watsonx-ai-saas-demo (depends on observability)
+>- agentic-ai-demo (depends on Watsonx project ID from watsonx-ai-saas-demo)  
+>
+>Failing to follow this order may result in failed references or missing values during deployment.
+
+1. From the table, select **observability-demo**, then click **Validate** in the action bar that appears above the table. 
+1. Click **Validate** again to confirm and start the validation process.
+1. Wait for the validation to complete successfully.
+    > ⏳ Note: This may take several minutes. While you're waiting, it's a good time to review the configuration documentation, double-check input references, or prepare testing steps for your application.
+
+1. Repeat the process for `watsonx-ai-saas-demo`:
+    - Select it from the table
+    - Click **Validate**, then confirm
+    - Wait for successful validation
+1. Finally, `validate agentic-ai-demo`:
+    - Select it from the table
+    - Click **Validate**, then confirm.
+    - Wait for successful validation.
 
 ## Step 3: View Deployment Outputs and test Load Risk AI Agents sample application
 

@@ -144,10 +144,17 @@ In a real-world scenario, this file would be created alongside your Terraform fi
                 "key": "ibmcloud_api_key"
               },
               {
+                "key": "watsonx_ai_api_key",
+                "required": true
+              },  
+              {
                 "key": "watsonx_project_id",
                 "type": "string",
                 "description": "Watsonx project ID.",
                 "required": true
+              },
+              {
+                "key": "prefix"
               }
             ]
           ],
@@ -166,7 +173,7 @@ In a real-world scenario, this file would be created alongside your Terraform fi
 
 Now add the product to your catalog:
 
-1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select catalog named `txc-catalog`
+1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select the catalog named `txc-catalog`
 1. Once inside, click **Add product** to begin adding your customized deployable architecture (DA)
 1. Choose **Deployable architecture** as the product type, and select **Terraform** as the delivery method
 1. Choose **Public repository** (if using a private repo, ensure the system has access via credentials or IBM Cloud Secrets Manager)
@@ -176,7 +183,7 @@ Now add the product to your catalog:
 
 6. Choose the **variation** `Code Engine application`, and set the **Software version** to `1.0.0`
 7. Click **Add product** to complete the process
-8. Click on the **Step 3 - Configure the deployment** tab, then click **Import input variables** to add all inputs to your deployment architecture
+8. Click on the **Step 3 - Configure the deployment** tab, then click **Import input variables** to add all inputs (e.g., `ibmcloud_api_key`, `watsonx_ai_api_key`, `watsonx_project_id`, `prefix`) to your deployment architecture
 
 ## Step 3: Make the deployable architecture available
 
@@ -184,7 +191,7 @@ After the product is added to a catalog, its version is initially in a draft sta
 
 To access your product version:
 
-1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select catalog named `txc-catalog`
+1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select the catalog named `txc-catalog`
 1. On the new page, in the **Products** table, click on our deployable architecture (DA) - `Demo: Custom IaC for Agentic AI`
 
 To make the deployable architecture available:

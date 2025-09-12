@@ -5,7 +5,7 @@
     ![image](images/dp-pipeline-run-details-logs.png)
     > Observe that each node in the pipeline graph corresponds to a node in the workbench pipeline editor. Each node represents a container run given the image you specified in the node properties panel.
 
-2. Go back to the IBM Cloud COS bucket that was created in [Step 1](#step-1-create-a-cos-bucket-with-credentials) and find the logs and output from the pipeline run that was just executed.
+2. Go back to the IBM Cloud COS bucket that was created in [Step 1](10-create-cos-bucket.md) and find the logs and output from the pipeline run that was just executed.
 
     ![image](images/dp-cos-pipeline-logs.png)
 

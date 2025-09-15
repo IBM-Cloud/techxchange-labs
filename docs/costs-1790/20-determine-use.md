@@ -32,12 +32,18 @@ In this part of the lab, you’ll use IBM Cloud Monitoring (powered by Sysdig) t
 1. Step through the list of astro-shop workloads using the filters at the top.  Look for any signs of services hitting memory limits and restarting.  Find any workloads with a lot more cpu or memory requested than used (and thus wasted capacity)
 ![Rightsizing filters](images/rightsizing-filters.png ':size=600')
 1. Let's look at the "frontend" deployment - this service renders the website and acts as an API gateway.  It is clearly critical for the operation of our ecommerce application.  How much cpu and ram is it requesting?  What are the cpu and ram limits set to?  Are we using the requested amounts?  Getting near or hitting the limits?
-1. Look at the unused requested CPU and Memory
+1. Select "frontend" in the workload filter and look at the unused requested CPU and Memory
 ![Unused resources](images/front-end-unused.png)
 We can see that the front end is requesting a lot more resources than it typically uses - this is something to correct.
 1. Look at the CPU and Memory limits vs used
 ![Resource Limits](images/front-end-limits.png)
 We can also see that the front end doesn't seem to have very bursty traffic (but double check over a week long time frame) and isn't near to hitting its limits.  We could probably lower the limits as well, but perhaps for the front end we should leave the limits high just in case.
+1. Now have a look at the "product-catalog" service.  This service is responsible for tracking inventory and which products are available.  Select "product-catalog" in the workload filter (be sure to remove "frontend" so you can focus on the single service.)
+![Unused resources](images/catalog-unused.png)
+Make sure to have a 12h or 24h time window so you can see there is some spiky load on this service.  In fact it is going way over its requested CPU and Memory during these bursts of load.  Given that this load is infrequent we may not want to raise the requested amounts to cover this.
+1. Look at the limits section for the service (near the bottom)
+![Resource Limits](images/catalog-limits.png)
+Here we can see that the bursts of load are causing the service to hit its CPU limit and get close to its RAM limit.  If we don't want to limit performance during bursts, we should raise the CPU limit and consider raising the Memory limit to avoid having the service get killed when it runs out of memory.
 
 ### Identify CPU, Memory, and Ephemeral Storage Usage
 

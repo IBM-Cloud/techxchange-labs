@@ -52,10 +52,10 @@ Here we can see that the bursts of load are causing the service to hit its CPU l
 
 ## Analyze cluster sizing
 
-1. From the Dashboards menu on the left, select the "Cluster Capacity Planning" dashboard.  The section on Total requests adds up the amount of CPU and Memory requested by all of the services on the cluster.
+1. From the Dashboards menu on the left, select the "Cluster Capacity Planning" dashboard.  The section called "Total requests" adds up the amount of CPU and Memory requested by all of the services on the cluster.
 ![Cluster capacity planning](images/cluster-capacity.png ':size=600')
-Look to see if the cluster has sufficient capacity for all the requested resources, or perhaps has way to much capacity?
-1. Scroll down to the Limit overcommit section.  This section tells us if we add up the limits for all of our services, would the cluster be overloaded? If not, the cluster is definitely oversized.  If it is, we need to consider if it is possible for all services to hit their limits at the same time.  If not, it may be ok if the cluster is slightly over committed.
+Look to see if the cluster has sufficient capacity for all the requested resources, or perhaps has too much capacity?
+1. Scroll down to the "Limit overcommit" section.  This section tells us if we add up the limits for all of our services, would the cluster be overloaded? If not, the cluster is definitely oversized.  If the cluster is limit over committed, we need to consider if it is possible for all services to hit their limits at the same time.  If not, it is likely ok if the cluster is slightly over committed.
 ![Cluster limits overcommit](images/cluster-limit-overcommit.png ':size=600')
 1. Record any adjustments you would make to the cluster size.
 

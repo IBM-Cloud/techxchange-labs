@@ -9,6 +9,9 @@ Ideally, we tune the requested amount to something close, but just above typical
 1. Navigate to the git repo where we have stored the cluster configuration for workload limits (in deployment.yaml): https://us-south.git.cloud.ibm.com/hyndman/Cluster-Config
 ![gitlab repo](images/gitlab.png ':size=600')
 
+1. Sign in to gitlab so that we can make changes.
+![gitlab signin](images/gitlab-signin-png.png ':size=600')
+
 1. Open the deployment.yaml file in the gitlab editor by clicking on the file name, pressing the edit button, and select "edit single file".  Make changes to update the limits to the new values you have figured out earlier for each of the workloads.
 ![gitlab edit](images/gitlab-edit.png ':size=600')
 

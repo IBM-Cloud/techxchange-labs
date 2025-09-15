@@ -54,12 +54,11 @@ ibmcloud target
 
 You should get an output that look like this:
 
-~~~
+
 API endpoint:     https://cloud.ibm.com
 Region:           us-east
 User:             email@us.ibm.com
 Account:          itz-enablement-036 (cd52f3c929884cf6b11a706ba6fb04ec) <-> 2694181
-~~~
 
 If the region is not us-east, you need to change the target by typing the following:
 

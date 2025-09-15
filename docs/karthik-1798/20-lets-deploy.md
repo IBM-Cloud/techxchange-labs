@@ -38,11 +38,11 @@ ibmcloud cos config ddl -ddl /home/$USER/.ssh
 ~~~
 
 You will receive the following output:
-~~~
+
 Saving default download location...
 OK
 Successfully saved download location. New files will be downloaded to '/home/attendee_XX/.ssh'.
-~~~
+
 
 ## Download private key and change permissions:
 ~~~
@@ -63,7 +63,7 @@ FIP1=$(ibmcloud is floating-ip-reserve $USER_NAME-fip --vni $PRI_VNI_ID --output
 ~~~
 
 
-Confirm tha your VSI has been provised and running.
+Confirm that your VSI has been provised and running.
 
 ~~~
 ibmcloud is instance $PRIMARY_VSI_ID
@@ -71,7 +71,6 @@ ibmcloud is instance $PRIMARY_VSI_ID
 ~~~
 
 
-~~~
 Getting instance 0XXX_496bfa86-3845-XXX-XXX-d97002300e37 under account itz-enablement-043 as user txlab-03@example.com...
                                          
 ID                                    0777_adecccc3-618b-43b9-a7f3-4edb451d0f44   
@@ -95,12 +94,7 @@ Lifecycle Reasons                     Code   Message
                                          
 Lifecycle State                       stable 
 
-~~~
-
-
-
-
-once it is running, lest comfirm that it is availne online via ping.
+once it is running, let's confirm that it is available and online via ping.
 
 ~~~
 ping $FIP1

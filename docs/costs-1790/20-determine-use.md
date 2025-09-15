@@ -48,12 +48,9 @@ Here we can see that the bursts of load are causing the service to hit its CPU l
 ### Document Optimization Opportunities
 
 1. Work your way through the remaining services in the astro-shop noting if there are any other changes that should be made.
-
-- ✅ **Flag workloads with large gaps** between requested and actual usage.
-  - These are often over-provisioned and may be good candidates for right-sizing.
-- ⚠️ **Identify workloads near or exceeding limits.**
-  - These may need to be scaled up or have higher limits set to avoid performance degradation or restarts.
-- Optional: Take screenshots or export metrics for reference in later lab sections.
+  - ✅ Flag workloads with large gaps between requested and actual usage. These are often over-provisioned and may be good candidates for right-sizing.
+  - ⚠️ Identify workloads near or exceeding limits. These may need to be scaled up or have higher limits set to avoid performance degradation or restarts.
+  - Optional: Take screenshots or export metrics for reference in later lab sections.
 
 1. Write down on a piece of paper any changes you think should be made.
 1. From the Dashboards menu on the left, select the "Cluster Capacity Planning" dashboard.  The section on Total requests adds up the amount of CPU and Memory requested by all of the services on the cluster.

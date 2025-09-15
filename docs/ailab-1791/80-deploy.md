@@ -1,6 +1,6 @@
 # Deploy and test a model
 
-## Prepare a model for deployment
+## Prepare and save a model for deployment
 
 After you train a model, you can deploy it by using the OpenShift AI model serving capabilities.
 

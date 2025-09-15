@@ -31,8 +31,13 @@ In this part of the lab, you’ll use IBM Cloud Monitoring (powered by Sysdig) t
 ![Monitoring timescale](images/timescale.png ':size=600')
 1. Step through the list of astro-shop workloads using the filters at the top.  Look for any signs of services hitting memory limits and restarting.  Find any workloads with a lot more cpu or memory requested than used (and thus wasted capacity)
 ![Rightsizing filters](images/rightsizing-filters.png ':size=600')
-
-
+1. Let's look at the "frontend" deployment - this service renders the website and acts as an API gateway.  It is clearly critical for the operation of our ecommerce application.  How much cpu and ram is it requesting?  What are the cpu and ram limits set to?  Are we using the requested amounts?  Getting near or hitting the limits?
+1. Look at the unused requested CPU and Memory
+![Unused resources](images/front-end-unused.png)
+We can see that the front end is requesting a lot more resources than it typically uses - this is something to correct.
+1. Look at the CPU and Memory limits vs used
+![Resource Limits](images/front-end-limits.png)
+We can also see that the front end doesn't seem to have very bursty traffic (but double check over a week long time frame) and isn't near to hitting its limits.  We could probably lower the limits as well, but perhaps for the front end we should leave the limits high just in case.
 
 ### Identify CPU, Memory, and Ephemeral Storage Usage
 

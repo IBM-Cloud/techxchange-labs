@@ -5,6 +5,7 @@
 - [🌻 Environmental Impact](40-carbon-calc.md)
 - [🏁 Check Success](50-success.md)
 - **Learn more**
-- [Lab Sign in](https://ibm.biz/txc-XXX-invite)
+- [Lab Sign in](https://ibm.biz/1970-login)
 - [Console](https://cloud.ibm.com/)
+- [Gitlab](https://us-south.git.cloud.ibm.com/hyndman/Cluster-Config/)
 - [Documentation](https://cloud.ibm.com/docs/)

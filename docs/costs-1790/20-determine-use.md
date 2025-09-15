@@ -45,28 +45,13 @@ Make sure to have a 12h or 24h time window so you can see there is some spiky lo
 ![Resource Limits](images/catalog-limits.png)
 Here we can see that the bursts of load are causing the service to hit its CPU limit and get close to its RAM limit.  If we don't want to limit performance during bursts, we should raise the CPU limit and consider raising the Memory limit to avoid having the service get killed when it runs out of memory.
 
-### Identify CPU, Memory, and Ephemeral Storage Usage
-
-- Use **Dashboards > Kubernetes Overview** or **Dashboards > Workload Resources**.
-- Examine:
-  - **Requested vs Actual CPU**
-  - **Requested vs Actual Memory**
-  - **Requested vs Actual Ephemeral Storage (if available)**
-
-### Compare Against Defined Resource Limits
-
-- Look for **Resource Limits** metrics under each deployment or pod:
-  - CPU limits
-  - Memory limits
-  - Ephemeral storage limits
-
 ### Document Optimization Opportunities
 
 While reviewing usage data:
 
 - ✅ **Flag workloads with large gaps** between requested and actual usage.
   - These are often over-provisioned and may be good candidates for right-sizing.
-- ⚠️ **Identify workloads consistently near or exceeding limits.**
+- ⚠️ **Identify workloads near or exceeding limits.**
   - These may need to be scaled up or have higher limits set to avoid performance degradation or restarts.
 - Optional: Take screenshots or export metrics for reference in later lab sections.
 

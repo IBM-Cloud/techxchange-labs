@@ -46,7 +46,7 @@ In this section, you will deploy on a single-model server. You create a new mode
 
 Now that you’ve deployed the model, you can test its API endpoints.
 
-1. Note the model’s Inference endpoint. You need this information when you test the model API.
+1. Click on the _Internal endpoint details_ to view the inference endpoints for this model.
    ![](images/50-dsp-get-api-endpoint.png ':size=600')
 1. Return to the Jupyter environment to try out your new endpoint.
 1. Open the file `5_rest_requests_single_model.ipynb` to try a REST API call.

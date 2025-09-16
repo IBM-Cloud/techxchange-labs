@@ -6,7 +6,7 @@ A workbench is an instance of your development and experimentation environment. 
 
 1. Navigate to the project detail page for your data science project.
 1. Click the **Workbenches** tab, and then click the **Create workbench** button.
-1. Set the name to your username, as example `ailab-123`.
+1. Set the **name** to the username assigned to you at the beginning of the lab.
 1. Select the TensorFlow image.
    > Red Hat provides several supported notebook images. In the Notebook image section, you can choose one of these images or any custom images that an administrator has set up for you. The Tensorflow image has the libraries needed for this lab.
 1. Set the image version to **2025.1**.

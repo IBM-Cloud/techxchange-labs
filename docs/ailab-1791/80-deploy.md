@@ -1,6 +1,6 @@
 # Deploy and test a model
 
-## Prepare a model for deployment
+## Prepare and save a model for deployment
 
 After you train a model, you can deploy it by using the OpenShift AI model serving capabilities.
 
@@ -26,7 +26,7 @@ In this section, you will deploy on a single-model server. You create a new mode
 1. Click the **Models** tab.
 1. Click **Deploy model**.
 1. In the form, provide the following values:
-   1. Set **Model deployment name** to **your username**, as example `ailab-123`.
+   1. Set **Model deployment name** to the username assigned to you at the beginning of the lab.
    1. Set **Serving runtime** to **OpenVINO Model Server**.
    1. Set **Model framework** to **onnx-1**.
    1. Set **Number of model server replicas to deploy** to **1**.
@@ -36,7 +36,7 @@ In this section, you will deploy on a single-model server. You create a new mode
       1. Set Memory requested to 1 GiB
       1. Set Memory limit to 1 GiB
    1. Set **Existing connection** to **ailab-1791-storage**.
-   1. Type the path that leads to the version folder that contains your model file `models/<your-username>/fraud`, as example `models/ailab-123/fraud`.
+   1. Type the path that leads to the version folder that contains your model file `models/<your-username>/fraud`.
    1. Leave the other fields with the default settings.
    ![](images/80-configure-model-server.png ':size=600')
 1. Click **Deploy**.
@@ -46,7 +46,7 @@ In this section, you will deploy on a single-model server. You create a new mode
 
 Now that you’ve deployed the model, you can test its API endpoints.
 
-1. Note the model’s Inference endpoint. You need this information when you test the model API.
+1. Click on the _Internal endpoint details_ to view the inference endpoints for this model.
    ![](images/50-dsp-get-api-endpoint.png ':size=600')
 1. Return to the Jupyter environment to try out your new endpoint.
 1. Open the file `5_rest_requests_single_model.ipynb` to try a REST API call.

@@ -47,7 +47,13 @@ Successfully saved download location. New files will be downloaded to '/home/att
 ## Download private key and change permissions:
 ~~~
 ibmcloud cos object-get --bucket txc-1798-2025 --key lab-ssh-1798_rsa.prv --region us-east
+~~~
+
+~~~
 ibmcloud cos object-get --bucket txc-1798-2025 --key lab-ssh-1798_rsa.pub --region us-east
+~~~
+
+~~~
 chmod 600 ~/.ssh/lab-ssh-1798_rsa.prv;
 chmod 644 ~/.ssh/lab-ssh-1798_rsa.pub
 ~~~
@@ -57,11 +63,7 @@ chmod 644 ~/.ssh/lab-ssh-1798_rsa.pub
 ## Create a VSI and attach a Floating IP:
 ~~~
 PRIMARY_VSI_ID=$(ibmcloud is instance-create $PRI_VSI_NAME $PRI_VPC_ID $ZONE $PROFILE $PRI_SN_ID --image $WDC_OS_IMAGE_ID --keys $EAST_SSH_KEY_ID  --output JSON | jq -r .id);
-PRI_VNI_ID=$(ibmcloud is instance $PRIMARY_VSI_ID --output JSON | jq -r .primary_network_attachment.virtual_network_interface.id);
-FIP1=$(ibmcloud is floating-ip-reserve $USER_NAME-fip --vni $PRI_VNI_ID --output JSON | jq -r .address)
-
 ~~~
-
 
 Confirm that your VSI has been provised and running.
 
@@ -97,6 +99,15 @@ Lifecycle State                       stable
 once it is running, let's confirm that it is available and online via ping.
 
 ~~~
+PRI_VNI_ID=$(ibmcloud is instance $PRIMARY_VSI_ID --output JSON | jq -r .primary_network_attachment.virtual_network_interface.id);
+~~~
+
+~~~
+FIP1=$(ibmcloud is floating-ip-reserve $USER_NAME-fip --vni $PRI_VNI_ID --output JSON | jq -r .address)
+
+~~~
+
+~~~
 ping $FIP1
 
 ~~~
@@ -119,7 +130,7 @@ View Share details
 ibmcloud is shares
 ~~~
 
-[Share Details](./assets/images/share-details.png)
+![Share Details](./assets/images/share-details.png)
 
 Once the share is available, run the following command to create a mount target
 
@@ -133,11 +144,11 @@ ibmcloud is shrmts $PRIMARY_SHARE_ID
 ~~~
 
 You will receive a following output
-~~~
+
 Listing share mount target of r014-0e8f5a3e-c1c8-42e3-86e5-e6b52011c3a2 in all resource groups and region us-east under account itz-enablement-036 as user email@us.ibm.com...
 ID                                          Name                        VPC                Lifecycle state   Transit Encryption   
 r014-291c9d63-7a62-41d7-8837-3d558817c2a3   most-stark-sanded-violist   lab-primary-1798   stable            none   
-~~~
+
 
 ~~~
 MOUNT_PATH=$(ibmcloud is share-mount-target $PRIMARY_SHARE_ID  $MOUNT_TARGET_ID  --output JSON | jq -e .mount_path)

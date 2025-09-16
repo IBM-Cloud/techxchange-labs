@@ -65,7 +65,8 @@ On the bottom right of this page, you will see the "Remote Copies" section. If t
 Go to the "Block storage snapshots" section and make sure you are on the Dallas MZR, if you're still on WDC, select Dallas from the drop down:
  ![Dallas Copy](./assets/images/dallas-copy.png)
 
-Once you are in Dallas, you will see the list of all the snapshots in that specific MZR, click on your snapshot name, and select "Create volume" from "Actions" dropdown, this will bring a new panel on the right hand side.
+Once you are in Dallas, you will see the list of all the snapshots in that specific MZR, wait for the sanpshot to be `stable` then click on your snapshot name, and select "Create volume" from "Actions" dropdown, this will bring a new
+panel on the right hand side.
 
   You will need to select the "Attach volume to a virtual server" checkbox, then select the "Attach new volume to a new virtual server" option, which will display a button that will take you to the VSI provisioning page, click on it:
   ![Restore VSI](./assets/images/Restore-vsi.png)

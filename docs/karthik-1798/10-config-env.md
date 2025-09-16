@@ -38,7 +38,6 @@ export SEC_SN_ID=0747-c69a5ea1-d0a3-41d9-9c7e-5ab4f5486944
 export PROFILE=cx2-2x4
 export WDC_OS_IMAGE_ID=r014-b214e175-6fbd-4128-ade7-0aac50cde5f5
 export US_OS_IMAGE_ID=r006-ab99a406-f1fe-492e-9036-d402e585c630
-export ED_KEY_PATH=~/.ssh/id_ed25519.pub
 export EAST_SSH_KEY_ID=r014-48058c22-ad5f-4e62-a18b-6de4e13df39b
 export SOUTH_SSH_KEY_ID=r006-c39b10d4-f29a-4859-b682-aceadbe1423f
 export COS_CRN=ed14acb-553c-4656-afa1-1fac6d533578

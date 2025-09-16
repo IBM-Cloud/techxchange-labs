@@ -130,7 +130,7 @@ View Share details
 ibmcloud is shares
 ~~~
 
-[Share Details](./assets/images/share-details.png)
+![Share Details](./assets/images/share-details.png)
 
 Once the share is available, run the following command to create a mount target
 

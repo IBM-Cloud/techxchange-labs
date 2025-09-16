@@ -144,11 +144,11 @@ ibmcloud is shrmts $PRIMARY_SHARE_ID
 ~~~
 
 You will receive a following output
-~~~
+
 Listing share mount target of r014-0e8f5a3e-c1c8-42e3-86e5-e6b52011c3a2 in all resource groups and region us-east under account itz-enablement-036 as user email@us.ibm.com...
 ID                                          Name                        VPC                Lifecycle state   Transit Encryption   
 r014-291c9d63-7a62-41d7-8837-3d558817c2a3   most-stark-sanded-violist   lab-primary-1798   stable            none   
-~~~
+
 
 ~~~
 MOUNT_PATH=$(ibmcloud is share-mount-target $PRIMARY_SHARE_ID  $MOUNT_TARGET_ID  --output JSON | jq -e .mount_path)

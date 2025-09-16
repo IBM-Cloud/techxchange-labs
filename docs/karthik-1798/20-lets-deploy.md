@@ -65,16 +65,6 @@ chmod 644 ~/.ssh/lab-ssh-1798_rsa.pub
 PRIMARY_VSI_ID=$(ibmcloud is instance-create $PRI_VSI_NAME $PRI_VPC_ID $ZONE $PROFILE $PRI_SN_ID --image $WDC_OS_IMAGE_ID --keys $EAST_SSH_KEY_ID  --output JSON | jq -r .id);
 ~~~
 
-~~~
-PRI_VNI_ID=$(ibmcloud is instance $PRIMARY_VSI_ID --output JSON | jq -r .primary_network_attachment.virtual_network_interface.id);
-~~~
-
-~~~
-FIP1=$(ibmcloud is floating-ip-reserve $USER_NAME-fip --vni $PRI_VNI_ID --output JSON | jq -r .address)
-
-~~~
-
-
 Confirm that your VSI has been provised and running.
 
 ~~~
@@ -107,6 +97,15 @@ Lifecycle Reasons                     Code   Message
 Lifecycle State                       stable 
 
 once it is running, let's confirm that it is available and online via ping.
+
+~~~
+PRI_VNI_ID=$(ibmcloud is instance $PRIMARY_VSI_ID --output JSON | jq -r .primary_network_attachment.virtual_network_interface.id);
+~~~
+
+~~~
+FIP1=$(ibmcloud is floating-ip-reserve $USER_NAME-fip --vni $PRI_VNI_ID --output JSON | jq -r .address)
+
+~~~
 
 ~~~
 ping $FIP1

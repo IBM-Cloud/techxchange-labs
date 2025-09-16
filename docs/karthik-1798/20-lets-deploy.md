@@ -47,7 +47,13 @@ Successfully saved download location. New files will be downloaded to '/home/att
 ## Download private key and change permissions:
 ~~~
 ibmcloud cos object-get --bucket txc-1798-2025 --key lab-ssh-1798_rsa.prv --region us-east
+~~~
+
+~~~
 ibmcloud cos object-get --bucket txc-1798-2025 --key lab-ssh-1798_rsa.pub --region us-east
+~~~
+
+~~~
 chmod 600 ~/.ssh/lab-ssh-1798_rsa.prv;
 chmod 644 ~/.ssh/lab-ssh-1798_rsa.pub
 ~~~
@@ -57,7 +63,13 @@ chmod 644 ~/.ssh/lab-ssh-1798_rsa.pub
 ## Create a VSI and attach a Floating IP:
 ~~~
 PRIMARY_VSI_ID=$(ibmcloud is instance-create $PRI_VSI_NAME $PRI_VPC_ID $ZONE $PROFILE $PRI_SN_ID --image $WDC_OS_IMAGE_ID --keys $EAST_SSH_KEY_ID  --output JSON | jq -r .id);
+~~~
+
+~~~
 PRI_VNI_ID=$(ibmcloud is instance $PRIMARY_VSI_ID --output JSON | jq -r .primary_network_attachment.virtual_network_interface.id);
+~~~
+
+~~~
 FIP1=$(ibmcloud is floating-ip-reserve $USER_NAME-fip --vni $PRI_VNI_ID --output JSON | jq -r .address)
 
 ~~~

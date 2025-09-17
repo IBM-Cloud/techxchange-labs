@@ -161,6 +161,10 @@ View and take note of Mount Path (hint: you can always get the mount path from t
 echo $MOUNT_PATH
 ~~~
 
+The output will look similar to following message
+
+`"10.241.128.7:/b757d51c_2341_4e46_a15a_97b398bc1d7d"`
+
 ssh into server using the floating IP in your list:
 ~~~
 ssh -i ~/.ssh/lab-ssh-1798_rsa.prv root@$FIP1
@@ -194,7 +198,8 @@ touch /mnt/nfs/test.file;
 echo "This is for cross region restore testing" > /tmp/restore.txt ;
 ~~~
 
-Lets create a couple of test files to replicate. These two commands will take about 3~4 min to complete. 
+Lets create a couple of test files to replicate. These two commands will take about 3~4 min to complete. Press enter once
+you pasted in the shell prompt.
 
 ~~~
 dd if=/dev/zero of=/mnt/nfs/250M.file bs=1M count=250 &

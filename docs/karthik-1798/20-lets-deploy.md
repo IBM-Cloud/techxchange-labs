@@ -127,7 +127,7 @@ PRIMARY_SHARE_ID=$(ibmcloud is share-create --name $FILE_SHARE_NAME --zone $ZONE
 
 View Share details
 ~~~
-ibmcloud is shares
+ibmcloud is share $PRIMARY_SHARE_ID
 ~~~
 
 ![Share Details](./assets/images/share-details.png)

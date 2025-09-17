@@ -69,6 +69,14 @@ This should change your region for you:
 
 ![Region](./assets/images/1798-region.png)
 
+Configure a resource group
+
+~~~
+ibmcloud target -g Default
+~~~
+
+![Resource Group](./assets/images/resource_group.png)
+
 
 ⇨ [Continue to Deployment](20-lets-deploy.md)
  

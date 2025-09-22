@@ -17,11 +17,13 @@ In this section, you are going to log in to IBM Cloud, understand how you can de
 
 IBM Cloud includes a deployable architecture to automatically configure a Red Hat OpenShift cluster with Red Hat OpenShift AI. A deployable architecture is a modular, reusable, and automated solution architecture that can be deployed on IBM Cloud. It consists of one or more deployable components, such as virtual machines, containers, or cloud services, that are connected and configured to work together. Deployable architectures can be stacked together to create a robust end-to-end solution architecture, and they can be customized and extended to meet specific business needs.
 
+!> For this lab, you do not need to deploy the architecture. It has been done for you already!
+
+To view the deployable architecture in the catalog:
 1. Go to the [IBM Cloud catalog](https://cloud.ibm.com/catalog).
 1. Switch to the **Community registry** catalog.
 1. Select the **OpenShift AI on IBM Cloud** tile.
-  ![](images/10-select-osai-title.png ':size=600')
-
-?> If you were to follow the steps to add this deployable architecture to a project and to deploy it, you would end up with a fully working environment to experience Red Hat OpenShift AI running on top of a managed Red Hat OpenShift cluster.<br><br>Instead, in this lab, you are going to skip this step and use a pre-deployed environment.
+1. **And that's it**, you can proceeed to the next section of this lab.
+   ![](images/10-select-osai-title.png ':size=600')
 
 ⇨ [Continue to Tour of OpenShift AI](20-tour.md)

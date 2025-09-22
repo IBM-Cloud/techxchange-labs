@@ -34,6 +34,7 @@ The Jupyter environment is a web-based environment, but everything you do inside
    ```
    https://github.com/IBM-Cloud/roks-osai-fraud-detection
    ```
+1. Ensure the **Include submobules** option is checked.
 1. Click **Clone**. The repository contents appear in a directory in the file explorer panel.
 1. Double-click on the newly created folder, `roks-osai-fraud-detection`.
    ![](images/50-dsp-cloned.png ':size=400')

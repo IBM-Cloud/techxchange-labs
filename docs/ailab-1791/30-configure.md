@@ -61,6 +61,7 @@ Now it's time to populate your JupyterLab notebook with a GitHub repository.
    ```
    https://github.com/IBM-Cloud/roks-osai-getting-started-with-gpus
    ```
+1. Ensure the **Include submobules** option is checked.
 1. Click **Clone**. The repository contents appear in a directory in the file explorer panel.
 1. Double-click on the newly created directory under the file explorer panel. The directory contains several notebooks as .ipnyb files, along with a standard license and README file.
    ![](images/30-jupyter-cloned.png ':size=600')

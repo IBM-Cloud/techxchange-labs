@@ -42,6 +42,7 @@ export EAST_SSH_KEY_ID=r014-48058c22-ad5f-4e62-a18b-6de4e13df39b
 export SOUTH_SSH_KEY_ID=r006-c39b10d4-f29a-4859-b682-aceadbe1423f
 export COS_CRN=ed14acb-553c-4656-afa1-1fac6d533578
 ~~~
+
 ![Export Variables](./assets/images/export-variables.png)
 
 

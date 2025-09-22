@@ -6,32 +6,32 @@
 
 ![Hamburger Menu](./assets/images/hamburger-menu.png)
 
-3. Scroll down to **Infrastructure**
+2. Scroll down to **Infrastructure**
 
 ![Infrastructure](./assets/images/infrastructure-console.png)
 
-4. Click the Pin next to Infrastructure to pin the menu option to the top.
-5. Choose **Virtual Server Instances** within the **Compute** sub-menu on the **Infrastructure** menu. This will take you to the VSI lising.
-6. If you are not in the **Washinton DC** region, please change it via the drop dowm at the top of the list.
+3. Click the Pin next to Infrastructure to pin the menu option to the top.
+4. Choose **Virtual Server Instances** within the **Compute** sub-menu on the **Infrastructure** menu. This will take you to the VSI listing.
+5. If you are not in the **Washinton DC** region, please change it via the drop dowm at the top of the list.
 
 ![Virtual Server Page](./assets/images/virtual-server-page.png)
 
-7. Click on your VSI Name.
+6. Click on your VSI Name.
 
 ## Create snapshot of Boot Volume
 
-1. Scroll down to the section that says **Storage**
-2. Click on the Boot Volume Name
+7. Scroll down to the section that says **Storage**
+8. Click on the Boot Volume Name
 
 ![Boot Volume of VSI](./assets/images/vsi-boot-volume.png)
 
-4. Click **Snapshots and backups** tab across top of screen
-5. Click blue **Create +** button on right.
+9. Click **Snapshots and backups** tab across top of screen
+10. Click blue **Create +** button on right.
 
 ![Snapshot Page](./assets/images/create-snapshot-page.png)
 
 
-7. Choose the following options on this create snapshot page
+11. Choose the following options on this create snapshot page
 
 >Location: pre-selected<br>
 >Snapshot Type: Single volume<br>
@@ -42,9 +42,12 @@ Hint: you might want to use a unique name to easily find your snapshot later.
   
 ![Create Snapshot](./assets/images/Snapshot-created.png)
   
-6. This will reveal a new blue create button.  
-7. Click Create
-8. Then click "Create block storage snapshot"
+12. This will reveal a new blue create button.  
+13. Click "Create +"
+
+![Cross Region Copy](./assets/images/cross-region-copy.png)
+
+14. Then click “Create block storage snapshot” in the lower right corner
 
 ![Boot Volume Snapshot](./assets/images/boot-snapshot.png)
 
@@ -56,11 +59,10 @@ and click on the name.
 
 On the bottom right of this page, you will see the "Remote Copies" section. If the Snapshot Status says "Pending", that's because the data is being transferred from the source region to the destination region. When the status says "Stable", you can continue.
 
-![Cross Region Copy](./assets/images/cross-region-copy.png)
-
 ## Data is protected!
   Now that you have protected your VPC Block Storage volume with a snapshot and copied the snapshot to a different MZR, let's re-create the deployment in Dallas by restoring the snapshot to a new VSI.
 
+![Block Storage Snapshot Navigation](./assets/images/snapshot_navigation.png)
 
 Go to the "Block storage snapshots" section and make sure you are on the Dallas MZR, if you're still on WDC, select Dallas from the drop down:
  ![Dallas Copy](./assets/images/dallas-copy.png)
@@ -84,9 +86,11 @@ the pre-defined VPCs available, or you can create your own VPC. Once all the req
 
   ![Floating IP Reservation](./assets/images/Floating-ip-dallas-page1.png)
 
+  Click on "Attach +"
+
   ![Floationg IP Page](./assets/images/Floating-ip-dallas-page2.png)
 
-  Click on the "Attach" button, and then "Reserve new floating IP", give it a name and the click "Reserve":
+  Click on the "Attach" button, and then "Reserve new floating IP", give it a name and the click "Reserve" and `X` to close the window:
   ![Floating IP Create](./assets/images/Floating-ip-dallas-reserve.png)
 
   Your new floating IP address is ready and associated to your vNIC:
@@ -97,10 +101,9 @@ Keep the FIP ready, in the next step we'll verify the data we dumped in WDC volu
 Note: The default Security group should allow ssh traffic.
 
 ### Set Session Variables
-Open the IBM Cloud Shell prompt
+If Cloud CLI browser tab still open, go to that browser tab, or else Open the IBM Cloud Shell prompt
 
 Copy and paste the following in your IBM Cloud Shell, then press enter:
-
 
 ~~~
 export COS_CRN=ed14acb-553c-4656-afa1-1fac6d533578
@@ -152,6 +155,14 @@ ssh -i ~/.ssh/lab-ssh-1798_rsa.prv root@<FIP2>
 
 Example 'ssh -i ~/.ssh/lab-ssh-1798_rsa.prv root@67.18.93.231'
 
+Answer "yes" when prompted following message
+
+```text
+The authenticity of host '52.117.127.120 (52.117.127.120)' can't be established.
+ECDSA key fingerprint is SHA256:3Uiea6CWJxHMXDGyDeh6FY7AzOAykhTLLMmXAURdW6o.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+```
+
 Check the file created in WDC volume
 ~~~
 cat /tmp/restore.txt
@@ -162,9 +173,9 @@ It will return the following text "This is for cross region restore testing"
 ## Let's now protect file storage
   Now that your VPC Block Storage volume is protected, let's protect your file share. We will use replication to protect our data in a different availability zone within the same MZR (Tip: you could replicate to a different MZR if needed, this is useful on data migration use cases.)
 
- Coming back to the browser, go to the "File storage shares" section within Infrastructure and make sure you are on the WDC MZR, then select your file share to go into the file share details page (Hint: it will have your user as part of the file share name). 
+ Go back the IBM Cloud UI, go to the "File Storage shares" section within Infrastructure and make sure you are on the WDC MZR, then click on your file share and in Overview tab, see "File share details" (Hint: it will have your user as part of the file share name). 
   
-  Once you are on the file share details page, scroll down to the replication section, since replication hasn't been setup, go ahead an click on "Create replica", which will open a new tab to provision the replica:
+  In "File share details, scroll down to the "File share replication relationship", Since replication hasn't been setup, click "Create replica" button, which will open a new tab to provision the replica:
   ![Replica Share Provisioning page 1](./assets/images/Share-Replica-page1.png)
 
 This provisioning page will show your source file share details, a target AZ (different than the source) will already be selected, you can change this selection to different AZ or even a different MZR at this stage. For this exercise, I'm going to leave WDC1 (source file share was created in WDC3):

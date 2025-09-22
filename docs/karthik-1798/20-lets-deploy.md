@@ -170,6 +170,16 @@ ssh into server using the floating IP in your list:
 ssh -i ~/.ssh/lab-ssh-1798_rsa.prv root@$FIP1
 ~~~
 
+Answer "yes" when prompted
+
+```text
+
+The authenticity of host '52.117.127.120 (52.117.127.120)' can't be established.
+ECDSA key fingerprint is SHA256:3Uiea6CWJxHMXDGyDeh6FY7AzOAykhTLLMmXAURdW6o.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+
+```
+
 Create a new directory:
 ~~~
 mkdir -p /mnt/nfs
@@ -177,8 +187,10 @@ mkdir -p /mnt/nfs
 
 
 Mount the NFS Share to newly created directory with the mount path listed above:
+Copy the output from echo $MOUNT_PATH without the double quotes and replace this `<host_ip:/host_path>`
+
 ~~~
-mount -t nfs4 -o sec=sys,nfsvers=4.1 <host_ip:/host_path> <local_path>
+mount -t nfs4 -o sec=sys,nfsvers=4.1 <host_ip:/host_path> /mnt/nfs
 
 ~~~ 
 Example 'mount -t nfs4 -o sec=sys,nfsvers=4.1 10.241.128.5:/ca8d1046_808b_4b6e_98e6_8769b30ed599 /mnt/nfs'

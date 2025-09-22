@@ -15,4 +15,4 @@ You will use and/or deploy the following services by the end of this lab.
 
 
 
-⇨ [Let's setup your enviorment!](10-config-env.md)
+⇨ [Let's set up your enviorment!](10-config-env.md)

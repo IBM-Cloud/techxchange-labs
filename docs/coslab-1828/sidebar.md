@@ -1,0 +1,12 @@
+- [🔎 Overview](README.md)
+- [🏎️ Getting started!](10-getting-started.md)
+- [🗺️ Introduction!](20-introduction.md)
+- [🏗️ Architecure!](30-architecture.md)
+- [🔧 RClone Setup!](40-rclonesetup.md)
+- [🔄 Native Replciation!](50-replication.md)
+- [💾 Vault Backup!](60-Vault.md)
+- [🏁 Conclusion](90-conclusion.md)
+- **Learn more**
+- [Lab Sign in](https://ibm.biz/txc-XXX-invite)
+- [Console](https://cloud.ibm.com/)
+- [Documentation](https://cloud.ibm.com/docs/)

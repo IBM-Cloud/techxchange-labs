@@ -2,7 +2,7 @@
 
 Pipelines in OpenShift AI will use this cloud object storage (COS) bucket to store log files and output from the pipeline runs. We will use the existing COS instance created for the OpenShift AI cluster. However, we will create a new bucket for the data pipeline to store it's logs and pipeline output. For performance purposes, the bucket should be allocated in the same location that the OpenShift cluster runs in.
 
-1. Log in to [IBM Cloud console](ibm.biz/1829-invite) using the credentials provided
+1. Log in to [IBM Cloud console](https://ibm.biz/1829-invite) using the credentials provided
 
 2. In the IBM Cloud console, navigate to the Resource List and expand the **Storage** category. Select the `rhocp-cluster-cos` service instance
 

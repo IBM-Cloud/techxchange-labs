@@ -1,0 +1,13 @@
+- [1. Overview](README.md)
+- [2. Getting started](./10-getting-started.md)
+- [3. Inventory](./20-inventory.md)
+- [4. Unified Risk Findings](./30-unified-risk-findings.md)
+- [5. AI Packages](./40-ai-packages.md)
+- [6. Compliance and Posture Management](./50-compliance-posture-mgmt.md)
+- [7. Conclusion](90-conclusion)
+- **Learn more**
+- [Lab Sign in](https://ibm.biz/txc-1833)
+- [Console](https://cloud.ibm.com/)
+- [Security and Compliance Center Workload Protection (SCC+WP)](https://cloud.ibm.com/docs/workload-protection?topic=workload-protection-key-features)
+- [IBM Cloud Posture Managed (CSPM) ](https://cloud.ibm.com/docs/workload-protection?topic=workload-protection-about)
+- [Documentation](https://cloud.ibm.com/docs/)

@@ -1,0 +1,554 @@
+{
+  "id": "ulmfLqXkxbZdJxHgExm23",
+  "name": "Code Engine Fleets - System insights",
+  "layout": {
+    "sections": [
+      {
+        "id": {
+          "value": "9dda62c7-823c-439f-9ae7-9ba70f636aed"
+        },
+        "rows": [
+          {
+            "id": {
+              "value": "9f4b2285-3ae4-4e2f-b9c6-73b8a990ebd2"
+            },
+            "appearance": {
+              "height": 23
+            },
+            "widgets": [
+              {
+                "id": {
+                  "value": "20d69484-0666-4bc0-9b7b-958c6928d42b"
+                },
+                "title": "Number of started task instances",
+                "definition": {
+                  "lineChart": {
+                    "legend": {
+                      "isVisible": true,
+                      "columns": [
+                        "LEGEND_COLUMN_SUM"
+                      ],
+                      "groupByQuery": true,
+                      "placement": "LEGEND_PLACEMENT_AUTO"
+                    },
+                    "tooltip": {
+                      "showLabels": false,
+                      "type": "TOOLTIP_TYPE_ALL"
+                    },
+                    "queryDefinitions": [
+                      {
+                        "id": "e8cb5553-6966-46f6-acd9-fe9d0356b1b1",
+                        "query": {
+                          "logs": {
+                            "luceneQuery": {
+                              "value": "app:\"codeengine\" AND messageKey:\"codeengine.fleet-task-instance-started\""
+                            },
+                            "groupBy": [],
+                            "aggregations": [
+                              {
+                                "count": {}
+                              }
+                            ],
+                            "filters": [],
+                            "groupBys": [
+                              {
+                                "keypath": [
+                                  "codeengine",
+                                  "component"
+                                ],
+                                "scope": "DATASET_SCOPE_USER_DATA"
+                              }
+                            ]
+                          }
+                        },
+                        "seriesCountLimit": "20",
+                        "unit": "UNIT_UNSPECIFIED",
+                        "scaleType": "SCALE_TYPE_LINEAR",
+                        "name": "Query 1",
+                        "isVisible": true,
+                        "colorScheme": "classic",
+                        "resolution": {
+                          "bucketsPresented": 96
+                        },
+                        "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
+                        "customUnit": "",
+                        "decimal": 2
+                      }
+                    ],
+                    "stackedLine": "STACKED_LINE_UNSPECIFIED"
+                  }
+                }
+              },
+              {
+                "id": {
+                  "value": "4c9d5421-ac81-480b-82ed-3a904164b942"
+                },
+                "title": "Duration of completed task instances (in seconds)",
+                "definition": {
+                  "lineChart": {
+                    "legend": {
+                      "isVisible": true,
+                      "columns": [
+                        "LEGEND_COLUMN_AVG",
+                        "LEGEND_COLUMN_MAX",
+                        "LEGEND_COLUMN_MIN"
+                      ],
+                      "groupByQuery": true,
+                      "placement": "LEGEND_PLACEMENT_AUTO"
+                    },
+                    "tooltip": {
+                      "showLabels": false,
+                      "type": "TOOLTIP_TYPE_ALL"
+                    },
+                    "queryDefinitions": [
+                      {
+                        "id": "1a841f84-9e6e-4d69-a84a-725da8e117aa",
+                        "query": {
+                          "logs": {
+                            "luceneQuery": {
+                              "value": "app:\"codeengine\" AND messageKey:\"codeengine.fleet-task-instance-completed\"\n"
+                            },
+                            "groupBy": [],
+                            "aggregations": [
+                              {
+                                "average": {
+                                  "observationField": {
+                                    "keypath": [
+                                      "codeengine",
+                                      "durationSeconds"
+                                    ],
+                                    "scope": "DATASET_SCOPE_USER_DATA"
+                                  }
+                                }
+                              }
+                            ],
+                            "filters": [],
+                            "groupBys": [
+                              {
+                                "keypath": [
+                                  "codeengine",
+                                  "component"
+                                ],
+                                "scope": "DATASET_SCOPE_USER_DATA"
+                              }
+                            ]
+                          }
+                        },
+                        "seriesCountLimit": "20",
+                        "unit": "UNIT_UNSPECIFIED",
+                        "scaleType": "SCALE_TYPE_LINEAR",
+                        "name": "Query 1",
+                        "isVisible": true,
+                        "colorScheme": "classic",
+                        "resolution": {
+                          "bucketsPresented": 96
+                        },
+                        "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
+                        "customUnit": "",
+                        "decimal": 2
+                      }
+                    ],
+                    "stackedLine": "STACKED_LINE_UNSPECIFIED"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": {
+              "value": "0b871816-5eca-4a21-bbc7-ff1c54b30688"
+            },
+            "appearance": {
+              "height": 19
+            },
+            "widgets": [
+              {
+                "id": {
+                  "value": "737c1a11-b002-4ecc-8bd0-225b4f5837d2"
+                },
+                "title": "Completed Tasks",
+                "definition": {
+                  "gauge": {
+                    "query": {
+                      "logs": {
+                        "luceneQuery": {
+                          "value": "app:\"codeengine\" AND messageKey:\"codeengine.fleet-task-instance-completed\"\n"
+                        },
+                        "logsAggregation": {
+                          "count": {}
+                        },
+                        "aggregation": "AGGREGATION_UNSPECIFIED",
+                        "filters": [],
+                        "groupBy": []
+                      }
+                    },
+                    "min": 0,
+                    "max": 100,
+                    "showInnerArc": false,
+                    "showOuterArc": false,
+                    "unit": "UNIT_NUMBER",
+                    "thresholds": [
+                      {
+                        "from": 0,
+                        "color": "var(--c-severity-log-verbose)"
+                      }
+                    ],
+                    "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
+                    "thresholdBy": "THRESHOLD_BY_VALUE",
+                    "customUnit": "",
+                    "decimal": 2,
+                    "thresholdType": "THRESHOLD_TYPE_RELATIVE",
+                    "legend": {
+                      "isVisible": true,
+                      "columns": [],
+                      "groupByQuery": false,
+                      "placement": "LEGEND_PLACEMENT_AUTO"
+                    },
+                    "legendBy": "LEGEND_BY_GROUPS"
+                  }
+                }
+              },
+              {
+                "id": {
+                  "value": "d3bf11d2-7c59-4234-8ded-cd10d2226fb3"
+                },
+                "title": "Breakdown by result and exit code",
+                "definition": {
+                  "pieChart": {
+                    "query": {
+                      "logs": {
+                        "luceneQuery": {
+                          "value": "app:\"codeengine\" AND messageKey:\"codeengine.fleet-task-instance-completed\"\n"
+                        },
+                        "aggregation": {
+                          "count": {}
+                        },
+                        "filters": [],
+                        "groupNames": [],
+                        "groupNamesFields": [
+                          {
+                            "keypath": [
+                              "codeengine",
+                              "result"
+                            ],
+                            "scope": "DATASET_SCOPE_USER_DATA"
+                          },
+                          {
+                            "keypath": [
+                              "codeengine",
+                              "exitCode"
+                            ],
+                            "scope": "DATASET_SCOPE_USER_DATA"
+                          }
+                        ]
+                      }
+                    },
+                    "maxSlicesPerChart": 8,
+                    "minSlicePercentage": 1,
+                    "stackDefinition": {
+                      "maxSlicesPerStack": 4
+                    },
+                    "labelDefinition": {
+                      "labelSource": "LABEL_SOURCE_STACK",
+                      "isVisible": true,
+                      "showName": true,
+                      "showValue": true,
+                      "showPercentage": true
+                    },
+                    "showLegend": true,
+                    "unit": "UNIT_UNSPECIFIED",
+                    "colorScheme": "classic",
+                    "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
+                    "customUnit": "",
+                    "legend": {
+                      "isVisible": true,
+                      "columns": [],
+                      "groupByQuery": false,
+                      "placement": "LEGEND_PLACEMENT_AUTO"
+                    }
+                  }
+                }
+              },
+              {
+                "id": {
+                  "value": "18161735-3dc9-4910-b3ae-d6a0c4d906ff"
+                },
+                "title": "List of completed task instances",
+                "definition": {
+                  "dataTable": {
+                    "query": {
+                      "logs": {
+                        "luceneQuery": {
+                          "value": "app:\"codeengine\" AND messageKey:\"codeengine.fleet-task-instance-completed\"\n"
+                        },
+                        "filters": []
+                      }
+                    },
+                    "resultsPerPage": 100,
+                    "rowStyle": "ROW_STYLE_ONE_LINE",
+                    "columns": [
+                      {
+                        "field": "coralogix.timestamp",
+                        "width": 167
+                      },
+                      {
+                        "field": "codeengine.component",
+                        "width": 142
+                      },
+                      {
+                        "field": "codeengine.subcomponent",
+                        "width": 337
+                      },
+                      {
+                        "field": "codeengine.result",
+                        "width": 131
+                      },
+                      {
+                        "field": "codeengine.exitCode",
+                        "width": 200
+                      }
+                    ],
+                    "orderBy": {
+                      "field": "coralogix.timestamp",
+                      "orderDirection": "ORDER_DIRECTION_DESC"
+                    },
+                    "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED"
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "options": {
+          "custom": {
+            "name": "Task instances",
+            "collapsed": false,
+            "color": {
+              "predefined": "SECTION_PREDEFINED_COLOR_UNSPECIFIED"
+            }
+          }
+        }
+      },
+      {
+        "id": {
+          "value": "4c85b4aa-2f09-4bd1-91b5-5258f9098db4"
+        },
+        "rows": [
+          {
+            "id": {
+              "value": "46c7118c-4b13-483b-83b2-1cbbd05ccfd8"
+            },
+            "appearance": {
+              "height": 19
+            },
+            "widgets": [
+              {
+                "id": {
+                  "value": "f77d66ab-c658-49a0-be18-205d6fa63f6b"
+                },
+                "title": "Image pull durations (in seconds)",
+                "definition": {
+                  "lineChart": {
+                    "legend": {
+                      "isVisible": true,
+                      "columns": [
+                        "LEGEND_COLUMN_AVG",
+                        "LEGEND_COLUMN_MAX",
+                        "LEGEND_COLUMN_MIN"
+                      ],
+                      "groupByQuery": true,
+                      "placement": "LEGEND_PLACEMENT_AUTO"
+                    },
+                    "tooltip": {
+                      "showLabels": false,
+                      "type": "TOOLTIP_TYPE_ALL"
+                    },
+                    "queryDefinitions": [
+                      {
+                        "id": "af5bcd4c-7def-49a1-bf6f-bcd1b04161dd",
+                        "query": {
+                          "logs": {
+                            "luceneQuery": {
+                              "value": "app:\"codeengine\" AND messageKey:\"codeengine.fleet-containerimage-pull-completed\""
+                            },
+                            "groupBy": [],
+                            "aggregations": [
+                              {
+                                "average": {
+                                  "observationField": {
+                                    "keypath": [
+                                      "codeengine",
+                                      "durationSeconds"
+                                    ],
+                                    "scope": "DATASET_SCOPE_USER_DATA"
+                                  }
+                                }
+                              }
+                            ],
+                            "filters": [],
+                            "groupBys": [
+                              {
+                                "keypath": [
+                                  "codeengine",
+                                  "component"
+                                ],
+                                "scope": "DATASET_SCOPE_USER_DATA"
+                              }
+                            ]
+                          }
+                        },
+                        "seriesCountLimit": "20",
+                        "unit": "UNIT_UNSPECIFIED",
+                        "scaleType": "SCALE_TYPE_LINEAR",
+                        "name": "Query 1",
+                        "isVisible": true,
+                        "colorScheme": "classic",
+                        "resolution": {
+                          "bucketsPresented": 96
+                        },
+                        "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
+                        "customUnit": "",
+                        "decimal": 2
+                      }
+                    ],
+                    "stackedLine": "STACKED_LINE_UNSPECIFIED"
+                  }
+                }
+              },
+              {
+                "id": {
+                  "value": "68b2013e-67f7-4e65-bab2-74bda7bae929"
+                },
+                "title": "List of recent image pulls",
+                "definition": {
+                  "dataTable": {
+                    "query": {
+                      "logs": {
+                        "luceneQuery": {
+                          "value": "app:\"codeengine\" AND messageKey:\"codeengine.fleet-containerimage-pull-completed\""
+                        },
+                        "filters": []
+                      }
+                    },
+                    "resultsPerPage": 100,
+                    "rowStyle": "ROW_STYLE_ONE_LINE",
+                    "columns": [
+                      {
+                        "field": "coralogix.timestamp",
+                        "width": 171
+                      },
+                      {
+                        "field": "codeengine.component",
+                        "width": 145
+                      },
+                      {
+                        "field": "codeengine.workerName",
+                        "width": 344
+                      },
+                      {
+                        "field": "codeengine.durationSeconds",
+                        "width": 470
+                      }
+                    ],
+                    "orderBy": {
+                      "field": "coralogix.timestamp",
+                      "orderDirection": "ORDER_DIRECTION_DESC"
+                    },
+                    "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED"
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "options": {
+          "custom": {
+            "name": "Image pulls",
+            "collapsed": false,
+            "color": {
+              "predefined": "SECTION_PREDEFINED_COLOR_UNSPECIFIED"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "variables": [],
+  "filters": [
+    {
+      "source": {
+        "logs": {
+          "operator": {
+            "equals": {
+              "selection": {
+                "list": {
+                  "values": []
+                }
+              }
+            }
+          },
+          "observationField": {
+            "keypath": [
+              "codeengine",
+              "region"
+            ],
+            "scope": "DATASET_SCOPE_USER_DATA"
+          }
+        }
+      },
+      "enabled": true,
+      "collapsed": false
+    },
+    {
+      "source": {
+        "logs": {
+          "operator": {
+            "equals": {
+              "selection": {
+                "list": {
+                  "values": []
+                }
+              }
+            }
+          },
+          "observationField": {
+            "keypath": [
+              "codeengine",
+              "project"
+            ],
+            "scope": "DATASET_SCOPE_USER_DATA"
+          }
+        }
+      },
+      "enabled": true,
+      "collapsed": false
+    },
+    {
+      "source": {
+        "logs": {
+          "operator": {
+            "equals": {
+              "selection": {
+                "list": {
+                  "values": []
+                }
+              }
+            }
+          },
+          "observationField": {
+            "keypath": [
+              "codeengine",
+              "component"
+            ],
+            "scope": "DATASET_SCOPE_USER_DATA"
+          }
+        }
+      },
+      "enabled": true,
+      "collapsed": false
+    }
+  ],
+  "relativeTimeFrame": "43200s",
+  "annotations": [],
+  "off": {}
+}

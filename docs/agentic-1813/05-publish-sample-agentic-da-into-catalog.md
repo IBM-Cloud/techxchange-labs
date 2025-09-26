@@ -48,29 +48,43 @@ In a real-world scenario, this file would be created alongside your Terraform fi
   "products": [
     {
       "name": "deploy-arch-ibm-ai-agent-code-engine",
-      "label": "Demo: Custom IaC for Agentic AI",
+      "label": "Loan Risk Evaluation with Watsonx AI Agents",
       "product_kind": "solution",
-      "tags": ["ibm_created","integration", "terraform", "solution"],
-      "keywords": ["code engine","IaC","infrastructure as code","terraform","solution", "agentic ai", "watsonx", "loan risk"],
+      "tags": [
+        "ibm_created",
+        "integration",
+        "terraform",
+        "solution"
+      ],
+      "keywords": [
+        "code engine",
+        "IaC",
+        "infrastructure as code",
+        "terraform",
+        "solution",
+        "agentic ai",
+        "watsonx",
+        "loan risk"
+      ],
       "short_description": "Provisions the Loan Risk AI Agents sample application on IBM Cloud Code Engine using a serverless architecture",
       "long_description": "Configures a serverless IBM Cloud Code Engine project to deploy the Loan Risk AI Agents sample application designed as a proof of concept (PoC) for adopting agentic AI in enterprise workflows.\n\nThe application showcases a bank loan processing workflow in the financial industry, demonstrating how LLMs can drive reasoning and actions—moving beyond traditional rule-based approaches. It uses IBM Cloud services including watsonx.ai for inferencing and retrieval-augmented generation (RAG), and watsonx Assistant/Orchestrate for conversational interactions.",
       "offering_docs_url": "https://github.com/IBM/agentic-iac-lab-materials/blob/main/agentic-solution/README.md",
       "features": [
         {
-          "title": "Code Engine project",
-          "description": "Creates Code Engine project for Code Engine resources such as applications, secrets, jobs."
+          "title": "Automated provisioning with Terraform",
+          "description": "Uses Infrastructure as Code (IaC) to provision all required IBM Cloud resources, including [Code Engine](https://www.ibm.com/products/code-engine), [Container Registry](https://www.ibm.com/products/container-registry), and associated configurations—ensuring consistency and repeatability."
         },
         {
-          "title": "Code Engine secret",
-          "description": "Creates a Code Engine secret used to securely store the API key required to publish the build image to the container registry."
+          "title": "End-to-end deployment of Loan Risk AI Agents",
+          "description": "Deploys a complete [agentic AI sample application](https://github.com/IBM/ai-agent-for-loan-risk) that demonstrates LLM-based decision-making for loan processing workflows using watsonx.ai and watsonx Assistant."
         },
         {
-          "title": "Code Engine build",
-          "description": "Creates a Code Engine build that compiles your application source code, builds a container image, and pushes it to the specified container registry using the stored authentication secret."
+          "title": "Secure API key and secret management",
+          "description": "Creates [Code Engine secrets](https://cloud.ibm.com/docs/codeengine?topic=codeengine-secret) to securely store sensitive information such as IBM Cloud API keys and registry credentials, used during the container build and deployment process."
         },
         {
-          "title": "Loan Risk AI Agents sample application",
-          "description": "Deploys Loan Risk AI Agents sample application."
+          "title": "Source-to-image build pipeline",
+          "description": "Builds container images directly from source code using Code Engine’s integrated build feature, and pushes the image to IBM Cloud Container Registry."
         }
       ],
       "flavors": [
@@ -90,41 +104,34 @@ In a real-world scenario, this file would be created alongside your Terraform fi
             },
             {
               "role_crns": [
-                "crn:v1:bluemix:public:iam::::serviceRole:Writer"
-              ],
-              "service_name": "codeengine"
-            },
-            {
-              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Writer",
                 "crn:v1:bluemix:public:iam::::role:Editor"
               ],
-              "service_name": "codeengine"
+              "service_name": "codeengine",
+              "notes": "Required to create and manage Code Engine resources."
             },
             {
               "role_crns": [
                 "crn:v1:bluemix:public:iam::::serviceRole:Writer",
                 "crn:v1:bluemix:public:iam::::role:Editor"
               ],
-              "service_name": "container-registry"
+              "service_name": "container-registry",
+              "notes": "Required to create and manage Container Registry namespaces."
             }
           ],
           "architecture": {
             "features": [
               {
                 "title": " ",
-                "description": "Creates Code Engine project."
+                "description": "Ideal for users deploying the Loan Risk AI Agents app on Code Engine without managing infrastructure."
               },
               {
                 "title": " ",
-                "description": "Creates Code Engine secret."
+                "description": "Uses Terraform to automate setup of projects, secrets, builds, and AI service integration."
               },
               {
                 "title": " ",
-                "description": "Builds Code Engine build."
-              },
-              {
-                "title": " ",
-                "description": "Deploys Loan Risk AI Agents sample application."
+                "description": "Runs a loan risk analysis app using watsonx.ai, Assistant, RAG, and orchestration logic."
               }
             ],
             "diagrams": [
@@ -134,7 +141,7 @@ In a real-world scenario, this file would be created alongside your Terraform fi
                   "caption": "IBM Cloud Code Engine application solution.",
                   "type": "image/svg+xml"
                 },
-                "description": "This deployable architecture creates IBM Cloud Code Engine project and deploys AI application."
+                "description": "The architecture of this solution uses Terraform to provision IBM Cloud resources, enabling deployment of the Loan Risk AI Agents application on Code Engine, with container builds pushed to Container Registry and managed secrets for authentication."
               }
             ]
           },
@@ -146,7 +153,7 @@ In a real-world scenario, this file would be created alongside your Terraform fi
               {
                 "key": "watsonx_ai_api_key",
                 "required": true
-              },  
+              },
               {
                 "key": "watsonx_project_id",
                 "type": "string",
@@ -192,7 +199,7 @@ After the product is added to a catalog, its version is initially in a draft sta
 To access your product version:
 
 1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select the catalog named `txc-catalog`
-1. On the new page, in the **Products** table, click on our deployable architecture (DA) - `Demo: Custom IaC for Agentic AI`
+1. On the new page, in the **Products** table, click on our deployable architecture (DA) - `Loan Risk Evaluation with Watsonx AI Agents`
 
 To make the deployable architecture available:
 
@@ -207,7 +214,7 @@ Your deployable architecture is now available in the catalog for no-code deploym
 To verify that your deployable architecture has been successfully added:
 
 1. Go to the [IBM Cloud Catalog](https://cloud.ibm.com/catalog)
-1. Use the search bar and type: `Demo: Custom IaC for Agentic AI`
+1. Use the search bar and type: `Loan Risk Evaluation with Watsonx AI Agents`
 1. Once it appears in the results, **click on the deployable architecture**.
 1. From there, you can **review the details and deploy it directly** from the catalog.
 

@@ -87,7 +87,7 @@ After adding a deployable architecture to your project, you can edit its input v
 ### Add and Configure your custom Code Engine DA
 
 1. Navigate to the **Catalog** via the top menu, or go directly to the [Catalog page](https://cloud.ibm.com/catalog).
-1. In the Catalog search bar, type `Demo: Custom IaC for Agentic AI` and select it from the results.
+1. In the Catalog search bar, type `Loan Risk Evaluation with Watsonx AI Agents` and select it from the results.
 1. Choose the correct version of the deployment architecture, then click **Configure and deploy** to proceed.
 1. Make sure **Add to existing** is selected from the left menu.  Then, choose `txc-project` from the dropdown. Update the configuration name if needed — in this case, we'll use `agentic-ai-demo`.
 1. Click **Add** to continue.

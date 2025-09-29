@@ -16,7 +16,7 @@ Clean up resources to avoid ongoing costs:
 
 ### IBM Cloud Project Resources
 
-1. Go to [IBM Cloud Projects](https://cloud.ibm.com/projects) → `txc-project`
+1. Go to [IBM Cloud Projects](https://cloud.ibm.com/projects) → `<your-initials>-txc-project`
 2. For each configuration (observability-demo, watsonx-ai-saas-demo, agentic-ai-demo):
    - Click configuration name → **Actions** → **Destroy resources**
    - Wait for completion before proceeding to next configuration
@@ -25,9 +25,9 @@ Clean up resources to avoid ongoing costs:
 
 ### Private Catalog
 
-1. Go to [IBM Cloud Catalogs](https://cloud.ibm.com/content-mgmt/catalogs) → `txc-catalog`
+1. Go to [IBM Cloud Catalogs](https://cloud.ibm.com/content-mgmt/catalogs) → `<your-initials>-txc-catalog`
 2. Delete your deployable architecture version and product
-3. Delete the `txc-catalog` itself
+3. Delete the `<your-initials>-txc-catalog` itself
 
 ### Local Files (if applicable)
 

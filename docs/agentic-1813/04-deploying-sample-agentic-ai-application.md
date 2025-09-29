@@ -17,36 +17,21 @@ ai-agent-for-loan-risk/
 ├── variables.tf        # Declares input variables used in the project
 ├── terraform.tfvars    # Provides values for the declared variables
 ├── outputs.tf          # Outputs useful information after apply (e.g., resource group ID)
-├── provider.tf         # Configures the IBM Cloud provider
+├── providers.tf         # Configures the IBM Cloud provider
 └── version.tf          # Defines required Terraform and provider versions
 ```
 
 This structure ensures the configuration is modular, organized, and aligned with Terraform best practices, making it easier to manage the deployment lifecycle of the **Loan Risk AI Agents sample application**.
 
-To begin, create a working directory named `ai-agent-for-loan-risk` that will contain all the Terraform configuration files for the `Loan Risk AI Agents sample application`. Within this directory, you’ll create the following set of files: `.gitignore main.tf variables.tf terraform.tfvars outputs.tf provider.tf version.tf`.
+To begin, make sure your workspace includes the `terraform-simple-template` directory with the required Terraform configuration files. This workspace should contain the following files: `.gitignore`, `main.tf`, `variables.tf`, `terraform.tfvars`, `outputs.tf`, `providers.tf`, and `version.tf`.
 
-<details>
-  <summary><b>CLI command</b></summary>
-  <div>
-    <p>In your terminal, run:</p>
-    <pre><code>
-mkdir ai-agent-for-loan-risk
-cd ai-agent-for-loan-risk
-touch .gitignore main.tf variables.tf terraform.tfvars outputs.tf provider.tf version.tf
-    </code></pre>
-  </div>
-</details>
-
-<details>
-  <summary><b>Text Editor</b></summary>
-Open VS Code, then create a new folder named <code>ai-agent-for-loan-risk</code>. Inside that folder, create the necessary Terraform files such as <code>.gitignore</code>, <code>main.tf</code>, <code>variables.tf</code>, <code>terraform.tfvars</code>, <code>outputs.tf</code>, <code>provider.tf</code>, and <code>version.tf</code> using the editor interface.
-</details>
+If any of these files are missing, you can create them manually: `right-click` in the folder view, and select `New File`. Enter the file name (e.g., `terraform.tfvars`) and press Enter to create it.
 
 ## Step 2: Set up IBM Cloud provider
 
-Set up the provider configuration by updating two files: `provider.tf` and `version.tf`. These files specify your IBM Cloud API key and region settings, which are necessary for Terraform to authenticate with IBM Cloud and understand which region and services to interact with during resource provisioning.
+Set up the provider configuration by updating two files: `providers.tf` and `version.tf`. These files specify your IBM Cloud API key and region settings, which are necessary for Terraform to authenticate with IBM Cloud and understand which region and services to interact with during resource provisioning.
 
-**Add the following content to `provider.tf`:**
+**Add the following content to `providers.tf`:**
 
 ```hcl
 provider "ibm" {
@@ -71,7 +56,7 @@ terraform {
 
 ## Step 3: Define input variables
 
-Define the required input variables in `variables.tf`. These variables enable you to manage configuration values separately from your main code, making the setup more maintainable and reusable across different environments.
+Define the required (`ibmcloud_api_key`, `watsonx_project_id` and `prefix`) and optional (`watsonx_ai_api_key` and `container_registry_api_key`) input variables in `variables.tf`. These variables enable you to manage configuration values separately from your main code, making the setup more maintainable and reusable across different environments.
 
 **Add the following content to `variables.tf`:**
 
@@ -84,8 +69,16 @@ variable "ibmcloud_api_key" {
 
 variable "watsonx_ai_api_key" {
   type        = string
-  description = "The API key of the IBM watsonx in the target account."
+  description = "The API key for IBM watsonx in the target account. If this key is not provided, the IBM Cloud API key will be used instead."
   sensitive   = true
+  default     = null
+}
+
+variable "container_registry_api_key" {
+  type        = string
+  description = "The API key of the container registry in the target account. If this key is not provided, the IBM Cloud API key will be used instead."
+  sensitive   = true
+  default     = null
 }
 
 variable "watsonx_project_id" {
@@ -96,28 +89,7 @@ variable "watsonx_project_id" {
 variable "prefix" {
   type        = string
   nullable    = true
-  description = "The prefix to be added to all resources created by this solution. To skip using a prefix, set this value to null or an empty string. The prefix must begin with a lowercase letter and may contain only lowercase letters, digits, and hyphens '-'. It should not exceed 12 characters, must not end with a hyphen('-'), and cannot contain consecutive hyphens ('--'). Example: txc-2025."
-  default = "txc-2025"
-  validation {
-    # - null and empty string is allowed
-    # - Must not contain consecutive hyphens (--): length(regexall("--", var.prefix)) == 0
-    # - Starts with a lowercase letter: [a-z]
-    # - Contains only lowercase letters (a–z), digits (0–9), and hyphens (-)
-    # - Must not end with a hyphen (-): [a-z0-9]
-    condition = (var.prefix == null || var.prefix == "" ? true :
-      alltrue([
-        can(regex("^[a-z][-a-z0-9]*[a-z0-9]$", var.prefix)),
-        length(regexall("--", var.prefix)) == 0
-      ])
-    )
-    error_message = "Prefix must begin with a lowercase letter and may contain only lowercase letters, digits, and hyphens '-'. It must not end with a hyphen('-'), and cannot contain consecutive hyphens ('--')."
-  }
-
-  validation {
-    # must not exceed 12 characters in length
-    condition     = var.prefix == null || var.prefix == "" ? true : length(var.prefix) <= 12
-    error_message = "Prefix must not exceed 12 characters."
-  }
+  description = "The prefix to be added to all resources name created by this solution."
 }
 ```
 
@@ -125,6 +97,19 @@ variable "prefix" {
 
 Now we'll build the main Terraform configuration that defines all the infrastructure components needed to deploy our application. The `main.tf` file orchestrates resource groups, Code Engine project, secrets, builds, and the application deployment.
 
+### Prefix
+
+All created resources will have a `prefix`. This prefix helps avoid naming conflicts with other resources in your account and provides a consistent naming structure. You can customize the prefix to something meaningful for your environment, such as a project name, environment (`dev`, `prod`), or team identifier.
+
+To implement this, we define a `local prefix variable` that builds the actual prefix string used in naming resources.
+
+**Add the following content to `main.tf`:**
+
+```hcl
+locals {
+  prefix = var.prefix != null ? (trimspace(var.prefix) != "" ? "${var.prefix}-" : "") : ""
+}
+```
 
 ### Resource group
 
@@ -135,8 +120,8 @@ Create a **Resource Group** to logically organize and manage your IBM Cloud reso
 ```hcl
 module "resource_group" {
   source              = "terraform-ibm-modules/resource-group/ibm"
-  version             = "1.2.1" 
-  resource_group_name = "txc-2025-resource-group"
+  version             = "1.3.0"
+  resource_group_name = "${local.prefix}resource-group"
 }
 ```
 
@@ -150,7 +135,7 @@ Create a **Code Engine project** to host and manage the **Loan Risk AI Agents sa
 module "code_engine_project" {
   source            = "terraform-ibm-modules/code-engine/ibm//modules/project"
   version           = "4.5.1"
-  name              = "txc-2025-ce-project"
+  name              = "${local.prefix}ce-project"
   resource_group_id = module.resource_group.resource_group_id
 }
 ```
@@ -165,13 +150,13 @@ Create a **Code Engine secret** to grant access to the private container registr
 module "code_engine_secret" {
   source     = "terraform-ibm-modules/code-engine/ibm//modules/secret"
   version    = "4.5.1"
-  name       = "my-registry-secret"
+  name       = "${local.prefix}ce-reg-secret"
   project_id = module.code_engine_project.id
   format     = "registry"
   data = {
     "server"   = "private.us.icr.io",
     "username" = "iamapikey",
-    "password" = var.ibmcloud_api_key,
+    "password" = var.container_registry_api_key != null ? var.container_registry_api_key : var.ibmcloud_api_key,
   }
 }
 ```
@@ -184,7 +169,7 @@ Create an **IBM Cloud Container Registry namespace** to organize and store conta
 
 ```hcl
 resource "ibm_cr_namespace" "rg_namespace" {
-  name              = "txc-2025-crn"
+  name              = "${local.prefix}crn"
   resource_group_id = module.resource_group.resource_group_id
 }
 ```
@@ -210,7 +195,7 @@ locals {
 module "code_engine_build" {
   source                     = "terraform-ibm-modules/code-engine/ibm//modules/build"
   version                    = "4.5.1"
-  name                       = "txc-2025-ce-build"
+  name                       = "${local.prefix}ce-build"
   ibmcloud_api_key           = var.ibmcloud_api_key
   project_id                 = module.code_engine_project.id
   existing_resource_group_id = module.resource_group.resource_group_id
@@ -238,13 +223,13 @@ module "code_engine_app" {
   source          = "terraform-ibm-modules/code-engine/ibm//modules/app"
   version         = "4.5.1"
   project_id      = module.code_engine_project.id
-  name            = "ai-agent-for-loan-risk"
+  name            = "${local.prefix}ai-agent-for-loan-risk"
   image_reference = module.code_engine_build.output_image
   image_secret    = module.code_engine_secret.name
   run_env_variables = [{
     type  = "literal"
     name  = "WATSONX_AI_APIKEY"
-    value = var.watsonx_ai_api_key
+    value = var.watsonx_ai_api_key != null ? var.watsonx_ai_api_key : var.ibmcloud_api_key
     },
     {
       type  = "literal"
@@ -312,17 +297,16 @@ First, if you're working in a Git repository, create a `.gitignore` file to prev
 
 ### Set up your configuration values
 
-Create the `terraform.tfvars` file to store your configuration values:
-
 > 📝 **Note:** For this lab, the `watsonx_project_id` and `watsonx_ai_api_key` are provided to enable the AI application to function immediately after deployment. In the next steps of this lab, you'll learn how to automate the creation of watsonx.ai resources using deployable architectures, eliminating the need to manually configure project IDs.
 
-Create `terraform.tfvars` and replace the placeholder values with your actual values:
+Open the `terraform.tfvars` and replace the placeholder values with your actual values:
 
 ```hcl
-ibmcloud_api_key     = "<your-IBM-cloud-api-key>"        # From IBM Cloud IAM
-watsonx_ai_api_key   = "<your-watsonx-ai-api-key>"       # Provided in the lab
-watsonx_project_id   = "<your-watsonx-project-id>"       # Provided in the lab
-prefix               = "<prefix-added-to-resources>"     # You can choose your own prefix for resource names
+ibmcloud_api_key             = "<your-IBM-cloud-api-key>"        # From IBM Cloud IAM
+container_registry_api_key   = "<your-crn-api-key>"              # Optional – can be skipped if the container registry is in the same account.
+watsonx_ai_api_key           = "<your-watsonx-ai-api-key>"       # Provided in the lab
+watsonx_project_id           = "<your-watsonx-project-id>"       # Provided in the lab
+prefix                       = "<prefix-added-to-resources>"     # You can choose your own prefix for resource names
 ```
 
 ### Deploy the infrastructure

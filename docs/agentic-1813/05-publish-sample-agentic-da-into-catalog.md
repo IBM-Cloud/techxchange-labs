@@ -29,7 +29,7 @@ To organize and manage your deployable architectures, you'll first need to creat
 1. In the IBM Cloud console, from the top navigation bar, click **Manage**, then select [**Catalogs**](https://cloud.ibm.com/content-mgmt/overview) from the dropdown menu
 1. From the left-hand navigation menu, select **Private catalogs**
 1. Click **Create** to add a new private catalog
-1. Fill in the **Name** field with `txc-catalog` and select the `Default` **resource group**. Under Select a template, choose **No products for now** — you'll add a product in the next steps. Then, click **Create**
+1. Fill in the **Name** field with `<your-initials>-txc-catalog` and select the `Default` **resource group**. Under Select a template, choose **No products for now** — you'll add a product in the next steps. Then, click **Create**
 
 > 💡 **Tip:** You can always view your catalog by clicking **Manage** in the top navigation bar, selecting **Catalogs**, and then choosing **Private catalogs**.
 
@@ -180,7 +180,7 @@ In a real-world scenario, this file would be created alongside your Terraform fi
 
 Now add the product to your catalog:
 
-1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select the catalog named `txc-catalog`
+1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select the catalog named `<your-initials>-txc-catalog`
 1. Once inside, click **Add product** to begin adding your customized deployable architecture (DA)
 1. Choose **Deployable architecture** as the product type, and select **Terraform** as the delivery method
 1. Choose **Public repository** (if using a private repo, ensure the system has access via credentials or IBM Cloud Secrets Manager)
@@ -190,7 +190,9 @@ Now add the product to your catalog:
 
 6. Choose the **variation** `Code Engine application`, and set the **Software version** to `1.0.0`
 7. Click **Add product** to complete the process
-8. Click on the **Step 3 - Configure the deployment** tab, then click **Import input variables** to add all inputs (e.g., `ibmcloud_api_key`, `watsonx_ai_api_key`, `watsonx_project_id`, `prefix`) to your deployment architecture
+8. On the new screen, click **Versions** in the left-hand menu.
+9. In the table, click on your version labeled `1.0.0`.
+10. In the **Configure version** section, click the **Step 3 - Configure the deployment** tab, then click **Import input variables** to add all inputs (e.g., `ibmcloud_api_key`, `watsonx_ai_api_key`, `watsonx_project_id`, `prefix`, `container_registry_api_key`) to your deployment architecture
 
 ## Step 3: Make the deployable architecture available
 
@@ -198,13 +200,13 @@ After the product is added to a catalog, its version is initially in a draft sta
 
 To access your product version:
 
-1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select the catalog named `txc-catalog`
+1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select the catalog named `<your-initials>-txc-catalog`
 1. On the new page, in the **Products** table, click on our deployable architecture (DA) - `Loan Risk Evaluation with Watsonx AI Agents`
 
 To make the deployable architecture available:
 
 1. Go to **Versions** in the left navigation panel
-1. Click the **option menu (⋮)** next to the draft version and select **Set as pre-release**
+1. Click the **option menu (⋮)** next to the draft version and select **Ready to pre-release**
 1. Follow the prompts to make the version available for deployment
 
 Your deployable architecture is now available in the catalog for no-code deployment by other users.

@@ -151,8 +151,10 @@ In a real-world scenario, this file would be created alongside your Terraform fi
                 "key": "ibmcloud_api_key"
               },
               {
-                "key": "watsonx_ai_api_key",
-                "required": true
+                "key": "watsonx_ai_api_key"
+              },
+              {
+                "key": "container_registry_api_key"
               },
               {
                 "key": "watsonx_project_id",

@@ -65,7 +65,7 @@ After adding a deployable architecture to your project, you will customize its i
 1. On the Configure page, scroll down and click **Next** to continue.
 1. To enter the **API key**, click **Create a personal API key** to generate one. This will create an API key with permissions tied to your user account.
 1. Click **Next** to continue.
-1. Enter your Watsonx API key into the **watsonx_ai_api_key** field.
+1. Enter your Watsonx API key into the **watsonx_ai_api_key** field. This step is optional — if the key is not provided, the IBM Cloud API key will be used by default.
 1. We will link the input of the `agentic-ai-demo` to the output of the previously deployed `watsonx-ai-saas-demo` DA. Hover over the **watsonx_project_id** input field and click on **Add Reference**.
 1. A new popup will open.
     - For **Source**, select `Configuration`.

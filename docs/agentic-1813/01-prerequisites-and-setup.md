@@ -20,6 +20,8 @@ You will use a web-based IDE for development and a dedicated IBM Cloud account t
 
 **Step 1: Access the Web-based IDE**
 
+> ⚠️ **Before starting**: Please ensure you don't have any existing active IBM Cloud sessions. Log out at https://cloud.ibm.com/logout if necessary.
+
 1.  Open a browser tab and log in at **[https://ibm.biz/txc-lab-env-login](https://ibm.biz/txc-lab-env-login)** using the first set of credentials provided.
 2.  After logging in, you will land on an IBM Cloud dashboard. In the same tab, open the web-based IDE by navigating to **[https://ibm.biz/txc-lab-env](https://ibm.biz/txc-lab-env)**. This is your complete IDE development environment, where you will edit files and run all the necessary commands (like `terraform`).
     > **Note:** After authentication, you may be prompted to **Log in with OpenShift**. Click the button to proceed.

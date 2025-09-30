@@ -1,7 +1,52 @@
 
 ## Serve a model for inferencing
 
-### 1. List the models available on the VSI 
+### 1. Run the `ilab` command 
+
+* Run the `ilab` command to see the options the command provides. `ilab` is the cli provided by Red Hat as part of InstructLab and Red Hat Enterprise Linux AI ([RHEL AI](https://www.redhat.com/en/products/ai/enterprise-linux-ai)). 
+
+
+``` bash
+ilab --help
+```
+**Output:**
+
+``` bash
+Usage: ilab [OPTIONS] COMMAND [ARGS]...
+
+  CLI for interacting with InstructLab.
+
+  If this is your first time running ilab, it's best to start with `ilab
+  config init` to create the environment.
+
+Options:
+  --config PATH  Path to a configuration file.  [default:
+                 /root/.config/instructlab/config.yaml]
+  -v, --verbose  Enable debug logging (repeat for even more verbosity)
+  --version      Show the version and exit.
+  --help         Show this message and exit.
+
+Commands:
+  config    Manage InstructLab configuration.
+  data      Generate synthetic data.
+  model     Manage GenAI (LLM) models.
+  process   Manage running processes.
+  rag       Retrieval-Augmented Generation (RAG).
+  system    Execute system commands.
+  taxonomy  Manage taxonomy datasets.
+
+Aliases:
+  chat      model chat
+  generate  data generate
+  serve     model serve
+```
+
+> [!NOTE]
+> It will take a few seconds when running the `ilab` command for the first time
+
+<p>&nbsp;</p>
+
+### 2. List the models available on the VSI 
 
 * Use the `ilab` command to list the models available on the VSI
 
@@ -25,14 +70,14 @@ These models were already downloaded to the image that was used to bring up the 
 
 <p>&nbsp;</p>
 
-### 2. Serve the model using the ilab command 
+### 3. Serve the model using the ilab command 
 
 * Use the `ilab` command to serve the model for inferencing
-* Utilize 2 GPUs
+* Utilize 1 GPU (We will serve the model with 2 GPUs later in the lab)
 * Serve the `8b` model
 
 ``` bash
-ilab model serve --model-path /root/.cache/instructlab/models/ibm-granite/granite-3.3-8b-instruct  --backend vllm --gpus 2 -- --disable-custom-all-reduce --enforce-eager
+ilab model serve --model-path /root/.cache/instructlab/models/ibm-granite/granite-3.3-8b-instruct  --backend vllm --gpus 1 -- --disable-custom-all-reduce --enforce-eager
 ```
 
 **Output:**
@@ -74,10 +119,10 @@ INFO:     Application startup complete.
 <p>&nbsp;</p>
 
 > [!NOTE]
-> Wait till the `Application startup complete` message is displayed.
+> Wait till the `Application startup complete` message is displayed. This will take a couple minutes.
 
 
-### 3. Chat with the model 
+### 4. Chat with the model 
 
 * Open another terminal window and run the ssh command to login and chat with the model using the `ilab` command
 
@@ -121,7 +166,7 @@ INFO 2025-08-27 15:32:52,506 instructlab.model.chat:816: Requested model /root/.
 ```
 <p>&nbsp;</p>
 
-### 4. Interact with the model using `curl`
+### 5. Interact with the model using `curl`
 
 * Use `curl` command to interact with the model
 
@@ -166,3 +211,15 @@ curl http://localhost:8000/v1/chat/completions   -H "Content-Type: application/j
   "prompt_logprobs": null
 }
 ```
+
+
+### 6. Recap
+
+If you have successfully made it upto this step, you now have:
+- A deployed a virtual server instance with GPU
+- A model serving with ibm-granite/granite-3.3-8b-instruct LLM
+- An endpoint to use for inferencing and performance testing
+
+In the next steps you will check the performance tools followed by running the performance benchmark tests and then evaluate the test results.
+
+

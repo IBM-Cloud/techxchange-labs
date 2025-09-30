@@ -32,52 +32,8 @@ ssh -i ./txc-gpulab-group1-key_rsa.prv root@<fip>
 <p>&nbsp;</p>
 
 
-### 4. Run the `ilab` command 
-
-* Run the `ilab` command to see the options the command provides
-
-``` bash
-ilab --help
-```
-**Output:**
-
-``` bash
-Usage: ilab [OPTIONS] COMMAND [ARGS]...
-
-  CLI for interacting with InstructLab.
-
-  If this is your first time running ilab, it's best to start with `ilab
-  config init` to create the environment.
-
-Options:
-  --config PATH  Path to a configuration file.  [default:
-                 /root/.config/instructlab/config.yaml]
-  -v, --verbose  Enable debug logging (repeat for even more verbosity)
-  --version      Show the version and exit.
-  --help         Show this message and exit.
-
-Commands:
-  config    Manage InstructLab configuration.
-  data      Generate synthetic data.
-  model     Manage GenAI (LLM) models.
-  process   Manage running processes.
-  rag       Retrieval-Augmented Generation (RAG).
-  system    Execute system commands.
-  taxonomy  Manage taxonomy datasets.
-
-Aliases:
-  chat      model chat
-  generate  data generate
-  serve     model serve
-```
-
-> [!NOTE]
-> It will take a few seconds when running the `ilab` command for the first time
-
-<p>&nbsp;</p>
-
-### 5. Run the `nvidia-smi` command 
-
+### 4. Run the `nvidia-smi` command 
+  
 * Run the `nvidia-smi` command to see information about the GPUs available in the VSI.
 
 ``` bash
@@ -113,5 +69,9 @@ Wed Aug 27 13:38:55 2025
 |  No running processes found                                                             |
 +-----------------------------------------------------------------------------------------+
 ```
+
+The above output confirms we have a server with two GPUs with id "0" and "1".
+
+
 
 <p>&nbsp;</p>

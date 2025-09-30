@@ -21,7 +21,7 @@ The **Virtual server instances for VPC** page looks like below.
 <p>&nbsp;</p>
 
 * Click on **Change image** in the **Server configuration** section 
-* Go to the **Custom images** tab 
+* Go to the **Custom images** tab. (Note: The reason for using a custom image is to save time during the lab. 1. The models are already downloaded. 2. The `guidellm` performance tool is also alredy installed. These are captured as part of the image)
 * Select the `rhelai-1-5-gpulab-1827` image and click on **Save**
 
 ![vsiConfigImage](./images/30-vsi-config-image.png)
@@ -48,5 +48,7 @@ The server configuration should look like below.
 
 ![vsiRunning](./images/30-vsi-running.png)
 
+
+> Expected provisioning time: 2 minutes
 <p>&nbsp;</p>
 

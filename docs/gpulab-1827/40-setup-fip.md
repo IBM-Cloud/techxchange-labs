@@ -13,7 +13,7 @@ The **Floating IPs for VPC** page looks like below.
 ### 2. Click on the `Reserve` button
 
 * Choose the **Geography** (`Europe`), **Region** (`Frankfurt(eu-de)`) and the **Zone** (`eu-de-2`)
-* Provide the **Floating IP name** for the floating IP (`txc-gpulab-`**group number**`-fip`). Make sure to use your group number.
+* Provide the **Floating IP name** for the floating IP (`txc-gpulab-`**group number**`-fip`). Make sure to use your group number or user-name to make the FIP name unique.
 * Select the **Resource Group** (`gpulab-1827-lab`)
 
 ![fipConfig1](./images/40-fip-config-1.png)

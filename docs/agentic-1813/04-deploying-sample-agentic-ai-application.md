@@ -290,9 +290,22 @@ As a platform engineer, you'll deploy this infrastructure **twice** in this lab:
 
 ### Set up your configuration values
 
+#### 🔐 IBM Cloud IAM API Key - Required for accessing IBM Cloud resources during this tutorial
+
 > 📝 **Note:** For this lab, the `watsonx_project_id` and `watsonx_ai_api_key` are provided to enable the AI application to function immediately after deployment. In the next steps of this lab, you'll learn how to automate the creation of watsonx.ai resources using deployable architectures, eliminating the need to manually configure project IDs.
 
-You can obtain your **IBM Cloud API key** by going to the [IBM Cloud Console](https://cloud.ibm.com) in your target account (Environment 2 - IBM Cloud Sandbox - Target Deployment Account), clicking **Manage** → **Access (IAM)** → **API keys**, and creating a new API key.
+To work with IBM Cloud resources, you’ll need an **IBM Cloud IAM API key**.
+
+How to obtain your API key:
+
+1. Go to the [IBM Cloud Console](https://cloud.ibm.com) for your target account
+_(Environment 2 – IBM Cloud Sandbox – Target Deployment Account)._
+1. Navigate to:
+**Manage → Access (IAM) → API Keys**
+1. Click **Create**, then enter a `Name` and click on **Create** to generate a new API key.
+
+> ❗ **Important**:
+Store your API key in a secure location — **you’ll need it throughout this tutorial**.
 
 > 💡 **Tip:** The `.gitignore` file is already in place for the lab environment and prevents sensitive configuration from being accidentally committed.
 

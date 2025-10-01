@@ -46,7 +46,7 @@ In this step, we’ll add the `Cloud foundation for AI ops and governance with w
 After adding a deployable architecture to your project, you can edit its input values to customize the deployment. While configurations can be generic, most projects use specific configurations—or groups of them—to deploy resources across different environments, such as development, test, and production.
 
 1. On the Edit watsonx-ai-saas-demo page, scroll down and click **Next** to continue.
-1. To enter the **API key**, click **Create a personal API key** to generate one. This will create an API key with permissions tied to your user account.
+1. To enter the **API key**, simply copy and paste the value of the key you created earlier.
 1. Click **Next** to continue.
 1. To enter a **resource group**, click `Edit` inside the `resource_group_name` input field, then enter the name of a new or existing resource group. In our case we will use `txc-watson-rg`.
 1. To configure all input variables, turn on **Optional inputs** to enable editing of optional inputs and fine-tune your configuration.
@@ -65,7 +65,7 @@ After adding a deployable architecture to your project, you can edit its input v
 After adding a deployable architecture to your project, you will customize its input values to match your specific use case. While default configurations are provided, you’ll often adjust them based on the type of workload, connected services, or the overall solution you're building.
 
 1. On the Edit agentic-ai-demo page, scroll down and click **Next** to continue.
-1. To enter the **API key**, click **Create a personal API key** to generate one. This will create an API key with permissions tied to your user account.
+1. To enter the **API key**, simply copy and paste the value of the key you created earlier.
 1. Click **Next** to continue.
 1. Enter your Watsonx API key into the **watsonx_ai_api_key** field. **This step is optional** — if the key is not provided, the IBM Cloud API key will be used by default.
 1. We will link the input of the `agentic-ai-demo` to the output of the previously deployed `watsonx-ai-saas-demo` DA. Hover over the **watsonx_project_id** input field and click on **Add Reference**.
@@ -184,7 +184,7 @@ In this optional step, you will deploy the `Cloud automation for Observability` 
 After adding a deployable architecture to your project, you can edit its input values to customize the deployment. While configurations can be generic, most projects use specific configurations—or groups of them—to deploy resources across different environments, such as development, test, and production.
 
 1. On the Edit observability-demo page, scroll down and click **Next** to continue.
-1. To enter the **API key**, click **Create a personal API key** to generate one. This will create an API key with permissions tied to your user account.
+1. To enter the **API key**, simply copy and paste the value of the key you created earlier.
 1. Click **Next** to continue.
 1. Click **Edit** inside the **Prefix** input field, and enter the value `<your-initials>-txc-demo`.
 1. Click **Done**, then click **Save** in the top-right corner of the page to save your changes.

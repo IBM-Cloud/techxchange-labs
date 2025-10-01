@@ -59,6 +59,8 @@ Once the IDE is loaded, here’s a quick tour to get you started.
 
 Go to the accounts credentials page **[https://ibm.biz/txc25_1813_creds](https://ibm.biz/txc25_1813_creds)** and follow the instructions to access your target deployment account.
 
+After obtaining your credentials, click the login link provided to access the IBM Cloud console. Once logged in, you'll be able to view and manage the resources you'll deploy in the following steps.
+
 > **Important**: Keep both tabs open. You will write code in the IDE (first tab) and view the deployed resources in your target IBM Cloud account (second tab).
 
 ### Self-Paced

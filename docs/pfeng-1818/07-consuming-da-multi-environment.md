@@ -36,19 +36,21 @@ This is where the self-service magic happens. The developer doesn't need to writ
     You will land on the **Configurations** tab of your new project. You can see the DA you added.
 2. **Security tab**: Provide IBM Cloud API Key. For this tutorial, leave compliance as is. The `ibmcloud_api_key` is handled automatically and securely by the project.
 
-3. **Provide Input Values**:
+   **Note:** Use your existing IBM Cloud API Key. Please avoid clicking on the "Create an API key" link.
+
+4. **Provide Input Values**:
     *   Click on your configuration to open the deployment panel.
     *   You will be prompted to provide a value for the `prefix` variable. Enter a unique prefix for this new environment, for example, `dev1`.
     > **Important**: The prefix must be 4 characters or less.
 
     ![Project Inputs](images/project-inputs.png)
 
-4. **Save and Validate**:
+5. **Save and Validate**:
     *   Click **Save**.
     *   The project will now show you the changes that will be made (i.e., all the resources that will be created).
     *   Click **Validate**. This will run a `terraform plan` in the background to ensure everything is correct.
 
-5. **Deploy**:
+6. **Deploy**:
     *   Once the validation is successful, click **Deploy**.
     *   The project will now run `terraform apply`, and you can monitor the progress from the **Activity** tab.
 

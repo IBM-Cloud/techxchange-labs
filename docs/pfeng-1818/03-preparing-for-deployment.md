@@ -40,8 +40,6 @@ To avoid naming conflicts with other resources in the account, we will use a uni
 
 ## Step 3: Review the Terraform Configuration
 
-## Step 3: Review the Terraform Configuration
-
 In the lab environment, you'll find a template with several empty files that follow Terraform best practices for organizing code. You'll need to add the appropriate code to each file:
 
 - `variables.tf` - For variable declarations
@@ -101,22 +99,22 @@ terraform {
 }
 ```
 
-- **Variables**: The `ibmcloud_api_key` and `prefix` variables are defined in `variables.tf`. The `sensitive = true` argument for the API key prevents Terraform from displaying it in logs.
-- **Provider**: The IBM Cloud provider is configured in `providers.tf`. It's set up to use the `ibmcloud_api_key` variable for authentication.
-- **Version Constraints**: The required Terraform version and provider versions are specified in `version.tf`.
+* **Variables**: The `ibmcloud_api_key` and `prefix` variables are defined in `variables.tf`. The `sensitive = true` argument for the API key prevents Terraform from displaying it in logs.
+* **Provider**: The IBM Cloud provider is configured in `providers.tf`. It's set up to use the `ibmcloud_api_key` variable for authentication.
+* **Version Constraints**: The required Terraform version and provider versions are specified in `version.tf`.
 
 ## Step 4: Initialize Terraform
 
 The final preparation step is to initialize the Terraform working directory. This command downloads the required provider plugins (in this case, for IBM Cloud and `time`).
 
-1.  **Run `terraform init`**:
+1. **Run `terraform init`**:
     In your terminal, at the root of the project directory, run:
 
     ```bash
     terraform init
     ```
 
-2.  **Verify the Output**:
+2. **Verify the Output**:
     You should see a success message confirming that Terraform has been initialized.
 
 You are now ready to start building the infrastructure.

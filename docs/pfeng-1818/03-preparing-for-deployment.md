@@ -40,13 +40,22 @@ To avoid naming conflicts with other resources in the account, we will use a uni
 
 ## Step 3: Review the Terraform Configuration
 
-The `main.tf` file in the root of the project directory contains the core Terraform configuration. Let's briefly review the key sections that are now configured by the environment variables you just set.
+In the lab environment, you'll find a template with several empty files that follow Terraform best practices for organizing code. You'll need to add the appropriate code to each file:
 
-> **Note**: For this tutorial, we’ll keep everything in a single `main.tf` file for simplicity, but in a real environment you would typically split the configuration into multiple files (e.g., `variables.tf`, `outputs.tf`) for better organization and maintainability.
+- `variables.tf` - For variable declarations
+- `providers.tf` - For provider configuration
+- `version.tf` - For Terraform version constraints
+- `main.tf` - For resource definitions
+- `outputs.tf` - For output values
+- `terraform.tfvars` - For variable values (will remain empty as we're using environment variables)
+
+Let's add the necessary code to each file:
+
+### variables.tf
+
+Add the following code to `variables.tf`:
 
 ```hcl
-# main.tf
-
 variable "ibmcloud_api_key" {
   description = "IBM Cloud API key for authentication and resource provisioning"
   type        = string
@@ -57,12 +66,24 @@ variable "prefix" {
   description = "Unique prefix for resource naming (e.g., 'vb-lab' or 'ra-dev'). Maximum prefix length is 6 characters."
   type        = string
 }
+```
 
+### providers.tf
+
+Add the following code to `providers.tf`:
+
+```hcl
 provider "ibm" {
   ibmcloud_api_key = var.ibmcloud_api_key
   region           = "us-south" # You can change this to your preferred region
 }
+```
 
+### version.tf
+
+Add the following code to `version.tf`:
+
+```hcl
 terraform {
   required_version = ">= 1.9.0"
   required_providers {
@@ -78,21 +99,22 @@ terraform {
 }
 ```
 
--   **`variable` blocks**: These define the `ibmcloud_api_key` and `prefix` variables. The `sensitive = true` argument for the API key prevents Terraform from displaying it in logs.
--   **`provider "ibm"` block**: This block configures the IBM Cloud provider. It's set up to use the `ibmcloud_api_key` variable for authentication.
+* **Variables**: The `ibmcloud_api_key` and `prefix` variables are defined in `variables.tf`. The `sensitive = true` argument for the API key prevents Terraform from displaying it in logs.
+* **Provider**: The IBM Cloud provider is configured in `providers.tf`. It's set up to use the `ibmcloud_api_key` variable for authentication.
+* **Version Constraints**: The required Terraform version and provider versions are specified in `version.tf`.
 
 ## Step 4: Initialize Terraform
 
 The final preparation step is to initialize the Terraform working directory. This command downloads the required provider plugins (in this case, for IBM Cloud and `time`).
 
-1.  **Run `terraform init`**:
+1. **Run `terraform init`**:
     In your terminal, at the root of the project directory, run:
 
     ```bash
     terraform init
     ```
 
-2.  **Verify the Output**:
+2. **Verify the Output**:
     You should see a success message confirming that Terraform has been initialized.
 
 You are now ready to start building the infrastructure.

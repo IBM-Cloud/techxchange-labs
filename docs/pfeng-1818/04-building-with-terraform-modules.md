@@ -1,6 +1,13 @@
 # 🏗️ Building the Infrastructure with Terraform Modules
 
-Now that the environment is set up, you will build the hub-and-spoke infrastructure step-by-step. You will add blocks of Terraform code to your `main.tf` file to provision the necessary resources.
+Now that the environment is set up, you will build the hub-and-spoke infrastructure step-by-step. You will add blocks of Terraform code to the appropriate files to provision the necessary resources. Remember that you have the following files to work with:
+
+- `main.tf` - For resource and module definitions
+- `outputs.tf` - For output values
+- `variables.tf` - For variable declarations (already set up in the previous step)
+- `providers.tf` - For provider configuration (already set up in the previous step)
+- `version.tf` - For Terraform version constraints (already set up in the previous step)
+- `terraform.tfvars` - For variable values (will remain empty as we're using environment variables)
 
 ## What are `terraform-ibm-modules`?
 
@@ -247,7 +254,7 @@ Now that the network foundation is in place, you will add the compute resources 
 
 You need an SSH key pair to securely connect to the virtual servers. The following code will generate a new key pair, upload the public key to IBM Cloud, and save the private key locally to a file named `<YOUR-PREFIX>_ssh_private_key.pem`.
 
-Add the following code to `main.tf`:
+Add the following resource code to `main.tf`:
 
 ```hcl
 # Generate SSH key pair for secure server access
@@ -263,17 +270,21 @@ resource "local_file" "ssh_private_key" {
   file_permission = "0600" # Read-only for owner
 }
 
-# ONLY outputs private file name
-output "ssh_private_key_file_name" {
-  description = "Private key file name."
-  value = "${var.prefix}_ssh_private_key.pem"
-}
-
 resource "ibm_is_ssh_key" "ssh_key" {
   name       = "${var.prefix}-ssh-key"
   public_key = tls_private_key.ssh_key.public_key_openssh
 }
 ```
+
+And add the following to your `outputs.tf` file:
+
+```hcl
+output "ssh_private_key_file_name" {
+  description = "Private key file name."
+  value = "${var.prefix}_ssh_private_key.pem"
+}
+```
+
 > **Security Note:** Saving private keys directly to the filesystem is done here for lab simplicity. In a production environment, you should use a secure secret management tool like IBM Cloud Secrets Manager.
 
 ## Step 7: Provision the Jumpbox Server
@@ -334,7 +345,11 @@ module "jumpbox_server" {
   vpc_id            = module.management_vpc.vpc_id
   vsi_per_subnet    = 1
 }
+```
 
+And add the following to your `outputs.tf` file:
+
+```hcl
 output "jumpbox_public_ip" {
   description = "Public IP address to connect to the jumpbox server"
   value       = module.jumpbox_server.fip_list[0].floating_ip
@@ -466,7 +481,11 @@ module "workload_servers" {
   vpc_id            = module.workload_vpc.vpc_id
   vsi_per_subnet    = 1
 }
+```
 
+And add the following to your `outputs.tf` file:
+
+```hcl
 output "workload_server_private_ips" {
   description = "Private IP addresses of the workload servers"
   value       = module.workload_servers.list[*].ipv4_address
@@ -534,7 +553,11 @@ module "public_lb_security_group" {
   vpc_id     = module.management_vpc.vpc_id
   target_ids = [ibm_is_lb.public_load_balancer.id]
 }
+```
 
+And add the following to your `outputs.tf` file:
+
+```hcl
 output "public_load_balancer_hostname" {
   description = "Public hostname to access the application through the load balancer"
   value       = ibm_is_lb.public_load_balancer.hostname
@@ -582,7 +605,11 @@ module "workload_vpes" {
     }
   ]
 }
+```
 
+And add the following to your `outputs.tf` file:
+
+```hcl
 output "workload_vpe_ips" {
   description = "Private IP addresses of VPC endpoints for cloud services"
   value       = module.workload_vpes.vpe_ips
@@ -615,7 +642,11 @@ module "cos_storage" {
     role                      = "Reader"
   }]
 }
+```
 
+And add the following to your `outputs.tf` file:
+
+```hcl
 output "cos_instance_crn" {
   description = "COS instance CRN"
   value       = module.cos_storage.cos_instance_crn
@@ -641,7 +672,7 @@ output "cos_secret_access_key" {
 
 ## Step 12: Deploy the Compute and Service Resources
 
-Your `main.tf` file is now complete with all compute, load balancing, and storage resources. Let's deploy them.
+Your Terraform files are now complete with all compute, load balancing, and storage resources. Let's deploy them.
 
 1. **Run `terraform init`**
     

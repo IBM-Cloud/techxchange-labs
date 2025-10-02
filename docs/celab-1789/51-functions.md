@@ -38,13 +38,11 @@ Finally click **Create**.
 
 You can change the function code on the fly from the text editor.
 
-1. Click the editor and change `main.js` as below to add a new attribute to the response body:
+1. Click the editor and change `main.js` as below to replace the response body with a single property:
    ```javascript
    function main(args) {
      const body = {
-       args,
-       env: process.env,
-       hello: "world" // add this line
+       hello: "world" // replace the body with a single property
      };
 
      console.log(`Return body: ${JSON.stringify(body, null, 2)}`);
@@ -62,6 +60,7 @@ You can change the function code on the fly from the text editor.
    ```
 1. Click **Deploy**.
 1. Use **Test function** and **Send request** again to confirm the new attribute is returned.
+   ![](images/51-verify-update.png ':size=750')
 
 ?> You just deployed your first function and deployed a new version in no time!
 

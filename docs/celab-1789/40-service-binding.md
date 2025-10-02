@@ -12,7 +12,7 @@ Service bindings provide applications and jobs access to IBM Cloud services.
    1. For **Bind to**, select your _Hello World_ application.
    1. Set **Role** to **Writer**.
    ![](images/40-create-binding.png ':size=800')
-1. Click **Add**.
+1. Click **Add** and wait for the application to become **Ready**.
    ![](images/40-binding-created.png ':size=800')
 
 ?> **Well done!** You have created a service binding between your Code Engine application and IBM Cloud Object Storage.
@@ -25,10 +25,11 @@ Binding a service instance to a Code Engine application or job automatically add
 
 1. Click **Applications** to go to your Code Engine applications.
 1. Click **Open URL** to open your specific application in a browser.
+   ![](images/40-open-url.png ':size=800')
 
 The output of your application now displays the credentials to access the *Cloud Object Storage* instance as environment variables in the application. For this example, the environment variables are named in the format `CLOUD_OBJECT_STORAGE_`.
 
-   ![](images/40-credentials.png ':size=500')
+   ![](images/40-credentials.png ':size=800')
 
 ?> You might need to refresh the page a few times before the application reflects the changes.
 

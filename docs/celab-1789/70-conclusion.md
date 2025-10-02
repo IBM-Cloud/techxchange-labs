@@ -28,5 +28,5 @@ To learn more about Code Engine workloads, see [Application workloads](https://c
 
    ?> Deleting your project also deletes all contained entities including apps and jobs as well as associated image builds, secrets, and configmaps.
    <br><br>
-   When you delete a project, the project remains restorable for 7 days and then it is automatically and permanently deleted. You can manually delete restorable projects at any time. You can restore projects before they are automatically deleted. You cannot create a project with the same name in the same region until the restorable project no longer exists.”
+   When you delete a project, the project remains restorable for 7 days and then it is automatically and permanently deleted. You can manually delete restorable projects at any time. You can restore projects before they are automatically deleted. You cannot create a project with the same name in the same region until the restorable project no longer exists.
 1. Go to the Container Registry at https://cloud.ibm.com/registry/images and delete the image named after your username.

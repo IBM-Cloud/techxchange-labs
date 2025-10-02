@@ -9,7 +9,7 @@
 - [🧑‍🔬️ More to discover](60-more-to-discover)
 - [🏁 Conclusion](70-conclusion)
 - **Code Engine in IBM Cloud**
-- [Lab Sign in](https://ibm.biz/1789-login)
-- [Console](https://cloud.ibm.com/codeengine)
+- [Lab Sign in](https://ibm.biz/txc-1789-login)
+- [Console](https://cloud.ibm.com/containers/serverless/overview)
 - [Documentation](https://cloud.ibm.com/docs/codeengine)
 - [Examples](https://github.com/IBM/CodeEngine)

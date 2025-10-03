@@ -83,7 +83,7 @@ Follow these steps to access this predefined dashboard:
 
 Follow these steps to search IBM Cloud Object Storage activity tracking data:
 
-1. In the IBM Cloud console, navigate to **Menu icon > Observability > Logging > Instances > Cloud Logs**.
+1. In the IBM Cloud console, navigate to **Menu icon > Observability > Logging > Instances > rag-cloud-logs**.
 
     ![IBM Cloud UI](images/30-1-1.png ':size=600')
 

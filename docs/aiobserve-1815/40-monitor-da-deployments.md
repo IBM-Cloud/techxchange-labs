@@ -249,7 +249,7 @@ In this deployment, you'll find these trusted profiles:
 
 Follow these steps to review login sessions:
 
-1. Navigate to **Menu icon > Observability > Logging > Instances > Cloud Logs**.
+1. Navigate to **Menu icon > Observability > Logging > Instances > rag-cloud-logs**.
 
     ![](images/30-1.png ':size=600')
 

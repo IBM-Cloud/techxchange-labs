@@ -4,7 +4,8 @@
 ### 1. Create a VPC 
 
 > [!NOTE]
-> For the **txc-2025-gpulab-1827**, use the `txc-gpulab-1827-vpc` that has already been created.
+> A VPC **txc-gpulab-1827-vpc** was already created for this lab.  
+> Skip this step and just select this existing VPC `txc-gpulab-1827-vpc` in the subsequent steps.  
 
 1. Go to **Infrastructure -> Network-> VPCs**. 
 

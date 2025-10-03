@@ -142,7 +142,7 @@ Benchmarking complete.
 Note the key metrics Request Rate (Requests Per Second), Request Latency, Time to First Token (TTFT) for requests made under different test conditions - synchronous, throughput and constant rates.
 
 - The stats for "_synchronous_" show the results of synchronous back-to-back calls. Requests per second will be low because a next request is made only after the previous one finishes.
-- The stats for "_throughput_" show the results of when all 10 requests are made concurrently as a burst, at the same time. It will show the throughput (request per second) and the associated concurrency.
+- The stats for "_throughput_" show the results of when all 30 requests are made concurrently as a burst, at the same time. It will show the throughput (request per second) and the associated concurrency.
 - The stats for "_constant@ 0.XX_" show the results for varying the request per second rates and the associated concurrency.
 
 

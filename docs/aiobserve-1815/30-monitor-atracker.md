@@ -71,7 +71,7 @@ Let's set up monitoring for these critical metrics:
 
 ## Step 2: Explore your Deployment's Target Configuration
 
-In the DA deployment, you have 2 targets configured:
+In this environment, you have 2 targets configured that were deployed through the deployable architecture:
 
 - 1 target sends data to the IBM Cloud Logs instance: `rag-cloud-logs-target`
 - 1 target sends data to the COS bucket: `rag-cos-target`

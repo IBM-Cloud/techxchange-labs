@@ -28,6 +28,8 @@ This lab is structured in two main parts:
 
 You'll examine how observability services work together in a comprehensive observability stack that includes logging, monitoring, metrics routing, logs routing, activity tracking event routing, and cross-service integrations.
 
+> **💡 TIP:** This is a comprehensive lab that covers multiple services. The sections are mostly independent of each other, so feel free to jump to sections that interest you most based on your learning goals.
+
 ## Your Lab Environment
 
 The RAG Pattern deployment includes key components such as:

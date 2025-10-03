@@ -16,7 +16,7 @@ In this section, you'll explore how to monitor IBM Cloud Object Storage, focusin
 
 IBM Cloud Object Storage is a highly available, durable, and secure platform for storing unstructured data. Unstructured data (sometimes called binary or "blob" data) refers to data that is not highly structured in the manner of a database. For more information, see [About Cloud Object Storage](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-about-cloud-object-storage).
 
-You can integrate IBM Cloud Object Storage with some of the following services that are deployed through the DA:
+You can integrate IBM Cloud Object Storage with some of the following services that are deployed through the deployable architecture:
 - IBM Cloud Logs
 - IBM Event Notifications
 
@@ -27,6 +27,8 @@ These services send critical data to the buckets configured for each service.
 In the DA deployment, you can find two COS instances:
 - **rag-base-event-notifications-cos**
 - **rag-observability-cos**
+
+> **Note:** These instances are visible under Storage in the resource list at https://cloud.ibm.com/resources
 
 With these critical buckets:
 - **rag-cloud-logs-data-bucket-xxxx**: Stores logs that you collect from your infrastructure, services, and applications, as well as activity tracking data (audit data).
@@ -81,7 +83,7 @@ Follow these steps to access this predefined dashboard:
 
 Follow these steps to search IBM Cloud Object Storage activity tracking data:
 
-1. Navigate to **Menu icon > Observability > Logging > Instances > Cloud Logs**.
+1. In the IBM Cloud console, navigate to **Menu icon > Observability > Logging > Instances > Cloud Logs**.
 
     ![IBM Cloud UI](images/30-1-1.png ':size=600')
 

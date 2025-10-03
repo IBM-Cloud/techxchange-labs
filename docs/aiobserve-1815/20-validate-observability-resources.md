@@ -13,7 +13,7 @@ The RAG Pattern deployable architecture demonstrates a comprehensive observabili
 
 ## Step 1: Verify IAM Authorizations
 
-> **📋 Why This Matters:**  IAM authorizations are the foundation of your observability architecture. Without proper authorizations, your services cannot communicate with each other, breaking the data flow needed for effective monitoring.
+> **📋 Why This Matters:**  IAM authorizations are the foundation of your observability architecture. Without proper authorizations, your observability services cannot communicate with each other, breaking the data flow needed for effective monitoring.
 
 Complete the following steps:
 
@@ -61,7 +61,7 @@ Complete the following steps:
 
 First, check the Event Notifications configuration:
 
-1. In the IBM Cloud console, click the **Menu icon > Developer Tools** and locate the Event Notifications instance **rag-base-event-notifications**.
+1. In the IBM Cloud console, click the **Menu icon > Developer Tools** and locate the Event Notifications instance **rag-base-event-notifications**. Leave the logs tab open and navigate to the previous tab before proceeding.
 
     ![](images/20-5.png ':size=600')
 
@@ -69,7 +69,7 @@ First, check the Event Notifications configuration:
 
     ![](images/20-6.png ':size=600')
 
-3. Verify a source exists with the name **IBM Cloud Logs - <CLOUD_LOGS_INSTANCE_ID>**.
+3. Verify a source exists with the name **IBM Cloud Logs - <Id>**.
 
 Now create a test topic and subscription:
 
@@ -89,7 +89,7 @@ Now create a test topic and subscription:
 
     ![](images/20-9.png ':size=600')
 
-9. Create a Subscription by entering a unique name like **Test-integration-student-N**.
+9. Select **Subscriptions** in the left menu, click **Create**, and create a subscription by entering a unique name like **Test-integration-student-N**.
 
 10. Select your topic and choose the email destination.
 
@@ -152,7 +152,7 @@ Complete the following steps:
 
 1. In the IBM Cloud console, click the **Menu icon > Observability**.
 
-2. Select **Activity Tracker > Routing**.
+2. Select **Activity Tracker**.
 
     ![](images/20-16.png ':size=600')
 

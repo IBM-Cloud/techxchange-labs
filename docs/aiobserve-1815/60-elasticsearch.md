@@ -71,6 +71,8 @@ Follow these steps to search for Elasticsearch activity:
    serviceName:"databases\-for\-elasticsearch" AND coralogix.metadata.severity:("Error" OR "Critical")
    ```
 
+    **Note:** If you don't see results, try `serviceName:"databases\-for\-elasticsearch" AND NOT coralogix.metadata.severity:("Error" OR "Critical")` instead to verify your query is working correctly for other logs that are not error or critical. You might also need to change the timestamp, for example, use the last 24 hours.
+
     ![](images/60-3.png ':size=600')
 
 5. Use **Show graph for key** to visualize the actions reporting errors:

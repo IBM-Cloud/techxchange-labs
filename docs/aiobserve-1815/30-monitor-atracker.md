@@ -15,7 +15,7 @@ IBM Cloud Activity Tracker Event Routing is a critical component that defines ho
 - **Compliance requirements**: Meeting regulatory standards that require audit trails
 - **Operational insights**: Understanding system usage patterns and potential issues
 
-> **📋 Why This Matters:** Activity Tracker Event Routing is a core service in IBM Cloud that collects audit events and routes them to destinations. Audit events are required for security and compliance. Failed event routing means lost audit data, which can create security blind spots and compliance gaps.
+> **📋 Why This Matters:** Activity Tracker Event Routing is a core service in IBM Cloud that collects audit events and routes them to destinations. Audit events are required for security and compliance. Failure to collect and route auditing events can create security blind spots and compliance gaps.
 
 ## Monitoring IBM Cloud Activity Tracking Event Routing through IBM Cloud Monitoring
 
@@ -76,7 +76,7 @@ In the DA deployment, you have 2 targets configured:
 - 1 target sends data to the IBM Cloud Logs instance: `rag-cloud-logs-target`
 - 1 target sends data to the COS bucket: `rag-cos-target`
 
-Take time to explore the **IBM Activity Tracker Event Routing Overview** predefined dashboard and familiarize yourself with the metrics patterns, then create an alert for when events fail to be sent to destinations.
+Take time to explore the **IBM Activity Tracker Event Routing Overview** predefined dashboard and familiarize yourself with the metrics patterns and continue to the next step to create an alert for when events fail to be sent to destinations.
 
 The key metrics to monitor include:
 - **Successful events**: Events successfully delivered to target destinations
@@ -105,9 +105,17 @@ First, you'll need to set up a notification channel so you can receive alerts wh
 
 1. In the monitoring dashboard, go to **Settings**.
 
+    ![Monitoring settings navigation](images/30-19-1.png ':size=600')
+
+2. Select **Notification Channels**.
+
+    ![Monitoring settings navigation](images/30-19-2.png ':size=600')
+
+3. Choose the email notification channel.
+
     ![Monitoring settings navigation](images/30-19.png ':size=600')
 
-2. Configure your email notification channel by adding your email address and testing the connection.
+4. Configure an email notification channel by adding the email address associated with your lab user ID **observe-XX@example.com**.
 
 > **💡 TIP:** In production environments, use team distribution lists rather than personal emails to ensure alerts reach someone even during vacations or staff changes.
 
@@ -117,7 +125,7 @@ First, you'll need to set up a notification channel so you can receive alerts wh
 
     ![Failed/Discarded events widget with create alert option](images/30-15.png ':size=600')
 
-4. Configure the triggering condition using this PromQL query:
+4. Configure the alert by choosing the triggering condition with the following PromQL query:
 
     `topk(50,sum(sum_over_time(ibm_atracker_failed_events_by_target{}[10s])) by (ibm_atracker_target_type, ibm_atracker_reason_code)) / 10`
 
@@ -125,13 +133,31 @@ First, you'll need to set up a notification channel so you can receive alerts wh
 
     ![Alert condition configuration](images/30-16.png ':size=600')
 
-5. Click **Create alert** to open the alert configuration wizard.
+5. Change the name of the alert.
+
+    ![Alert condition configuration](images/30-16-1.png ':size=600')
+
+    Enter **[Observe-XX] Failed events**
+
+    ![Alert condition configuration](images/30-16-2.png ':size=600')
+
+6. Click **Create alert** to open the alert configuration wizard.
 
     ![Alert creation wizard](images/30-17.png ':size=600')
 
-6. Review the alert configuration, ensure your notification channel is selected, and click **Save**.
+7. Review the alert configuration, ensure your notification channel is selected, and click **Save**.
 
     ![Final alert configuration review](images/30-18.png ':size=600')
+
+To check the alert has been created, go to the **Alerts** section and select **Alerts**:
+
+![Final alert configuration review](images/30-18-1.png ':size=600')
+
+Then look for the alert you just created.
+
+![Final alert configuration review](images/30-18-2.png ':size=600')
+
+
 
 > **💡 TIP:** Consider creating different severity alerts for different thresholds. For example, a warning alert for any failures and a critical alert when failures exceed a certain percentage of total events.
 

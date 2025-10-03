@@ -46,60 +46,154 @@ You can monitor project deployment activity through events such as:
 For more information, see [Activity tracking events for a project](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-at_events).
 
 
+## Cloud Logs TCO Optimizer
+
+> **📋 In Cloud Logs, you have different data pipelines that you can configure through policies to monitor the data after ingestion. You must have an IBM Cloud Object Storage data bucket configured before creating TCO policies. For more information, see:
+- [TCO Optimizer](https://cloud.ibm.com/docs/cloud-logs?topic=cloud-logs-tco-data-pipelines)
+- [Configuring the TCO Optimizer](https://cloud.ibm.com/docs/cloud-logs?topic=cloud-logs-tco-optimizer).
+
+The three TCO pipelines that you can configure are:
+
+- **Priority insights**:
+
+    Logs that require immediate access and full IBM Cloud Logs analysis capabilities. These logs are typically high-severity or business-critical logs that need to be analyzed or queried individually.
+
+    Data that you send through the Priority Insights data pipeline is stored in the backend and in the COS data bucket.
+
+    Data retention for fast searches is set at the Cloud Logs instance level. You can choose from 7 days, 14 days, 30 days,60 days, or 90 days.
+
+    Data retention in the COS data bucket attached to the Cloud Logs instance is set by you. You manage the bucket and you can keep the data for as long as you need.
+
+    > **📋 Queries that you use to search data in Priority Insights (fast search), you can reuse them to query older data that meet that criteria and is stored in the COS data bucket as long as you keep data for the timestamp of your search.
+
+- **Analyze and Alert**:
+
+    Logs that require processing and can be queried later if needed from an archive. These logs are typically logs used for monitoring and statistical analysis.
+
+    Data that you send through the Analyze and Alert data pipeline is stored in the COS data bucket only. You can use this data in searches, dashboards and to trigger alerts.
+
+    Data retention in the COS data bucket attached to the Cloud Logs instance is set by you. You manage the bucket and you can keep the data for as long as you need.
+
+- **Store and Search**:
+
+    Logs that need to be kept for compliance or post-processing reasons but can be maintained and queried from an archive.
+
+    Data that you send through the Store and Search data pipeline is stored in the COS data bucket only. You can use this data in searches only.
+
+    Data retention in the COS data bucket attached to the Cloud Logs instance is set by you. You manage the bucket and you can keep the data for as long as you need.
+
+> **💡 TIP:** Configure the TCO data pipelines based on the importance of the data to your business. The TCO Optimizer can help you improve real-time analysis and alerting, and can also help you manage costs.
+
+
+## Searching data that is stored in the COS data bucket
+
+In this section of the lab, you will search data that is stored in the COS bucket that is attached to the Cloud Logs instance.
+
+Complete these steps to monitor data in the COS bucket:
+
+1. Navigate to **Menu icon > Observability > Logging > Instances**.
+
+    ![IBM Cloud UI](images/30-1-1.png ':size=600')
+
+2. For the **rag-cloud-logs** instance, click **Dashboard**, then **Explore Logs > Logs**.
+
+    ![IBM Cloud UI](images/30-1-2.png ':size=600')
+
+3. Select **All logs** to search data stored in the bucket.
+
+    ![IBM Cloud UI](images/30-1-2-1.png ':size=600')
+
+4. Change the timestamp to the period that you are analyzing.
+
+    ![IBM Cloud UI](images/30-1-2-2.png ':size=600')
+
+
 ## Step 1: Monitoring Infrastructure Project Deployments Using Query Searches
 
 > **📋 Why This Matters:**  Search and filter techniques help you track deployment activities and troubleshoot issues. Understanding project lifecycle events is crucial for maintaining governance and identifying deployment problems.
 
 Follow these steps to review project deployment events:
 
-1. Navigate to **Menu icon > Observability > Logging > Instances > Cloud Logs**.
+1. Navigate to **Menu icon > Observability > Logging > Instances**.
 
 2. For the **rag-cloud-logs** instance, click **Dashboard**, then **Explore Logs > Logs**.
 
-3. Apply these filters to view only project deployment events:
-   - For **Application**, select **ibm-audit-event**
-   - For **Subsystems**, select **project:**
+3. Change the Cloud to **Custom** and select the values with the information on the following image:
+
+    ![IBM Cloud UI](images/30-1-2-3.png ':size=600')
+
+4. Apply these filters to view only project deployment events:
+    - For **Application**, select **ibm-audit-event**
+    - For **Subsystems**, select **project:**
 
     ![](images/40-7.png ':size=600')
 
-4. Try these specific queries to monitor different deployment activities:
+5. Try these specific queries to monitor different deployment activities:
 
-   **To identify configuration validation requests:**
-   ```
-   action:"project.config.validate"
-   ```
+    > **To identify configuration validation requests:**
+
+    Set the custom timestamp to:
+
+    ![](images/40-8-1.png ':size=600')
+
+    ![](images/40-8-2.png ':size=600')
+
+    Enter the Lucene query:
+
+    ```
+    action:"project.config.validate"
+    ```
 
     ![](images/40-8.png ':size=600')
 
-   **To identify approval requests and who approved them:**
-   ```
-   action:"project.config.approve"
-   ```
+    > **To identify approval requests and who approved them:**
+
+    ```
+    action:"project.config.approve"
+    ```
 
     ![](images/40-11.png ':size=600')
 
-   **To identify deployment requests and who initiated them:**
-   ```
-   action:"project.config.deploy"
-   ```
+    > **To identify deployment requests and who initiated them:**
+
+    ```
+    action:"project.config.deploy"
+    ```
 
     ![](images/40-9.png ':size=600')
 
-   **To identify configuration update requests:**
-   ```
-   action:"project.config.update"
-   ```
+    > **To identify configuration update requests:**
+
+    Set the timestamp to:
+
+    ![](images/40-2-1.png ':size=600')
+
+    Enter the Lucene query:
+
+    ```
+    action:"project.config.update"
+    ```
 
     ![](images/40-2.png ':size=600')
 
-   **To identify configuration update errors:**
-   ```
-   action:"project.config.update" AND message:"-failure"
-   ```
+    > **To identify configuration update errors:**
+
+    Set the timestamp to:
+
+    ![](images/40-3-1.png ':size=600')
+
+    Enter the Lucene query:
+
+    ```
+    action:"project.config.update" AND message:"-failure"
+    ```
 
     ![](images/40-3.png ':size=600')
 
+
+
 > **💡 TIP:** Save these queries as views for quick access. During deployment windows, have these views open to monitor progress in real time.
+
 
 ## Step 2: Monitoring Infrastructure Project Deployments Using Dashboards
 
@@ -140,6 +234,8 @@ To create your own deployment monitoring dashboard:
 6. To manage your dashboard, hover over it in the dashboards panel, click the three dots, and select the desired action (Favorite, Set As Default, Rename, Delete, Save As, Export, or Copy URL).
 
 > **💡 TIP:** Create focused dashboards for specific deployment types or environments. This makes it easier to monitor complex infrastructures without being overwhelmed by irrelevant data.
+
+
 
 ## Monitoring Trusted Profiles - Review Login Sessions
 

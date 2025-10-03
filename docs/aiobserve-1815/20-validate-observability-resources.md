@@ -34,7 +34,7 @@ Complete the following steps:
 
 Complete the following steps:
 
-1. Click the **Menu icon > Observability** to access the Observability dashboard.
+1. In the IBM Cloud console, click the **Menu icon > Observability** to access the Observability dashboard.
 
     ![](images/20-1.png ':size=600')
 
@@ -45,9 +45,12 @@ Complete the following steps:
     ![](images/20-2.png ':size=600')
 
 5. Select **Dashboard** to launch the instance's UI.
-6. Navigate to **Outbound integrations** and verify you have an integration to the Event Notifications instance.
+6. Navigate to **Outbound integrations**.
 
     ![](images/20-3.png ':size=600')
+
+7. Verify you have an integration to the Event Notifications instance.
+
     ![](images/20-4.png ':size=600')
 
 > **💡 TIP:** In a production environment, regularly validate that your storage buckets have sufficient capacity and appropriate lifecycle policies to manage log growth.
@@ -58,7 +61,7 @@ Complete the following steps:
 
 First, check the Event Notifications configuration:
 
-1. Click the **Menu icon > Developer Tools** and locate the Event Notifications instance **rag-base-event-notifications**.
+1. In the IBM Cloud console, click the **Menu icon > Developer Tools** and locate the Event Notifications instance **rag-base-event-notifications**.
 
     ![](images/20-5.png ':size=600')
 
@@ -110,7 +113,11 @@ Now test the integration:
 
 14. Return to IBM Cloud Logs UI and edit the outbound integration.
 
+    ![](images/20-13-1.png ':size=600')
+
 15. Click **Test** and verify that you receive the test event email.
+
+    ![](images/20-13-1.png ':size=600')
 
 > **💡 TIP:** When setting up notification channels in your own environment, consider using group distribution lists rather than individual emails to ensure alerts reach your team even when specific individuals are unavailable.
 
@@ -120,13 +127,13 @@ Now test the integration:
 
 Complete the following steps:
 
-1. Click the **Menu icon > Observability**.
+1. In the IBM Cloud console, click the **Menu icon > Observability**.
+
+2. Select **Monitoring > Instances**.
 
     ![](images/20-14.png ':size=600')
 
-2. Click **Monitoring > Instances**.
-
-3. Locate the instance **rag-cloud-metrics** and select **Dashboard**.
+3. Locate the instance **rag-cloud-monitoring** and select **Dashboard**.
 
 4. Navigate to **Dashboards > IBM**.
 
@@ -143,7 +150,7 @@ Complete the following steps:
 
 Complete the following steps:
 
-1. Click the **Menu icon > Observability**.
+1. In the IBM Cloud console, click the **Menu icon > Observability**.
 
 2. Select **Activity Tracker > Routing**.
 
@@ -156,10 +163,12 @@ Complete the following steps:
     ![](images/20-17.png ':size=600')
 
 4. Check the **Routes** tab to confirm you have two routes configured:
+
+    ![](images/20-18.png ':size=600')
+
    - Route sending all activity tracking events to Cloud Logs
    - Route sending all activity tracking events to the COS target
 
-    ![](images/20-18.png ':size=600')
     ![](images/20-19.png ':size=600')
 
 > **💡 TIP:** Multiple targets provide redundancy for critical audit data. If one destination becomes unavailable, you still have a copy of your audit trail elsewhere.
@@ -170,7 +179,7 @@ Complete the following steps:
 
 Complete the following steps:
 
-1. Click the **Menu icon > Observability**.
+1. In the IBM Cloud console, click the **Menu icon > Observability**.
 
 2. Select **Monitoring > Routing**.
 

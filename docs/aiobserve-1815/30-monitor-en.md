@@ -96,29 +96,49 @@ Follow these steps to search Event Notifications logs and activity tracking data
 
 1. Navigate to **Menu icon > Observability > Logging > Instances > Cloud Logs**.
 
+    ![IBM Cloud UI](images/30-1-1.png ':size=600')
+
 2. For the **rag-cloud-logs** instance, click **Dashboard**, then **Explore Logs > Logs**.
 
-3. Apply these filters:
-   - For **Application**, select **ibm-audit-event** and **ibm-platform-logs**.
+    ![IBM Cloud UI](images/30-1-2.png ':size=600')
+
+3. To monitor activity tracking events, apply these filters:
+
+   - For **Application**, select **ibm-audit-event**.
    - For **Subsystems**, select entries that include **event-notifications:<InstanceID>**
 
-You can run more refined queries to filter data based on custom search criteria. For example, you can create custom views to track notification failures and delivery latencies.
+   ![IBM Cloud Logs UI](images/30-1-5.png ':size=600')
 
-In addition, Event Notifications generates platform logs that you can use to investigate abnormal activity and troubleshoot problems when sending notifications to your destinations.
+4. To monitor platform logs that you can use to investigate abnormal activity and troubleshoot problems when sending notifications to your destinations, apply these filters:
+
+   - For **Application**, select **ibm-platform-logs**.
+   - For **Subsystems**, select entries that include **event-notifications:<InstanceID>**
+
+   ![IBM Cloud Logs UI](images/30-1-6.png ':size=600')
+
+> **💡 TIP:** You can create custom views to monitor CRUD operations and configuration changes by monitoring activity tracking events. You can create custom views to monitor and track notification failures and delivery latencies by monitoring platform logs.
 
 Follow these steps to view some sample dashboards that can help you monitor the Event Notifications service for your DA:
 
 1. Navigate to **Menu icon > Observability > Logging > Instances**.
 
+2. For the **rag-cloud-logs** instance, click **Dashboard**.
+
+    ![IBM Cloud UI](images/30-1-1.png ':size=600')
+
+3. Select **IBM Cloud Logs menu icon > Dashboards > Custom Dashboards**.
+
     ![](images/30-121.png ':size=600')
 
-2. For the **rag-cloud-logs** instance, click **Dashboard**, then **Custom Dashboards**.
-
-3. Explore the following dashboards:
+4. Explore the following dashboards:
 
     - **Event Notifications IBM Cloud Management Overview** dashboard to understand resource management patterns
+
+        ![](images/30-123.png ':size=600')
+
     - **Event Notifications - Send notifications** dashboard to understand delivery patterns
 
+        ![](images/30-122.png ':size=600')
 
 
 ⇨ [Continue to Monitoring the DA project deployments](40-monitor-da-deployments.md)

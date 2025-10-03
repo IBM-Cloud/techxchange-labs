@@ -15,7 +15,7 @@
 
 2. Click on the **Create** button.
 
-* Select the **Geography** (`Europe`) and the **Region** ()`Frankfurt(eu-de)`)
+* Select the **Geography** (`Europe`) and the **Region** (`Frankfurt(eu-de)`)
 * Provide the **Name** for the vpc (`txc-gpulab-1827-vpc`)
 * Select the **Resource Group** (`gpulab-1827-lab`)
 * Select to **Allow SSH**

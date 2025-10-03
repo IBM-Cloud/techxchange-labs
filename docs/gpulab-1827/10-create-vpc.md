@@ -3,7 +3,7 @@
 
 ### 1. Create a VPC 
 
-> [!NOTE]
+> [!NOTE]. 
 > A VPC **txc-gpulab-1827-vpc** was already created for this lab.  
 > Skip this step and just select this existing VPC `txc-gpulab-1827-vpc` in the subsequent steps.  
 

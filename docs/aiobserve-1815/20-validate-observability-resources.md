@@ -69,7 +69,7 @@ First, check the Event Notifications configuration:
 
     ![](images/20-6.png ':size=600')
 
-3. Verify a source exists with the name **IBM Cloud Logs - <Id>**.
+3. Verify a source exists with the name **IBM Cloud Logs - Cloud Logs Id**.
 
 Now create a test topic and subscription:
 

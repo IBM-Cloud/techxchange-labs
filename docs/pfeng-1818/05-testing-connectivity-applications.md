@@ -196,8 +196,14 @@ The final step is to access the application from the public internet through the
 
     ```bash
     export LB_HOSTNAME=$(terraform output -raw public_load_balancer_hostname)
-    curl http://$LB_HOSTNAME
+    echo http://$LB_HOSTNAME
     ```
+
+    You can now access the application by navigating to `http://$LB_HOSTNAME` in any web browser or by running:
+
+    ```bash
+    curl http://$LB_HOSTNAME
+    ```   
 
 2. **Check the Result**:
     You should see the content of the `dummy_page.html` file:

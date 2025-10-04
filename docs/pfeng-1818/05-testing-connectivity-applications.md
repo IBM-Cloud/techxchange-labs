@@ -6,7 +6,9 @@ After deploying your infrastructure, the next critical step is to test it. This 
 
 First, let's retrieve the key information about your newly created infrastructure from the Terraform outputs. You will need these values for the following steps.
 
-1.  **Open a terminal** in the same directory where your `main.tf` file is located. We'll refer to this as **Terminal 1 (Local)**.
+1.  **Open a new terminal**. We'll refer to this as **Terminal 1 (Local)**.
+
+> In your development environment, you can open a terminal by clicking on the hamburger menu in the top left corner and selecting **Terminal > New Terminal**.
 
 2.  **Get the Jumpbox Public IP**:
 

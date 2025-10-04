@@ -62,7 +62,7 @@ From the jumpbox, you should be able to connect to the workload servers in the p
 1. **Copy the Private Key to the Jumpbox**:
     To connect from the jumpbox to the workload server, the jumpbox needs the private SSH key. Because you are connecting *through* the jumpbox, it acts as an intermediary and needs the key to authenticate to the workload server on your behalf. You will copy this key from your local machine to the jumpbox.
 
-    First, open a **new, second terminal window** on your local machine. We'll call this **Terminal 2 (Local)**. Navigate to the project directory. In this new terminal, you need to re-export the variables for the jumpbox IP and the private key.
+    First, open a **new, additional terminal window**. We'll call this **Terminal 2 (Local)**. Navigate to the project directory. In this new terminal, you need to re-export the variables for the jumpbox IP and the private key.
 
     Run these commands from **Terminal 2 (Local)**.
     

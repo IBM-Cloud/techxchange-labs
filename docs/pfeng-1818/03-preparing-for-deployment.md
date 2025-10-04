@@ -18,6 +18,8 @@ Terraform requires an API key to authenticate with IBM Cloud.
 
     Open your terminal and run the following command, replacing `<YOUR-IBMCLOUD-API-KEY>` with the key you just created:
 
+    > In your development environment, you can open a terminal by clicking on the hamburger menu in the top left corner and selecting **Terminal > New Terminal**.
+
     ```bash
     export TF_VAR_ibmcloud_api_key="<YOUR-IBMCLOUD-API-KEY>"
     ```

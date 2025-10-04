@@ -1,4 +1,6 @@
-# 🌍 Consuming the DA: Multi-Environment Deployment
+# 🌍 (Optional) Consuming the DA: Multi-Environment Deployment
+
+This part of the lab is **optional** and demonstrates how a developer would consume the Deployable Architecture you just created.
 
 Now, you will switch roles from a platform engineer to a developer. Your goal is to use the Deployable Architecture (DA) that you previously published to deploy a new, complete environment from the IBM Cloud catalog.
 

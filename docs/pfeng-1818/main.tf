@@ -192,6 +192,7 @@ resource "local_file" "ssh_private_key" {
   file_permission = "0600" # Read-only for owner
 }
 
+# Registers the public key in IBM Cloud to make it available for the VSIs.
 resource "ibm_is_ssh_key" "ssh_key" {
   name       = "${var.prefix}-ssh-key"
   public_key = tls_private_key.ssh_key.public_key_openssh

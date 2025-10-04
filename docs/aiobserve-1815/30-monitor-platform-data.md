@@ -13,7 +13,7 @@ In IBM Cloud, you'll find these key Observability services:
 
 ## Observability Architecture Overview
 
-The RAG Pattern deployable architecture demonstrates a comprehensive observability stack that showcases enterprise-level monitoring architecture. By examining this deployment, you'll understand how to design and validate observability solutions for any complex infrastructure.
+The RAG Pattern deployable architecture demonstrates a comprehensive observability stack that showcases enterprise-level monitoring architecture. By examining this deployment, you'll understand how to design and validate observability solutions for any complex infrastructure. The RAG resources mentioned throughout this lab (with names starting with "rag-") were deployed as part of this architecture and will be explored in the following sections.
 
 As part of the deployment, the **Essential Security - Logging Monitoring Activity Tracker** component is deployed. This component creates a fully integrated observability stack with the following elements:
 

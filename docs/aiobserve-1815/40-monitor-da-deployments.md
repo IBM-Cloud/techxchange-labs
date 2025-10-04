@@ -48,23 +48,23 @@ For more information, see [Activity tracking events for a project](https://cloud
 
 ## Cloud Logs TCO Optimizer
 
-> **📋 In Cloud Logs, you have different data pipelines that you can configure through policies to monitor the data after ingestion. You must have an IBM Cloud Object Storage data bucket configured before creating TCO policies. For more information, see:
+> **Note:** TCO stands for Total Cost of Ownership, which helps optimize your logging costs while maintaining access to the data you need.
+
+**📋 In Cloud Logs, you have different data pipelines that you can configure through policies to monitor the data after ingestion. You must have an IBM Cloud Object Storage data bucket configured before creating TCO policies. For more information, see:**
 - [TCO Optimizer](https://cloud.ibm.com/docs/cloud-logs?topic=cloud-logs-tco-data-pipelines)
 - [Configuring the TCO Optimizer](https://cloud.ibm.com/docs/cloud-logs?topic=cloud-logs-tco-optimizer).
 
-The three TCO pipelines that you can configure are:
+**The three TCO pipelines that you can configure are:**
 
-- **Priority insights**:
-
-    Logs that require immediate access and full IBM Cloud Logs analysis capabilities. These logs are typically high-severity or business-critical logs that need to be analyzed or queried individually.
+- **Priority insights**: Logs that require immediate access and full IBM Cloud Logs analysis capabilities. These logs are typically high-severity or business-critical logs that need to be analyzed or queried individually.
 
     Data that you send through the Priority Insights data pipeline is stored in the backend and in the COS data bucket.
 
-    Data retention for fast searches is set at the Cloud Logs instance level. You can choose from 7 days, 14 days, 30 days,60 days, or 90 days.
+    Data retention for fast searches is set at the Cloud Logs instance level. You can choose from 7 days, 14 days, 30 days, 60 days, or 90 days.
 
     Data retention in the COS data bucket attached to the Cloud Logs instance is set by you. You manage the bucket and you can keep the data for as long as you need.
 
-    > **📋 Queries that you use to search data in Priority Insights (fast search), you can reuse them to query older data that meet that criteria and is stored in the COS data bucket as long as you keep data for the timestamp of your search.
+    > **Note:** Queries that you use to search data in Priority Insights (fast search), you can reuse them to query older data that meet that criteria and is stored in the COS data bucket as long as you keep data for the timestamp of your search.
 
 - **Analyze and Alert**:
 
@@ -249,7 +249,7 @@ In this deployment, you'll find these trusted profiles:
 
 Follow these steps to review login sessions:
 
-1. Navigate to **Menu icon > Observability > Logging > Instances > Cloud Logs**.
+1. Navigate to **Menu icon > Observability > Logging > Instances > rag-cloud-logs**.
 
     ![](images/30-1.png ':size=600')
 

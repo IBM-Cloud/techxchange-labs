@@ -22,7 +22,7 @@ Now, you will add your Terraform bundle to the private catalog.
 
 > **Note:** In a real-world scenario, the `.tar.gz` file is typically generated from a release in a source code repository like GitHub or GitLab. For this lab, a public URL to the bundle is provided to simplify the process.
 
-**Public URL:** https://github.com/IBM/deployable-architecture-iac-lab-materials/archive/refs/tags/v1.0.1.tar.gz
+**Public URL:** https://github.com/IBM/deployable-architecture-iac-lab-materials/archive/refs/tags/v1.0.3.tar.gz
 
 1.  From your private catalog's page, click **Add product**.
 2.  Configure the product details:

@@ -192,7 +192,7 @@ Now for the final test. You will deploy a sample Python application on the workl
 The final step is to access the application from the public internet through the load balancer.
 
 1. **Access the Application**:
-    Open a web browser or use `curl` from **Terminal 1 (Local)**. First, ensure the load balancer's hostname is set in your current terminal session.
+    Open a web browser or use `curl` from **Terminal 2 (Local)**. First, ensure the load balancer's hostname is set in your current terminal session.
 
     ```bash
     export LB_HOSTNAME=$(terraform output -raw public_load_balancer_hostname)

@@ -22,7 +22,7 @@ Now, you will add your Terraform bundle to the private catalog.
 
 > **Note:** In a real-world scenario, the `.tar.gz` file is typically generated from a release in a source code repository like GitHub or GitLab. For this lab, a public URL to the bundle is provided to simplify the process.
 
-**Public URL:** https://github.com/IBM/deployable-architecture-iac-lab-materials/archive/refs/tags/v1.0.0.tar.gz 
+**Public URL:** https://github.com/IBM/deployable-architecture-iac-lab-materials/archive/refs/tags/v1.0.1.tar.gz
 
 1.  From your private catalog's page, click **Add product**.
 2.  Configure the product details:
@@ -68,24 +68,16 @@ To mark the version as pre-release:
 
 Your Deployable Architecture is now ready for use in projects.
 
+## Step 5: Verify Your Deployable Architecture in the Catalog
 
-## 🔄 (Optional) Share the Deployable Architecture (DA) Across Other Private Catalogs or IBM Cloud Accounts
+Now that you've published your Deployable Architecture, you can verify it's available in the catalog:
 
-You can share your product version with:
-- Other private catalogs within the same IBM Cloud account.
-- Other IBM Cloud accounts you own or collaborate with.
+1. Navigate to the **Catalog** in the IBM Cloud console.
+2. On the left-hand side, under **Filter by**, select the name of the private catalog you created earlier (e.g., `My Deployable Architectures`).
+3. You should see your Deployable Architecture listed. This confirms it's ready for consumption.
 
-To share the product
-1. On the **Product Overview** page, click the **lock icon** at the top and select **"View product visibility"**.
-![da-publish-lock.png](images/da-publish-lock.png)
-2. You’ll now see two sharing options:
-   - **Share with other catalogs in the same account** (if you have access to them). Select the checkbox.
-   - **Share with other IBM Cloud accounts.**
-3. To share with other accounts:
-   - Click **"Share with other accounts"**, then **"Add accounts"**.
-   - You can enter account IDs manually or select **"Add your accounts"** to pick from accounts you have access to.
-   - Depending on the visibility settings of the target account, an invitation may need to be accepted before the product appears there.
+This verification step ensures your work is properly published and discoverable by potential consumers of your architecture.
 
 ---
 
-[Next: Consuming the DA in a Project](./07-consuming-da-multi-environment.md)
+[Next: (Optional) Consuming the DA: Multi-Environment Deployment](./07-consuming-da-multi-environment.md)

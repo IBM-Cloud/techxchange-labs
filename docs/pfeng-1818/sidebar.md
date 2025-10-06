@@ -10,7 +10,6 @@
 
 **Part III: Enterprise Distribution**
 - [📦 Packaging as a Deployable Architecture](./06-packaging-as-deployable-architecture.md)
-- [🌍 (Optional) Consuming the DA: Multi-Environment Deployment](./07-consuming-da-multi-environment.md)
 - [✅ Final Review and Conclusion](./08-final-review-cleanup.md)
 
 **Quick Links**

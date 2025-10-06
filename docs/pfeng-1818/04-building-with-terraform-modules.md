@@ -250,7 +250,13 @@ Once the apply starts, you can go to the VPC console to see your newly created r
 
 > **Note:** Ensure the region is set to **us-south** on that page.
 
-You should start to see the new resources appearing (VPCs). You can refresh the page periodically. Once they appear, you can click on the VPCs to explore their details and see how they match the configuration you specified in your Terraform code.
+You should start to see the new resources appearing (VPCs). You can refresh the page periodically. Once they appear, you can click on the management or workload VPC to explore their details.
+
+> **Important**: For each of the links below, copy the URL and paste it into the private browser window where you are logged into your target IBM Cloud account. Ensure the region is set to **us-south** on each page.
+
+You can also explore these resources:
+-   **Security Groups**: [https://cloud.ibm.com/infrastructure/network/securityGroups](https://cloud.ibm.com/infrastructure/network/securityGroups)
+-   **VPC Network Topology**: [https://cloud.ibm.com/infrastructure/vpcLayout](https://cloud.ibm.com/infrastructure/vpcLayout)
    
 ---
 
@@ -302,7 +308,7 @@ Add the following code to `main.tf`:
 ```hcl
 module "jumpbox_server" {
   source                = "terraform-ibm-modules/landing-zone-vsi/ibm"
-  version               = "v5.4.18"
+  version               = "v5.5.0"
   create_security_group = true
   image_id              = "r006-ca75f893-8675-47b0-b35d-9f847abc95e3" # Debian 12 minimal
   enable_floating_ip    = true
@@ -377,7 +383,7 @@ Add the following code to `main.tf`:
 ```hcl
 module "workload_servers" {
   source                = "terraform-ibm-modules/landing-zone-vsi/ibm"
-  version               = "v5.4.18"
+  version               = "v5.5.0"
   create_security_group = true
   image_id              = "r006-ca75f893-8675-47b0-b35d-9f847abc95e3" # Debian 12 minimal
   security_group = {
@@ -534,7 +540,7 @@ resource "ibm_is_lb_pool_member" "private_lb_target" {
   lb             = ibm_is_lb.public_load_balancer.id
   pool           = element(split("/", ibm_is_lb_pool.public_lb_pool.id), 1)
   port           = 80
-  target_address = "10.10.4.6" # Private load balancer IP in workload VPC zone 2
+  target_address = module.workload_servers.load_balancers_metadata["${var.prefix}-workload-${var.prefix}-private-lb-lb"].private_ips[0] # Private load balancer IP
 }
 
 resource "ibm_is_lb_listener" "public_lb_listener" {

@@ -11,7 +11,7 @@ Terraform requires an API key to authenticate with IBM Cloud.
     *   Navigate to **Manage > Access (IAM) > API keys**.
     *   Click **Create an IBM Cloud API key**.
     *   Give your key a descriptive name (e.g., `terraform-lab-key`) and click **Create**.
-    *   **Important**: A window will pop up with your API key. Copy it immediately and save it. You will not be able to see it again.
+    *   **Important**: A window will pop up with your API key. Keep this window open for the next step to be able to copy the api key, and also download the key for later use in the lab. You will not be able to see it again. Note that downloading API keys is not recommended for production environments, but is acceptable for this lab.
 
 2.  **Set the API Key as an Environment Variable**:
     Terraform can read credentials from environment variables. This is a secure way to provide credentials without hardcoding them in your configuration files.

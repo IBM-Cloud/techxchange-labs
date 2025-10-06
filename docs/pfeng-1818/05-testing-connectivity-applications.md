@@ -2,6 +2,8 @@
 
 After deploying your infrastructure, the next critical step is to test it. This ensures that all components are working together as expected, from network connectivity to application deployment.
 
+> **Tip**: Open the architecture diagram in a separate tab to keep a view of how we're progressing through the test environment: [Hub and Spoke VPC Diagram](images/architecture.png)
+
 ## Step 1: Get Your Infrastructure Outputs
 
 First, let's retrieve the key information about your newly created infrastructure from the Terraform outputs. You will need these values for the following steps.
@@ -60,9 +62,9 @@ When prompted to continue connecting, type `yes`. If the connection is successfu
 From the jumpbox, you should be able to connect to the workload servers in the private VPC. This test validates that the **Transit Gateway** is correctly routing traffic between the two VPCs. It also implicitly verifies that the **Network ACLs** and **Security Groups** on both the jumpbox and the workload server are configured to allow SSH traffic.
 
 1. **Copy the Private Key to the Jumpbox**:
-    To connect from the jumpbox to the workload server, the jumpbox needs the private SSH key. Because you are connecting *through* the jumpbox, it acts as an intermediary and needs the key to authenticate to the workload server on your behalf. You will copy this key from your local machine to the jumpbox.
+    To connect from the jumpbox to the workload server, you need to copy the SSH key to the jumpbox.
 
-    First, open a **new, additional terminal window**. We'll call this **Terminal 2 (Local)**. Navigate to the project directory. In this new terminal, you need to re-export the variables for the jumpbox IP and the private key.
+    First, open a **new, additional terminal window**. We'll call this **Terminal 2 (Local)**. In this new terminal, you need to re-export the variables for the jumpbox IP and the private key.
 
     Run these commands from **Terminal 2 (Local)**.
     
@@ -108,8 +110,8 @@ Now for the final test. You will deploy a sample Python application on the workl
 
 `Internet -> Public LB -> Private LB -> Workload Server -> VPE -> COS`
 
-1. **Download some additional files in your Development workspace (local terminal)**:
-    1. Download the sample Python application file 
+1. **Download some additional files in Terminal 2 (Local)**:
+    1. Download the sample Python application file
        ```bash
        wget https://raw.githubusercontent.com/IBM/deployable-architecture-iac-lab-materials/refs/heads/main/test_app.py
        ```
@@ -144,7 +146,7 @@ Now for the final test. You will deploy a sample Python application on the workl
     ```bash
     ibmcloud login --sso
     ```
-    > **Note**: If you have access multiple IBM cloud accounts, make sure to select the account where your resources are deployed. 
+    > **Note**: Follow the link provided in the `ibmcloud login --sso` command output to complete the login process. Make sure you open the provided URL in your Target Deployment Account (private/icognito window). When prompted, select the **us-south** region.
     
     Next, you need to configure the Cloud Object Storage CLI plugin with the CRN (Cloud Resource Name) of the service instance created by Terraform.
 
@@ -185,7 +187,11 @@ Now for the final test. You will deploy a sample Python application on the workl
     nohup python3 test_app.py > app.log 2>&1 &
     ```
     
-    The application will start and listen on port 8080. You can check its status with `tail -f app.log`.
+    The application will start and listen on port 8080. You can check its status with `tail app.log`. You should see output similar to:
+    
+    ```
+    10.10.8.6 - - [06/Oct/2025 18:39:50] "GET / HTTP/1.0" 200 -
+    ```
 
 ## Step 5: Verify Public Access
 

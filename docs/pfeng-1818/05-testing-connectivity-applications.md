@@ -2,7 +2,7 @@
 
 After deploying your infrastructure, the next critical step is to test it. This ensures that all components are working together as expected, from network connectivity to application deployment.
 
-> **Tip**: Open the architecture diagram in a separate tab to keep a view of how we're progressing through the test environment: [Hub and Spoke VPC Diagram](images/architecture.png)
+> **Tip**: Open the architecture diagram in a separate tab to keep a view of how we're progressing through the test environment: [Hub and Spoke VPC Diagram](https://ibm-cloud.github.io/techxchange-labs/pfeng-1818/images/architecture.png)
 
 ## Step 1: Get Your Infrastructure Outputs
 

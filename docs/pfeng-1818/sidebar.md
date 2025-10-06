@@ -10,12 +10,11 @@
 
 **Part III: Enterprise Distribution**
 - [📦 Packaging as a Deployable Architecture](./06-packaging-as-deployable-architecture.md)
-- [🌍 Consuming the DA in a Project](./07-consuming-da-multi-environment.md)
-- [✅ Final Review and Cleanup](./08-final-review-cleanup.md)
-- [🏁 Conclusion and Next Steps](./09-conclusion.md)
+- [🌍 (Optional) Consuming the DA: Multi-Environment Deployment](./07-consuming-da-multi-environment.md)
+- [✅ Final Review and Conclusion](./08-final-review-cleanup.md)
 
 **Quick Links**
-- [Lab Sign In](https://ibm.biz/txc-lab-env)
+- [Lab Sign In](https://ibm.biz/txc25_1818_creds)
 - [IBM Cloud Console](https://cloud.ibm.com)
 - [IBM Cloud VPC Documentation](https://cloud.ibm.com/docs/vpc)
 - [Terraform IBM Provider Docs](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs)

@@ -725,7 +725,7 @@ Your Terraform files are now complete with all compute, load balancing, and stor
 -   **VPC Network Topology**: [https://cloud.ibm.com/infrastructure/vpcLayout](https://cloud.ibm.com/infrastructure/vpcLayout)
 -   **Virtual Private Endpoints**: [https://cloud.ibm.com/infrastructure/network/endpointGateways](https://cloud.ibm.com/infrastructure/network/endpointGateways)
 
-> **Note:** It is actually possible to start Part II before the `terraform apply` fully completes (after around 5 minutes). The remaining time is taken to complete the Load Balancer creation, which is not needed until Step 4 in Part II.
+> **Note:** It is actually possible to start the next section (Testing End-to-End Connectivity) before the `terraform apply` fully completes (after around 5 minutes). The remaining time is taken to complete the Load Balancer creation, which is not needed until Step 4 in Testing End-to-End Connectivity.
 
 4. **Review the Outputs**
 

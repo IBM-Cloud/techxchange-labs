@@ -212,7 +212,7 @@ To access your product version:
 To make the deployable architecture available:
 
 1. Go to **Versions** in the left navigation panel
-1. Click the **option menu (⋮)** next to the draft version and select **Set as pre-release**
+1. Click the **option menu (⋮)** next to the draft version and select **Ready to pre-release**
 1. Follow the prompts to make the version available for deployment
 
 Your deployable architecture is now available in the catalog for no-code deployment by other users.

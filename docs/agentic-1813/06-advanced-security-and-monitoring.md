@@ -69,7 +69,7 @@ After adding a deployable architecture to your project, you will customize its i
 1. On the **Edit agentic-ai-demo page**, scroll down and click **Next** to continue.
 1. To enter the **API key**, simply copy and paste the value of the key you created earlier.
 1. Click **Next** to continue.
-1. In the input field labeled `prefix`, enter the `<your-initials>-txc-demo`.
+1. In the input field labeled `prefix`, enter the `<your-initials>-txc-ce`.
 1. We will link the input of the `agentic-ai-demo` to the output of the previously deployed `watsonx-ai-saas-demo` DA. Hover over the **watsonx_project_id** input field and click on **Add Reference**.
 1. A new popup will open.
     - For **Source**, select `Configuration`.

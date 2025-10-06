@@ -8,6 +8,8 @@ The **low-code approach** means creating a complete solution by combining existi
 > - Your custom Code Engine DA (application workload)
 > - [Watsonx.ai SaaS DA](https://cloud.ibm.com/catalog/architecture/deploy-arch-ibm-watsonx-ai-saas-e8ad6597-8c1a-466a-8bb7-243a109daaa8-global) (AI services) - *provided by IBM through the public catalog*
 > - **Optional:**[Security & Observability DA](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-observability-a3137d28-79e0-479d-8a24-758ebd5a0eab-global) (enterprise features) - *provided by IBM through the public catalog*
+>
+> For time efficiency, we'll first follow the complete steps for adding Watsonx.ai only, and then show how to add the observability and encryption services as an optional part of the lab. The steps are conceptually the same for all DAs - wiring outputs of one DA as inputs to another. In a real-world scenario, you would wire all DAs first and then share the full stack in one go.
 
 Then, wire them together, test the complete solution, and share it as a reusable stack.
 

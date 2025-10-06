@@ -4,9 +4,8 @@
 - [🛠️ Developing Custom Automation (High-Code Approach)](./04-deploying-sample-agentic-ai-application.md)
 - [🚀 Publishing Your Automation to the Catalog](./05-publish-sample-agentic-da-into-catalog.md)
 - [🔐 Complete Solution Stack with Low-Code Composition](./06-advanced-security-and-monitoring.md)
-- [✅ Final Review and Cleanup](./07-final-review-cleanup.md)
-- [🏁 Conclusion](./08-conclusion.md)
+- [🏁 Conclusion](./07-final-review-cleanup.md)
 - **Quick links**
-- [Lab Sign in](https://ibm.biz/txc-lab-env)
+- [Lab Sign in](https://ibm.biz/txc25_1813_creds)
 - [IBM Cloud Console](https://cloud.ibm.com)
 

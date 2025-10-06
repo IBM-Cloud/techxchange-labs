@@ -42,9 +42,9 @@ After creating a new private catalog, you can onboard your deployable architectu
 
 ### Understanding the Catalog Metadata
 
-When developing a custom Deployable Architecture (DA), the product repository must include an `ibm_catalog.json` file. This file provides the necessary metadata and input variable definitions required by IBM Cloud to correctly process and deploy the product. 
+When developing a custom Deployable Architecture (DA), the product repository must include an `ibm_catalog.json` file. This file provides the necessary metadata and input variable definitions required by IBM Cloud to correctly process and deploy the product.
 
-In a real-world scenario, this file would be created alongside your Terraform files in your source repository, and both would be packaged together during your CI/CD release process (e.g., GitHub releases, GitLab releases). The `ibm_catalog.json` would typically contain:
+In a real-world scenario, this file would be created alongside your Terraform files in your source repository, and both would be packaged together during your CI/CD release process (e.g., GitHub releases, GitLab releases). The `ibm_catalog.json` contains key aspects like product information, features, permissions, and input definitions. Here's what it would typically contain:
 
 ```json
 {
@@ -219,7 +219,7 @@ Your deployable architecture is now available in the catalog for no-code deploym
 
 ## Step 4: Find your deployable architecture in the IBM Cloud Catalog
 
-To verify that your deployable architecture has been successfully added:
+To verify that your deployable architecture has been successfully added and is available to end users:
 
 1. Go to the [IBM Cloud Catalog](https://cloud.ibm.com/catalog)
 1. Use the search bar and type: `Loan Risk Evaluation with Watsonx AI Agents`

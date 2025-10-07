@@ -134,7 +134,7 @@ Follow these steps to review project deployment events:
 
     Set the custom timestamp to:
 
-    ![](images/40-8-1.png ':size=600')
+    ![](images/40-8-1-1.png ':size=600')
 
     ![](images/40-8-2.png ':size=600')
 
@@ -166,7 +166,7 @@ Follow these steps to review project deployment events:
 
     Set the timestamp to:
 
-    ![](images/40-2-1.png ':size=600')
+    ![](images/40-2-1-1.png ':size=600')
 
     Enter the Lucene query:
 
@@ -180,7 +180,7 @@ Follow these steps to review project deployment events:
 
     Set the timestamp to:
 
-    ![](images/40-3-1.png ':size=600')
+    ![](images/40-3-1-1.png ':size=600')
 
     Enter the Lucene query:
 

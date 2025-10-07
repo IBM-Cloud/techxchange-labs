@@ -28,13 +28,10 @@ To organize and manage your deployable architectures, you'll first need to creat
 
 > **Important**: Make sure you're in the target sandbox account (Environment 2 - IBM Cloud Sandbox - Target Deployment Account) for this step.
 
-1. In the IBM Cloud console, from the top navigation bar, click **Manage**, then select [**Catalogs**](https://cloud.ibm.com/content-mgmt/overview) from the dropdown menu
+1. In the IBM Cloud console, from the top navigation bar, click **Manage**, then select **Catalogs** from the dropdown menu
 1. From the left-hand navigation menu, select **Private catalogs**
 1. Click **Create** to add a new private catalog
 1. Fill in the **Name** field with `<your-initials>-txc-catalog` and select the `Default` **resource group**. Under Select a template, choose **No products for now** — you'll add a product in the next steps. Then, click **Create**
-
-
-> 💡 **Tip:** You can always view your catalog by clicking **Manage** in the top navigation bar, selecting **Catalogs**, and then choosing **Private catalogs**.
 
 ## Step 2: Add your deployable architecture to the private catalog
 
@@ -42,142 +39,12 @@ After creating a new private catalog, you can onboard your deployable architectu
 
 ### Understanding the Catalog Metadata
 
-When developing a custom Deployable Architecture (DA), the product repository must include an `ibm_catalog.json` file. This file provides the necessary metadata and input variable definitions required by IBM Cloud to correctly process and deploy the product.
+When developing a custom Deployable Architecture (DA), the product repository must include an `ibm_catalog.json` file. This file contains:
 
-In a real-world scenario, this file would be created alongside your Terraform files in your source repository, and both would be packaged together during your CI/CD release process (e.g., GitHub releases, GitLab releases). The `ibm_catalog.json` contains key aspects like product information, features, permissions, and input definitions. Here's what it would typically contain:
-
-```json
-{
-  "products": [
-    {
-      "name": "deploy-arch-ibm-ai-agent-code-engine",
-      "label": "Loan Risk Evaluation with Watsonx AI Agents",
-      "product_kind": "solution",
-      "tags": [
-        "ibm_created",
-        "integration",
-        "terraform",
-        "solution"
-      ],
-      "keywords": [
-        "code engine",
-        "IaC",
-        "infrastructure as code",
-        "terraform",
-        "solution",
-        "agentic ai",
-        "watsonx",
-        "loan risk"
-      ],
-      "short_description": "Provisions the Loan Risk AI Agents sample application on IBM Cloud Code Engine using a serverless architecture",
-      "long_description": "Configures a serverless IBM Cloud Code Engine project to deploy the Loan Risk AI Agents sample application designed as a proof of concept (PoC) for adopting agentic AI in enterprise workflows.\n\nThe application showcases a bank loan processing workflow in the financial industry, demonstrating how LLMs can drive reasoning and actions—moving beyond traditional rule-based approaches. It uses IBM Cloud services including watsonx.ai for inferencing and retrieval-augmented generation (RAG), and watsonx Assistant/Orchestrate for conversational interactions.",
-      "offering_docs_url": "https://github.com/IBM/agentic-iac-lab-materials/blob/main/agentic-solution/README.md",
-      "features": [
-        {
-          "title": "Automated provisioning with Terraform",
-          "description": "Uses Infrastructure as Code (IaC) to provision all required IBM Cloud resources, including [Code Engine](https://www.ibm.com/products/code-engine), [Container Registry](https://www.ibm.com/products/container-registry), and associated configurations—ensuring consistency and repeatability."
-        },
-        {
-          "title": "End-to-end deployment of Loan Risk AI Agents",
-          "description": "Deploys a complete [agentic AI sample application](https://github.com/IBM/ai-agent-for-loan-risk) that demonstrates LLM-based decision-making for loan processing workflows using watsonx.ai and watsonx Assistant."
-        },
-        {
-          "title": "Secure API key and secret management",
-          "description": "Creates [Code Engine secrets](https://cloud.ibm.com/docs/codeengine?topic=codeengine-secret) to securely store sensitive information such as IBM Cloud API keys and registry credentials, used during the container build and deployment process."
-        },
-        {
-          "title": "Source-to-image build pipeline",
-          "description": "Builds container images directly from source code using Code Engine’s integrated build feature, and pushes the image to IBM Cloud Container Registry."
-        }
-      ],
-      "flavors": [
-        {
-          "label": "Code Engine Application",
-          "name": "ce-ai-application",
-          "working_directory": "agentic-solution",
-          "licenses": [],
-          "compliance": {},
-          "iam_permissions": [
-            {
-              "role_crns": [
-                "crn:v1:bluemix:public:iam::::role:Viewer"
-              ],
-              "service_name": "Resource group only",
-              "notes": "Viewer access is required in the resource group you want to provision in."
-            },
-            {
-              "role_crns": [
-                "crn:v1:bluemix:public:iam::::serviceRole:Writer",
-                "crn:v1:bluemix:public:iam::::role:Editor"
-              ],
-              "service_name": "codeengine",
-              "notes": "Required to create and manage Code Engine resources."
-            },
-            {
-              "role_crns": [
-                "crn:v1:bluemix:public:iam::::serviceRole:Writer",
-                "crn:v1:bluemix:public:iam::::role:Editor"
-              ],
-              "service_name": "container-registry",
-              "notes": "Required to create and manage Container Registry namespaces."
-            }
-          ],
-          "architecture": {
-            "features": [
-              {
-                "title": " ",
-                "description": "Ideal for users deploying the Loan Risk AI Agents app on Code Engine without managing infrastructure."
-              },
-              {
-                "title": " ",
-                "description": "Uses Terraform to automate setup of projects, secrets, builds, and AI service integration."
-              },
-              {
-                "title": " ",
-                "description": "Runs a loan risk analysis app using watsonx.ai, Assistant, RAG, and orchestration logic."
-              }
-            ],
-            "diagrams": [
-              {
-                "diagram": {
-                  "url": "https://raw.github.com/IBM/agentic-iac-lab-materials/refs/heads/main/agentic-solution/reference-architecture/ce-app-da.svg",
-                  "caption": "IBM Cloud Code Engine application solution.",
-                  "type": "image/svg+xml"
-                },
-                "description": "The architecture of this solution uses Terraform to provision IBM Cloud resources, enabling deployment of the Loan Risk AI Agents application on Code Engine, with container builds pushed to Container Registry and managed secrets for authentication."
-              }
-            ]
-          },
-          "configuration": [
-            [
-              {
-                "key": "ibmcloud_api_key"
-              },
-              {
-                "key": "watsonx_ai_api_key"
-              },
-              {
-                "key": "container_registry_api_key"
-              },
-              {
-                "key": "watsonx_project_id",
-                "type": "string",
-                "description": "Watsonx project ID.",
-                "required": true
-              },
-              {
-                "key": "prefix"
-              }
-            ]
-          ],
-          "install_type": "fullstack",
-          "terraform_version": "1.10.0"
-        }
-      ]
-    }
-  ]
-}
-```
+- Product metadata (name, description, features)
+- Architecture diagram reference
+- Required permissions
+- Input parameters
 
 > 📝 **Note:** For this lab, you don't need to create this file manually. [The provided package](https://github.com/IBM/agentic-iac-lab-materials/releases/tag/v1.0.0) already contains both the Terraform configuration you built in the previous section and the required [`ibm_catalog.json`](https://github.com/IBM/agentic-iac-lab-materials/blob/main/ibm_catalog.json) metadata file. For more information about the catalog schema, refer to the [IBM Cloud Catalog schema documentation](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-manifest-values).
 
@@ -185,7 +52,7 @@ In a real-world scenario, this file would be created alongside your Terraform fi
 
 Now add the product to your catalog:
 
-1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select the catalog named `<your-initials>-txc-catalog`
+1. Go to the private catalog page and select the catalog named `<your-initials>-txc-catalog`
 1. Once inside, click **Add product** to begin adding your customized deployable architecture (DA)
 1. Choose **Deployable architecture** as the product type, and select **Terraform** as the delivery method
 1. Choose **Public repository**
@@ -206,8 +73,8 @@ After the product is added to a catalog, its version is initially in a draft sta
 
 To access your product version:
 
-1. Go to the [private catalog page](https://cloud.ibm.com/content-mgmt/catalogs) and select the catalog named `<your-initials>-txc-catalog`
-1. On the new page, in the **Products** table, click on our deployable architecture (DA) - `Loan Risk Evaluation with Watsonx AI Agents`
+1. Go to the private catalog page and select the catalog named `<your-initials>-txc-catalog`
+1. On the new page, in the **Products** table, click on your deployable architecture (DA) - `Loan Risk Evaluation with Watsonx AI Agents`
 
 To make the deployable architecture available:
 
@@ -221,10 +88,12 @@ Your deployable architecture is now available in the catalog for no-code deploym
 
 To verify that your deployable architecture has been successfully added and is available to end users:
 
-1. Go to the [IBM Cloud Catalog](https://cloud.ibm.com/catalog)
+1. Go to the IBM Cloud Catalog by clicking **Catalog** in the top navigation bar
 1. Use the search bar and type: `Loan Risk Evaluation with Watsonx AI Agents`
-1. Once it appears in the results, **click on the deployable architecture**.
-1. From there, you can **review the details and deploy it directly** from the catalog.
+1. Once it appears in the results, **click on the deployable architecture**
+1. From there, you can **review the details and deploy it directly** from the catalog
+
+This is a significant achievement - you've now made your custom infrastructure automation available to anyone in your organization through a simple, no-code interface.
 
 ## Platform Engineering Milestone
 

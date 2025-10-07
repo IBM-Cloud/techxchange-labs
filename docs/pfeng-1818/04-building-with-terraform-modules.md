@@ -251,12 +251,6 @@ Once the apply starts, you can go to the VPC console to see your newly created r
 > **Note:** Ensure the region is set to **us-south** on that page.
 
 You should start to see the new resources appearing (VPCs). You can refresh the page periodically. Once they appear, you can click on the management or workload VPC to explore their details.
-
-> **Important**: For each of the links below, copy the URL and paste it into the private browser window where you are logged into your target IBM Cloud account. Ensure the region is set to **us-south** on each page.
-
-You can also explore these resources:
--   **Security Groups**: [https://cloud.ibm.com/infrastructure/network/securityGroups](https://cloud.ibm.com/infrastructure/network/securityGroups)
--   **VPC Network Topology**: [https://cloud.ibm.com/infrastructure/vpcLayout](https://cloud.ibm.com/infrastructure/vpcLayout)
    
 ---
 

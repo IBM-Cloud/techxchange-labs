@@ -63,16 +63,4 @@ After obtaining your credentials, click the login link provided to access the IB
 
 > **Important**: Keep both tabs open. You will write code in the IDE (first tab) and view the deployed resources in your target IBM Cloud account (second tab).
 
-### Self-Paced
-
-Ensure you have:
-
-- IBM Cloud account with necessary permissions (Pay-As-You-Go account required)
-- Development machine with:
-  - [Terraform CLI](https://developer.hashicorp.com/terraform/install)
-  - [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started)
-  - Make sure you have installed Cloud Object Storage plugin for IBM Cloud CLI by running `ibmcloud plugin install cloud-object-storage`.
-  - Text editor such as [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-  - (Optional) [Git client](https://github.com/git-guides/install-git)
-
 

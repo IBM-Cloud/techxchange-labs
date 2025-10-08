@@ -65,15 +65,18 @@ Now customize the input values for your Code Engine DA:
 1. On the Edit agentic-ai-demo page, scroll down and click **Next** to continue.
 1. To enter the **API key**, simply copy and paste the value of the key you created earlier.
 1. Click **Next** to continue.
-1. Enter your Watsonx API key into the **watsonx_ai_api_key** field. **This step is optional** — if the key is not provided, the IBM Cloud API key will be used by default.
-1. We will link the input of the `agentic-ai-demo` to the output of the previously deployed `watsonx-ai-saas-demo` DA. Hover over the **watsonx_project_id** input field and click on **Add Reference**.
+1. We will link the input of the `agentic-ai-demo` to the output of the previously deployed `watsonx-ai-saas-demo` DA. Hover over the **watsonx_project_id** input field and click on **Add a reference**.
 1. A new popup will open.
     - For **Source**, select `Configuration`.
     - For **Name**, choose your `watsonx-ai-saas-demo`.
     - Set **Category** to `Output`.
     - For **Property**, select `watsonx_project_id`.
-1. Click **OK** to confirm the reference selection.
-1. Click the **Optional inputs** toggle to display optional input variables, then modify the **prefix** value as needed.
+    - Click **OK** to confirm the reference selection.
+1. In the input field labeled `prefix`, enter the `<your-initials>-txc-demo`.
+1. Click the **Optional inputs** toggle to display optional input variables - **This step is optional**:
+    -  Enter your Watsonx API key into the **watsonx_ai_api_key** field. If the key is not provided, the IBM Cloud API key will be used by default.
+    -  Enter your Container Registry API key into the **container_registry_api_key** field. If the key is not provided, the IBM Cloud API key will be used by default. 
+ then modify the **prefix** value as needed.
 1. Click **Done**, then click **Save** at the top right to save your configuration.
 
 
@@ -98,14 +101,26 @@ Now package the entire stack as a reusable solution for application teams:
 1. Click the checkbox next to the **Name** column header in the table to select all configurations.
 1. In the newly opened bar above, click on **Stack** to start the process.
 1. Enter the name `txc-stack-demo` in the field.
-1. On the new page, you can expose inputs from each deployment architecture (DA) as global input variables. We will expose a global input variable named **prefix**, which can be shared and used across all DAs. To do this, click on **agentic-ai-demo**, then go to **Required inputs**, and select **Stack level** for the `prefix` input variable.
+1. On the new page, you can expose inputs from each deployment architecture (DA) as global input variables. We will expose a global input variable named **prefix**, which can be shared and used across all DAs. To do this:
+   - Click on **agentic-ai-demo**, then go to **Required inputs**, and select **Stack level** for the `prefix` input variable.
+   - Click on **watsonx-ai-saas-demo**, then go to **Optional inputs**, and select **Stack level** for the `resource_prefix` input variable.
 1. Click on **Review** in the left-hand navigation menu, and then click **Finish**.
-1. On the new page, you need to define both the **API key** and the **prefix** input:
-   - First, click the cross (✕) icon on the "Not set" bubble next to the **ibmcloud_api_key** field
-   - Enter your API key value and click **Done**
-   - Next, click the cross (✕) icon on the "Not set" bubble next to the **prefix** input field
-   - Enter the value `txc-stack-demo`
-   - Click **Done**, and then **Save** to confirm
+
+On the new page, you need to define both the **API key** and the **prefix** inputs, as these are now part of the stack inputs shared across all DAs.
+
+1. First, click the **Edit** for **Security** section to show the **ibmcloud_api_key** field
+1. Enter your API key value and click **Done**
+1. Next, click the **Edit** for **Inputs** section to show the **prefix** input field
+1. Click the cross (✕) icon on the `Not set` bubble next to the prefix input field
+1. Enter the value `txc-stack-demo`
+1. Toggle the **Optional inputs** section to display the **resource_prefix** field. This field will be linked to **prefix**, ensuring a single shared prefix value between both DAs.
+1. Hover over the **resource_prefix** input field and click on **Add a reference**. A new popup will open.
+    - For **Source**, select `Configuration`.
+    - For **Name**, choose your `agentic-ai-demo`.
+    - Set **Category** to `Input`.
+    - For **Property**, select `prefix`.
+    - Click **OK** to confirm the reference selection.
+1. Click **Done**, and then **Save** to confirm
 
 ### Share a Stack of Deployable Architectures
 

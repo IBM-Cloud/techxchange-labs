@@ -37,7 +37,7 @@ Backup Vaults provide a **secure, scalable, and cost-effective** solution for st
     - **Name:** e.g., `my-backup-policy`
     - **Backup type:** Continuous
    - **Choose destination backup vault:** Select `my-backup-vault`
-   - **Backup retention time (days):`30`
+   - **Backup retention time (days):`1` - you can customize it
 5. Click **Create** .
 ---
 

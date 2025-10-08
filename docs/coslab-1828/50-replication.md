@@ -48,11 +48,6 @@ Repeat above steps with:
 4. Click **Create bucket**.  
 
 
-### Upload data to Source Bucket (us-south)
-1. Navigate to `source-bucket-coslab-xx`
-2. Click **Upload**
-3. Upload any file.
-
 
 ### Destination Bucket (eu-de)
 1. Navigate to `my-coslab-xx-destination`.  
@@ -73,11 +68,13 @@ Repeat above steps with:
 1. Go to **Manage > Access (IAM)**.  
 2. Click **Authorizations**.  
 3. Click **Create**.  
-4. Configure:  
-   - Source service: `Cloud Object Storage` (`my-coslab-xx-source`)  
-   - Target service: `Cloud Object Storage` (`my-coslab-xx-destination`)  
-   - Roles: `Writer`  
-5. Click **Authorize**.  
+4. Source Account->This account
+5. Service -> Cloud Object Storage -> next
+6. Resources -> Specific Resource-> Service Instance -> my-coslab-xx-source -> next
+7. Target : Service -> Cloud Object Storage -> next
+8. Resources -> Specific Resource-> Service Instance -> my-coslab-xx-destination -> next
+5. Roles: `Writer`  
+6. Click **Authorize**.  
 
 ---
 
@@ -85,23 +82,16 @@ Repeat above steps with:
 ## Step 4: Configure Replication Rules
 
 1. Navigate to `my-coslab-xx-source > source-bucket-coslab-xx`.  
-2. Go to **Data management** tab → **Bucket replication rules** → **Setup replication**  
+2. Go to **Data management** tab → **Bucket replication ** → **Add**  
 3. Configure:  
    - **Rule details:**  
      - **Replication source**  
      - Cloud Object Storage instance: `my-coslab-xx-destination`  
      - Name of target bucket : `destination-bucket-coslab-xx`
      - Check Permissions
+     - Incase there are issues, Please copy the IBM Cloud shell commands to IBM Cloud Shell and run
      - Rule name: `RuleSRC`  
      - Priority: `0`
-     - Done
-4. Navigate to `my-coslab-xx-destination > destination-bucket-coslab-xx`.  
-5. Go to **Confirguration** tab → **Bucket replication rules** → **Setup replication**  
-6. Configure:  
-   - **Rule details:**  
-     - **Replication target**  
-     - Source bucket CRN: `crn:v1:bluemix:public:xxx` 
-     - Check Permissions
      - Done
 
 ---

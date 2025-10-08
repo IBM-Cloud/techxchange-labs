@@ -23,10 +23,12 @@ This lab is structured in two main parts:
 
 - Infrastructure deployment monitoring through IBM Cloud Projects
 - Serverless applications running on Code Engine
-- Database services like IBM Cloud Databases for Elasticsearch  
+- Database services like IBM Cloud Databases for Elasticsearch
 - AI services through WatsonX
 
 You'll examine how observability services work together in a comprehensive observability stack that includes logging, monitoring, metrics routing, logs routing, activity tracking event routing, and cross-service integrations.
+
+> **💡 TIP:** This is a comprehensive lab that covers multiple services. The sections are mostly independent of each other, so feel free to jump to sections that interest you most based on your learning goals.
 
 ## Your Lab Environment
 
@@ -67,8 +69,11 @@ By the end of this lab, you'll understand:
 
 ## Log in to IBM Cloud
 
-1. Go to <https://ibm.biz/1815-invite>
+1. Go to <https://ibm.biz/lab1815>
 1. Enter the `Username` and `Password` provided for the lab.
+
+    Enter your user ID as follows: `observe-XX@example.com` where XX is the number in the student ID that you have been assigned.
+
 1. Click **Sign in**.
 
   ![IBM Cloud login screen](images/10-login.png ':size=800')

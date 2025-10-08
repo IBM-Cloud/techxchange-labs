@@ -18,7 +18,7 @@ In this section, you are going to log in to IBM Cloud, deploy an application and
 A project is a grouping of Code Engine entities such as applications, jobs, and builds. The name of your project must be unique within your IBM Cloud resource group, user account, and region. Projects are used to manage resources and provide access to its entities.
 
 1. Go to https://cloud.ibm.com/containers/serverless/overview
-   * Alternatively, use the navigation menu to go to the Code Engine Overview page: ☰ > Containers > Serverless (Code Engine) > Get Started.
+   * Alternatively, use the navigation menu to go to the Code Engine Overview page: **☰ > Containers > Serverless (Code Engine) > Get started**.
 1. Click **Start creating**.
   ![](images/10-landing.png ':size=800')
 1. Click **Create project**
@@ -36,7 +36,7 @@ A project is a grouping of Code Engine entities such as applications, jobs, and 
 1. Set the **Name** of the application to something unique like `<your-username>-helloworld-app`. As example `celab-123-helloworld-app`.
 1. Review the other settings in the page but keep their default values:
    * **Code** - This example application uses a pre-built sample image that is publically available in IBM Cloud Container Registry (`icr.io/codeengine/helloworld`). However, outside of this specific example, you can easily use your own container image or even start from a source code repository.
-      * Because this example uses a sample that is publically available, no registry access is required. (I would acknowledge the registry access secret setting).
+      * Because this example uses a sample that is publically available, no registry access is required.
       * This application listens internally for requests on port `8080`, but is exposed by Code Engine on the standard `443` HTTPS port.
    * **Resources & scaling** - You can configure resources that are associated with your application including CPU, memory, storage, number of instances, and autoscaling settings.
    * **Domain mappings** - These settings control the visibility of your application. Consider if your application is internet-facing, only available inside the IBM Cloud network, or only available to other applications in the same Code Engine project.

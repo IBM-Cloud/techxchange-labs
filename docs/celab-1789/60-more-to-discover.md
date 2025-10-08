@@ -2,6 +2,27 @@
 
 There are more capabilities built in Code Engine to help you build and deploy your applications. Several are highlighted below.
 
+## Fleets
+
+As artificial intelligence continues to grow and demand for cloud-based solutions increases, the ability to run large-scale, compute-intensive workloads both quickly and efficiently has become critical.
+
+A fleet (also referred to as a serverless fleet) is a Code Engine compute resource that runs one or more instances of user code in parallel to process a large set of compute-intensive tasks.
+
+Fleets can connect to Virtual Private Clouds (VPCs) to securely access user data and services. They provide single-tenant isolation, and support for GPU workloads.
+
+A fleet automatically deploys and removes a collection of worker nodes on top of which instances of user code complete their associated tasks. Each worker hosts one or more instances and as soon as an instance finishes working on its task a new instance is started in its place to work on one of the pending tasks. This process continues until all tasks are finished.
+
+The profiles and quantities of worker nodes can be automatically chosen by Code Engine to best match the instance resource and scaling parameters. Alternatively, users can require a specific worker profile to be used, for example one that contains a desired GPU capability. In those cases, Code Engine deploys only worker nodes with the user-specified profile and deploys them in the quantity required to match the instance resource and scaling settings.
+
+Fleets offer the following advantages:
+
+* Support for large-scale parallel computing tasks, with no limits on vCPU, memory, or task duration.
+* Automatic, dynamic scaling—from a single task to millions of tasks.
+* Consumption-based pricing: pay only for the resources you use, with no idle or fixed costs.
+* Fully managed service—no infrastructure administration required.
+* Broad machine type support, including GPU-enabled instances.
+* Seamless integration with your VPC network.
+
 ## Batch jobs
 
 A job in Code Engine runs one or more instances of your executable code. Unlike applications, which handle HTTP requests, jobs are designed to run one time and exit, such that the resources to run the job workload are freed up.

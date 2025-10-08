@@ -14,6 +14,8 @@ From the **Overview** tab for your specific application, Code Engine displays ba
    * The current number of **Instances**.
    * The total number of **CPU** and **Memory** used by these instances.
 
+Under **Test Application** click **Application URL** and copy the browser URL into the clipboard, after the page loaded
+
 Now, let’s see what happens when this app gets a lot of traffic!
 1. Go to https://ibm.biz/txc-1789-loadgen.
 1. Copy and paste the URL of the application in the form.

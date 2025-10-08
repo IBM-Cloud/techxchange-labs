@@ -16,3 +16,4 @@ Before you can create a data science pipeline, you must create a pipeline server
 ![image](images/dp-configure-pipeline-server.png)
 
 Click **Configure pipeline server**
+> Wait for the pipeline server to complete and continue with the next step to create a workbench

@@ -19,9 +19,19 @@ When you work with Code Engine apps, jobs, or builds in the console with logging
 
 You can use the IBM Cloud Monitoring service to monitor your Code Engine workloads. Code Engine forwards selected information about your workloads to Monitoring so that you can monitor specific metrics such as requests, revisions, and duration.
 
-1. From the **Overview** page for the application, use the drop down menu and click **Monitoring**.
+1. Go to the list of projects at https://cloud.ibm.com/containers/serverless/projects
+1. Select the project you created previously.
+1. From the **Actions** menu, select **View monitoring**.
    ![](images/50-launch-monitoring.png ':size=750')
-1. When you launch monitoring, the Code Engine monitoring dashboard opens. This dashboard is pre-configured with your Code Engine project.
+1. Confirm to by clicking **Open dashboard** in the side panel.
+   ![](images/50-open-monitoring-dashboard.png ':size=750')
+1. On the empty dashboard, click on the user name **notset notset** in the bottom right corner.
+   ![](images/50-monitoring-notset.png ':size=750')
+1. Under **My Teams**, select **Monitor Operations**
+   ![](images/50-monitoring-my-teams.png ':size=750')
+1. Select the **IBM Code Engine Project Overview** dashboard
+   ![](images/50-monitoring-select-ce-dashboard.png ':size=750')
+1. Set the **ibm_location** and the **ibm_codeengine_project_name** filters properly.
    ![](images/50-monitoring.png ':size=750')
 1. See the metrics on the Code Engine monitoring dashboard for your application. This dashboard includes a variety of metrics such as:
    * Number of concurrent requests per application

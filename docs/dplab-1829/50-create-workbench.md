@@ -6,7 +6,7 @@ Workbenches are scoped to a Data science project, and you can have more than one
 
 2. Create a workbench.
     * **Name**: `evaluate-model-workbench`
-    * **Description**: `This workbench is used to construct pipelines that will evaluate a Granite inference model running locally on OpenShift AI. Evaluations and testing will use DeepEval https://www.confident-ai.com/`
+    * **Description**: *This workbench is used to construct pipelines that will evaluate a Granite inference model running locally on OpenShift AI. Evaluations and testing will use DeepEval https://www.confident-ai.com/*
     * **Image Selection**: `TrustyAI`
     * **Version selection**: `2025.1` (or the Recommended version)
   >"View package information" shows what packages will be available in the workbench environment. This lab requires Jupyter and Elyra, so any image selected that has those pacakages should suffice.

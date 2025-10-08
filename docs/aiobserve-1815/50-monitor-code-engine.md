@@ -13,7 +13,7 @@ In this section, you'll learn how Code Engine applications fit within the broade
 
 IBM Cloud Code Engine is a fully managed, serverless platform that runs containerized workloads, including web apps, micro-services, event-driven functions, or batch jobs. Code Engine can even build container images from your source code, and all workloads can work together because they're hosted within the same Kubernetes infrastructure.
 
-![](images/50-1.png ':size=600')
+![](images/50-1.png ':size=800')
 
 > **💡 TIP:** Code Engine scales to zero when not in use, which can significantly reduce costs. However, this means you need to monitor cold starts if your application requires consistent performance. Look for patterns in scaling events to optimize your configuration.
 
@@ -64,14 +64,14 @@ Follow these steps:
    serviceName:"codeengine" AND label.Project:"rag-Generative_AI_Sample_App_CI_Project"
    ```
 
-    ![](images/50-2.png ':size=600')
+    ![](images/50-2.png ':size=800')
 
    **Filter logs for an application:**
    ```
    serviceName:"codeengine" AND _app:"rag-sample-app"
    ```
 
-    ![](images/50-3.png ':size=600')
+    ![](images/50-3.png ':size=800')
 
    **Filter logs for a specific revision:**
    ```
@@ -87,7 +87,7 @@ Follow these steps:
    - Add/remove columns to focus on relevant data
    - Adjust the format of displayed data
 
-    ![](images/50-4.png ':size=200')
+    ![](images/50-4.png ':size=00')
 
    - Explore options per log line
 
@@ -95,7 +95,7 @@ Follow these steps:
 
    - Use field selection options to filter and analyze logs
 
-    ![](images/50-6.png ':size=600')
+    ![](images/50-6.png ':size=800')
 
 > **💡 TIP:** When troubleshooting Code Engine applications, start with broader queries and gradually add filters to narrow down to specific components or time ranges. This helps you understand the context before focusing on specific issues.
 
@@ -124,7 +124,7 @@ Follow these steps:
 
    > **Note:** If you don't see deletion events, try `read` instead to verify your query is working correctly.
 
-    ![](images/50-8.png ':size=600')
+    ![](images/50-8.png ':size=800')
 
    **Monitor application activity:**
    ```

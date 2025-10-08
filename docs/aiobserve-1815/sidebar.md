@@ -14,6 +14,6 @@
 - [Monitoring WatsonX AI services](./70-monitoring-watsonx.md)
 - [Conclusion](./100-conclusion.md)
 - **Learn more**
-- [Lab Sign in](https://ibm.biz/1815-invite)
+- [Lab Sign in](https://ibm.biz/lab1815)
 - [Console](https://cloud.ibm.com/)
 - [Documentation](https://cloud.ibm.com/docs/)

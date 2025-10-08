@@ -20,6 +20,8 @@ You will use a web-based IDE for development and a dedicated IBM Cloud account t
 
 **Step 1: Access the Web-based IDE**
 
+> ⚠️ **Before starting**: Please ensure you don't have any existing active IBM Cloud sessions. Log out at https://cloud.ibm.com/logout if necessary.
+
 1.  Open a browser tab and log in at **[https://ibm.biz/txc-lab-env-login](https://ibm.biz/txc-lab-env-login)** using the first set of credentials provided.
 2.  After logging in, you will land on an IBM Cloud dashboard. In the same tab, open the web-based IDE by navigating to **[https://ibm.biz/txc-lab-env](https://ibm.biz/txc-lab-env)**. This is your complete IDE development environment, where you will edit files and run all the necessary commands (like `terraform`).
     > **Note:** After authentication, you may be prompted to **Log in with OpenShift**. Click the button to proceed.
@@ -57,18 +59,8 @@ Once the IDE is loaded, here’s a quick tour to get you started.
 
 Go to the accounts credentials page **[https://ibm.biz/txc25_1813_creds](https://ibm.biz/txc25_1813_creds)** and follow the instructions to access your target deployment account.
 
+After obtaining your credentials, click the login link provided to access the IBM Cloud console. Once logged in, you'll be able to view and manage the resources you'll deploy in the following steps.
+
 > **Important**: Keep both tabs open. You will write code in the IDE (first tab) and view the deployed resources in your target IBM Cloud account (second tab).
-
-### Self-Paced
-
-Ensure you have:
-
-- IBM Cloud account with necessary permissions (Pay-As-You-Go account required)
-- Development machine with:
-  - [Terraform CLI](https://developer.hashicorp.com/terraform/install)
-  - [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started)
-  - Make sure you have installed Cloud Object Storage plugin for IBM Cloud CLI by running `ibmcloud plugin install cloud-object-storage`.
-  - Text editor such as [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-  - (Optional) [Git client](https://github.com/git-guides/install-git)
 
 

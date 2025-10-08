@@ -35,7 +35,7 @@ Before we begin analyzing cost and sustainability metrics, it's essential to und
 
 5. Take note of the number of pool workers per zone, the number of zones, and the pool machine type as these inputs have a significant impact on the size and cost of the cluster.
 
-6. This configuration is based on a reusable deployable architecture for [Red Hat OpenShift on IBM Cloud VPC infrastructure](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-ocp-vpc-1728a4fd-f561-4cf9-82ef-2b1eeb5da1a8-global) which is a great way to deploy a secure cluster.
+6. This configuration is based on a reusable deployable architecture for [Landing zone for containerized applications with OpenShift](https://cloud.ibm.com/catalog/architecture/deploy-arch-ibm-slz-ocp-95fccffc-ae3b-42df-b6d9-80be5914d852-global) which is a great way to deploy a secure cluster.
 
 
 ## Survey account via the Resource List

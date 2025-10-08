@@ -1,52 +1,25 @@
 # Developing Custom Automation (High-Code Approach)
 
-As a platform engineer, you're now ready to develop your first custom deployable architecture using the **high-code approach**. This step demonstrates how to write Terraform configurations using terraform-ibm-modules to create reusable automation.
+In this section, you'll develop a custom deployable architecture using the **high-code approach** with Terraform and IBM Cloud modules.
 
-You'll create a complete Terraform configuration that builds and containerizes the **Loan Risk AI Agents sample application** from source code, securely pushes the container image to IBM Cloud Container Registry, and deploys it as a scalable, serverless application on Code Engine using [terraform-ibm-modules](https://github.com/terraform-ibm-modules) for enterprise-grade components.
+You'll create Terraform configuration to deploy the **Loan Risk AI Agents sample application** using IBM Cloud Code Engine - a fully managed, serverless platform that handles both building container images from source code and running applications with automatic scaling.
 
-Rather than writing infrastructure code from scratch, you'll use pre-built, enterprise-grade Terraform modules that provide officially supported IBM Cloud components with built-in security controls and compliance features. You'll primarily use **terraform-ibm-resource-group** for foundational resource organization and **terraform-ibm-code-engine** for the complete Code Engine deployment pipeline.
+You'll use pre-built modules from the [terraform-ibm-modules](https://github.com/terraform-ibm-modules) library instead of writing infrastructure code from scratch.
 
 ## Step 1: Set up Terraform project structure
 
-We will follow standard Terraform practices by organizing the code into a modular, maintainable structure. This approach helps separate concerns, improves readability, and makes the configuration easier to scale or reuse. Therefore, the structure of the Terraform project will be as follows:
-
-```text
-ai-agent-for-loan-risk/
-├── .gitignore          # Specifies which files and directories Git should ignore and not track in version control.
-├── main.tf             # Defines the Terraform resources/modules
-├── variables.tf        # Declares input variables used in the project
-├── terraform.tfvars    # Provides values for the declared variables
-├── outputs.tf          # Outputs useful information after apply (e.g., resource group ID)
-├── provider.tf         # Configures the IBM Cloud provider
-└── version.tf          # Defines required Terraform and provider versions
-```
-
-This structure ensures the configuration is modular, organized, and aligned with Terraform best practices, making it easier to manage the deployment lifecycle of the **Loan Risk AI Agents sample application**.
-
-To begin, create a working directory named `ai-agent-for-loan-risk` that will contain all the Terraform configuration files for the `Loan Risk AI Agents sample application`. Within this directory, you’ll create the following set of files: `.gitignore main.tf variables.tf terraform.tfvars outputs.tf provider.tf version.tf`.
-
-<details>
-  <summary><b>CLI command</b></summary>
-  <div>
-    <p>In your terminal, run:</p>
-    <pre><code>
-mkdir ai-agent-for-loan-risk
-cd ai-agent-for-loan-risk
-touch .gitignore main.tf variables.tf terraform.tfvars outputs.tf provider.tf version.tf
-    </code></pre>
-  </div>
-</details>
-
-<details>
-  <summary><b>Text Editor</b></summary>
-Open VS Code, then create a new folder named <code>ai-agent-for-loan-risk</code>. Inside that folder, create the necessary Terraform files such as <code>.gitignore</code>, <code>main.tf</code>, <code>variables.tf</code>, <code>terraform.tfvars</code>, <code>outputs.tf</code>, <code>provider.tf</code>, and <code>version.tf</code> using the editor interface.
-</details>
+You're already in the `terraform-simple-template` directory in your WebIDE Development Workspace, which contains most of the required Terraform files:
+- `main.tf` - Defines resources and modules
+- `variables.tf` - Declares input variables
+- `outputs.tf` - Defines output values
+- `providers.tf` - Configures the IBM Cloud provider
+- `version.tf` - Sets required Terraform versions
 
 ## Step 2: Set up IBM Cloud provider
 
-Set up the provider configuration by updating two files: `provider.tf` and `version.tf`. These files specify your IBM Cloud API key and region settings, which are necessary for Terraform to authenticate with IBM Cloud and understand which region and services to interact with during resource provisioning.
+Set up the provider configuration by updating two files: `providers.tf` and `version.tf`. These files specify your IBM Cloud API key and region settings, which are necessary for Terraform to authenticate with IBM Cloud and understand which region and services to interact with during resource provisioning.
 
-**Add the following content to `provider.tf`:**
+**Add the following content to `providers.tf`:**
 
 ```hcl
 provider "ibm" {
@@ -71,7 +44,7 @@ terraform {
 
 ## Step 3: Define input variables
 
-Define the required input variables in `variables.tf`. These variables enable you to manage configuration values separately from your main code, making the setup more maintainable and reusable across different environments.
+Define the required (`ibmcloud_api_key`, `watsonx_project_id` and `prefix`) and optional (`watsonx_ai_api_key`) input variables in `variables.tf`. These variables enable you to manage configuration values separately from your main code, making the setup more maintainable and reusable across different environments.
 
 **Add the following content to `variables.tf`:**
 
@@ -84,8 +57,9 @@ variable "ibmcloud_api_key" {
 
 variable "watsonx_ai_api_key" {
   type        = string
-  description = "The API key of the IBM watsonx in the target account."
+  description = "The API key for IBM watsonx in the target account. If this key is not provided, the IBM Cloud API key will be used instead."
   sensitive   = true
+  default     = null
 }
 
 variable "watsonx_project_id" {
@@ -95,29 +69,7 @@ variable "watsonx_project_id" {
 
 variable "prefix" {
   type        = string
-  nullable    = true
-  description = "The prefix to be added to all resources created by this solution. To skip using a prefix, set this value to null or an empty string. The prefix must begin with a lowercase letter and may contain only lowercase letters, digits, and hyphens '-'. It should not exceed 12 characters, must not end with a hyphen('-'), and cannot contain consecutive hyphens ('--'). Example: txc-2025."
-  default = "txc-2025"
-  validation {
-    # - null and empty string is allowed
-    # - Must not contain consecutive hyphens (--): length(regexall("--", var.prefix)) == 0
-    # - Starts with a lowercase letter: [a-z]
-    # - Contains only lowercase letters (a–z), digits (0–9), and hyphens (-)
-    # - Must not end with a hyphen (-): [a-z0-9]
-    condition = (var.prefix == null || var.prefix == "" ? true :
-      alltrue([
-        can(regex("^[a-z][-a-z0-9]*[a-z0-9]$", var.prefix)),
-        length(regexall("--", var.prefix)) == 0
-      ])
-    )
-    error_message = "Prefix must begin with a lowercase letter and may contain only lowercase letters, digits, and hyphens '-'. It must not end with a hyphen('-'), and cannot contain consecutive hyphens ('--')."
-  }
-
-  validation {
-    # must not exceed 12 characters in length
-    condition     = var.prefix == null || var.prefix == "" ? true : length(var.prefix) <= 12
-    error_message = "Prefix must not exceed 12 characters."
-  }
+  description = "The prefix to be added to all resources name created by this solution."
 }
 ```
 
@@ -125,20 +77,23 @@ variable "prefix" {
 
 Now we'll build the main Terraform configuration that defines all the infrastructure components needed to deploy our application. The `main.tf` file orchestrates resource groups, Code Engine project, secrets, builds, and the application deployment.
 
+All resources will be created with a prefix (`${var.prefix}-`) to avoid naming conflicts and provide consistent naming structure.
 
 ### Resource group
 
-Create a **Resource Group** to logically organize and manage your IBM Cloud resources. The prefix `txc-2025` in the resource group name helps avoid naming conflicts with other resources in your account. You can change this prefix to something more meaningful for your organization if needed.
+Create a **Resource Group** to logically organize and manage your IBM Cloud resources. Using your initials as a prefix in the resource group name helps avoid naming conflicts with other resources in your account.
 
 **Add the following content to `main.tf`:**
 
 ```hcl
 module "resource_group" {
   source              = "terraform-ibm-modules/resource-group/ibm"
-  version             = "1.2.1" 
-  resource_group_name = "txc-2025-resource-group"
+  version             = "1.3.0"
+  resource_group_name = "${var.prefix}-resource-group"
 }
 ```
+
+> For more information about this module, see the [terraform-ibm-resource-group documentation](https://github.com/terraform-ibm-modules/terraform-ibm-resource-group).
 
 ### Code Engine project
 
@@ -150,14 +105,14 @@ Create a **Code Engine project** to host and manage the **Loan Risk AI Agents sa
 module "code_engine_project" {
   source            = "terraform-ibm-modules/code-engine/ibm//modules/project"
   version           = "4.5.1"
-  name              = "txc-2025-ce-project"
+  name              = "${var.prefix}-ce-project"
   resource_group_id = module.resource_group.resource_group_id
 }
 ```
 
 ### Code Engine secret
 
-Create a **Code Engine secret** to grant access to the private container registry (`private.us.icr.io`), enabling the push of container images for the **Loan Risk AI Agents sample application**.
+Create a **Code Engine secret** to grant access to the private container registry (`private.us.icr.io`), enabling the push of container images for the application. IBM Cloud Container Registry is the service that you can use to store and share your container images. This secret authenticates with the container registry during the build process.
 
 **Add the following content to `main.tf`:**
 
@@ -165,7 +120,7 @@ Create a **Code Engine secret** to grant access to the private container registr
 module "code_engine_secret" {
   source     = "terraform-ibm-modules/code-engine/ibm//modules/secret"
   version    = "4.5.1"
-  name       = "my-registry-secret"
+  name       = "${var.prefix}-registry-access-secret"
   project_id = module.code_engine_project.id
   format     = "registry"
   data = {
@@ -178,27 +133,26 @@ module "code_engine_secret" {
 
 ### Container Registry namespace
 
-Create an **IBM Cloud Container Registry namespace** to organize and store container images used by the **Loan Risk AI Agents sample application**.
+Create an **IBM Cloud Container Registry namespace** to organize and store container images.
 
 **Add the following content to `main.tf`:**
 
 ```hcl
 resource "ibm_cr_namespace" "rg_namespace" {
-  name              = "txc-2025-crn"
+  name              = "${var.prefix}-crn"
   resource_group_id = module.resource_group.resource_group_id
 }
 ```
 
 ### Code Engine build
 
-Create a **Code Engine build** to automatically build container images from source code and push them to the container registry for the **Loan Risk AI Agents sample application**.
+Create a **Code Engine build** to automatically build container images from source code and push them to the container registry.
 
-The `code_engine_build` module includes key inputs:
-
-- **source_url** – [The URL of the Git repository](https://github.com/IBM/ai-agent-for-loan-risk) that contains the source code for the **Loan Risk AI Agents sample application**.
-- **strategy_type** – Set to `dockerfile`, which tells Code Engine to use a Dockerfile located in the [Git repository](https://github.com/IBM/ai-agent-for-loan-risk/blob/main/Dockerfile) to define how the container image should be built.
-- **output_secret** – The name of the Code Engine secret (created in the previous step) that contains credentials for authenticating with the IBM Cloud Container Registry. This allows the built image to be securely pushed to the container registry under your CR namespace.
-- **output_image** – The full path of the image (including registry namespace and image name) where the final container will be stored. This is the destination in IBM Cloud Container Registry where the built image is pushed.
+Key inputs:
+- **source_url** – [Git repository](https://github.com/IBM/ai-agent-for-loan-risk) containing the AI application source code
+- **strategy_type** – Uses the Dockerfile in the repository to build the image
+- **output_secret** – References the secret created earlier for registry authentication
+- **output_image** – Destination path in Container Registry for the built image
 
 **Add the following content to `main.tf`:**
 
@@ -210,7 +164,7 @@ locals {
 module "code_engine_build" {
   source                     = "terraform-ibm-modules/code-engine/ibm//modules/build"
   version                    = "4.5.1"
-  name                       = "txc-2025-ce-build"
+  name                       = "${var.prefix}-ce-build"
   ibmcloud_api_key           = var.ibmcloud_api_key
   project_id                 = module.code_engine_project.id
   existing_resource_group_id = module.resource_group.resource_group_id
@@ -223,12 +177,12 @@ module "code_engine_build" {
 
 ### Code Engine application
 
-Deploy a Code Engine application to run the containerized **Loan Risk AI Agents sample application** as a scalable, serverless workload in your AI agent infrastructure.
+Deploy a Code Engine application to run the containerized application as a scalable, serverless workload.
 
-The `code_engine_app` module includes key inputs:
-
-- **image_reference** – The full path to the container image in IBM Cloud Container Registry (same value as `output_image` from the build step). This image will be used to launch the application.
-- **image_secret** – The name of the Code Engine secret (created in the previous step) that provides access to the container registry, allowing the application to securely pull the container image.
+Key inputs:
+- **image_reference** – Path to the container image built in the previous step
+- **image_secret** – References the secret for registry access
+- **run_env_variables** – Environment variables for watsonx integration
 
 **Add the following content to `main.tf`:**
 
@@ -238,13 +192,13 @@ module "code_engine_app" {
   source          = "terraform-ibm-modules/code-engine/ibm//modules/app"
   version         = "4.5.1"
   project_id      = module.code_engine_project.id
-  name            = "ai-agent-for-loan-risk"
+  name            = "${var.prefix}-ai-agent-for-loan-risk"
   image_reference = module.code_engine_build.output_image
   image_secret    = module.code_engine_secret.name
   run_env_variables = [{
     type  = "literal"
     name  = "WATSONX_AI_APIKEY"
-    value = var.watsonx_ai_api_key
+    value = var.watsonx_ai_api_key != null ? var.watsonx_ai_api_key : var.ibmcloud_api_key  # Uses watsonx API key if provided, otherwise falls back to IBM Cloud API key for LLM inferencing
     },
     {
       type  = "literal"
@@ -257,16 +211,12 @@ module "code_engine_app" {
 
 ## Step 5: Define outputs
 
-At the end of the Terraform deployment, output values provide quick access to important information about the resources you’ve provisioned. These outputs can include identifiers, URLs, or other values that are useful for follow-up tasks, integration, or verification.
+Define output values to provide quick access to important resource information after deployment:
 
-For the **Loan Risk AI Agents sample application**, the outputs may include:
-
-- **Resource Group ID** – Used to reference the group in other services or modules
-- **Code Engine Project Name or ID** – Helpful for tracking and managing workloads
-- **Container Image URL** – Used for deployments or monitoring
-- **Application Route URL** – The public endpoint to access the deployed loan application
-
-Defining outputs in your `outputs.tf` file helps make your Terraform configuration more user-friendly, modular, and ready for automation or scripting in CI/CD pipelines.
+- **Resource Group ID** – For referencing in other services
+- **Code Engine Project ID** – For managing workloads
+- **Container Image URL** – For deployments
+- **Application Route URL** – Public endpoint to access the application
 
 **Add the following content to `outputs.tf`:**
 
@@ -291,146 +241,70 @@ output "app_url" {
 
 ## Step 6: Configure variables and deploy the infrastructure
 
-### Why Test Locally First?
-
-As a platform engineer, you'll deploy this infrastructure **twice** in this lab: now (locally) to test and validate your automation works correctly, and later (from catalog) to test the deployable architecture experience for end users. This dual-deployment approach ensures your automation is reliable before teams across your organization start using it.
-
 ### Configure secure variables
 
-You can obtain your **IBM Cloud API key** by going to the [IBM Cloud Console](https://cloud.ibm.com), clicking **Manage** → **Access (IAM)** → **API keys**, and creating a new API key.
+You'll deploy this infrastructure twice: locally now to test, and later (optionally) from the catalog to validate the end-user experience.
 
-First, if you're working in a Git repository, create a `.gitignore` file to prevent sensitive files from being committed to version control:
+To work with IBM Cloud resources, create an **IBM Cloud IAM API key**:
 
-> 💡 **Tip:** This step is only needed if you're working in a Git repository. The `.gitignore` file prevents sensitive configuration from being accidentally committed.
+1. Go to the [IBM Cloud Console](https://cloud.ibm.com) for your target account _(Environment 2)_
+1. Navigate to **Manage → Access (IAM) → API Keys**
+1. Click **Create**, enter a `Name` and click **Create**
 
-```bash
-# Add to .gitignore if working in a Git repository
-.terraform*
-*.tfstate*
-*.tfvars*
-```
+> ❗ **Important**: Keep the popup window with the API Key open for the next step. You can also download your API key for later use, or keep note of it in a text note for this lab. In production, store this securely.
 
-### Set up your configuration values
+> 📝 **Note:** For this part of the lab, the `watsonx_project_id` and `watsonx_ai_api_key` are provided to enable the AI application to function immediately after deployment. In the next section of the lab, you'll learn how to create the watsonx.ai instances through automation, eliminating the need to manually provide the project id and watsonx_ai_api_key.
 
-Create the `terraform.tfvars` file to store your configuration values:
 
-> 📝 **Note:** For this lab, the `watsonx_project_id` and `watsonx_ai_api_key` are provided to enable the AI application to function immediately after deployment. In the next steps of this lab, you'll learn how to automate the creation of watsonx.ai resources using deployable architectures, eliminating the need to manually configure project IDs.
 
-Create `terraform.tfvars` and replace the placeholder values with your actual values:
+You need to create the `terraform.tfvars` file:
+
+1. Right-click in the file explorer and select **New File**
+2. Enter `terraform.tfvars` as the filename and press Enter
+3. Copy and paste the following template into the file:
 
 ```hcl
-ibmcloud_api_key     = "<your-IBM-cloud-api-key>"        # From IBM Cloud IAM
-watsonx_ai_api_key   = "<your-watsonx-ai-api-key>"       # Provided in the lab
-watsonx_project_id   = "<your-watsonx-project-id>"       # Provided in the lab
-prefix               = "<prefix-added-to-resources>"     # You can choose your own prefix for resource names
+ibmcloud_api_key             = "<your-IBM-cloud-api-key>"        # From IBM Cloud IAM
+watsonx_ai_api_key           = "<your-watsonx-ai-api-key>"       # Provided in the lab
+watsonx_project_id           = "<your-watsonx-project-id>"       # Provided in the lab
+prefix                       = "<your-initials>"                 # Use your initials to avoid naming conflicts
 ```
+
+4. Replace the placeholder values with your actual values
 
 ### Deploy the infrastructure
 
-Now that all required Terraform configuration files are in place, you're ready to deploy the **Loan Risk AI Agents sample application** on IBM Cloud.
+Now deploy the infrastructure:
 
-In your terminal, run the following commands:
-
-```bash
-terraform init
-```
-
-> Initializes the working directory by downloading necessary providers and initializing any referenced modules.
-
-<pre style="font-size: 9px;">
-terraform init
-Initializing the backend...
-Initializing modules...
-Downloading registry.terraform.io/terraform-ibm-modules/code-engine/ibm 4.5.1 for code_engine_app...
-...
-Terraform has been successfully initialized!
-</pre>
+1. Open a terminal: Click the hamburger menu (☰) → **Terminal → New Terminal**
+2. Run these commands:
 
 ```bash
-terraform plan
+terraform init   # Initialize providers and modules
+terraform plan   # Preview changes without applying
+terraform apply  # Apply changes (type 'yes' when prompted)
 ```
 
-> Shows an execution plan detailing what resources will be created, changed, or destroyed — **without applying changes**.  
-> In a real-world scenario, use this to **review safely** before applying anything.
+> This may take a few minutes. While waiting, you can explore the resources being created in the IBM Cloud console.
 
-<pre style="font-size: 9px;">
-terraform plan
 
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-  &#43; create
- <= read (data resources)
 
-Terraform will perform the following actions:
+While you're waiting for the full apply to complete, let's explore the resources being created in the IBM Cloud Console of your target sandbox account (Environment 2). You may need to refresh the page periodically to see the new resources as they are being created.
 
-  &#35; ibm_cr_namespace.rg_namespace will be created
-  &#43; resource "ibm_cr_namespace" "rg_namespace" {
-      &#43; name                  = "txc-2025-crn"
-      &#43; resource_group_id     = (known after apply)
-    }
+Make sure you open these links in the target sandbox account:
+- Code Engine Project section: https://cloud.ibm.com/containers/serverless/projects
+  1. Click on your serverless project named `<your-initials>-ce-project`
+  2. In the project dashboard, navigate to the **Image builds** section from the left-hand menu to view your build configuration
+  3. In the project dashboard, navigate to the **Applications** section to view your application configuration
+  4. In the project dashboard, navigate to the **Secrets and configmaps** section to view your created secrets
+- Resource Groups section: https://cloud.ibm.com/account/resource-groups
 
-  &#35; module.code_engine_app.ibm_code_engine_app.ce_app will be created
-  &#43; resource "ibm_code_engine_app" "ce_app" {
-      &#43; name                          = "ai-agent-for-loan-risk"
-      &#43; image_reference               = "private.us.icr.io/txc-2025-crn/ai-agent-for-loan-risk"
-      &#43; endpoint                      = (known after apply)
-    }
+You can also view all your resources in one place: https://cloud.ibm.com/resources (type your prefix in the name filter to find your resources)
 
-...
-
-Plan: 7 to add, 0 to change, 0 to destroy.
-
-Changes to Outputs:
-  &#43; app_url           = (known after apply)
-  &#43; ce_project_id     = (known after apply)
-  &#43; output_image      = "private.us.icr.io/txc-2025-crn/ai-agent-for-loan-risk"
-  &#43; resource_group_id = (known after apply)
-</pre>
-
-```bash
-terraform apply
-```
-
-> Applies the changes required to reach the desired state of the configuration.  
-> When prompted, type `yes` to confirm and begin provisioning.
-
-<pre style="font-size: 9px;">
-terraform apply
-
-Terraform used the selected providers to generate the following execution plan...
-
-Do you want to perform these actions?
-  Terraform will perform the actions described above.
-  Only 'yes' will be accepted to approve.
-
-  Enter a value: yes
-
-module.resource_group.ibm_resource_group.resource_group[0]: Creating...
-module.code_engine_project.ibm_code_engine_project.ce_project: Creating...
-...
-module.code_engine_app.ibm_code_engine_app.ce_app: Creation complete after 1m1s
-
-Apply complete! Resources: 7 added, 0 changed, 0 destroyed.
-
-Outputs:
-
-app_url = "https://ai-agent-for-loan-risk.1xz02kcijske.us-south.codeengine.appdomain.cloud"
-ce_project_id = "ed7e8ae7-fa42-4af6-8c54-66e00ea13186"
-output_image = "private.us.icr.io/txc-2025-crn/ai-agent-for-loan-risk"
-resource_group_id = "82a136aaa2a44964a5b45e9370a93ff2"
-</pre>
-
----
-> ✅ **Success:** After running the above commands, your IBM Cloud resources have been **successfully provisioned**. You can view these resources in the IBM Cloud Console.
-
-- [Resource Groups](https://cloud.ibm.com/account/resource-groups) section of the IBM Cloud.
-- [Container Registry](https://cloud.ibm.com/containers/registry/namespaces) section of the IBM Cloud.
-- [Code Engine Project](https://cloud.ibm.com/containers/serverless/projects) section of the IBM Cloud.
-  - In the project dashboard, navigate to the **Secrets and configmaps** section from the left-hand menu to view the configuration of your created `secret`.
-  - In the project dashboard, navigate to the **Image builds** section from the left-hand menu to view the configuration of your created `image build`.
-  - In the project dashboard, navigate to the **Applications** section from the left-hand menu to view the configuration of your created `application`.
+> ✅ **Success:** After the apply completes, your IBM Cloud resources will be successfully provisioned.
 
 > 🌐 To **access** the **deployed Loan Risk AI Agents sample application**, look at the **`app_url`** output from the `terraform apply` command — it provides the public URL of the running application. You can navigate to application URL (`app_url`) in your browser to access and test the AI Agent for Loan Risk application UI.
-Note that it may take a short while for the application to fully load after deployment, so if the page doesn’t respond immediately, give it a moment before refreshing.
+Note that it may take up to 1 minute for the application to fully load after deployment, so if the page doesn't respond immediately, give it a moment before refreshing.
 
 ## Local Infrastructure Cleanup
 
@@ -446,15 +320,12 @@ Now that you've successfully tested your infrastructure automation by deploying 
 3. **Review the resources** that will be destroyed and confirm by typing `yes` when prompted
 4. **Wait for the destruction process** to complete
 
-> ⚠️ **Important:** Make sure you're in the correct directory containing your Terraform configuration files before running `terraform destroy`. This command will permanently remove all infrastructure resources managed by that Terraform state.
 
 > 📝 **Note:** This cleanup only removes the resources you deployed locally for testing. Later in the lab, when you deploy via the catalog using IBM Cloud Projects, you'll learn how to clean up those resources as well.
 
 ## Conclusion
 
-You've successfully built and tested custom Terraform automation for the **Loan Risk AI Agents sample application**. You've learned how to create infrastructure configurations using enterprise-grade modules and validate your automation through local testing.
-
-In the next step, you'll learn how to package this automation as a deployable architecture and publish it to the IBM Cloud Catalog for organization-wide use.
+You've successfully built and tested custom Terraform automation for the AI application using enterprise-grade modules. In the next step, you'll package this automation as a deployable architecture and publish it to the IBM Cloud Catalog for organization-wide use.
 
 ---
 

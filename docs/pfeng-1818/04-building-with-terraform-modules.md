@@ -1,6 +1,13 @@
 # 🏗️ Building the Infrastructure with Terraform Modules
 
-Now that the environment is set up, you will build the hub-and-spoke infrastructure step-by-step. You will add blocks of Terraform code to your `main.tf` file to provision the necessary resources.
+Now that the environment is set up, you will build the hub-and-spoke infrastructure step-by-step. You will add blocks of Terraform code to the appropriate files to provision the necessary resources. Remember that you have the following files to work with:
+
+- `main.tf` - For resource and module definitions
+- `outputs.tf` - For output values
+- `variables.tf` - For variable declarations (already set up in the previous step)
+- `providers.tf` - For provider configuration (already set up in the previous step)
+- `version.tf` - For Terraform version constraints (already set up in the previous step)
+- `terraform.tfvars` - For variable values (will remain empty as we're using environment variables)
 
 ## What are `terraform-ibm-modules`?
 
@@ -237,7 +244,13 @@ At this point, you have defined the core network infrastructure: two VPCs and a 
 
     Terraform will ask for your confirmation. Type `yes` and press Enter.
 
-    The provisioning process for the network can take a few minutes (typically less than 10 minutes). Once complete, you can go to the [VPC console](https://cloud.ibm.com/vpc-ext/network/vpcs) in the Target Deployment IBM Cloud Account to see your newly created `management` and `workload` VPCs.
+    The provisioning process for the network can take a few minutes (typically 3 to 4 minutes).
+
+Once the apply starts, you can go to the VPC console to see your newly created resources. Copy the following URL and open it in the private browser window where you are logged into your target IBM Cloud account: `https://cloud.ibm.com/infrastructure/network/vpcs`
+
+> **Note:** Ensure the region is set to **us-south** on that page.
+
+You should start to see the new resources appearing (VPCs). You can refresh the page periodically. Once they appear, you can click on the management or workload VPC to explore their details.
    
 ---
 
@@ -247,7 +260,7 @@ Now that the network foundation is in place, you will add the compute resources 
 
 You need an SSH key pair to securely connect to the virtual servers. The following code will generate a new key pair, upload the public key to IBM Cloud, and save the private key locally to a file named `<YOUR-PREFIX>_ssh_private_key.pem`.
 
-Add the following code to `main.tf`:
+Add the following resource code to `main.tf`:
 
 ```hcl
 # Generate SSH key pair for secure server access
@@ -263,29 +276,33 @@ resource "local_file" "ssh_private_key" {
   file_permission = "0600" # Read-only for owner
 }
 
-# ONLY outputs private file name
-output "ssh_private_key_file_name" {
-  description = "Private key file name."
-  value = "${var.prefix}_ssh_private_key.pem"
-}
-
 resource "ibm_is_ssh_key" "ssh_key" {
   name       = "${var.prefix}-ssh-key"
   public_key = tls_private_key.ssh_key.public_key_openssh
 }
 ```
+
+And add the following to your `outputs.tf` file:
+
+```hcl
+output "ssh_private_key_file_name" {
+  description = "Private key file name."
+  value = "${var.prefix}_ssh_private_key.pem"
+}
+```
+
 > **Security Note:** Saving private keys directly to the filesystem is done here for lab simplicity. In a production environment, you should use a secure secret management tool like IBM Cloud Secrets Manager.
 
 ## Step 7: Provision the Jumpbox Server
 
-Now, provision the **jumpbox server** in the Management VPC. It will have a public IP address so you can connect to it.
+Now, provision the **jumpbox server** in the Management VPC. It will have a public IP address so you can connect to it. This leverages the [VSI landing zone module](https://github.com/terraform-ibm-modules/terraform-ibm-landing-zone-vsi) to accelerate the deployment.
 
 Add the following code to `main.tf`:
 
 ```hcl
 module "jumpbox_server" {
   source                = "terraform-ibm-modules/landing-zone-vsi/ibm"
-  version               = "v5.4.18"
+  version               = "v5.5.0"
   create_security_group = true
   image_id              = "r006-ca75f893-8675-47b0-b35d-9f847abc95e3" # Debian 12 minimal
   enable_floating_ip    = true
@@ -334,7 +351,11 @@ module "jumpbox_server" {
   vpc_id            = module.management_vpc.vpc_id
   vsi_per_subnet    = 1
 }
+```
 
+And add the following to your `outputs.tf` file:
+
+```hcl
 output "jumpbox_public_ip" {
   description = "Public IP address to connect to the jumpbox server"
   value       = module.jumpbox_server.fip_list[0].floating_ip
@@ -356,7 +377,7 @@ Add the following code to `main.tf`:
 ```hcl
 module "workload_servers" {
   source                = "terraform-ibm-modules/landing-zone-vsi/ibm"
-  version               = "v5.4.18"
+  version               = "v5.5.0"
   create_security_group = true
   image_id              = "r006-ca75f893-8675-47b0-b35d-9f847abc95e3" # Debian 12 minimal
   security_group = {
@@ -466,7 +487,11 @@ module "workload_servers" {
   vpc_id            = module.workload_vpc.vpc_id
   vsi_per_subnet    = 1
 }
+```
 
+And add the following to your `outputs.tf` file:
+
+```hcl
 output "workload_server_private_ips" {
   description = "Private IP addresses of the workload servers"
   value       = module.workload_servers.list[*].ipv4_address
@@ -481,7 +506,7 @@ To expose the application to the internet, you will create a **public load balan
 This configuration demonstrates a common and secure cloud design pattern called **Load Balancer Chaining**.
 -   The **Public Load Balancer** acts as the secure entry point. It lives in the Management VPC and is the only component exposed to the public internet.
 -   It then forwards traffic to the **Private Load Balancer** in the isolated Workload VPC.
--   This ensures that the workload servers are never directly exposed to the internet, significantly reducing the attack surface.
+-   This ensures that no network resources in the workload VPC are publicly exposed. In this case, we do not want to have a load balancer living in the private VPC being publicly exposed.
 
 Add the following code to `main.tf`:
 
@@ -509,7 +534,7 @@ resource "ibm_is_lb_pool_member" "private_lb_target" {
   lb             = ibm_is_lb.public_load_balancer.id
   pool           = element(split("/", ibm_is_lb_pool.public_lb_pool.id), 1)
   port           = 80
-  target_address = "10.10.4.6" # Private load balancer IP in workload VPC zone 2
+  target_address = module.workload_servers.load_balancers_metadata["${var.prefix}-workload-${var.prefix}-private-lb-lb"].private_ips[0] # Private load balancer IP
 }
 
 resource "ibm_is_lb_listener" "public_lb_listener" {
@@ -534,7 +559,11 @@ module "public_lb_security_group" {
   vpc_id     = module.management_vpc.vpc_id
   target_ids = [ibm_is_lb.public_load_balancer.id]
 }
+```
 
+And add the following to your `outputs.tf` file:
+
+```hcl
 output "public_load_balancer_hostname" {
   description = "Public hostname to access the application through the load balancer"
   value       = ibm_is_lb.public_load_balancer.hostname
@@ -543,7 +572,7 @@ output "public_load_balancer_hostname" {
 
 ## Step 10: Provision Virtual Private Endpoints (VPEs)
 
-To allow the private workload servers to securely access IBM Cloud services like Cloud Object Storage, you will create a **Virtual Private Endpoint (VPE)**. This keeps traffic on the private IBM Cloud network.
+To allow the private workload servers to securely access IBM Cloud services like Cloud Object Storage, you will create a **Virtual Private Endpoint (VPE)**. A VPE is a local representation (IP address) of a remote IBM Cloud service within your VPC. This keeps traffic on the private IBM Cloud network. The code also configures a security group for the VPE, allowing all resources in the workload VPC (in this case, the VSIs) to access it.
 
 Add the following code to `main.tf`:
 
@@ -582,7 +611,11 @@ module "workload_vpes" {
     }
   ]
 }
+```
 
+And add the following to your `outputs.tf` file:
+
+```hcl
 output "workload_vpe_ips" {
   description = "Private IP addresses of VPC endpoints for cloud services"
   value       = module.workload_vpes.vpe_ips
@@ -615,7 +648,11 @@ module "cos_storage" {
     role                      = "Reader"
   }]
 }
+```
 
+And add the following to your `outputs.tf` file:
+
+```hcl
 output "cos_instance_crn" {
   description = "COS instance CRN"
   value       = module.cos_storage.cos_instance_crn
@@ -641,7 +678,7 @@ output "cos_secret_access_key" {
 
 ## Step 12: Deploy the Compute and Service Resources
 
-Your `main.tf` file is now complete with all compute, load balancing, and storage resources. Let's deploy them.
+Your Terraform files are now complete with all compute, load balancing, and storage resources. Let's deploy them.
 
 1. **Run `terraform init`**
     
@@ -671,13 +708,24 @@ Your `main.tf` file is now complete with all compute, load balancing, and storag
 
     Terraform will ask for your confirmation. Type `yes` and press Enter.
 
-    The provisioning process will take several minutes (typically 10-15 minutes).
+    The provisioning process will take several minutes (typically 10-15 minutes, with the load balancer taking the longest). This is a great opportunity to explore the resources being created in your target environment.
+
+> **Important**: For each of the links below, copy the URL and paste it into the private browser window where you are logged into your target IBM Cloud account. Ensure the region is set to **us-south** on each page.
+
+-   **Virtual Server Instances**: [https://cloud.ibm.com/infrastructure/compute/vs](https://cloud.ibm.com/infrastructure/compute/vs)
+-   **SSH Keys**: [https://cloud.ibm.com/infrastructure/compute/sshKeys](https://cloud.ibm.com/infrastructure/compute/sshKeys)
+-   **Load Balancers**: [https://cloud.ibm.com/infrastructure/network/loadBalancers](https://cloud.ibm.com/infrastructure/network/loadBalancers)
+-   **Security Groups**: [https://cloud.ibm.com/infrastructure/network/securityGroups](https://cloud.ibm.com/infrastructure/network/securityGroups)
+-   **VPC Network Topology**: [https://cloud.ibm.com/infrastructure/vpcLayout](https://cloud.ibm.com/infrastructure/vpcLayout)
+-   **Virtual Private Endpoints**: [https://cloud.ibm.com/infrastructure/network/endpointGateways](https://cloud.ibm.com/infrastructure/network/endpointGateways)
+
+> **Note:** It is actually possible to start the next section (Testing End-to-End Connectivity) before the `terraform apply` fully completes (after around 5 minutes). The remaining time is taken to complete the Load Balancer creation, which is not needed until Step 4 in Testing End-to-End Connectivity.
 
 4. **Review the Outputs**
 
     Once the `apply` is complete, Terraform will display all the outputs, including the jumpbox IP and load balancer hostname. You will use these in the next section to test your deployment.
 
-**Congratulations!** You have successfully built a secure hub-and-spoke architecture on IBM Cloud.
+**Congratulations!** You have successfully built a secure hub-and-spoke architecture on IBM Cloud. Now, let's test it and explore the topology in more detail.
 
 ---
 

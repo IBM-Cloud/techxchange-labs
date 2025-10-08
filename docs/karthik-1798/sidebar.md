@@ -1,5 +1,5 @@
 - [🛫 Overview](README.md)
-- [🚀 Configure Enviorment](10-config-env.md)
+- [🚀 Configure Environment](10-config-env.md)
 - [⚡️ Lets Deploy](20-lets-deploy.md)
 - [🎛 Portal Time](30-portal-time.md)
 - [🏁 Conclusion](40-conclusion.md)

@@ -8,7 +8,7 @@ You will package your Terraform code as a **Deployable Architecture (DA)** and p
 
 A private catalog is a way to share your Deployable Architectures within your IBM Cloud account.
 
-1. In the IBM Cloud console, navigate to **Manage > Catalogs**.
+1. In the IBM Cloud console (for your Target Deployment Account), navigate to **Manage > Catalogs**.
 2. Click **Create a catalog**.
 3. Enter a name for your catalog (e.g., `My Deployable Architectures`), a description (optional) and a resource group (e.g., `Default`).
 4. You can start with "No products" template.
@@ -22,7 +22,7 @@ Now, you will add your Terraform bundle to the private catalog.
 
 > **Note:** In a real-world scenario, the `.tar.gz` file is typically generated from a release in a source code repository like GitHub or GitLab. For this lab, a public URL to the bundle is provided to simplify the process.
 
-**Public URL:** https://github.com/IBM/deployable-architecture-iac-lab-materials/archive/refs/tags/v1.0.0.tar.gz 
+**Public URL:** https://github.com/IBM/deployable-architecture-iac-lab-materials/archive/refs/tags/v1.0.3.tar.gz
 
 1.  From your private catalog's page, click **Add product**.
 2.  Configure the product details:
@@ -39,19 +39,7 @@ After a few moments, your Deployable Architecture will be onboarded and will be 
 
 ![Product Overview](images/product-overview.png)
 
-## Step 3: Configure the Input Variables
-
-The final step is to configure how the input variables (`prefix` and `ibmcloud_api_key`) will be handled when someone deploys the architecture.
-
-1.  From the product overview page, click on the version number to go to the version details.
-2.  In the **Configure Version**, select the **Step 3: Configure the deployment** tab.
-3.  Click on the **Import input variables**, and you will see your two input variables listed. Select both of them and then **add**".
-    *   For the `ibmcloud_api_key`, we want to ensure it is treated as a secure secret.
-    *   For the `prefix`, we want to let the user provide their own.
-
-![Input Variables](images/input-variables.png)
-
-## Step 4: Mark as Pre-release
+## Step 3: Mark as Pre-release
 
 For this lab, we will skip the full validation process to save time. Instead, we will mark the version as a "pre-release". This makes it available for deployment without requiring the lengthy validation step.
 
@@ -60,7 +48,8 @@ For this lab, we will skip the full validation process to save time. Instead, we
 *   **Validated & Published**: The standard for production. A validated DA has been fully tested by the platform, including a successful `terraform apply`, cost estimation, and security scans. Publishing it makes it officially available in the catalog.
 
 To mark the version as pre-release:
-1.  From the product version page, click the **kebab menu (⋮)** next to the "Validate" button.
+1.  From the product overview page, click on the **Versions** on the left and then click on the version number to go to the version details.
+2.  Click the **kebab menu (⋮)** next to the "Validate" button.
 2.  Select **Ready to pre-release**.
 3.  Confirm the action.
 
@@ -68,24 +57,17 @@ To mark the version as pre-release:
 
 Your Deployable Architecture is now ready for use in projects.
 
+## Step 5: See Your Deployable Architecture in Action
 
-## 🔄 (Optional) Share the Deployable Architecture (DA) Across Other Private Catalogs or IBM Cloud Accounts
+Now that you've published your Deployable Architecture, see how it appears to users in your organization:
 
-You can share your product version with:
-- Other private catalogs within the same IBM Cloud account.
-- Other IBM Cloud accounts you own or collaborate with.
+1. Navigate to the **Catalog** in the IBM Cloud console.
+2. On the left-hand side, under **My private catalogs**, select the name of the private catalog you created earlier (e.g., `My Deployable Architectures`).
+3. You should see your Deployable Architecture listed and ready for use.
+4. Click on your Deployable Architecture to open it. This view shows what users in your organization will see - a description, architecture diagram, and a "Configure and deploy" button that lets them deploy the entire hub-and-spoke topology without writing any Terraform code.
 
-To share the product
-1. On the **Product Overview** page, click the **lock icon** at the top and select **"View product visibility"**.
-![da-publish-lock.png](images/da-publish-lock.png)
-2. You’ll now see two sharing options:
-   - **Share with other catalogs in the same account** (if you have access to them). Select the checkbox.
-   - **Share with other IBM Cloud accounts.**
-3. To share with other accounts:
-   - Click **"Share with other accounts"**, then **"Add accounts"**.
-   - You can enter account IDs manually or select **"Add your accounts"** to pick from accounts you have access to.
-   - Depending on the visibility settings of the target account, an invitation may need to be accepted before the product appears there.
+This is the key benefit of creating a Deployable Architecture: your organization can now deploy this complex infrastructure consistently with just a few clicks, reducing deployment time while maintaining security standards.
 
 ---
 
-[Next: Consuming the DA in a Project](./07-consuming-da-multi-environment.md)
+[Next: Final Review and Conclusion](./08-final-review-cleanup.md)

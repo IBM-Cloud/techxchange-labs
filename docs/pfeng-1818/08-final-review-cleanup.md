@@ -1,4 +1,4 @@
-# ✅ Final Review and Cleanup
+# ✅ Final Review and Conclusion
 
 You have now completed the entire platform engineering lifecycle: from designing and automating a secure architecture to packaging it for others to consume.
 
@@ -14,37 +14,21 @@ Let's review the key milestones you achieved in this lab:
 
 This lab demonstrated how platform engineering bridges the gap between infrastructure complexity and the need for development agility, resulting in faster, more secure, and more consistent application deployments.
 
-## Clean Up Your Resources
+## Conclusion
 
-To avoid incurring further costs, it's important to destroy all the resources you created.
+Congratulations on completing the **Secure Hub-and-Spoke Architecture** lab!
 
-### If You Deployed from the IBM Cloud Catalog (Using a Project)
+You have successfully navigated the full lifecycle of a platform engineer: designing, automating, testing, and distributing a complex, secure, and reusable piece of cloud infrastructure.
 
-The easiest way to clean up is to delete the project. This will automatically destroy all the resources that were deployed as part of that project.
+By building and packaging this Deployable Architecture, you've seen firsthand how platform engineering provides a powerful force-multiplier for an organization, enabling development teams to move faster while ensuring that all infrastructure adheres to enterprise standards for security, resiliency, and governance.
 
-1.  Navigate to **Projects** in the IBM Cloud console.
-2.  Find the project you created (e.g., `development-environment`).
-3.  Click the three-dots menu (**...**) at the end of the row and select **Delete**.
-4.  You will be asked to confirm the deletion. This will trigger a `terraform destroy` command in the background.
+## What's Next?
 
-![Delete Project](images/delete-project.png)
+The architecture you built is a solid foundation. Here are a few ways you could expand on it:
 
-### If You Deployed from Your Local Machine (Using `terraform apply`)
+-   **Add Monitoring and Logging**: Integrate services like IBM Cloud Monitoring and Log Analysis to get visibility into the performance and health of your infrastructure and applications.
+-   **Enhance Security**: Implement more advanced security measures, such as adding a Web Application Firewall (WAF) or integrating with the IBM Cloud Security and Compliance Center.
+-   **Create More Variations**: Build different versions of your Deployable Architecture (e.g., a smaller, more cost-effective version for development or a larger, more resilient version for production).
+-   **Integrate with CI/CD**: Set up a CI/CD pipeline using a tool like Tekton or Jenkins to automatically test and deploy new versions of your Deployable Architecture.
 
-If you deployed the infrastructure directly from your terminal, you can destroy it from there as well.
-
-1.  Open your terminal and navigate to the root of the project directory.
-2.  Make sure your `TF_VAR_ibmcloud_api_key` and `TF_VAR_prefix` environment variables are still set.
-3.  Run the `terraform destroy` command:
-
-    ```bash
-    terraform destroy
-    ```
-
-4.  Terraform will show you a plan of all the resources that will be destroyed. Type `yes` to confirm.
-
-The cleanup process will take several minutes. Once it's complete, all the infrastructure you created during this lab will be removed from your account.
-
----
-
-[Next: Conclusion and Next Steps](./09-conclusion.md)
+Thank you for participating in this lab. We hope it has provided you with valuable, hands-on experience in building and managing enterprise-grade infrastructure on IBM Cloud.

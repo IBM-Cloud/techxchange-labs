@@ -28,6 +28,7 @@ From the **Configuration** tab for your specific application, Code Engine displa
    > Note that you can use also use configmap and secrets defined at the project level.
    1. Click **Add**.
 1. Click **Deploy**.
+   ![](images/30-click-deploy.png ':size=800')
 
 When you save the configuration changes, Code Engine deploys a new version of your application with the configuration changes.
 

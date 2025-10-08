@@ -1,47 +1,31 @@
-# Final Review and Cleanup
+# Conclusion
 
 ## What You've Built
 
-You've completed a realistic platform engineering workflow that organizations use to scale infrastructure deployment:
+You've completed a platform engineering workflow with two complementary approaches:
 
 **High-Code Approach**: Custom Terraform automation for the Loan Risk AI Agents application using terraform-ibm-modules, published as a deployable architecture in your private catalog.
 
-**Low-Code Approach**: Complete solution stack combining your custom automation with IBM-provided services (watsonx.ai, observability, security) using IBM Cloud Projects.
+**Low-Code Approach**: Solution stack combining your custom automation with IBM-provided services (watsonx.ai, observability, security) using IBM Cloud Projects.
 
-**Impact**: Development teams can now deploy complex AI infrastructure through simple web forms while following your established security and compliance patterns.
+## Platform Engineering Capabilities
 
-## Cleanup Instructions
+In this lab, you've learned how to:
 
-Clean up resources to avoid ongoing costs:
+- **Build** custom infrastructure automation using enterprise-grade Terraform modules
+- **Publish** automation as no-code deployable architectures
+- **Compose** multiple solutions into complete infrastructure stacks
+- **Apply** these patterns to containerized workloads and infrastructure components
 
-### IBM Cloud Project Resources
+## What's Next
 
-1. Go to [IBM Cloud Projects](https://cloud.ibm.com/projects) → `txc-project`
-2. For each configuration (observability-demo, watsonx-ai-saas-demo, agentic-ai-demo):
-   - Click configuration name → **Actions** → **Destroy resources**
-   - Wait for completion before proceeding to next configuration
+Consider how you can apply these skills in your own projects:
 
-> ⚠️ **Important:** Wait for each configuration to complete destruction before proceeding to the next one to avoid dependency conflicts.
+- **Start Small**: Begin with one application or team
+- **Iterate**: Gather feedback and refine your patterns
+- **Expand**: Extend to more teams and use cases
+- **Govern**: Add appropriate controls as you scale
 
-### Private Catalog
+---
 
-1. Go to [IBM Cloud Catalogs](https://cloud.ibm.com/content-mgmt/catalogs) → `txc-catalog`
-2. Delete your deployable architecture version and product
-3. Delete the `txc-catalog` itself
-
-### Local Files (if applicable)
-
-```bash
-cd ai-agent-for-loan-risk
-terraform destroy
-```
-
-## Next Steps
-
-Apply these patterns in your organization:
-
-- **Expand**: Create deployable architectures for other application patterns and environments
-- **Govern**: Add compliance scanning, approval workflows, and cost controls  
-- **Scale**: Train teams and establish feedback loops for continuous improvement
-
-You now have the practical skills to build platform engineering solutions that enable infrastructure deployment at organizational scale.
+Thank you for participating in this lab! We hope you found it valuable and that you'll apply these platform engineering techniques in your own projects. Your feedback helps us continue to improve our educational materials.

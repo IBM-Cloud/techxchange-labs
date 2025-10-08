@@ -85,7 +85,7 @@ Repeat above steps with:
 ## Step 4: Configure Replication Rules
 
 1. Navigate to `my-coslab-xx-source > source-bucket-coslab-xx`.  
-2. Go to **Confirguration** tab → **Bucket replication rules** → **Setup replication**  
+2. Go to **Data management** tab → **Bucket replication rules** → **Setup replication**  
 3. Configure:  
    - **Rule details:**  
      - **Replication source**  

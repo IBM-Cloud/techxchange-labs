@@ -21,90 +21,19 @@ This guide demonstrates how to configure and use Rclone to replicate objects bet
 
 ## Login to IBM Cloud using the credentials provided
 
-1. Log in to the [IBM Cloud Console] https://cloud.ibm.com/authorize/techxchange_2024/TkQjwl2TOB 
-2. Navigate to **Manage > Access (IAM) > API keys**.
-3. Click **Create an IBM Cloud API key**.
-4. Enter a **name** and **description** for your key.
-5. Choose what action IBM Cloud should take if the key is leaked (Disable, Delete, or None).
-6. Click **Create**.
-7. Once the key appears:
+1. Open a Notepad in your machine
+2. Log in to the [IBM Cloud Console] https://cloud.ibm.com/authorize/techxchange_2024/TkQjwl2TOB 
+3. Navigate to **Manage > Access (IAM) > API keys**.
+4. Click **Create an IBM Cloud API key**.
+5. Enter a **name** and **description** for your key.
+6. Choose what action IBM Cloud should take if the key is leaked (Disable, Delete, or None).
+7. Click **Create**.
+8. Once the key appears:
     - Click **Show** to reveal the API key.
-    - Use **Copy** to put the key on your clipboard.
+    - Use **Copy** to put the key on your Notepad/clipboard.
     - Optionally, use **Download** to save the key as a file.
 
 > **Note:** The API key is only available to copy or download at the moment of creation. Lost keys cannot be retrieved; you must create a new one if needed.
-
-
-## Login to VPC VSI Using Private SSH Key in IBM Cloud Shell
-
-Follow these steps to securely download, configure, and use your private SSH key in IBM Cloud Shell.
-
-### 1. Download the SSH Private Key
-- From **Hamburger Menu -> Select Resource List->Storage → vsi-prv-keys → coslab-keys**  
-- Download the file named **coslab-xx.prv**
-
-### 2. Open the Private Key on Your Local Machine
-- Open the downloaded file (**coslab-xx.prv**) in a text editor.  
-- Copy the *entire* contents, including:
-
-```
-
------BEGIN OPENSSH PRIVATE KEY-----
-...
------END OPENSSH PRIVATE KEY-----
-
-```
-
-> **Never share your private key with anyone.**
-
-### 3. Create a Key File in IBM Cloud Shell
-Open Cloud Shell from IBM Cloud
-Create a new file in IBM Cloud Shell using `nano`:
-
-```
-
-nano ~/my_vpc_key
-
-```
-
-### 4. Paste the Private Key
-- Paste the copied private key contents into the file.  
-- Save and exit:  
-  *Press `Ctrl+X`, then `Y`, then `Enter` to confirm the filename.*
-
-### 5. Set Secure Permissions
-SSH requires strict permissions on the private key file:
-
-```
-
-chmod 600 ~/my_vpc_key
-
-```
-
-### 6. Next Steps: Connect With The Key
-
-Test SSH connectivity to your server using the custom key file:
-
-```
-
-ssh -i ~/my_vpc_key root@<hostIP>
-
-
-hostIP is found from
-Infrastructure -> Compute -> Virtual server instances
-Click on coslab-XX-vsi
-Click Networking tab
-Take note of Floating IP address
-
-Answer yes when prompted
-```
-
-- Replace `<user>` with your username and `<host>` with the server's IP address or hostname.[web:2]
-- If the key is accepted, you will be authenticated without a password prompt.
-
----
-
-*Your SSH private key is now ready for secure use within IBM Cloud Shell. If you encounter permission errors, verify your key file permissions and try again.*
 
 
 
@@ -115,13 +44,29 @@ Answer yes when prompted
 2. Search for **Object Storage**.  
 3. Click **Object Storage**.  
 4. Configure:
-   - Service name: `my-coslab-xx`  
+   - Service name: `my-coslab-xx`  (xx is your lab number)
    - Resource group: *coslab-1828-lab*  
 5. Click **Create**.  
 
 ---
 
-## Step 2: Create Buckets
+### Generate IBM Cloud COS HMAC Credentials
+
+1. Go to IBM Cloud Console → Object Storage
+2. Select your COS instance (`my-coslab-xx`)
+3. Go to **Service credentials** → Click **New credential**
+4. Under Create Credentials 
+   - Name: `cred-coslab-xx`  
+   - Role: `Writer`  
+   - Select Service ID (Optional): `Auto Generated`  
+   - Include HMAC Credential: `On`  
+5. Select Add
+
+Expand the Service Credentials to see the access_key_id, secret_access_key and resource_instance_id which will be need for the next step to configure rclone ( copy these to a Notepad)
+
+---
+
+## Step 2 : Create Buckets
 
 ### Source Bucket (Chennai 01)
 1. Navigate to `my-coslab-xx`.  
@@ -148,9 +93,83 @@ Answer yes when prompted
    - Storage class: `Standard`  
 4. Click **Create bucket**.  
 
+
+
 ---
 
-## Step 3: Install Rclone
+## Step 3 : Login to VPC VSI Using Private SSH Key in IBM Cloud Shell
+
+Follow these steps to securely download, configure, and use your private SSH key in IBM Cloud Shell.
+
+### Download the SSH Private Key
+- From **Hamburger Menu -> Select Resource List->Storage → vsi-prv-keys → coslab-keys**  
+- Download the file named **coslab-xx.prv** (xx is your lab number given)
+
+### Open the Private Key on Your Local Machine
+- Open the downloaded file (**coslab-xx.prv**) in a text editor.  
+- Copy the *entire* contents, including:
+
+```
+
+-----BEGIN OPENSSH PRIVATE KEY-----
+...
+-----END OPENSSH PRIVATE KEY-----
+
+```
+
+> **Never share your private key with anyone.**
+
+### Create a Key File in IBM Cloud Shell
+Open Cloud Shell from IBM Cloud
+Create a new file in IBM Cloud Shell using `nano`:
+
+```
+
+nano ~/my_vpc_key
+
+```
+
+### Paste the Private Key
+- Paste the copied private key contents into the file.  
+- Save and exit:  
+  *Press `Ctrl+X`, then `Y`, then `Enter` to confirm the filename.*
+
+### Set Secure Permissions
+SSH requires strict permissions on the private key file:
+
+```
+
+chmod 600 ~/my_vpc_key
+
+```
+
+### Next Steps: Connect With The Key
+
+Test SSH connectivity to your server using the custom key file:
+
+```
+
+ssh -i ~/my_vpc_key root@<hostIP>
+
+
+hostIP is found from
+Infrastructure -> Compute -> Virtual server instances (make sure region is Dallas(us-south))
+Click on coslab-XX-vsi
+Click Networking tab
+Take note of Floating IP address
+
+Answer yes when prompted
+```
+
+- Replace `<host>` with the server's IP address or hostname.[web:2]
+- If the key is accepted, you will be authenticated without a password prompt.
+
+---
+
+*Your SSH private key is now ready for secure use within IBM Cloud Shell. If you encounter permission errors, verify your key file permissions and try again.*
+
+
+## Step 4: Install Rclone
 
 ### Linux/macOS
 
@@ -189,19 +208,6 @@ Replace `{region}` with your actual region (e.g., `us-south`, `eu-de`, etc.)
 
 ## Step 5: Create Rclone Configuration
 
-### Generate IBM Cloud COS HMAC Credentials
-
-1. Go to IBM Cloud Console → Object Storage
-2. Select your COS instance (`my-coslab-xx`)
-3. Go to **Service credentials** → Click **New credential**
-4. Under Create Credentials 
-   - Name: `cred-coslab-xx`  
-   - Role: `Writer`  
-   - Select Service ID (Optional): `Auto Generated`  
-   - Include HMAC Credential: `On`  
-5. Select Add
-
-Expand the Service Credentials to see the access_key_id, secret_access_key and resource_instance_id which will be need for the next step to configure rclone
 
 ### Configure Rclone
 
@@ -344,11 +350,11 @@ ibm-coslab-xx-destination:destination-bucket-coslab-xx
 # Check file counts
 
 rclone size ibm-coslab-xx-source:source-bucket-coslab-xx
-rclone size ibm-coslab-xx-destination:estination-bucket-coslab-xx
+rclone size ibm-coslab-xx-destination:destination-bucket-coslab-xx
 
 # Compare checksums
 
-rclone check ibm-coslab-xx-source:source-bucket-coslab-xx ibm-coslab-xx-destination:estination-bucket-coslab-xx
+rclone check ibm-coslab-xx-source:source-bucket-coslab-xx ibm-coslab-xx-destination:destination-bucket-coslab-xx
 ```
 
 ### Monitor Transfer Speed

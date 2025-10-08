@@ -41,7 +41,7 @@ Backup Vaults provide a **secure, scalable, and cost-effective** solution for st
 5. Click **Create** .
 ---
 
-### 4. Monitor and Maintain
+### 3. Monitor and Maintain
 - Set up **Monitoring Alerts** for storage usage and API activity
 - Use **Activity Tracker** to audit access and changes
 - Regularly **test restore operations** to ensure data recoverability

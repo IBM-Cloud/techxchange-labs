@@ -154,7 +154,7 @@ ssh -i ~/my_vpc_key root@<hostIP>
 
 hostIP is found from
 Infrastructure -> Compute -> Virtual server instances (make sure region is Dallas(us-south))
-Click on coslab-XX-vsi
+Click on coslab-vsi-xx (where xx is the lab number)
 Click Networking tab
 Take note of Floating IP address
 

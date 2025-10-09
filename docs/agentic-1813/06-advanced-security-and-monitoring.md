@@ -250,7 +250,7 @@ You can optionally deploy the stack to verify that everything works correctly fr
 1. Click **Done** and then **Save** at the top left of the screen
 1. After a few seconds, click the ***View stack configurations** button
 1. Click the kebab (three dots) on the top right of the screen to expand the menu, and click **Validate** to start the deployment process
-1. Monitor the deployment progress on the resulting page. The deployment takes approximately 10 minutes to complete, but you don't need to wait - you've completed the lab and understand the process.
+1. Monitor the deployment progress on the resulting page. The deployment takes approximately 20 minutes to complete, but you don't need to wait - you've completed the lab and understand the process.
 
 > **Note:** Project is now going to deploy the full infrasutructure stack to support the application, including deployment of observability capabilities to monitor the application, watsonx.ai to provide the AI capabilities, and the application itself.
 

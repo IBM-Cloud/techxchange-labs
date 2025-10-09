@@ -309,22 +309,6 @@ You can also view all your resources in one place: https://cloud.ibm.com/resourc
 > 🌐 To **access** the **deployed Loan Risk AI Agents sample application**, look at the **`app_url`** output from the `terraform apply` command — it provides the public URL of the running application. You can navigate to application URL (`app_url`) in your browser to access and test the AI Agent for Loan Risk application UI.
 Note that it may take up to 1 minute for the application to fully load after deployment, so if the page doesn't respond immediately, give it a moment before refreshing.
 
-## Local Infrastructure Cleanup
-
-Now that you've successfully tested your infrastructure automation by deploying it, it's important to clean up the resources to avoid unnecessary costs.
-
-1. **Navigate to your Terraform project directory** (if not already there)
-2. **Run the destroy command:**
-
-   ```bash
-   terraform destroy
-   ```
-
-3. **Review the resources** that will be destroyed and confirm by typing `yes` when prompted
-4. **Wait for the destruction process** to complete
-
-
-> 📝 **Note:** This cleanup only removes the resources you deployed locally for testing. Later in the lab, when you deploy via the catalog using IBM Cloud Projects, you'll learn how to clean up those resources as well.
 
 ## Conclusion
 

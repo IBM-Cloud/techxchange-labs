@@ -54,11 +54,12 @@ Next, we'll add the Cloud automation for Key Protect DA to provide security serv
 
 1. Click **Catalog** in the header bar at top of screen
 1. In the Catalog search bar, type `Cloud automation for Key Protect` and select it from the results
-1. Select **Fully configurable** variation
+1. Select **Standard** variation
 1. Click **Configure and deploy**
-1. On the "Customize Cloud automation for Key Protect" screen, do NOT select "Cloud automation for account configuration"
 1. Select **Add to existing** from the left menu and choose `<your-initials>-txc-project` from the dropdown
-1. Enter `key-protect-demo` as the configuration name and click **Add**
+1. Enter `key-protect-demo` as the configuration name and click **Next**
+1. On the "Customize Cloud automation for Key Protect" screen, do NOT select "Cloud automation for account configuration"
+1. Click **Add to project**
 1. On the Edit key-protect-demo page, we won't be making any changes at this point
 
 ### Add and Configure Cloud automation for Observability
@@ -70,7 +71,9 @@ Finally, we'll add the Cloud automation for Observability DA to provide monitori
 1. Select `Instances` variation and version `v3.1.26`, then click **Configure and deploy**
 1. Select **Add to existing** from the left menu and choose `<your-initials>-txc-project` from the dropdown
 1. Enter `observability-demo` as the configuration name and click **Next**
-1. **Important**: Unselect **Cloud Automation for Key Protect** as we've already added it separately
+1. **Important**:
+   - Unselect **Cloud Automation for Key Protect** as we've already added it separately
+   - Do NOT select **Cloud automation for account configuration**
 1. Click **Add to project**
 1. On the Edit observability-demo page, we won't be making any changes at this point.
 

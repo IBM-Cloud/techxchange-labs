@@ -155,7 +155,7 @@ Next, let's connect the `Cloud foundation for AI ops and governance with watsonx
 
 ### Wire Observability with Key Protect
 
-Finally, let's connect the Observability DA with the `Cloud automation for Key Protect` DA to enable integrated key management:
+Finally, let's connect the `Cloud automation for Observability` DA with the `Cloud automation for Key Protect` DA to enable integrated key management:
 
 1. In the console, click **☰** in the top-left corner, then **Projects**
 1. Select your project `<your-initials>-txc-project`
@@ -172,6 +172,31 @@ Finally, let's connect the Observability DA with the `Cloud automation for Key P
     - Click **OK** to confirm the reference selection  
       > **Note**: You may see an error "The reference can't be found." This is expected as the DA is not deployed yet.
 1. Click **Done**, then click **Save** in the top-right corner of the page to save your changes
+
+### Wire Stack input variables
+
+Sometimes, the same stack-level input variables are **required** for certain Deployment Architectures (DAs), while they are **optional** for others. Additionally, the input names might differ between DAs.
+
+To ensure consistent values across these inputs, we will **wire them at the stack level**:
+
+1. In the console, click **☰** in the top-left corner, then **Projects**
+1. Select your project `<your-initials>-txc-project`
+1. Navigate to the **Configuration** tab
+1. Open the **options menu (⋮)** on the configuration row for the stack and click **Edit**
+1. On the Edit secure-ai-stack page, click **Next** twice to go to the inputs page
+1. Toggle **Optional inputs** to enable and enter the optional inputs:
+    - Set **resource_prefix** by wiring it to the **prefix** input to reuse the same value. Hover over the **resource_prefix** input field and click on **Add a reference**. A new popup will open.
+        - For **Source**, select `Configuration`.
+        - For **Name**, choose your stack named `secure-ai-stack`.
+        - Set **Category** to `Inputs`.
+        - For **Property**, select `prefix`.
+        - Click **OK** to confirm the reference selection.
+    - Set **resource_group** by wiring it to the **resource_group_name** input to reuse the same value. Hover over the **resource_group** input field and click on **Add a reference**. A new popup will open.
+        - For **Source**, select `Configuration`.
+        - For **Name**, choose your stack named `secure-ai-stack`.
+        - Set **Category** to `Inputs`.
+        - For **Property**, select `resource_group_name`.
+        - Click **OK** to confirm the reference selection.
 
 ### Dependency Wiring Overview
 
@@ -195,6 +220,7 @@ Now that you've created and configured your stack, you can share it with others 
 1. Open the **options menu (⋮)** on the configuration row for the stack and click **Add to private catalog**
 1. In the catalog details page:
    - Select your private catalog: `<your-initials>-txc-catalog`
+   - Select `Add a new product`
    - Enter a product name: `Enterprise-Ready AI Risk Evaluation Platform`
    - Select category: `AI/Machine Learning`
    - Click **Next** and then **Add** to complete the process
@@ -216,23 +242,14 @@ You can optionally deploy the stack to verify that everything works correctly fr
 1. Select your project `<your-initials>-txc-project`
 1. Click **Add** to complete the process
 1. Enter the required inputs:
-   - **API key**: copy paste your existing IBM Cloud API key
-   - **prefix**: `<your-initials>-stack` (to avoid a clash in naming with the previously deployed code engine instance in part 1 of this lab)
-   - **resource_group**: `Default`
-   - 
-   - region: `us-south`
-1. Toggle **Optional inputs** to enable and enter the optional inputs:
-   - **use_existing_resource_group**: `true`
-   - Set **resource_prefix** by wiring it to the **prefix** input to reuse the same value.  
-     Hover over the **resource_prefix** input field and click on **Add a reference**. A new popup will open.
-       - For **Source**, select `Configuration`.
-       - For **Name**, choose your stack name.
-       - Set **Category** to `Inputs`.
-       - For **Property**, select `prefix`.
-       - Click **OK** to confirm the reference selection.
+    - **API key**: copy paste your existing IBM Cloud API key
+    - **prefix**: `<your-initials>-stack` (to avoid a clash in naming with the previously deployed code engine instance in part 1 of this lab)
+    - **resource_group**: `Default`
+1. Toggle **Optional inputs** to enable and enter the optional input:
+    - Set **use_existing_resource_group** to `true`.
 1. Click **Done** and then **Save** at the top left of the screen
 1. After a few seconds, click the ***View stack configurations** button
-1. Click the kebab (three dots) on the top right of the screen to expand the menu, and click **Validate and deploy** to start the deployment process
+1. Click the kebab (three dots) on the top right of the screen to expand the menu, and click **Validate** to start the deployment process
 1. Monitor the deployment progress on the resulting page. The deployment takes approximately 10 minutes to complete, but you don't need to wait - you've completed the lab and understand the process.
 
 > **Note:** Project is now going to deploy the full infrasutructure stack to support the application, including deployment of observability capabilities to monitor the application, watsonx.ai to provide the AI capabilities, and the application itself.

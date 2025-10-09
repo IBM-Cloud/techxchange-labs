@@ -1,6 +1,6 @@
 # Complete Solution Stack with Low-Code Composition
 
-You've built a custom deployable architecture using the high-code approach. Now you'll learn the **low-code approach** by combining your custom DA with pre-built IBM Cloud services DAs to create a complete solution stack through visual interfaces and reference connections - no code required.
+You've built a custom deployable architecture using the high-code approach. Now you'll learn the **low-code approach** by combining your custom DA with pre-built IBM Cloud service DAs to create a complete solution stack through visual interfaces and reference connections - no code required.
 
 > 💡 **Simple Goal:** Combine four deployable architectures into one complete solution:
 > - Your custom Code Engine DA (application workload)
@@ -26,7 +26,7 @@ Start by creating a new IBM Cloud project named `<your-initials>-txc-project` th
 
 ### Add and Configure your custom Code Engine DA
 
-In this step, we'll add your custom Code Engine DA to the project. This will be the application workload component of your solution.
+In this step, we'll add your `custom Code Engine` DA to the project. This will be the application workload component of your solution.
 
 1. Click **Catalog** in the header bar at top of screen
 1. In the Catalog search bar, type `Loan Risk Evaluation with Watsonx AI Agents` and select it from the results.
@@ -38,7 +38,7 @@ In this step, we'll add your custom Code Engine DA to the project. This will be 
 
 ### Add and Configure Cloud foundation for AI ops and governance with watsonx
 
-Now, we'll add the `Cloud foundation for AI ops and governance with watsonx` Deployment Architecture from the public IBM Cloud Catalog. This will serve as the foundation for our AI sample application.
+Now, we'll add the `Cloud foundation for AI ops and governance with watsonx` DA from the public IBM Cloud Catalog. This will serve as the foundation for our AI sample application.
 
 1. Click **Catalog** in the header bar at top of screen
 1. In the Catalog search bar, type `Cloud foundation for AI ops and governance with watsonx` and select it from the results.
@@ -50,30 +50,31 @@ Now, we'll add the `Cloud foundation for AI ops and governance with watsonx` Dep
 
 ### Add and Configure Cloud automation for Key Protect
 
-Next, we'll add the Cloud automation for Key Protect DA to provide security services for our solution.
+Next, we'll add the `Cloud automation for Key Protect` DA to provide security services for our solution.
 
 1. Click **Catalog** in the header bar at top of screen
 1. In the Catalog search bar, type `Cloud automation for Key Protect` and select it from the results
-1. Select **Standard** variation
+1. Select **Fully configurable** variation and select product version `v5.3.2`
 1. Click **Configure and deploy**
 1. Select **Add to existing** from the left menu and choose `<your-initials>-txc-project` from the dropdown
 1. Enter `key-protect-demo` as the configuration name and click **Next**
-1. On the "Customize Cloud automation for Key Protect" screen, do NOT select "Cloud automation for account configuration"
+1. On the `Customize Cloud automation for Key Protect` screen, **do NOT select** `Cloud automation for account configuration`  
+   This option configures account-wide settings, which isn't needed for this tutorial
 1. Click **Add to project**
 1. On the Edit key-protect-demo page, we won't be making any changes at this point
 
 ### Add and Configure Cloud automation for Observability
 
-Finally, we'll add the Cloud automation for Observability DA to provide monitoring and observability features.
+Finally, we'll add the `Cloud automation for Observability` DA to provide monitoring and observability features.
 
 1. Click **Catalog** in the header bar at top of screen
 1. In the Catalog search bar, type `Cloud automation for Observability` and select it from the results.
-1. Select `Instances` variation and version `v3.1.26`, then click **Configure and deploy**
+1. Select `Instances` variation and version `v3.1.33`, then click **Configure and deploy**
 1. Select **Add to existing** from the left menu and choose `<your-initials>-txc-project` from the dropdown
 1. Enter `observability-demo` as the configuration name and click **Next**
 1. **Important**:
-   - Unselect **Cloud Automation for Key Protect** as we've already added it separately
-   - Do NOT select **Cloud automation for account configuration**
+   - **Unselect** `Cloud Automation for Key Protect` as we've already added it separately
+   - **Do NOT** select `Cloud automation for account configuration`
 1. Click **Add to project**
 1. On the Edit observability-demo page, we won't be making any changes at this point.
 
@@ -89,10 +90,15 @@ Now package the entire stack as a reusable solution for application teams:
 1. Enter the name `secure-ai-stack` in the field and click **Continue**
 1. On the new page, you can expose inputs from each deployment architecture (DA) as input variables for the stack. These are the variables that end-users of the stack will initially see, so it's best to keep them simple and minimal. We will expose the following stack input variables:
    - Click on **agentic-ai-demo**, then go to **Required inputs**, and select **Stack level** for the `prefix` input variable
-   - Click on **watsonx-ai-saas-demo**, then go to **Required inputs**, and select **Stack level** for the `resource_group_name` input variable
-   - Click on **watsonx-ai-saas-demo**, then go to **Optional inputs**, and select **Stack level** for the `use_existing_resource_group` input variable
-   - Click on **key-protect-demo**, then go to **Required inputs**, and select **Stack level** for the `prefix`, `resource_group_name`, `region`, and `use_existing_resource_group` input variables
-   - Click on **observability-demo**, then go to **Required inputs**, and select **Stack level** for the `prefix` and `region` input variables
+   - Click on **watsonx-ai-saas-demo**:
+       - Go to **Required inputs**, and select **Stack level** for the `resource_group_name` input variable
+       - Go to **Optional inputs**, and select **Stack level** for the `use_existing_resource_group` and `resource_prefix` input variables
+   - Click on **key-protect-demo**:
+       - Go to **Required inputs**, and select **Stack level** for the `prefix` and `region` input variables
+       - Go to **Optional inputs**, and select **Stack level** for the `existing_resource_group_name` input variable 
+   - Click on **observability-demo**:
+       - Go to **Required inputs**, and select **Stack level** for the `prefix`, `region` input variables
+       - Go to **Optional inputs**, and select **Stack level** for the `resource_group_name` input variable
 
 1. For all DAs, also expose all settings under **Security** by selecting **Stack level** for the checkboxes for **authorizations** and **compliance_profile**
 
@@ -106,7 +112,7 @@ Now that we've created a stack with all four components, we need to wire them to
 
 ### Wire the Custom DA with Watsonx.ai
 
-First, let's connect your custom Code Engine DA with the Watsonx.ai SaaS DA:
+First, let's connect your `custom Code Engine` DA with the `Cloud foundation for AI ops and governance with watsonx` DA:
 
 1. In the console, click **☰** in the top-left corner, then **Projects**
 1. Select your project `<your-initials>-txc-project`
@@ -118,17 +124,15 @@ First, let's connect your custom Code Engine DA with the Watsonx.ai SaaS DA:
 1. A new popup will open:
     - For **Source**, select `Configuration`
     - For **Name**, choose your `watsonx-ai-saas-demo`
-    - Set **Category** to `Output`
+    - Set **Category** to `Outputs`
     - For **Property**, select `watsonx_project_id`
-    - Click **OK** to confirm the reference selection
+    - Click **OK** to confirm the reference selection  
     > **Note**: You may see an error "The reference can't be found." This is expected as the DA is not deployed yet.
 1. Click **Done**, then click **Save** at the top right to save your configuration
 
-
-
 ### Wire Watsonx.ai with Key Protect
 
-Next, let's connect the Watsonx.ai SaaS DA with the Key Protect DA to enable customer-managed encryption keys (where you own the key to the data, not IBM):
+Next, let's connect the `Cloud foundation for AI ops and governance with watsonx` DA with the `Cloud automation for Key Protect` DA to enable customer-managed encryption keys (where you own the key to the data, not IBM):
 
 1. In the console, click **☰** in the top-left corner, then **Projects**
 1. Select your project `<your-initials>-txc-project`
@@ -142,15 +146,16 @@ Next, let's connect the Watsonx.ai SaaS DA with the Key Protect DA to enable cus
 1. A new popup will open:
     - For **Source**, select `Configuration`
     - For **Name**, choose `key-protect-demo`
-    - Set **Category** to `Output`
+    - Set **Category** to `Outputs`
     - For **Property**, select `kms_instance_crn`
     - Click **OK** to confirm the reference selection
+      > **Note**: You may see an error "The reference can't be found." This is expected as the DA is not deployed yet.
 1. Enter `cos-kms-key-demo` in the **cos_kms_new_key_name** field
 1. Click **Done**, then click **Save** in the top-right corner of the page to save your changes
 
 ### Wire Observability with Key Protect
 
-Finally, let's connect the Observability DA with the Key Protect DA to enable integrated key management:
+Finally, let's connect the `Cloud automation for Observability` DA with the `Cloud automation for Key Protect` DA to enable integrated key management:
 
 1. In the console, click **☰** in the top-left corner, then **Projects**
 1. Select your project `<your-initials>-txc-project`
@@ -162,10 +167,36 @@ Finally, let's connect the Observability DA with the Key Protect DA to enable in
 1. A new popup will open:
     - For **Source**, select `Configuration`
     - For **Name**, choose `key-protect-demo`
-    - Set **Category** to `Output`
+    - Set **Category** to `Outputs`
     - For **Property**, select `kms_instance_crn`
-    - Click **OK** to confirm the reference selection
+    - Click **OK** to confirm the reference selection  
+      > **Note**: You may see an error "The reference can't be found." This is expected as the DA is not deployed yet.
 1. Click **Done**, then click **Save** in the top-right corner of the page to save your changes
+
+### Wire Stack input variables
+
+Sometimes, the same stack-level input variables are **required** for certain Deployment Architectures (DAs), while they are **optional** for others. Additionally, the input names might differ between DAs.
+
+To ensure consistent values across these inputs, we will **wire them at the stack level**:
+
+1. In the console, click **☰** in the top-left corner, then **Projects**
+1. Select your project `<your-initials>-txc-project`
+1. Navigate to the **Configuration** tab
+1. Open the **options menu (⋮)** on the configuration row for the stack and click **Edit**
+1. On the Edit secure-ai-stack page, click **Next** twice to go to the inputs page
+1. Toggle **Optional inputs** to enable and enter the optional inputs:
+    - Set **resource_prefix** by wiring it to the **prefix** input to reuse the same value. Hover over the **resource_prefix** input field and click on **Add a reference**. A new popup will open.
+        - For **Source**, select `Configuration`.
+        - For **Name**, choose your stack named `secure-ai-stack`.
+        - Set **Category** to `Inputs`.
+        - For **Property**, select `prefix`.
+        - Click **OK** to confirm the reference selection.
+    - Set **resource_group** by wiring it to the **resource_group_name** input to reuse the same value. Hover over the **resource_group** input field and click on **Add a reference**. A new popup will open.
+        - For **Source**, select `Configuration`.
+        - For **Name**, choose your stack named `secure-ai-stack`.
+        - Set **Category** to `Inputs`.
+        - For **Property**, select `resource_group_name`.
+        - Click **OK** to confirm the reference selection.
 
 ### Dependency Wiring Overview
 
@@ -186,9 +217,10 @@ Now that you've created and configured your stack, you can share it with others 
 1. In the console, click **☰** in the top-left corner, then **Projects**
 1. Select your project `<your-initials>-txc-project`
 1. Navigate to the **Configuration** tab
-1. Open the menu (⋮) on the configuration row for the stack and click **Add to private catalog**
+1. Open the **options menu (⋮)** on the configuration row for the stack and click **Add to private catalog**
 1. In the catalog details page:
    - Select your private catalog: `<your-initials>-txc-catalog`
+   - Select `Add a new product`
    - Enter a product name: `Enterprise-Ready AI Risk Evaluation Platform`
    - Select category: `AI/Machine Learning`
    - Click **Next** and then **Add** to complete the process
@@ -204,21 +236,21 @@ You can optionally deploy the stack to verify that everything works correctly fr
 1. Click **Catalog** in the header bar at top of screen
 1. Use the search bar and type: `Enterprise-Ready AI Risk Evaluation Platform`
 1. Once it appears in the results, click on the stack
-1. Review the details - you may click Components tab to confirm that the stack is made of the 4 deployable architectures, including our custom one.
+1. Review the details - you may click **Components tab** to confirm that the stack is made of the 4 deployable architectures, including our custom one.
 1. Click **Configure and deploy**
 1. Click **Add to existing** (we'll reuse the existing project for convenience in this lab)
 1. Select your project `<your-initials>-txc-project`
 1. Click **Add** to complete the process
 1. Enter the required inputs:
-   - API key: copy paste your existing IBM Cloud API key
-   - prefix: `<your-initials>-stack` (to avoid a clash in naming with the previously deployed code engine instance in part 1 of this lab)
-   - resource_group: `Default`
-   - use_existing_resource_group: `true`
-   - region: `us-south`
+    - **API key**: copy paste your existing IBM Cloud API key
+    - **prefix**: `<your-initials>-stack` (to avoid a clash in naming with the previously deployed code engine instance in part 1 of this lab)
+    - **resource_group**: `Default`
+1. Toggle **Optional inputs** to enable and enter the optional input:
+    - Set **use_existing_resource_group** to `true`.
 1. Click **Done** and then **Save** at the top left of the screen
 1. After a few seconds, click the ***View stack configurations** button
-1. Click the kebab (three dots) on the top right of the screen to expand the menu, and click **Validate and deploy** to start the deployment process
-1. Monitor the deployment progress on the resulting page. The deployment takes approximately 10 minutes to complete, but you don't need to wait - you've completed the lab and understand the process.
+1. Click the kebab (three dots) on the top right of the screen to expand the menu, and click **Validate** to start the deployment process
+1. Monitor the deployment progress on the resulting page. The deployment takes approximately 20 minutes to complete, but you don't need to wait - you've completed the lab and understand the process.
 
 > **Note:** Project is now going to deploy the full infrasutructure stack to support the application, including deployment of observability capabilities to monitor the application, watsonx.ai to provide the AI capabilities, and the application itself.
 

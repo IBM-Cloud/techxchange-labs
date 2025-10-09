@@ -270,6 +270,8 @@ watsonx_project_id           = "<your-watsonx-project-id>"       # Provided in t
 prefix                       = "<your-initials>"                 # Use your initials to avoid naming conflicts
 ```
 
+> Get the watsonx api key and project id at `https://ibm.biz/<access-code>`
+
 4. Replace the placeholder values with your actual values
 
 ### Deploy the infrastructure

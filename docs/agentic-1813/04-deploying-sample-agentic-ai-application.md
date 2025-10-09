@@ -295,7 +295,8 @@ Make sure you open these links in the target sandbox account:
 - Code Engine Project section: https://cloud.ibm.com/containers/serverless/projects
   1. Click on your serverless project named `<your-initials>-ce-project`
   2. In the project dashboard, navigate to the **Image builds** section from the left-hand menu to view your build configuration
-  3. In the project dashboard, navigate to the **Applications** section to view your application configuration
+  3. Click on the build, then click **step-source-default** to see the logs of the AI app being built
+  4. Once the build is done, navigate to the **Applications** section to view your application configuration. You should see the app starting to deploy, based on the docker image just built
   4. In the project dashboard, navigate to the **Secrets and configmaps** section to view your created secrets
 - Resource Groups section: https://cloud.ibm.com/account/resource-groups
 
